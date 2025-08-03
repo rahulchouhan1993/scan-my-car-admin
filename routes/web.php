@@ -1,0 +1,77 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\Inspector\InspectorController;
+//use App\Http\Controllers\Customer\CustomerController;
+
+// =========================
+// CUSTOMER ROUTES
+// =========================
+Route::middleware('guest')->group(function () {
+    Route::get('/', [CustomersController::class, 'dashbaord'])->name('dashbaord');
+    Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
+    Route::post('/register-user', [CustomersController::class, 'createUser'])->name('register');
+    Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
+    // Route::get('/register', ...) if needed
+});
+
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');
+    // Add other customer-only routes
+});
+
+
+// =========================
+// ADMIN ROUTES
+// =========================
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Admin Guest Routes (Login Only)
+    Route::middleware('guest')->group(function () {
+        Route::match(['post','get'],'/', [AuthController::class, 'showAdminLogin'])->name('login');
+        Route::match(['post','get'],'/forgot-password', [AdminController::class, 'forgotPassword'])->name('forgot-password');
+    });
+
+    // Admin Authenticated Routes
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        //Users Routes
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::match(['post','get'],'/profile', [AdminController::class, 'profile'])->name('profile');
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('/update-user/{id}', [UsersController::class, 'updateStatus'])->name('users.status');
+        Route::get('/delete-user/{id}', [UsersController::class, 'deleteUser'])->name('users.delete');
+        Route::get('/users/{roleType}', [UsersController::class, 'index'])->name('users');
+        Route::match(['post','get'],'/add-user/{type}/{id}', [UsersController::class, 'add'])->name('users.add');
+
+        //Contact Us Routes
+        Route::get('/inquiries', [UsersController::class, 'inquiries'])->name('inquiries');
+        Route::get('/inquiry-status/{id}', [UsersController::class, 'inquiryStatus'])->name('inquirystatus');
+        Route::get('/delete-inquiry/{id}', [UsersController::class, 'deleteInquiry'])->name('delete.inquiry');
+        // Add other admin-only routes
+    });
+});
+
+
+// =========================
+// INSPECTOR ROUTES
+// =========================
+
+Route::prefix('inspector')->name('inspector.')->group(function () {
+    // Inspector Guest Routes (Login Only)
+    Route::middleware('guest')->group(function () {
+        Route::match(['post','get'],'/', [AuthController::class, 'showInspectorLogin'])->name('login');
+        Route::match(['post','get'],'/forgot-password', [InspectorController::class, 'forgotPassword'])->name('forgot-password');
+    });
+
+    // Inspector Authenticated Routes
+    Route::middleware(['auth', 'role:inspector'])->group(function () {
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/dashboard', [InspectorController::class, 'dashboard'])->name('dashboard');
+        Route::match(['post','get'],'/profile', [InspectorController::class, 'profile'])->name('profile');
+        // Add other inspector-only routes
+    });
+});
