@@ -4,7 +4,7 @@ import FrontLayout from '../../layout/CustomerLayout'
 const Home = () => {
   return (
     <>
-    Home
+    This is my homepage content
     </>
   )
 }

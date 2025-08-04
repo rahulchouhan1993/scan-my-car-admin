@@ -11,8 +11,8 @@ use App\Http\Controllers\Inspector\InspectorController;
 // =========================
 // CUSTOMER ROUTES
 // =========================
-Route::middleware('guest')->group(function () {
-    Route::get('/', [CustomersController::class, 'dashbaord'])->name('dashbaord');
+Route::middleware('guest')->group(function () { 
+    Route::get('/', [CustomersController::class, 'home'])->name('home');
     Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
     Route::post('/register-user', [CustomersController::class, 'createUser'])->name('register');
     Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');

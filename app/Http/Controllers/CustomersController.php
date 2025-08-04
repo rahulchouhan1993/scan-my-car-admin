@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class CustomersController extends Controller
 {
 
-    public function dashbaord(){
+    public function home(){
         return inertia('Customers/Home');
     }
 

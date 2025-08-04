@@ -19,7 +19,7 @@ const CustomerLayout = ({ children }) => {
       <div className="wrapper d-flex flex-column min-vh-100">
         <Header />
         <div className="body flex-grow-1">
-          <Content>{children}</Content>
+          {children}
         </div>
         <Footer />
       </div>
