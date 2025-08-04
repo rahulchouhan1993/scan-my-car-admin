@@ -19,9 +19,9 @@ const DefaultLayout = ({ children }) => {
   return (
     <div>
       <AppSidebar />
-      <div className="wrapper d-flex flex-column min-vh-100">
+      <div className="111wrapper 11d-flex 11flex-column 11min-vh-100">
         <AppHeader />
-        <div className="body flex-grow-1">
+        <div className="1body 1flex-grow-1">
           <AppContent>{children}</AppContent>
         </div>
         <AppFooter />

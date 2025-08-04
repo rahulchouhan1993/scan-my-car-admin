@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../css/app.css'
 import { useEffect } from 'react';
 import Header from '../components/Front/Header'
 import Footer from '../components/Front/Footer'
@@ -15,14 +16,12 @@ const CustomerLayout = ({ children }) => {
       }
   }, [flash]);
   return (
-    <div>
-      <div className="wrapper d-flex flex-column min-vh-100">
-        <Header />
-        <div className="body flex-grow-1">
+    <div className='mk'>
+      <Header />
+        <div className="1body 1flex-grow-1">
           {children}
         </div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   )
 }
