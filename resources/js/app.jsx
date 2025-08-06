@@ -1,7 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import React from 'react'
-// import '../css/style.scss'
 import '../css/examples.scss'
 import 'toastr/build/toastr.min.css'
 

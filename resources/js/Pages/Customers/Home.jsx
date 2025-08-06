@@ -1,5 +1,5 @@
 import React from 'react'
-import FrontLayout from '../../layout/CustomerLayout'
+import CustomerLayout from '../../layout/CustomerLayout'
 import reactimg from '../../assets/images/react.jpg'
 import heroImage from "../../assets/images/homebanner.jpg";
 import homeoverlaybg from "../../assets/images/homeoverlaybg.png";
@@ -47,5 +47,5 @@ const Home = () => {
   )
 }
 
-Home.layout = (page) => <FrontLayout>{page}</FrontLayout>
+Home.layout = (page) => <CustomerLayout>{page}</CustomerLayout>
 export default Home

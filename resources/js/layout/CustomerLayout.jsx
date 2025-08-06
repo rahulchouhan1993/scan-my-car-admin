@@ -1,10 +1,9 @@
 import React from 'react'
-import '../../css/app.css'
 import { useEffect } from 'react';
 import Header from '../components/Front/Header'
 import Footer from '../components/Front/Footer'
-import Content from '../components/Front/Content'
 import toastr from 'toastr'
+import '../../css/app.css'
 const CustomerLayout = ({ children }) => {
   const { flash } = children.props;
   useEffect(() => {

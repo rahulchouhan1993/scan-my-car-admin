@@ -12,6 +12,6 @@
          @routes
     </head>
     <body class="">
-        @inertia
+    @inertia
     </body>
 </html>
