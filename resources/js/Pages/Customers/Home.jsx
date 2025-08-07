@@ -13,6 +13,9 @@ import VehicleChecks from '../../components/Front/VehicleChecks';
 import CarInspectionSlider from '../../components/CarInspectionSlider';
 import { Link } from '@inertiajs/react';
 import AccordianSlider from '../../components/AccordianSlider';
+import PricingSection from '../../components/Plan';
+import TestimonialSlider from '../../components/Testimonials';
+import CarSlider from '../../components/CarSlider';
 
 const Home = () => {
   return (
@@ -40,9 +43,9 @@ const Home = () => {
             <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[34px] mb-[30px]">
               Smarter vehicle inspections for smarter buyers and owners. Expert checks. Instant reports. No guesswork.
             </p>
-            <button className="creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[13px]  md:px-[30px] md:py-[13px] lg:px-[30px] lg:py-[13px] rounded-full hover:bg-gray-200 transition">
+            <Link to="/" className="inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
               Book an Inspection
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -64,7 +67,7 @@ const Home = () => {
           </div>
           <CarInspectionSlider />
           <div className=' flex items-center justify-center z-[1]'>
-            <Link className='bookbtn min-w-[280px]'>Book an Inspection</Link>
+            <Link to="/" className='bookbtn min-w-[280px] py-[151px]'>Book an Inspection</Link>
           </div>
         </div>
       </div>
@@ -101,7 +104,7 @@ const Home = () => {
             report so you can buy, sell, or own with total confidence.
             </p>
             <div>
-              <Link className="bg-white text-black font-semibold py-[15px] px-[25px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
+              <Link to="/" className="bg-white text-black font-semibold py-[15px] px-[25px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
               Schedule Your Inspection
               </Link>
             </div>
@@ -109,6 +112,32 @@ const Home = () => {
         </div>
       </div>
     </section>
+
+    <section className='bg-[#F9F9F9] py-[80px]'>
+      <div className='container'>
+        <div className='flex items-center gap-[40px] mb-[50px]'>
+          <h2 className='ppfont text-[#192735] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
+          <p className='creatodisplayM text-[#192735ab] text-[20px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
+        </div>
+        <CarSlider />
+        <TestimonialSlider />
+      </div>
+
+    </section>
+
+
+    <PricingSection />
+    <section className='bg-[#F9F9F9] py-[80px]'>
+      <div className='container'>
+        <div className='flex items-center gap-[40px] mb-[50px]'>
+          <h2 className='ppfont text-[#192735] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Real Reports. Real Results. Real People.</h2>
+          <p className='creatodisplayM text-[#192735ab] text-[20px] '>Here’s what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
+        </div>
+        <TestimonialSlider />
+      </div>
+
+    </section>
+
     </>
   )
 }
