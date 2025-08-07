@@ -30,9 +30,15 @@ const Index = (props) => {
     <CRow>
       <CCol xs={12}>
         <div className="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
-            <Link href={route('admin.users.add', { type: roleType,id: 0 })} className="btn btn-primary">
+          {roleType=='customer' ? (
+            <Link href={route('admin.users.add', { id: 0 })} className="btn btn-primary">
                 Add +
             </Link>
+          ) : (
+            <Link href={route('admin.inspector.add', { id: 0 })} className="btn btn-primary">
+                Add +
+            </Link>
+          )}
         </div>
         <CCard className="mb-4">
           <CCardHeader>
@@ -75,7 +81,11 @@ const Index = (props) => {
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu>
-                          <CDropdownItem href={route('admin.users.add',{type:roleType,id:user.id})}>Edit</CDropdownItem>
+                          {user.role=='customer' ? (
+                            <CDropdownItem href={route('admin.users.add',{id:user.id})}>Edit</CDropdownItem>
+                          ) : (
+                             <CDropdownItem href={route('admin.inspector.add',{id:user.id})}>Edit</CDropdownItem>
+                          )}
                           <CDropdownItem href={route('admin.users.status',{id:user.id})}>Update Status</CDropdownItem>
                           <CDropdownItem
                             as="button"

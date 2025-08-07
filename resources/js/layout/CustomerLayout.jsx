@@ -1,9 +1,8 @@
-import React from 'react'
 import { useEffect } from 'react';
 import Header from '../components/Front/Header'
 import Footer from '../components/Front/Footer'
 import toastr from 'toastr'
-import '../../css/app.css'
+import { Head } from '@inertiajs/react';
 const CustomerLayout = ({ children }) => {
   const { flash } = children.props;
   useEffect(() => {
@@ -15,13 +14,16 @@ const CustomerLayout = ({ children }) => {
       }
   }, [flash]);
   return (
+    <>
+    <Head title={children.props.pageTitle} />
     <div className='mk'>
       <Header />
         <div className="1body 1flex-grow-1">
           {children}
         </div>
       <Footer />
-    </div>
+    </div></>
+    
   )
 }
 

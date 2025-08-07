@@ -28,7 +28,8 @@ class AuthController extends Controller
 
             return back()->with('error', 'The provided credentials do not match our records.');
         }
-        return inertia('Inspector/Users/Login');
+        $pageTitle = 'Customer | Login';
+        return inertia('Customer/Users/Login', compact('pageTitle'));
     }
 
     function showAdminLogin(Request $request){
@@ -52,7 +53,8 @@ class AuthController extends Controller
 
             return back()->with('error', 'The provided credentials do not match our records.');
         }
-        return inertia('Admin/Users/Login');
+        $pageTitle = 'Admin | Login';
+        return inertia('Admin/Users/Login', compact('pageTitle'));
     }
 
     function showInspectorLogin(Request $request){
@@ -75,7 +77,8 @@ class AuthController extends Controller
 
             return back()->with('error', 'The provided credentials do not match our records.');
         }
-        return inertia('Inspector/Users/Login');
+        $pageTitle = 'Inspector | Login';
+        return inertia('Inspector/Users/Login', compact('pageTitle'));
     }
 
      public function logout(Request $request){

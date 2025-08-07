@@ -14,7 +14,7 @@ import { useForm, usePage } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
 
-const Add = () => {
+const AddInspector = () => {
     const { props } = usePage()
     const { auth } = props
     const { data, setData, post, processing, errors } = useForm({
@@ -27,12 +27,16 @@ const Add = () => {
     city: props?.userDetails?.city || '',
     state: props?.userDetails?.state || '',
     zip: props?.userDetails?.zip || '',
-    phone_no2: props?.userDetails?.phone_no2 || ''
+    phone_no2: props?.userDetails?.phone_no2 || '',
+    branch_manager: props?.userDetails?.branch_manager || '',
+    report_to: props?.userDetails?.report_to || '',
+    work_type: props?.userDetails?.work_type || '',
+    allocation_branch: props?.userDetails?.allocation_branch || ''
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    post(route(`admin.users.add`,{id:props.id}))
+    post(route(`admin.inspector.add`,{id:props.id}))
   }
   return (
     <CRow>
@@ -98,7 +102,50 @@ const Add = () => {
                   feedbackInvalid={errors.phone_no2}
                 />
               </CCol>
-              
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="branchManager"
+                  label="Branch Manager"
+                  value={data.branch_manager}
+                  onChange={(e) => setData('branch_manager', e.target.value)}
+                  invalid={!!errors.branch_manager}
+                  feedbackInvalid={errors.branch_manager}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="reportTo"
+                  label="Report To"
+                  value={data.report_to}
+                  onChange={(e) => setData('report_to', e.target.value)}
+                  invalid={!!errors.report_to}
+                  feedbackInvalid={errors.report_to}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="workType"
+                  label="Work Type"
+                  value={data.work_type}
+                  onChange={(e) => setData('work_type', e.target.value)}
+                  invalid={!!errors.work_type}
+                  feedbackInvalid={errors.work_type}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="allocationBranch"
+                  label="Allocation Branch"
+                  value={data.allocation_branch}
+                  onChange={(e) => setData('allocation_branch', e.target.value)}
+                  invalid={!!errors.allocation_branch}
+                  feedbackInvalid={errors.allocation_branch}
+                />
+              </CCol>
 
               <CCol xs={12}>
                 <CFormInput
@@ -165,5 +212,5 @@ const Add = () => {
   )
 }
 
-Add.layout = (page) => <DefaultLayout>{page}</DefaultLayout>
-export default Add
+AddInspector.layout = (page) => <DefaultLayout>{page}</DefaultLayout>
+export default AddInspector

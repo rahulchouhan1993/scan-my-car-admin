@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'phone_no',
+        'phone_no2',
         'address',
         'address2',
         'city',
@@ -28,6 +29,10 @@ class User extends Authenticatable
         'zip',
         'status',
         'role',
+        'branch_manager',
+        'report_to',
+        'work_type',
+        'allocation_branch',
         'password',
     ];
 

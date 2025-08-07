@@ -12,9 +12,15 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         $user = Auth::user();
-
-        if (!$user || !in_array($user->role, $roles)) {
-            abort(403, 'Unauthorized');
+        
+        if (!in_array($user->role, $roles)) {
+            if ($user->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role == 'inspector') {
+                return redirect()->route('inspector.dashboard');
+            } else {
+                return redirect('/'); // customer
+            }
         }
 
         return $next($request);

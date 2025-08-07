@@ -9,9 +9,6 @@ import redangleleftSm from "../../assets/images/redangleleft-sm.png";
 import overlayBg from '../../assets/images/overlaybg-2.png'
 import readychoosebg from '../../assets/images/readychoosebg.jpg'
 import confidentbg from '../../assets/images/confidentbg.jpg'
-
-
-
 import VehicleChecks from '../../components/Front/VehicleChecks';
 import CarInspectionSlider from '../../components/CarInspectionSlider';
 import { Link } from '@inertiajs/react';

@@ -17,26 +17,38 @@ class UsersController extends Controller
 {
     public function index($roleType){
         $userDetails = User::where('role',$roleType)->paginate(10);
-        return inertia('Admin/Users/Index',compact('userDetails','roleType'));
+        $pageTitle = 'Admin | Users - '.ucfirst($roleType).'';
+        return inertia('Admin/Users/Index',compact('userDetails','roleType', 'pageTitle'));
     }
 
-    public function add($type,$id, Request $request){
+    public function add($id, Request $request){
         if($id>0){
             $userDetails = User::find($id);
         }else{
             $userDetails = new User();
         }
         if($request->isMethod('post')){
-            $validator = Validator::make($request->all(), [
-                'name'      => ['required', 'string', 'max:50'],
-                'email'     => ['required', 'string', 'email', 'max:50', Rule::unique('users', 'email')->ignore($request->id)],
-                'phone_no'  => ['required', 'string', 'max:15', Rule::unique('users', 'phone_no')->ignore($request->id)],
-                'address'   => ['required', 'string', 'max:200'],
-                'address2'  => ['nullable', 'string', 'max:200'],
-                'city'      => ['required', 'string', 'max:50'],
-                'state'     => ['required', 'string', 'max:50'],
-                'zip'       => ['required', 'string', 'max:8'],
-            ]);
+            $rules = [
+                'name'              => ['required', 'string', 'max:50'],
+                'email'             => ['required', 'string', 'email', 'max:50', Rule::unique('users', 'email')->ignore($id)],
+                'phone_no'          => ['required', 'string', 'max:15', Rule::unique('users', 'phone_no')->ignore($id)],
+                'address'           => ['required', 'string', 'max:200'],
+                'address2'          => ['nullable', 'string', 'max:200'],
+                'city'              => ['required', 'string', 'max:50'],
+                'state'             => ['required', 'string', 'max:50'],
+                'zip'               => ['required', 'string', 'max:8'],
+                'phone_no2'         => ['required']
+            ];
+            
+            if ($id > 0) {
+                // Editing: password is optional but must be valid if provided
+                $rules['password'] = ['nullable', 'string', 'min:6', 'max:8'];
+            } else {
+                // Creating: password is required
+                $rules['password'] = ['required', 'string', 'min:6', 'max:8'];
+            }
+            
+            $validator = Validator::make($request->all(), $rules);
 
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput($request->all());
@@ -45,24 +57,104 @@ class UsersController extends Controller
             $userDetails->name = $request->name;
             $userDetails->email = $request->email;
             $userDetails->phone_no = $request->phone_no;
-            $userDetails->role = $type;
+            $userDetails->phone_no2 = $request->phone_no2;
+            $userDetails->role = 'customer';
             $userDetails->address = $request->address;
             $userDetails->address2 = $request->address2;
             $userDetails->city = $request->city;
             $userDetails->state = $request->state;
             $userDetails->zip = $request->zip;
-            $randomPassword = rand();
-            $userDetails->password = Hash::make($randomPassword);
+            if($id>0){
+                if(!empty($request->password)){
+                    $userDetails->password = Hash::make($request->password);
+                }
+            }else{
+                $randomPassword = $request->password;
+                $userDetails->password = Hash::make($randomPassword);
+            }
             $userDetails->save();
             if($id>0){
-                return redirect()->route('admin.users',['roleType'=>$type])->with('success','User Updated');
+                return redirect()->route('admin.users',['roleType'=>'customer'])->with('success','User Updated');
             }else{
                 Mail::to($userDetails->email)->send(new UserLoginDetailsMail($userDetails, $randomPassword));
-                return redirect()->route('admin.users',['roleType'=>$type])->with('success','User Added');
+                return redirect()->route('admin.users',['roleType'=>'customer'])->with('success','User Added');
             }
             
         }
-        return inertia('Admin/Users/Add',compact('type','id','userDetails'));
+        $pageTitle = 'Admin | Add Customer';
+        return inertia('Admin/Users/Add',compact('id','userDetails', 'pageTitle'));
+    }
+
+    public function addInspector($id, Request $request){
+        if($id>0){
+            $userDetails = User::find($id);
+        }else{
+            $userDetails = new User();
+        }
+        if($request->isMethod('post')){
+            $rules = [
+                'name'              => ['required', 'string', 'max:50'],
+                'email'             => ['required', 'string', 'email', 'max:50', Rule::unique('users', 'email')->ignore($id)],
+                'phone_no'          => ['required', 'string', 'max:15', Rule::unique('users', 'phone_no')->ignore($id)],
+                'address'           => ['required', 'string', 'max:200'],
+                'address2'          => ['nullable', 'string', 'max:200'],
+                'city'              => ['required', 'string', 'max:50'],
+                'state'             => ['required', 'string', 'max:50'],
+                'zip'               => ['required', 'string', 'max:8'],
+                'phone_no2'         => ['required'],
+                'branch_manager'    => ['required', 'string', 'max:25'],
+                'report_to'         => ['required', 'string', 'max:25'],
+                'work_type'         => ['required', 'string', 'max:25'],
+                'allocation_branch' => ['required', 'string', 'max:25'],
+            ];
+            
+            if ($id > 0) {
+                // Editing: password is optional but must be valid if provided
+                $rules['password'] = ['nullable', 'string', 'min:6', 'max:8'];
+            } else {
+                // Creating: password is required
+                $rules['password'] = ['required', 'string', 'min:6', 'max:8'];
+            }
+            
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
+            }
+
+            $userDetails->name = $request->name;
+            $userDetails->email = $request->email;
+            $userDetails->phone_no = $request->phone_no;
+            $userDetails->phone_no2 = $request->phone_no2;
+            $userDetails->role = 'inspector';
+            $userDetails->address = $request->address;
+            $userDetails->address2 = $request->address2;
+            $userDetails->city = $request->city;
+            $userDetails->state = $request->state;
+            $userDetails->zip = $request->zip;
+            $userDetails->branch_manager = $request->branch_manager;
+            $userDetails->report_to = $request->report_to;
+            $userDetails->work_type = $request->work_type;
+            $userDetails->allocation_branch = $request->allocation_branch;
+            if($id>0){
+                if(!empty($request->password)){
+                    $userDetails->password = Hash::make($request->password);
+                }
+            }else{
+                $randomPassword = $request->password;
+                $userDetails->password = Hash::make($randomPassword);
+            }
+            $userDetails->save();
+            if($id>0){
+                return redirect()->route('admin.users',['roleType'=>'inspector'])->with('success','User Updated');
+            }else{
+                Mail::to($userDetails->email)->send(new UserLoginDetailsMail($userDetails, $randomPassword));
+                return redirect()->route('admin.users',['roleType'=>'inspector'])->with('success','User Added');
+            }
+            
+        }
+        $pageTitle = 'Admin | Add Inspector';
+        return inertia('Admin/Users/AddInspector',compact('id','userDetails', 'pageTitle'));
     }
 
     public function updateStatus($id){
@@ -86,7 +178,8 @@ class UsersController extends Controller
     
     public function inquiries(){
         $allInquiries = ContactUs::paginate(10);
-        return inertia('Admin/Users/Inquiries',compact('allInquiries'));
+        $pageTitle = 'Admin | Inquiries';
+        return inertia('Admin/Users/Inquiries',compact('allInquiries', 'pageTitle'));
     }
 
     public function inquiryStatus($id){

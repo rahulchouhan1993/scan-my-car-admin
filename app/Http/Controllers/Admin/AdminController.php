@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     public function dashboard(){
+        
         return inertia('Admin/Dashbaord/Index');
     }
 
@@ -47,7 +48,8 @@ class AdminController extends Controller
             $userDetails->save();
             return redirect()->back()->with('success','Profile Updated');
         }
-        return inertia('Admin/Users/Profile',compact('userDetails'));
+        $pageTitle = 'Admin | Profile';
+        return inertia('Admin/Users/Profile',compact('userDetails', 'pageTitle'));
     }
 
     public function forgotPassword(Request $request){
@@ -72,6 +74,7 @@ class AdminController extends Controller
                 return back()->with('success', 'A new password has been sent to your provided email.');
             }
         }
-        return inertia('Admin/Users/ForgotPassword');
+        $pageTitle = 'Admin | Forgot Password';
+        return inertia('Admin/Users/ForgotPassword', compact('pageTitle'));
     }
 }

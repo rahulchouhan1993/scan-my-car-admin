@@ -11,13 +11,11 @@ use App\Http\Controllers\Inspector\InspectorController;
 // =========================
 // CUSTOMER ROUTES
 // =========================
-Route::middleware('guest')->group(function () { 
-    Route::get('/', [CustomersController::class, 'home'])->name('home');
-    Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
-    Route::post('/register-user', [CustomersController::class, 'createUser'])->name('register');
-    Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
-    // Route::get('/register', ...) if needed
-});
+
+Route::get('/', [CustomersController::class, 'home'])->name('home');
+Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
+Route::post('/register-user', [CustomersController::class, 'createUser'])->name('register');
+Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');
@@ -45,7 +43,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/update-user/{id}', [UsersController::class, 'updateStatus'])->name('users.status');
         Route::get('/delete-user/{id}', [UsersController::class, 'deleteUser'])->name('users.delete');
         Route::get('/users/{roleType}', [UsersController::class, 'index'])->name('users');
-        Route::match(['post','get'],'/add-user/{type}/{id}', [UsersController::class, 'add'])->name('users.add');
+        Route::match(['post','get'],'/add-customer/{id}', [UsersController::class, 'add'])->name('users.add');
+        Route::match(['post','get'],'/add-inspector/{id}', [UsersController::class, 'addInspector'])->name('inspector.add');
 
         //Contact Us Routes
         Route::get('/inquiries', [UsersController::class, 'inquiries'])->name('inquiries');

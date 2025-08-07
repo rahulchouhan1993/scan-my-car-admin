@@ -14,7 +14,8 @@ class CustomersController extends Controller
 {
 
     public function home(){
-        return inertia('Customers/Home');
+        $pageTitle = 'Home | CertifyCars';
+        return inertia('Customers/Home', compact('pageTitle'));
     }
 
     public function contactUs(Request $request){
