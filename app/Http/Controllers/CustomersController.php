@@ -18,6 +18,16 @@ class CustomersController extends Controller
         return inertia('Customers/Home', compact('pageTitle'));
     }
 
+    public function aboutUs(){
+        $pageTitle = 'About Us | CertifyCars';
+        return inertia('Customers/AboutUs', compact('pageTitle'));
+    }
+
+    public function termsAndConditions(){
+        $pageTitle = 'Terms and Conditions | CertifyCars';
+        return inertia('Customers/TermsAndConditions', compact('pageTitle'));
+    }
+
     public function contactUs(Request $request){
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
@@ -41,7 +51,8 @@ class CustomersController extends Controller
 
             return redirect()->back()->with('success','Contact request submitted successfully.');
         }
-        return inertia('Customers/Users/ContactUs');
+        $pageTitle = 'Contact Us | CertifyCars';
+        return inertia('Customers/ContactUs', compact('pageTitle'));
     }
 
     public function createUser(Request $request){
@@ -81,6 +92,8 @@ class CustomersController extends Controller
             return redirect()->back()->with('success','Please verify your email to activate your account');
             
         }
+        $pageTitle = 'Registration | CertifyCars';
+        return inertia('Customers/Register', compact('pageTitle'));
     }
     
 }

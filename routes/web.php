@@ -14,9 +14,12 @@ use App\Http\Controllers\Dealer\DealersController;
 // =========================
 
 Route::get('/', [CustomersController::class, 'home'])->name('home');
-Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
-Route::post('/register-user', [CustomersController::class, 'createUser'])->name('register');
+Route::get('/about-us', [CustomersController::class, 'aboutUs'])->name('about');
+Route::get('/terms-and-conditions', [CustomersController::class, 'termsAndConditions'])->name('terms');
 Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
+Route::match(['post','get'],'/register-dealer', [CustomersController::class, 'createUser'])->name('register');
+
+Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');
