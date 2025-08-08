@@ -47,53 +47,40 @@ class CustomersController extends Controller
     public function createUser(Request $request){
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
-                'name'              => ['required', 'string', 'max:100'],
+                'name'              => ['required', 'string', 'max:50'],
+                'company_name'      => ['required', 'string', 'max:50'],
                 'email'             => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+                'buying_limit'      => ['required'],
+                'car_model'         => ['required'],
+                'model_year'        => ['required'],
+                'milage'            => ['required'],
+                'account_manager'   => ['required'],
                 'phone_no'          => ['required', 'digits:10'],
                 'password'          => ['required', 'string', 'min:8', 'confirmed'],
-                //password_confirmation
+                'password_confirmation' => ['required', 'string', 'min:8']
             ]);
 
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()], 422);
             }
-            $randomPass = rand();
+            $randomPass = $request->password;
             $user = User::create([
-                'name'      => $request->name,
-                'email'     => $request->email,
-                'role'      => 'customer',
-                'phone_no'  => $request->phone_no,
-                'password'  => Hash::make($randomPass),
+                'name'              => $request->name,
+                'company_name'      => $request->company_name,
+                'email'             => $request->email,
+                'role'              => 'dealer',
+                'buying_limit'      => $request->buying_limit,
+                'car_model'         => $request->car_model,
+                'model_year'        => $request->model_year,
+                'milage'            => $request->milage,
+                'account_manager'   => $request->account_manager,
+                'phone_no'          => $request->phone_no,
+                'password'          => Hash::make($randomPass),
             ]);
             Mail::to($user->email)->send(new UserLoginDetailsMail($user, $randomPass));
             return redirect()->back()->with('success','Please verify your email to activate your account');
             
         }
-    }
-    
-    public function forgotPassword(Request $request){
-        if($request->isMethod('post')){
-            $validator = Validator::make($request->all(), [
-                'email' => ['required', 'string', 'email']
-            ]);
-
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
-
-            $checkuser = User::where('email',$request->email)->where('role','customer')->first();
-            if(empty($checkuser)){
-                return back()->with('error', 'The provided email is not registered with us.');
-            }else{
-                $newPassword = rand();
-                $checkuser->password = $newPassword;
-                $checkuser->save();
-                $checkuser->new_password = $newPassword;
-                Mail::to($checkuser->email)->send(new ForgotPasswordMail($checkuser));
-                return back()->with('success', 'A new password has been sent to your provided email.');
-            }
-        }
-        return inertia('Customers/ForgotPassword');
     }
     
 }

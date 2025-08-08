@@ -8,28 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    function showCustomerLogin(Request $request){
+    function showDealerLogin(Request $request){
         if ($request->isMethod('post')) {
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
                 'password' => ['required'],
             ]);
 
-            $user = User::where('email', $credentials['email'])->where('role','customer')->first();
+            $user = User::where('email', $credentials['email'])->where('role','dealer')->first();
             if ($user && $user->status == 0) {
                 return back()->with('error', 'Your account is inactive. Please contact support.');
             }
             if(!empty($user)){
                 if (Auth::attempt($credentials)) {
                     $request->session()->regenerate();
-                    return redirect()->route('customer.dashboard');
+                    return redirect()->route('dealer.dashboard');
                 }
             }
 
             return back()->with('error', 'The provided credentials do not match our records.');
         }
-        $pageTitle = 'Customer | Login';
-        return inertia('Customer/Users/Login', compact('pageTitle'));
+        $pageTitle = 'Dealer | Login';
+        return inertia('Dealer/Users/Login', compact('pageTitle'));
     }
 
     function showAdminLogin(Request $request){

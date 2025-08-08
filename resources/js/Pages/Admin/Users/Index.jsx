@@ -30,7 +30,7 @@ const Index = (props) => {
     <CRow>
       <CCol xs={12}>
         <div className="d-grid gap-2 d-md-flex mb-2 justify-content-md-end">
-          {roleType=='customer' ? (
+          {roleType=='dealer' ? (
             <Link href={route('admin.users.add', { id: 0 })} className="btn btn-primary">
                 Add +
             </Link>
@@ -81,7 +81,7 @@ const Index = (props) => {
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu>
-                          {user.role=='customer' ? (
+                          {user.role=='dealer' ? (
                             <CDropdownItem href={route('admin.users.add',{id:user.id})}>Edit</CDropdownItem>
                           ) : (
                              <CDropdownItem href={route('admin.inspector.add',{id:user.id})}>Edit</CDropdownItem>

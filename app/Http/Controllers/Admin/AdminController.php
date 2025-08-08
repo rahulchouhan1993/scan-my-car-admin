@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     public function dashboard(){
-        
-        return inertia('Admin/Dashbaord/Index');
+        $pageTitle = 'Admin | Dashboard';
+        return inertia('Admin/Dashbaord/Index', compact('pageTitle'));
     }
 
     public function profile(Request $request){

@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\InspectionRequest;
 use App\Models\InspectionLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InspectionRequestSubmitted;
+use App\Mail\InspectionRequestConfirmation;
 
 class InspectionsController extends Controller
 {
@@ -39,6 +44,8 @@ class InspectionsController extends Controller
             ], 422);
         }
 
+        $preferredDate = $request->preferred_date ? Carbon::parse($request->preferred_date)->format('Y-m-d') : null;
+        $assignDate = $request->assign_date ? Carbon::parse($request->assign_date)->format('Y-m-d') : null;
         $inspectionRequest = InspectionRequest::create([
             'user_id'             => $request->user_id,
             'inspector_id'        => $request->inspector_id,
@@ -51,18 +58,29 @@ class InspectionsController extends Controller
             'transmission'        => $request->transmission,
             'color'               => $request->color,
             'mileage'             => $request->mileage,
-            'preferred_date'      => $request->preferred_date,
+            'preferred_date'      => $preferredDate,
             'preferred_time_slot' => $request->preferred_time_slot,
             'additional_notes'    => $request->additional_notes,
             'status'              => $request->status ?? 0,
-            'assign_date'         => $request->assign_date,
+            'assign_date'         => $assignDate,
         ]);
 
         InspectionLog::create([
             'inspection_request_id' => $inspectionRequest->id,
             'inspector_id'          => $request->inspector_id,
-            'stlog_detailsatus'     => 'Dummy log',
+            'log_details'     => 'Dummy log',
         ]);
+
+        //Send Email to user and admin
+        $userDetails = User::find($request->user_id);
+        $inspectionRequest->load('user'); 
+        if ($userDetails) {
+            Mail::to($userDetails->email)->send(new InspectionRequestConfirmation($inspectionRequest));
+        }
+        $adminDetails = User::find(1);
+        if ($adminDetails) {
+            Mail::to('r.chouhan64@gmail.com')->send(new InspectionRequestSubmitted($inspectionRequest));
+        }
 
         return response()->json([
             'status' => true,

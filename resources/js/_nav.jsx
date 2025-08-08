@@ -22,7 +22,7 @@ const _nav = [
     available: 'both',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Customers', available: 'both', href: '/users/customer' },
+      { component: CNavItem, name: 'Dealers', available: 'both', href: '/users/dealer' },
       { component: CNavItem, name: 'Inspectors', available: 'admin', href: '/users/inspector' },
     ],
   },

@@ -37,7 +37,13 @@ class UsersController extends Controller
                 'city'              => ['required', 'string', 'max:50'],
                 'state'             => ['required', 'string', 'max:50'],
                 'zip'               => ['required', 'string', 'max:8'],
-                'phone_no2'         => ['required']
+                'phone_no2'         => ['required'],
+                'company_name'      => ['required', 'string', 'max:25'],
+                'buying_limit'      => ['required', 'string', 'max:8'],
+                'car_model'         => ['required', 'string', 'max:25'],
+                'model_year'        => ['required', 'string', 'max:4'],
+                'milage'            => ['required', 'string', 'max:8'],
+                'account_manager'   => ['required', 'string', 'max:25']
             ];
             
             if ($id > 0) {
@@ -58,12 +64,18 @@ class UsersController extends Controller
             $userDetails->email = $request->email;
             $userDetails->phone_no = $request->phone_no;
             $userDetails->phone_no2 = $request->phone_no2;
-            $userDetails->role = 'customer';
+            $userDetails->role = 'dealer';
             $userDetails->address = $request->address;
             $userDetails->address2 = $request->address2;
             $userDetails->city = $request->city;
             $userDetails->state = $request->state;
             $userDetails->zip = $request->zip;
+            $userDetails->company_name = $request->company_name;
+            $userDetails->buying_limit = $request->buying_limit;
+            $userDetails->car_model = $request->car_model;
+            $userDetails->model_year = $request->model_year;
+            $userDetails->milage = $request->milage;
+            $userDetails->account_manager = $request->account_manager;
             if($id>0){
                 if(!empty($request->password)){
                     $userDetails->password = Hash::make($request->password);
@@ -74,14 +86,14 @@ class UsersController extends Controller
             }
             $userDetails->save();
             if($id>0){
-                return redirect()->route('admin.users',['roleType'=>'customer'])->with('success','User Updated');
+                return redirect()->route('admin.users',['roleType'=>'dealer'])->with('success','User Updated');
             }else{
                 Mail::to($userDetails->email)->send(new UserLoginDetailsMail($userDetails, $randomPassword));
-                return redirect()->route('admin.users',['roleType'=>'customer'])->with('success','User Added');
+                return redirect()->route('admin.users',['roleType'=>'dealer'])->with('success','User Added');
             }
             
         }
-        $pageTitle = 'Admin | Add Customer';
+        $pageTitle = 'Admin | Add Dealer';
         return inertia('Admin/Users/Add',compact('id','userDetails', 'pageTitle'));
     }
 

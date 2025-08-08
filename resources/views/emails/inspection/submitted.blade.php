@@ -67,7 +67,7 @@
               <tr>
                 <td align="left" style="padding: 0 50px;">
                   <h2 style="font-size: 26px; line-height: 34px; font-weight: bold; color: #333333;">
-                    Hello {{ $user->name }},</h2>
+                    A new inspection has been requested.</h2>
                 </td>
               </tr>
 
@@ -77,36 +77,41 @@
               <!-- Introduction -->
               <tr>
                 <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
-                  Your account has been created successfully. Below are your login details:
-                </td>
-              </tr>
-
-              <tr><td style="padding: 10px 50px;"></td></tr>
-              <tr>
-                <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
-                  <p><strong>Email:</strong> {{ $user->email }}</p>
-                    <p><strong>Password:</strong> {{ $plainPassword }}</p>
+                  Below are the details of the new inspection request:
                 </td>
               </tr>
 
               <!-- Spacer -->
               <tr><td style="padding: 10px 50px;"></td></tr>
-              @php
-                if($user->role=='admin'){
-                    $link = env('APP_URL').'/admin';
-                }elseif($user->role=='inspector'){
-                    $link = env('APP_URL').'/inspector';
-                }elseif($user->role=='customer'){
-                    $link = env('APP_URL').'/login';
-                }elseif($user->role=='dealer'){
-                    $link = env('APP_URL').'/dealer';
-                }
-            @endphp
+
+              <!-- Message Body -->
+              <tr>
+                <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
+                    <strong>Inspection ID:</strong> {{ $inspectionRequest->id }}<br>
+                    <strong>Vehicle:</strong> {{ $inspectionRequest->vehicle_make }} - {{ $inspectionRequest->vehicle_model }} - {{ $inspectionRequest->vehicle_year }}<br>
+                    <strong>Date & Time:</strong> {{ $inspectionRequest->preferred_date }} {{ $inspectionRequest->preferred_time_slot }}<br>
+                    <strong>Status:</strong> 
+                    @php 
+                        echo $inspectionRequest->status == 0 ? 'Open' : ($inspectionRequest->status == 1 ? 'Assigned' : ($inspectionRequest->status == 2 ? 'Completed' : 'Hold')); 
+                    @endphp
+                    <br>
+                    <strong>Requested By:</strong> {{ $inspectionRequest->user->name }} ({{ $inspectionRequest->user->email }})<br>
+                </td>
+              </tr>
+
+              <tr><td style="padding: 10px 50px;"></td></tr>
+
+              <tr>
+                <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
+                  You can view the details and manage the inspection request by logging into your dashboard.
+                </td>
+              </tr>
+
               <!-- Call to Action -->
               <tr>
                 <td align="left" style="padding: 30px 50px;">
-                  <a href="{{ $link }}" style="background-color: #D72638; color: #fff; padding: 12px 25px; font-size: 16px; border-radius: 4px; display: inline-block;">
-                    Login
+                  <a href="{{ env('APP_URL') }}/admin/" style="background-color: #D72638; color: #fff; padding: 12px 25px; font-size: 16px; border-radius: 4px; display: inline-block;">
+                    Validate Inspection Request
                   </a>
                 </td>
               </tr>
@@ -125,4 +130,3 @@
     </center>
   </body>
 </html>
-

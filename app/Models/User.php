@@ -34,6 +34,12 @@ class User extends Authenticatable
         'work_type',
         'allocation_branch',
         'password',
+        'company_name',
+        'buying_limit',
+        'car_model',
+        'model_year',
+        'milage',
+        'account_manager'
     ];
 
     /**
@@ -58,4 +64,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    
 }

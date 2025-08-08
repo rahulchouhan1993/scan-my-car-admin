@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Inspector;
+namespace App\Http\Controllers\Dealer;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Mail;
 
-class InspectorController extends Controller
+class DealersController extends Controller
 {
-    public function dashboard(){
-        $pageTitle = 'Inspector | Dashboard';
-        return inertia('Inspector/Dashbaord/Index', compact('pageTitle'));
+    public function dashboard(Request $request){
+        $pageTitle = 'Dealer | Dashboard';
+        return inertia('Dealer/Dashbaord/Index', compact('pageTitle'));
     }
 
-     public function profile(Request $request){
+    public function profile(Request $request){
         $userDetails = User::find(auth()->user()->id);
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
@@ -48,7 +48,8 @@ class InspectorController extends Controller
             $userDetails->save();
             return redirect()->back()->with('success','Profile Updated');
         }
-        return inertia('Inspector/Users/Profile',compact('userDetails'));
+        $pageTitle = 'Dealer | Profile';
+        return inertia('Dealer/Users/Profile',compact('userDetails', 'pageTitle'));
     }
 
     public function forgotPassword(Request $request){
@@ -60,8 +61,7 @@ class InspectorController extends Controller
             if ($validator->fails()) {
                 return response()->json(['errors' => $validator->errors()], 422);
             }
-
-            $checkuser = User::where('email',$request->email)->where('role','inspector')->first();
+            $checkuser = User::where('email',$request->email)->where('role','dealer')->first();
             if(empty($checkuser)){
                 return back()->with('error', 'The provided email is not registered with us.');
             }else{
@@ -73,6 +73,7 @@ class InspectorController extends Controller
                 return back()->with('success', 'A new password has been sent to your provided email.');
             }
         }
-        return inertia('Inspector/Users/ForgotPassword');
+        $pageTitle = 'Dealer | Forgot Password';
+        return inertia('Dealer/Users/ForgotPassword', compact('pageTitle'));
     }
 }

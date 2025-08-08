@@ -27,7 +27,13 @@ const Add = () => {
     city: props?.userDetails?.city || '',
     state: props?.userDetails?.state || '',
     zip: props?.userDetails?.zip || '',
-    phone_no2: props?.userDetails?.phone_no2 || ''
+    phone_no2: props?.userDetails?.phone_no2 || '',
+    company_name: props?.userDetails?.company_name || '',
+    buying_limit: props?.userDetails?.buying_limit || '',
+    car_model: props?.userDetails?.car_model || '',
+    model_year: props?.userDetails?.model_year || '',
+    milage: props?.userDetails?.milage || '',
+    account_manager: props?.userDetails?.account_manager || ''
   })
 
   const handleSubmit = (e) => {
@@ -47,11 +53,22 @@ const Add = () => {
                 <CFormInput
                   type="text"
                   id="inputName"
-                  label="Full name"
+                  label="Full Name"
                   value={data.name}
                   onChange={(e) => setData('name', e.target.value)}
                   invalid={!!errors.name}
                   feedbackInvalid={errors.name}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="inputCompany"
+                  label="Company Name"
+                  value={data.company_name}
+                  onChange={(e) => setData('company_name', e.target.value)}
+                  invalid={!!errors.company_name}
+                  feedbackInvalid={errors.company_name}
                 />
               </CCol>
               <CCol md={4}>
@@ -98,8 +115,61 @@ const Add = () => {
                   feedbackInvalid={errors.phone_no2}
                 />
               </CCol>
-              
-
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="inputbuyingLimit"
+                  label="Buying Limit"
+                  value={data.buying_limit}
+                  onChange={(e) => setData('buying_limit', e.target.value)}
+                  invalid={!!errors.buying_limit}
+                  feedbackInvalid={errors.buying_limit}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="inputcarModel"
+                  label="Car Model"
+                  value={data.car_model}
+                  onChange={(e) => setData('car_model', e.target.value)}
+                  invalid={!!errors.car_model}
+                  feedbackInvalid={errors.car_model}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="inputcarYear"
+                  label="Model Year"
+                  value={data.model_year}
+                  onChange={(e) => setData('model_year', e.target.value)}
+                  invalid={!!errors.model_year}
+                  feedbackInvalid={errors.model_year}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="inputMilage"
+                  label="Milage"
+                  value={data.milage}
+                  onChange={(e) => setData('milage', e.target.value)}
+                  invalid={!!errors.milage}
+                  feedbackInvalid={errors.milage}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="inputAccountManager"
+                  label="Account Manager"
+                  value={data.account_manager}
+                  onChange={(e) => setData('account_manager', e.target.value)}
+                  invalid={!!errors.account_manager}
+                  feedbackInvalid={errors.account_manager}
+                />
+              </CCol>
               <CCol xs={12}>
                 <CFormInput
                   id="inputAddress"

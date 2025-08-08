@@ -24,4 +24,9 @@ class InspectionRequest extends Model
         'status',
         'assign_date',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

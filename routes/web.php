@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\Inspector\InspectorController;
+use App\Http\Controllers\Dealer\DealersController;
 //use App\Http\Controllers\Customer\CustomerController;
 
 // =========================
@@ -20,6 +21,27 @@ Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contact
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');
     // Add other customer-only routes
+});
+
+
+// =========================
+// Dealer ROUTES
+// =========================
+
+Route::prefix('dealer')->name('dealer.')->group(function () {
+    // Dealer Guest Routes (Login Only)
+    Route::middleware('guest')->group(function () {
+        Route::match(['post','get'],'/', [AuthController::class, 'showDealerLogin'])->name('login');
+        Route::match(['post','get'],'/forgot-password', [DealersController::class, 'forgotPassword'])->name('forgot-password');
+    });
+
+    // Dealer Authenticated Routes
+    Route::middleware(['auth', 'role:dealer'])->group(function () {
+        //Users Routes
+        Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::match(['post','get'],'/profile', [DealersController::class, 'profile'])->name('profile');
+        Route::get('/dashboard', [DealersController::class, 'dashboard'])->name('dashboard');
+    });
 });
 
 
@@ -43,7 +65,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/update-user/{id}', [UsersController::class, 'updateStatus'])->name('users.status');
         Route::get('/delete-user/{id}', [UsersController::class, 'deleteUser'])->name('users.delete');
         Route::get('/users/{roleType}', [UsersController::class, 'index'])->name('users');
-        Route::match(['post','get'],'/add-customer/{id}', [UsersController::class, 'add'])->name('users.add');
+        Route::match(['post','get'],'/add-dealer/{id}', [UsersController::class, 'add'])->name('users.add');
         Route::match(['post','get'],'/add-inspector/{id}', [UsersController::class, 'addInspector'])->name('inspector.add');
 
         //Contact Us Routes

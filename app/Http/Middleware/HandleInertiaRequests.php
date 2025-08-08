@@ -60,6 +60,8 @@ class HandleInertiaRequests extends Middleware
             return 'admin'; 
         } elseif ($request->is('inspector*')) {
             return 'admin';
+        } elseif ($request->is('dealer*')) {
+            return 'admin';
         }
 
         return 'app';
