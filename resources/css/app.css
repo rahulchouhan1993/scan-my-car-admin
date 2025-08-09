@@ -42,7 +42,7 @@
 }
 
 
-.container { width: 100%;max-width: 1330px; margin: auto;}
+.container { width: 100%;max-width: 1330px; margin: auto;    padding: 0 15px;}
 .ppfont{font-family:'RightGroteskWideMedium';}
 .creatodisplayM {font-family: 'CreatoDisplayMedium';}
 .creatodisplayB {font-family: 'CreatoDisplayBold';}
@@ -57,4 +57,5 @@ to{transform:rotate(360deg);}
 }
 .bookbtn {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%); color: #fff;text-align: center; padding: 15px 20px; border-radius: 60px;font-family: 'CreatoDisplayBold'; font-size: 20px; display: inline-block;}
 .carSlider .swiper-button-prev, .carSlider .swiper-button-next{ display: none!important;}
-.redbt {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%);}
+.redbtn {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%);}
+.workbreak{    word-break: break-word;}
