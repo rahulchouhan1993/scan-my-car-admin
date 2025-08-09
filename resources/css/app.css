@@ -57,3 +57,4 @@ to{transform:rotate(360deg);}
 }
 .bookbtn {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%); color: #fff;text-align: center; padding: 15px 20px; border-radius: 60px;font-family: 'CreatoDisplayBold'; font-size: 20px; display: inline-block;}
 .carSlider .swiper-button-prev, .carSlider .swiper-button-next{ display: none!important;}
+.redbt {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%);}
