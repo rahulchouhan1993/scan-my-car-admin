@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import sliderdemo01 from '../assets/images/sliderdemo01.jpg';
 import formbookimg01 from '../assets/images/formbookimg01.jpg';
-import image2 from '../assets/images/homebanner.jpg';
-import image3 from '../assets/images/servicehover.jpg';
+import formbookimg02 from '../assets/images/carsliderimg03.jpg';
+import formbookimg03 from '../assets/images/carsliderimg02.jpg';
+import formbookimg04 from '../assets/images/carsliderimg01.jpg';
+
 
 const data = [
   {
@@ -12,18 +14,18 @@ const data = [
   },
   {
     title: "We send a certified technician to your location",
-    content: "",
-    image: formbookimg01,
+    content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.",
+    image: formbookimg02,
   },
   {
     title: "We prepare a complete visual + diagnostic report",
-    content: "",
-    image: formbookimg01,
+    content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.",
+    image: formbookimg03,
   },
   {
     title: "You make smarter decisions with real data",
-    content: "",
-    image: formbookimg01,
+    content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.",
+    image: formbookimg04,
   },
 ];
 
@@ -53,14 +55,14 @@ const AccordianSlider = () => {
   }, [activeIndex]);
 
   return (
-    <div className="container mt-10 px-4 flex flex-col md:flex-row items-center gap-6">
+    <div className=" min-h-[700px] flex flex-col md:flex-row items-center gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[70px]">
       {/* Left Image */}
-      <div className="md:w-1/2 w-full">
+      <div className="md:w-1/2 w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px]">
         <img
           key={activeIndex}
           src={data[activeIndex].image}
           alt="car"
-          className={`rounded-[30px] w-full object-cover h-full max-h-[500px] transition-opacity duration-500 ${
+          className={`rounded-[10px] md:rounded-[20px] lg:rounded-[30px] w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px] object-cover h-full  transition-opacity duration-500 ${
             fadeImage ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -73,14 +75,12 @@ const AccordianSlider = () => {
           const isNextToOpen = index === (activeIndex + 1) % data.length;
 
           return (
-            <div
-              key={index}
-              className={`bg-gray-100 rounded-2xl p-5 transition-all duration-300 shadow-sm`}
-            >
-              <h3 className="text-lg font-semibold text-[#0b1a2a] mb-2">{item.title}</h3>
+            <div key={index}
+              className={`relative bg-[#19273512] rounded-2xl px-[10px] md:px-[15px] lg:px-[20px] py-[10px] md:py-[15px] lg:py-[20px] transition-all duration-300 shadow-sm`}>
+              <h3 className="ppfont text-[20px] md:text-[22px] lg:text-[20px] xl:text-[26px] leading-[22px] md:leading-[24px] lg:leading-[22px] xl:leading-[30px] text-[#192735] mb-2">{item.title}</h3>
 
               {isActive && item.content && (
-                <p className="text-sm text-gray-600">{item.content}</p>
+                <p className="creatodisplayM text-[12px] md:text-[16px] text-[#192735ad]">{item.content}</p>
               )}
 
               {/* Active red underline */}
@@ -90,7 +90,7 @@ const AccordianSlider = () => {
 
               {/* Progress bar for next */}
               {!isActive && isNextToOpen && (
-                <div className="w-full h-1 bg-gray-300 mt-3 rounded-full overflow-hidden">
+                <div className="absolute bottom-[0] left-[0] rounded-[10px] w-full h-[6px] bg-gray-300 mt-3 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-red-500 transition-all duration-100"
                     style={{ width: `${progress}%` }}

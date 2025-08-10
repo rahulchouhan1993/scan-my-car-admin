@@ -20,20 +20,22 @@ import CarSlider from '../../components/CarSlider';
 const Home = () => {
   return (
     <>
-      <section className="relative flex items-center w-full min-h-[600px] md:min-h-[740px] lg:min-h-[840px] overflow-hidden">
+      <section className="relative  flex items-center w-full min-h-[600px] md:min-h-[740px] lg:min-h-[840px] overflow-hidden">
         {/* Image */}
-        <img src={heroImage} alt="Vehicle Inspection" className="w-full max-w-full object-cover" />
+        <div className="absolute inset-0 top-[0] bottom-[0] h-full">
+        <img src={heroImage} alt="Vehicle Inspection" className="w-full h-full object-cover" />
+        </div>
         <div className='flex items-center absolute right-[0] top-[0] bottom-[0] m-auto z-[1]'>
-          <img src={redangleleft} alt="img" className='max-w-full' />
+          <img src={redangleleft} alt="img" className='max-w-full w-full' />
         </div>
 
         {/* Overlay */}
-        <div className="absolute inset-0 top-[0] bottom-[0]">
-          <img src={homeoverlaybg} alt="" className='w-full' />
+        <div className="absolute inset-0 top-[0] bottom-[0] h-full">
+          <img src={homeoverlaybg} alt="" className='w-full h-full object-cover' />
         </div>
 
         {/* Content */}
-        <div className="absolute inset-0 flex items-center px-6 md:px-12 lg:px-20">
+        <div className="absolute z-[2] inset-0 flex items-center px-6 md:px-12 lg:px-20">
           <div className="text-white container">
             <h1 className="ppfont  text-white text-[35px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[35px] md:leading-[55px] lg:leading-[65px] xl:leading-[75px] mb-[15px]">
               Know the Vehicle.<br />
@@ -43,7 +45,7 @@ const Home = () => {
             <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[34px] mb-[30px]">
               Smarter vehicle inspections for smarter buyers and owners. Expert checks. Instant reports. No guesswork.
             </p>
-            <Link to="/" className="inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
+            <Link to="/" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
               Book an Inspection
             </Link>
           </div>
@@ -51,36 +53,36 @@ const Home = () => {
       </section>
       <VehicleChecks />
 
-      <div className=' relative overflow-hidden bg-[#0D1B2A] min-h-[600px] md:min-h-[750px] lg:min-h-[810px] flex items-center '>
+      <div className='group relative overflow-hidden py-[30px] md:py-[40px] lg:md:py-[70px] bg-[#0D1B2A] hover:bg-[#fff] min-h-[600px] md:min-h-[750px] lg:min-h-[810px] flex items-center '>
         <div className='absolute left-[0] top-[0] bottom-[0]'>
           <img src={redangleright} alt="" />
         </div>
         <div className='container'>
-          <div className="flex items-center flex-wrap md:flex-nowrap gap-[10px]">
+          <div className="flex items-start flex-wrap md:flex-nowrap gap-[10px] mb-[40px]">
             <div className='w-full md-w-[50%]'>
-              <h2 className='ppfont text-[25] md:text-[36px] text-white'>We Inspect What Others Overlook</h2>
+              <h2 className='ppfont text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-white group-hover:text-[#192735]'>We Inspect What Others Overlook</h2>
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='ppfont text-[20] md:text-[20px] text-[#fff]'>Your local mechanic may do a quick look — but we dive deep into 200+ data points, scan with diagnostics, and capture visual proof that lets you truly understand your car’s health.</p>
+              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#fff] group-hover:text-[#192735bf]'>Your local mechanic may do a quick look — but we dive deep into 200+ data points, scan with diagnostics, and capture visual proof that lets you truly understand your car’s health.</p>
             </div>
           </div>
           <CarInspectionSlider />
-          <div className=' flex items-center justify-center z-[1]'>
-            <Link to="/" className='bookbtn min-w-[280px] py-[151px]'>Book an Inspection</Link>
+          <div className=' flex items-center justify-center z-[1] mt-[10px] md:mt-[30px] lg:mt-[50px]'>
+            <Link to="/" className='bookbtn flex min-w-[280px] md:!py-[20px] '>Book an Inspection</Link>
           </div>
         </div>
       </div>
 
-      <div className='bg-[#F9F9F9] py-[80px]'>
+      <div className='bg-[#F9F9F9] py-[40px] md:py-[50px] lg:py-[80px]'>
         <div className='container'>
-          <div className="flex items-center flex-wrap md:flex-nowrap gap-[10px]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div className='w-full md-w-[50%]'>
-              <h2 className='ppfont text-[25] md:text-[36px] text-[#192735]'>From Booking to Report — It’s Built to Be Effortless</h2>
+              <h2 className='ppfont text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-[#192735]'>From Booking to Report — It’s Built to Be Effortless</h2>
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='ppfont text-[20] md:text-[20px] text-[#192735]'>We’ve simplified the vehicle inspection process into 4 smooth steps — all handled at your location, with zero disruption.</p>
+              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#192735ad]'>We’ve simplified the vehicle inspection process into 4 smooth steps — all handled at your location, with zero disruption.</p>
             </div>
           </div>
 

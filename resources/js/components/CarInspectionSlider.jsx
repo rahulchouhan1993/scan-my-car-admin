@@ -1,19 +1,19 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 // Image imports from src/img
-import sliderdemo01 from '../assets/images/sliderdemo01.jpg';
-import sliderdemo02 from '../assets/images/sliderdemo02.jpg';
-import sliderdemo03 from '../assets/images/sliderdemo03.jpg';
-import sliderdemo04 from '../assets/images/sliderdemo04.jpg';
+import sliderdemo01 from '../assets/images/insepectimg01.jpg';
+import sliderdemo02 from '../assets/images/insepectimg02.jpg';
+import sliderdemo03 from '../assets/images/insepectimg03.jpg';
+import sliderdemo04 from '../assets/images/insepectimg04.jpg';
 
-import sliderdemo05 from '../assets/images/sliderdemo01.jpg';
-import sliderdemo06 from '../assets/images/sliderdemo02.jpg';
-import sliderdemo07 from '../assets/images/sliderdemo03.jpg';
-import sliderdemo08 from '../assets/images/sliderdemo04.jpg';
+import sliderdemo05 from '../assets/images/insepectimg01.jpg';
+import sliderdemo06 from '../assets/images/insepectimg02.jpg';
+import sliderdemo07 from '../assets/images/insepectimg03.jpg';
+import sliderdemo08 from '../assets/images/insepectimg04.jpg';
 
 
 const data = [
@@ -63,7 +63,7 @@ const data = [
   {
     title: "Interior & exterior visual condition",
     desc: "",
-    img: sliderdemo07,
+    img: sliderdemo08,
   },
   
   
@@ -71,29 +71,34 @@ const data = [
 
 const CarInspectionSlider = () => {
   return (
-    <div className="bg-[#0b1a2a] py-10 px-4">
+    <div className="">
       <Swiper
         spaceBetween={20}
         slidesPerView={1.2}
         breakpoints={{
-          300: { slidesPerView: 2 },
+          300: { slidesPerView: 1 },
+          576: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
           1280: { slidesPerView: 4 },
         }}
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        modules={[Autoplay]}
         className="w-full"
       >
         {data.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="rounded-2xl overflow-hidden shadow-lg">
+            <div className="relative rounded-[10px] md:rounded-[15px] lg:rounded-[20px]">
               <img
                 src={item.img}
                 alt={item.title}
-                className="h-56 w-full object-cover"
+                className="h-[260px] md:h-[350px]  lg:h-[400px] w-full object-cover rounded-[10px] md:rounded-[15px] lg:rounded-[20px]"
               />
-              <div className="p-4 text-white bg-[#0b1a2a]">
-                <h3 className="text-lg font-semibold">{item.title}</h3>
+              <div className="absolute left-[0] bottom-[0] px-[10px] py-[10px] md:px-[15px] md:py-[15px] lg:px-[20px] lg:py-[20px]">
+                <h3 className="ppfont text-[18px] md:text-[22px] lg:text-[24px] text-white leading-[28px] ">{item.title}</h3>
                 {item.desc && <p className="text-sm mt-1">{item.desc}</p>}
               </div>
             </div>
