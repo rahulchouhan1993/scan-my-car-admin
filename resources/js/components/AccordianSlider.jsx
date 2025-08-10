@@ -55,7 +55,7 @@ const AccordianSlider = () => {
   }, [activeIndex]);
 
   return (
-    <div className=" min-h-[700px] flex flex-col md:flex-row items-center gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[70px]">
+    <div className=" min-h-[750px] flex flex-col md:flex-row items-start gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[70px]">
       {/* Left Image */}
       <div className="md:w-1/2 w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px]">
         <img

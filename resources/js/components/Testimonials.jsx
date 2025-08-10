@@ -42,10 +42,10 @@ const SliderColumn = ({ direction = 'down', delay = 0 }) => {
       className="h-[420px]"
     >
       {testimonials.map((testimonial, index) => (
-        <SwiperSlide className='p-[25px] ' key={index}>
+        <SwiperSlide className='' key={index}>
           <div className="bg-white rounded-[20px] px-[20px] py-[25px] ">
             <p className="creatodisplayM text-[18px] leading-[24px] text-[#000315] mb-4">“{testimonial.quote}”</p>
-            <p className="creatodisplayM text-[#F61221] text-[14px] uppercase font-semibold">— {testimonial.name}</p>
+            <p className="creatodisplayM text-[#F61221] text-[14px] uppercase ">— {testimonial.name}</p>
           </div>
         </SwiperSlide>
       ))}

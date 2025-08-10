@@ -23,7 +23,7 @@ const Home = () => {
       <section className="relative  flex items-center w-full min-h-[600px] md:min-h-[740px] lg:min-h-[840px] overflow-hidden">
         {/* Image */}
         <div className="absolute inset-0 top-[0] bottom-[0] h-full">
-        <img src={heroImage} alt="Vehicle Inspection" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Vehicle Inspection" className="w-full h-full object-cover" />
         </div>
         <div className='flex items-center absolute right-[0] top-[0] bottom-[0] m-auto z-[1]'>
           <img src={redangleleft} alt="img" className='max-w-full w-full' />
@@ -76,7 +76,7 @@ const Home = () => {
 
       <div className='bg-[#F9F9F9] py-[40px] md:py-[50px] lg:py-[80px]'>
         <div className='container'>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div className='w-full md-w-[50%]'>
               <h2 className='ppfont text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-[#192735]'>From Booking to Report — It’s Built to Be Effortless</h2>
             </div>
@@ -91,54 +91,68 @@ const Home = () => {
       </div>
 
 
-      <section className="relative w-full bg-cover bg-center flex items-center justify-center min-h-[300px] ">
-      <div className="flex items-center h-full absolute top-[0] bottom-[0] right-[0]">
-        <img src={redangleleftSm} alt="img" className="" />
-      </div>
-      <img src={readychoosebg} alt="img"  className="w-full max-w-full h-100% cover"/>
-      <div className="absolute  top-[0] bottom-[0] left-[0] right-[0] w-full h-full flex items-center justify-center">
-        <div className="container relative z-10 max-w-2xl text-white text-left px-[15px] py-[15px]">
-            <h1 className="ppfont text-[30px] md:text-[45px] lg:text-[60px] leading-tight mb-4">
-            Ready to Make a <br className="hidden sm:block" /> Confident Choice?
+      <section className="relative overflow-hidden w-full bg-cover bg-center flex items-center justify-center min-h-[380px] md:min-h-[480px] lg:min-h-[500px] xl:min-h-[580px] ">
+        <div className="flex  items-center h-full z-[1] absolute top-[0] bottom-[0] right-[0]">
+          <img src={redangleleftSm} alt="img" className="" />
+        </div>
+
+        <div className="absolute  inset-0 top-[0] bottom-[0] h-full">
+          <img src={readychoosebg} alt="Vehicle Inspection" className="w-full h-full object-cover" />
+        </div>
+
+        {/* <img src={readychoosebg} alt="img" className="w-full h-full cover" /> */}
+        <div className="absolute z-[2]  top-[0] bottom-[0] left-[0] right-[0] w-full h-full flex items-center justify-center">
+          <div className="container relative z-10 text-white text-left px-[15px] py-[15px]">
+
+            <h1 className="ppfont text-[30px] md:text-[45px] lg:text-[60px] leading-[32px] md:leading-[50px] lg:leading-[62px] mb-4">
+              Ready to Make a Confident <br className="hidden sm:block" /> Choice?
             </h1>
-            <p className="max-w-[600px] text-lg sm:text-xl mb-[40px]">
-            Schedule an inspection in minutes. Our experts deliver a detailed
-            report so you can buy, sell, or own with total confidence.
+            <p className="creatodisplayM max-w-[800px] text-[18px] leading-[20px] md:text-[24px] md:leading-[28px] text-white  mb-[40px]">
+              Schedule an inspection in minutes. Our experts deliver a detailed
+              report so you can buy, sell, or own with total confidence.
             </p>
             <div>
-              <Link to="/" className="bg-white text-black font-semibold py-[15px] px-[25px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
-              Schedule Your Inspection
+              <Link to="/" className="creatodisplayB bg-white text-[16px] text-[#000315] py-[20px] px-[28px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
+                Schedule Your Inspection
               </Link>
             </div>
-           
+
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section className='bg-[#F9F9F9] py-[80px]'>
-      <div className='container'>
-        <div className='flex items-center gap-[40px] mb-[50px]'>
-          <h2 className='ppfont text-[#192735] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
-          <p className='creatodisplayM text-[#192735ab] text-[20px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
+      <section className='group bg-[#F9F9F9] hover:bg-[#0D1B2A] py-[80px]'>
+        <div className='container'>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
+            <div className='w-full md-w-[50%]'>
+              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
+            </div>
+
+            <div className='w-full md-w-[50%]'>
+              <p className='creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
+            </div>
+          </div>
+          <CarSlider />
         </div>
-        <CarSlider />
-        <TestimonialSlider />
-      </div>
+      </section>
 
-    </section>
+      <PricingSection />
+      <section className='bg-[#F9F9F9] py-[30px] md:py-[40px] lg:py-[60px] xl:py-[80px]'>
+        <div className='container'>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
+            <div className='w-full md-w-[50%]'>
+              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Real Reports. Real Results. Real People.</h2>
+            </div>
 
+            <div className='w-full md-w-[50%]'>
+              <p className='creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] '>Here's what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
+            </div>
+          </div>
 
-    <PricingSection />
-    <section className='bg-[#F9F9F9] py-[80px]'>
-      <div className='container'>
-        <div className='flex items-center gap-[40px] mb-[50px]'>
-          <h2 className='ppfont text-[#192735] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Real Reports. Real Results. Real People.</h2>
-          <p className='creatodisplayM text-[#192735ab] text-[20px] '>Here’s what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
+          <TestimonialSlider />
         </div>
-        <TestimonialSlider />
-      </div>
 
-    </section>
+      </section>
 
     </>
   )
