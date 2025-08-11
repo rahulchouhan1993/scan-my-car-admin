@@ -1,17 +1,17 @@
 import React from 'react'
+import { Link } from '@inertiajs/react';
 import CustomerLayout from '../../layout/CustomerLayout'
 import reactimg from '../../assets/images/react.jpg'
 import heroImage from "../../assets/images/homebanner.jpg";
 import redangleright from "../../assets/images/redangleright.png";
-import homeoverlaybg from "../../assets/images/homeoverlaybg.png";
 import redangleleft from "../../assets/images/redangleleft.png";
+import homeoverlaybg from "../../assets/images/homeoverlaybg.png";
 import redangleleftSm from "../../assets/images/redangleleft-sm.png";
 import overlayBg from '../../assets/images/overlaybg-2.png'
 import readychoosebg from '../../assets/images/readychoosebg.jpg'
 import confidentbg from '../../assets/images/confidentbg.jpg'
 import VehicleChecks from '../../components/Front/VehicleChecks';
 import CarInspectionSlider from '../../components/CarInspectionSlider';
-import { Link } from '@inertiajs/react';
 import AccordianSlider from '../../components/AccordianSlider';
 import PricingSection from '../../components/Plan';
 import TestimonialSlider from '../../components/Testimonials';
