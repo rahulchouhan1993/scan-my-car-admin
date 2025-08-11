@@ -6,9 +6,29 @@ import contactbg from "../../assets/images/contactbg.jpg";
 import writeusbg from "../../assets/images/writeusbg.jpg";
 import redarrowRg from "../../assets/images/redarrowRg.png";
 import writeusredicon from "../../assets/images/writeusredicon.png";
+import { route } from 'ziggy-js'
+import { useForm, usePage } from '@inertiajs/react'
 
 // contactbg
 const ContactUs = () => {
+  const { props } = usePage()
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: props?.name || '',
+    email: props?.email || '',
+    phone_no: props?.phone_no || '',
+    service_type: props?.service_type || '',
+    description: props?.description || ''
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    post(route('contactus'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            reset()
+        }
+    })
+  }
   return (
     <>
       <section className="relative text-white py-16  overflow-hidden">
@@ -54,7 +74,7 @@ const ContactUs = () => {
                   <AiOutlineMail className="text-white text-[25px]" />
                 </div>
                 <h3 className="ppfont text-[24px] md:text-[28px]">Mail Us at</h3>
-                <p className="creatodisplayM text-[18px] text-[#ffffffa1] break-words whitespace-normal workbreak">info@vincentedussault.com</p>
+                <p className="creatodisplayM text-[18px] text-[#ffffffa1] break-words whitespace-normal workbreak">info@certifycars.ae</p>
               </div>
             </div>
           </div>
@@ -94,33 +114,47 @@ const ContactUs = () => {
             </p>
             </div>
 
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Full Name"
                 className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                value={data.name}
+                onChange={(e) => setData('name', e.target.value)}
               />
+              {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
               <input
                 type="email"
                 placeholder="Email"
                 className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                value={data.email}
+                onChange={(e) => setData('email', e.target.value)}
               />
+              {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
               <input
                 type="tel"
                 placeholder="Phone"
                 className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                value={data.phone_no}
+                onChange={(e) => setData('phone_no', e.target.value)}
               />
+              {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               <input
                 type="text"
                 placeholder="Service Type"
                 className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                value={data.service_type}
+                onChange={(e) => setData('service_type', e.target.value)}
               />
+              {errors.service_type && <div className="text-red-500 text-sm">{errors.service_type}</div>}
               <textarea
                 placeholder="Message"
                 rows="4"
                 className="w-full border rounded-[20px] px-[30px] py-[18px] outline-none resize-none focus:ring-2 focus:ring-[#ccc]"
+                value={data.description}
+                onChange={(e) => setData('description', e.target.value)}
               ></textarea>
-
+              {errors.description && <div className="text-red-500 text-sm">{errors.description}</div>}
               <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[247px] bg-[#F61221] text-[20px] text-white rounded-full py-[17px] hover:opacity-90 transition">
                 Submit
               </button>

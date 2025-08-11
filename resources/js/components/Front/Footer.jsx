@@ -15,23 +15,23 @@ const Footer = () => {
           {/* Logo & Social Icons */}
           <div>
             <h1 className="text-4xl font-cursive text-white mb-6">
-              <Link to="/">
+              <Link href="/">
               <img src={footlogo} alt="" />
               </Link>
             </h1>
             <div className="flex space-x-4">
               <div>
-              <Link to="/"  className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
+              <Link href="/"  className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
                 <FaFacebookF />
                 </Link>
               </div>
               <div >
-              <Link to="/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
+              <Link href="/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
                 <FaInstagram />
                 </Link>
               </div>
               <div>
-              <Link to="/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
+              <Link href="/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
                 <FaXTwitter />
                 </Link>
               </div>
@@ -43,11 +43,11 @@ const Footer = () => {
             <h3 className="creatodisplayM text-[24px] mb-4">Quick Links</h3>
             <ul className="space-y-2 creatodisplayM text-[18px] text-[#ffffffc7] hover:text-[#fff]">
              
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Home</Link></li>
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Service</Link></li>
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Pricing</Link></li>
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>About</Link></li>
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Contact</Link></li>
+              <li><Link href="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Home</Link></li>
+              <li><Link href="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Services</Link></li>
+              <li><Link href="/about-us" className=' text-[#ffffffc7] hover:text-[#fff]'>About</Link></li>
+              <li><Link href="/contact-us" className=' text-[#ffffffc7] hover:text-[#fff]'>Contact</Link></li>
+              <li><Link href="/terms-and-conditions" className=' text-[#ffffffc7] hover:text-[#fff]'>Terms & Condition</Link></li>
             </ul>
           </div>
 
@@ -55,9 +55,9 @@ const Footer = () => {
           <div className='border-b-[#ffffff3b] border-b-[1px] border-t-[#ffffff3b] border-t-[1px] pt-[20px] pb-[20px] md:border-none'>
             <h3 className="creatodisplayM text-[24px] mb-4">Services</h3>
             <ul className="space-y-2 creatodisplayM text-[18px] text-[#ffffffc7]">
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Pre-Purchase Car Inspection</Link></li>
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Pre-Sale Vehicle Health Check</Link></li>
-              <li><Link to="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Ownership Diagnostics</Link></li>
+              <li><Link href="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Pre-Purchase Car Inspection</Link></li>
+              <li><Link href="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Pre-Sale Vehicle Health Check</Link></li>
+              <li><Link href="/" className=' text-[#ffffffc7] hover:text-[#fff]'>Ownership Diagnostics</Link></li>
             </ul>
           </div>
 

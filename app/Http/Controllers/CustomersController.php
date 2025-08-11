@@ -27,7 +27,7 @@ class CustomersController extends Controller
         $pageTitle = 'Terms and Conditions | CertifyCars';
         return inertia('Customers/TermsAndConditions', compact('pageTitle'));
     }
-
+ 
     public function contactUs(Request $request){
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
@@ -35,21 +35,17 @@ class CustomersController extends Controller
                 'email'        => 'required|email|max:100',
                 'phone_no'     => 'required|digits:10',
                 'service_type' => 'required|string|max:50',
-                'description'  => 'nullable|string',
-                'seen_status'  => 'required|boolean'
+                'description'  => 'required|nullable|string'
             ]);
 
             if ($validator->fails()) {
-                return response()->json([
-                    'status' => 'error',
-                    'errors' => $validator->errors()
-                ], 422);
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
 
             // Step 2: Save to database
             $contact = ContactUs::create($validator->validated());
 
-            return redirect()->back()->with('success','Contact request submitted successfully.');
+            return back()->with('success', 'Contact request submitted successfully.');
         }
         $pageTitle = 'Contact Us | CertifyCars';
         return inertia('Customers/ContactUs', compact('pageTitle'));
@@ -58,21 +54,21 @@ class CustomersController extends Controller
     public function createUser(Request $request){
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
-                'name'              => ['required', 'string', 'max:50'],
-                'company_name'      => ['required', 'string', 'max:50'],
-                'email'             => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-                'buying_limit'      => ['required'],
-                'car_model'         => ['required'],
-                'model_year'        => ['required'],
-                'milage'            => ['required'],
-                'account_manager'   => ['required'],
-                'phone_no'          => ['required', 'digits:10'],
-                'password'          => ['required', 'string', 'min:8', 'confirmed'],
+                'name'                  => ['required', 'string', 'max:50'],
+                'company_name'          => ['required', 'string', 'max:50'],
+                'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+                'buying_limit'          => ['required'],
+                'car_model'             => ['required'],
+                'model_year'            => ['required'],
+                'milage'                => ['required'],
+                'account_manager'       => ['required'],
+                'phone_no'              => ['required', 'digits:10'],
+                'password'              => ['required', 'string', 'min:8', 'confirmed'],
                 'password_confirmation' => ['required', 'string', 'min:8']
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
             $randomPass = $request->password;
             $user = User::create([
