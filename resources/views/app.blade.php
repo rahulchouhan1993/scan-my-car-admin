@@ -6,6 +6,7 @@
 		<meta name="googlebot" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title inertia></title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
         @viteReactRefresh
         @vite('resources/js/app.jsx')
         @inertiaHead
