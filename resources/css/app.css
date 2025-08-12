@@ -60,3 +60,46 @@ to{transform:rotate(360deg);}
 .redbtn {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%);}
 .btn:hover {background: #F61221; background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%); color: #fff;}
 .workbreak{word-break: break-word;}
+
+.inspectionSlider .swiper-button-prev {
+    width: 64px;
+    height: 64px;
+    background: #D72638;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    right: inherit;
+    left: 6px;
+}
+
+.inspectionSlider .swiper-button-prev:after {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+
+.inspectionSlider .swiper-button-next {
+    width: 64px;
+    height: 64px;
+    background: #D72638;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 60px;
+    left: inherit;
+    right: 6px;
+}
+
+.inspectionSlider .swiper-button-next:after {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+@media(max-width:767px){
+.inspectionSlider .swiper-button-prev,
+.inspectionSlider .swiper-button-next { width: 45px; height: 45px;}
+}
+
