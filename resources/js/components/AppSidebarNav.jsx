@@ -6,7 +6,7 @@ import 'simplebar-react/dist/simplebar.min.css'
 import { CBadge, CNavLink, CSidebarNav } from '@coreui/react'
 
 export const AppSidebarNav = ({ items }) => {
-  const { auth,notifications } = usePage().props
+  const { auth,notifications,serviceRequest } = usePage().props
   
   const navLink = (name, icon, badge, indent = false) => (
     <>
@@ -18,11 +18,15 @@ export const AppSidebarNav = ({ items }) => {
             </span>
           )}
       {name}
-      {badge && (
+      {badge && badge.badgeName === 'service-request' ? (
+        <CBadge color={badge.color} className="ms-auto" size="sm">
+          {serviceRequest}
+        </CBadge>
+      ) : badge && badge.badgeName === 'inquiries' ? (
         <CBadge color={badge.color} className="ms-auto" size="sm">
           {notifications}
         </CBadge>
-      )}
+      ) : null}
     </>
   )
 

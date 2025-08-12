@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\InspectionsController;
 use App\Http\Controllers\Inspector\InspectorController;
 use App\Http\Controllers\Dealer\DealersController;
 //use App\Http\Controllers\Customer\CustomerController;
@@ -18,8 +19,9 @@ Route::get('/about-us', [CustomersController::class, 'aboutUs'])->name('about');
 Route::get('/terms-and-conditions', [CustomersController::class, 'termsAndConditions'])->name('terms');
 Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
 Route::match(['post','get'],'/register-dealer', [CustomersController::class, 'createUser'])->name('register');
+Route::match(['post','get'],'/book-inspection', [InspectionsController::class, 'requestInspection'])->name('register');
+Route::get('/inspection-details', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
 
-Route::get('/login', [AuthController::class, 'showCustomerLogin'])->name('login');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');
@@ -44,6 +46,7 @@ Route::prefix('dealer')->name('dealer.')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::match(['post','get'],'/profile', [DealersController::class, 'profile'])->name('profile');
         Route::get('/dashboard', [DealersController::class, 'dashboard'])->name('dashboard');
+        Route::get('/service-request', [DealersController::class, 'serviceRequest'])->name('service-request');
     });
 });
 
@@ -75,7 +78,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/inquiries', [UsersController::class, 'inquiries'])->name('inquiries');
         Route::get('/inquiry-status/{id}', [UsersController::class, 'inquiryStatus'])->name('inquirystatus');
         Route::get('/delete-inquiry/{id}', [UsersController::class, 'deleteInquiry'])->name('delete.inquiry');
-        // Add other admin-only routes
+
+        //service request
+        Route::get('/service-request', [UsersController::class, 'serviceRequest'])->name('service-request');
     });
 });
 

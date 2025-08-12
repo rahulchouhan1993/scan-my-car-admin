@@ -4,6 +4,7 @@ import {
   cilSpeedometer,
   cilUser,
   cilBell,
+  cilCarAlt
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -28,11 +29,19 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Service Request',
+    href: '/service-request',
+    available: 'both',
+    icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
+    badge: { color: 'info', text: 'NEW', badgeName: 'service-request' },
+  },
+  {
+    component: CNavItem,
     name: 'Inquiries',
     href: '/inquiries',
     available: 'admin',
     icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
-    badge: { color: 'info', text: 'NEW' },
+    badge: { color: 'info', text: 'NEW', badgeName: 'inquiries' },
   },
 ]
 

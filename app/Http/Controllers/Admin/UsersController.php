@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ContactUs;
+use App\Models\InspectionRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -211,5 +212,11 @@ class UsersController extends Controller
         $userDetail->delete();
 
         return Redirect::back()->with('success', 'Inquiry deleted successfully.');
+    }
+
+    public function serviceRequest(){
+        $allInspections = InspectionRequest::paginate(10);
+        $pageTitle = 'Admin | Service Request';
+        return inertia('Admin/Users/ServiceRequest',compact('pageTitle','allInspections'));
     }
 }

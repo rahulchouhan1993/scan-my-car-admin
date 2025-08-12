@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\ContactUs;
+use App\Models\InspectionRequest;
 use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
@@ -44,6 +45,12 @@ class HandleInertiaRequests extends Middleware
             'notifications' => function () {
                 if (Auth::check()) {
                     return ContactUs::where('seen_status', 0)->count();
+                }
+                return [];
+            },
+            'serviceRequest' => function () {
+                if (Auth::check()) {
+                    return InspectionRequest::where('status', 0)->count();
                 }
                 return [];
             },

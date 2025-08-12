@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class InspectionRequest extends Model
 {
     protected $fillable = [
-        'user_id',
         'inspector_id',
+        'full_name',
+        'contact_no',
+        'email',
+        'address_line_1',
+        'address_line_2',
+        'car_parked',
         'vehicle_make',
         'vehicle_model',
         'vehicle_year',
@@ -16,13 +21,12 @@ class InspectionRequest extends Model
         'vin',
         'fuel_type',
         'transmission',
-        'color',
         'mileage',
         'preferred_date',
         'preferred_time_slot',
         'additional_notes',
         'status',
-        'assign_date',
+        'assign_date'
     ];
 
     public function user()
