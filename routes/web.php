@@ -81,6 +81,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //service request
         Route::get('/service-request', [UsersController::class, 'serviceRequest'])->name('service-request');
+        Route::get('/edit-request/{id}', [UsersController::class, 'editRequest'])->name('inspections.add');
     });
 });
 

@@ -219,4 +219,10 @@ class UsersController extends Controller
         $pageTitle = 'Admin | Service Request';
         return inertia('Admin/Users/ServiceRequest',compact('pageTitle','allInspections'));
     }
+
+    public function editRequest($id, Request $request){
+        $inspectionsDetail = InspectionRequest::find($id);
+        $pageTitle = 'Admin | Service Request';
+        return inertia('Admin/Users/ServiceRequest',compact('pageTitle','inspectionsDetail'));
+    }
 }
