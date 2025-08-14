@@ -72,7 +72,7 @@ class InspectionsController extends Controller
             InspectionLog::create([
                 'inspection_request_id' => $inspectionRequest->id,
                 'inspector_id'          => $request->inspector_id,
-                'log_details'     => 'Dummy log',
+                'log_details'           => 'New Service Request Created',
             ]);
 
             //Send Email to user and admin

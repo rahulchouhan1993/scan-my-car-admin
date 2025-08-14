@@ -76,10 +76,9 @@ const ServiceRequest = (props) => {
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu>
-                           <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>View</CDropdownItem>
-                           <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>Assign</CDropdownItem>
-                           <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>View Report</CDropdownItem>
-                           <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>Update Status</CDropdownItem>
+                           <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>Edit</CDropdownItem>
+                           <CDropdownItem href={route('admin.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
+                           <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem>
                         </CDropdownMenu>
                       </CDropdown>
                     </CTableDataCell>

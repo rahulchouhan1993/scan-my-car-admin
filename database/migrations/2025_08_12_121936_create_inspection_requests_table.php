@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('inspection_requests', function (Blueprint $table) {
             $table->id();
+            $table->integer('package_id')->default(1)->nullable(false);
             $table->integer('inspector_id')->nullable(true);
             $table->string('full_name',50)->nullable(true);
             $table->string('contact_no',15)->nullable(true);
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('car_parked',20)->nullable(true);
             $table->string('vehicle_make')->nullable(true);
             $table->string('vehicle_model')->nullable(true);
+            $table->string('color',25)->nullable(true);
             $table->year('vehicle_year')->nullable()->nullable(true);
             $table->string('registration_number')->nullable(true);
             $table->string('vin')->nullable()->nullable(true);

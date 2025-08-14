@@ -26,7 +26,9 @@ class InspectionRequest extends Model
         'preferred_time_slot',
         'additional_notes',
         'status',
-        'assign_date'
+        'assign_date',
+        'package_id',
+        'color',
     ];
 
     public function user()

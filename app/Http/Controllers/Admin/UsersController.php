@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ContactUs;
 use App\Models\InspectionRequest;
+use App\Models\InspectionLog;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -223,6 +224,18 @@ class UsersController extends Controller
     public function editRequest($id, Request $request){
         $inspectionsDetail = InspectionRequest::find($id);
         $pageTitle = 'Admin | Service Request';
-        return inertia('Admin/Users/ServiceRequest',compact('pageTitle','inspectionsDetail'));
+        return inertia('Admin/Users/EditRequest',compact('pageTitle','inspectionsDetail'));
+    }
+
+    public function report($id, Request $request){
+        $inspectionsDetail = InspectionRequest::find($id);
+        $pageTitle = 'Admin | Report';
+        return inertia('Admin/Users/Report',compact('pageTitle','inspectionsDetail'));
+    }
+
+    public function logs($id,){
+        $inspectinLogs = InspectionLog::where('inspection_request_id', $id)->paginate(10);
+        $pageTitle = 'Admin | Logs';
+        return inertia('Admin/Users/Logs',compact('pageTitle','inspectinLogs'));
     }
 }

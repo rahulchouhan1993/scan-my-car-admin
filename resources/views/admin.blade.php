@@ -5,6 +5,7 @@
         <meta name="Googlebot-News" content="noindex, nnofollow">
 		<meta name="googlebot" content="noindex, nofollow">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8000/favicon.png">
          <title inertia></title>
         @viteReactRefresh
         @vite('resources/js/admin.jsx')
