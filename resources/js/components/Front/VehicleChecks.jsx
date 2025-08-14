@@ -51,7 +51,7 @@ const VehicleChecks = () => {
               <div className="relative z-10 flex items-stretch h-full flex-col justify-between ">
                 <div className="flex items-stretch justify-between mb-6 gap-[10px]">
                   <h3 className="ppfont text-[22px] md:text-[24px] lg:text-[28px] lg:leading-[32px] text-white">{service.title}</h3>
-                  <Link to="/">
+                  <Link href="/book-inspection">
                   <span className="min-w-[50px] min-h-[50px] md:min-w-[64px] md:min-h-[64px] flex items-center justify-center bg-[#F61221] rounded-[90px]">
                     {/* <ArrowUpRight size={20} /> */}
                     <MdOutlineArrowOutward size={20} />

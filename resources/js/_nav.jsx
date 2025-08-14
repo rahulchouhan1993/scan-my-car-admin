@@ -37,7 +37,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Inquiries',
+    name: 'Contact Us Inquiries',
     href: '/inquiries',
     available: 'admin',
     icon: <CIcon icon={cilBell} customClassName="nav-icon" />,

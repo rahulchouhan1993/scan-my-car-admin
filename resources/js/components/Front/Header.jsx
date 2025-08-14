@@ -24,8 +24,8 @@ const Header = () => {
               Home
             </Link>
 
-            <Link href="/" className="hover:text-red-500">
-              Services
+            <Link href="/book-inspection" className="hover:text-red-500">
+              Book An Inspection
             </Link>
 
             <Link href="/about-us" className="hover:text-red-500">
@@ -42,7 +42,7 @@ const Header = () => {
            
             <Link href="/register-dealer" className="inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[150px] px-[7px] md:px-[8px] lg:px-[10px] py-[8px] md:py-[9px] lg:py-[12px] border border-white rounded-full text-white text-[20px] font-w[500] hover:bg-white hover:text-black transition">Register</Link>
 
-            <Link href="/dealer" className="inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[150px] px-[7px] md:px-[8px] lg:px-[10px] py-[8px] md:py-[9px] lg:py-[12px] bg-[#D72638] rounded-full text-white text-[20px] font-[500] hover:bg-[#D72638] transition">Login</Link>
+            <a href="/dealer" className="inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[150px] px-[7px] md:px-[8px] lg:px-[10px] py-[8px] md:py-[9px] lg:py-[12px] bg-[#D72638] rounded-full text-white text-[20px] font-[500] hover:bg-[#D72638] transition">Login</a>
 
            
           </div>

@@ -69,7 +69,7 @@ const Home = () => {
           </div>
           <CarInspectionSlider />
           <div className=' flex items-center justify-center z-[1] mt-[10px] md:mt-[30px] lg:mt-[50px]'>
-            <Link to="/" className='bookbtn flex min-w-[280px] md:!py-[20px] '>Book an Inspection</Link>
+            <Link href="/book-inspection" className='bookbtn flex min-w-[280px] md:!py-[20px] '>Book an Inspection</Link>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@ const Home = () => {
               report so you can buy, sell, or own with total confidence.
             </p>
             <div>
-              <Link to="/" className="creatodisplayB bg-white text-[16px] text-[#000315] py-[20px] px-[28px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
+              <Link href="/book-inspection" className="creatodisplayB bg-white text-[16px] text-[#000315] py-[20px] px-[28px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
                 Schedule Your Inspection
               </Link>
             </div>

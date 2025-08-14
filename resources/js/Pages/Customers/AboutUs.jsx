@@ -52,7 +52,7 @@ const AboutUs = () => {
             <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[34px] mb-[30px]">
               In a world where second-hand vehicles can hide first-class problems, we set out to create a service that puts truth back on the table. Founded by a team of auto experts, tech lovers, and everyday car buyers like you, our mission is simple: make vehicle inspections clear, convenient, and trustworthy.
             </p>
-            <Link to="/" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
+            <Link href="/book-inspection" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
               Book an Inspection
             </Link>
           </div>

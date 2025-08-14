@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\ContactUs;
+use App\Models\User;
 use App\Models\InspectionRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,6 +52,21 @@ class HandleInertiaRequests extends Middleware
             'serviceRequest' => function () {
                 if (Auth::check()) {
                     return InspectionRequest::where('status', 0)->count();
+                }
+                return [];
+            },
+            'dashboardData' => function () {
+                if (Auth::check()) {
+                    if(Auth::user()->role=='admin') {
+                        return [
+                            'totalUsers' => User::where('role','!=', 'admin')->count(),
+                            'totalServiceRequests' => InspectionRequest::where('status', 0)->count(),
+                        ];
+                    }else{
+                        return [
+                            'totalServiceRequests' => InspectionRequest::where('inspector_id', Auth::user()->id)->count(),
+                        ];
+                    }
                 }
                 return [];
             },

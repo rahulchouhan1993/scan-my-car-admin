@@ -102,7 +102,7 @@ const PricingSection = () => {
                             </div>
 
                             <div className="mt-8">
-                                <Link to="/"
+                                <Link href="/book-inspection"
                                     className={`creatodisplayM text-[20px] text-white inline-flex items-center justify-center w-full py-3 rounded-full transition-all ${plan.isPrimary
                                             ? "bg-[#D72638] text-white hover:bg-red-700"
                                             : "border border-white hover:bg-white hover:text-[#0b1a2a]"

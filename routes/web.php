@@ -19,7 +19,8 @@ Route::get('/about-us', [CustomersController::class, 'aboutUs'])->name('about');
 Route::get('/terms-and-conditions', [CustomersController::class, 'termsAndConditions'])->name('terms');
 Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
 Route::match(['post','get'],'/register-dealer', [CustomersController::class, 'createUser'])->name('register');
-Route::match(['post','get'],'/book-inspection', [InspectionsController::class, 'requestInspection'])->name('register');
+Route::match(['post','get'],'/book-inspection', [InspectionsController::class, 'requestInspection'])->name('book-inspection');
+Route::post('/request-inspection', [InspectionsController::class, 'requestInspection'])->name('request-inspection');
 Route::get('/inspection-details', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
 
 

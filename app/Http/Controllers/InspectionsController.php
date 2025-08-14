@@ -33,20 +33,15 @@ class InspectionsController extends Controller
                 'fuel_type'            => 'required|string|in:Petrol,Diesel,Hybrid,Electric',
                 'transmission'         => 'required|string|in:Manual,Automatic',
                 'mileage'              => 'required',
-                'preferred_date'       => 'nullable|date|after_or_equal:today',
-                'preferred_time_slot'  => 'nullable|string|in:Morning,Afternoon,Evening',
+                'preferred_date'       => 'required|date|after_or_equal:today',
+                'preferred_time_slot'  => 'required|string',
                 'additional_notes'     => 'nullable|string|max:1000',
                 'status'               => 'nullable|integer|in:0,1,2', // define status codes if needed
                 'assign_date'          => 'nullable|date',
             ]);
            
             if ($validator->fails()) {
-                if ($request->expectsJson()) {
-                    return response()->json([
-                        'status' => 'error',
-                        'errors' => $validator->errors()
-                    ], 422);
-                }
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
 
             $preferredDate = $request->preferred_date ? Carbon::parse($request->preferred_date)->format('Y-m-d') : null;

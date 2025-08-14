@@ -87,7 +87,7 @@
               <!-- Call to Action -->
               <tr>
                 <td align="left" style="padding: 30px 50px;">
-                  <a href="{{ env('APP_URL') }}/login" style="background-color: #D72638; color: #fff; padding: 12px 25px; font-size: 16px; border-radius: 4px; display: inline-block;">
+                  <a href="{{ env('APP_URL') }}/dealer" style="background-color: #D72638; color: #fff; padding: 12px 25px; font-size: 16px; border-radius: 4px; display: inline-block;">
                     Check Status
                   </a>
                 </td>
