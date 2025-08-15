@@ -67,7 +67,7 @@ const Footer = () => {
             <p className="text-xl creatodisplayM text-[18px] md:text-[22px] lg:text-[28px] xl:lg:text-[36px]  text-[#ffffffc7]  mb-2">+1 (202) 456 8798</p>
             <p className="creatodisplayM text-[18px]  text-[#ffffffc7]  mb-2">info@certifycars.ae</p>
             <p className="creatodisplayM text-[18px] text-[#ffffffc7]">
-              21 Jump street, California, Navada,<br /> USA 202555
+             Al Ghaizi Palaza, Al Garhoud, <br /> Dubai
             </p>
           </div>
         </div>

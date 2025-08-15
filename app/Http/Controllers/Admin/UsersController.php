@@ -14,11 +14,11 @@ use App\Mail\UserLoginDetailsMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
-
+use Carbon\Carbon;
 class UsersController extends Controller
 {
     public function index($roleType){
-        $userDetails = User::where('role',$roleType)->paginate(10);
+        $userDetails = User::where('role',$roleType)->orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Admin | Users - '.ucfirst($roleType).'';
         return inertia('Admin/Users/Index',compact('userDetails','roleType', 'pageTitle'));
     }
@@ -191,7 +191,7 @@ class UsersController extends Controller
     }
     
     public function inquiries(){
-        $allInquiries = ContactUs::paginate(10);
+        $allInquiries = ContactUs::orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Admin | Inquiries';
         return inertia('Admin/Users/Inquiries',compact('allInquiries', 'pageTitle'));
     }
@@ -216,15 +216,81 @@ class UsersController extends Controller
     }
 
     public function serviceRequest(){
-        $allInspections = InspectionRequest::paginate(10);
+        $allInspections = InspectionRequest::orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Admin | Service Request';
         return inertia('Admin/Users/ServiceRequest',compact('pageTitle','allInspections'));
     }
 
     public function editRequest($id, Request $request){
         $inspectionsDetail = InspectionRequest::find($id);
+        $alInspectors = User::where('role','inspector')->where('status',1)->get();
+        if($request->isMethod('post')){
+            $preferredDate = $request->preferred_date ? Carbon::parse($request->preferred_date)->format('Y-m-d') : null;
+            $assignDate = $request->assign_date ? Carbon::parse($request->assign_date)->format('Y-m-d') : null;
+            $inspectionsDetail->inspector_id        = $request->inspector_id;
+            $inspectionsDetail->full_name           = $request->full_name;
+            $inspectionsDetail->contact_no          = $request->contact_no;
+            $inspectionsDetail->email               = $request->email;
+            $inspectionsDetail->address_line_1      = $request->address_line_1;
+            $inspectionsDetail->address_line_2      = $request->address_line_2;
+            $inspectionsDetail->car_parked          = $request->car_parked;
+            $inspectionsDetail->vehicle_make        = $request->vehicle_make;
+            $inspectionsDetail->vehicle_model       = $request->vehicle_model;
+            $inspectionsDetail->vehicle_year        = $request->vehicle_year;
+            $inspectionsDetail->registration_number = $request->registration_number;
+            $inspectionsDetail->vin                 = $request->vin;
+            $inspectionsDetail->fuel_type           = $request->fuel_type;
+            $inspectionsDetail->transmission        = $request->transmission;
+            $inspectionsDetail->mileage             = $request->mileage;
+            $inspectionsDetail->preferred_date      = $preferredDate;
+            $inspectionsDetail->preferred_time_slot = $request->preferred_time_slot;
+            $inspectionsDetail->color               = $request->color;
+            $inspectionsDetail->additional_notes    = $request->additional_notes;
+            $inspectionsDetail->status              = $request->status ?? 0;
+            $inspectionsDetail->assign_date         = $assignDate;
+            $inspectionsDetail->save();
+
+            InspectionLog::create([
+                'inspection_request_id' => $inspectionsDetail->id,
+                'inspector_id'          => Auth()->user()->id,
+                'log_details'           => 'Inspection Details Changed By Admin',
+            ]);
+            if($request->change_identifier=='status_and_inspector_changed' || $request->change_identifier=='status_changed' || $request->change_identifier=='inspector_changed'){
+                if($inspectionsDetail->status == 0){
+                    $inspectionLogBtn = 'Unassigned';
+                }
+                if($inspectionsDetail->status == 1){
+                    $inspectionLogBtn = 'Assigned';
+                }
+                if($inspectionsDetail->status == 2){
+                    $inspectionLogBtn = 'In Process';
+                }
+                if($inspectionsDetail->status == 3){
+                    $inspectionLogBtn = 'Cancelled';
+                }
+                if($inspectionsDetail->status == 4){
+                    $inspectionLogBtn = 'Completed';
+                }
+                if($request->change_identifier=='status_and_inspector_changed' || $request->change_identifier=='status_changed'){
+                    InspectionLog::create([
+                        'inspection_request_id' => $inspectionsDetail->id,
+                        'inspector_id'          => Auth()->user()->id,
+                        'log_details'           => 'Inspection Status Changed By Admin: '.$inspectionLogBtn,
+                    ]);
+                }
+                if($request->change_identifier=='status_and_inspector_changed' || $request->change_identifier=='inspector_changed'){
+                    InspectionLog::create([
+                        'inspection_request_id' => $inspectionsDetail->id,
+                        'inspector_id'          => Auth()->user()->id,
+                        'log_details'           => 'Inspection Request Assigned To Inspector',
+                    ]);
+                }
+            }
+
+            return redirect()->back()->with('success', 'Inspection details updated successfully.');
+        }
         $pageTitle = 'Admin | Service Request';
-        return inertia('Admin/Users/EditRequest',compact('pageTitle','inspectionsDetail'));
+        return inertia('Admin/Users/EditRequest',compact('pageTitle','inspectionsDetail','alInspectors'));
     }
 
     public function report($id, Request $request){
@@ -234,7 +300,7 @@ class UsersController extends Controller
     }
 
     public function logs($id,){
-        $inspectinLogs = InspectionLog::where('inspection_request_id', $id)->paginate(10);
+        $inspectinLogs = InspectionLog::where('inspection_request_id', $id)->orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Admin | Logs';
         return inertia('Admin/Users/Logs',compact('pageTitle','inspectinLogs'));
     }

@@ -64,7 +64,7 @@ const EditRequest = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    post(route(`admin.inspections.add`, { id: props.inspectionsDetail.id }))
+    post(route(`inspector.inspections.add`, { id: props.inspectionsDetail.id }))
   }
 
   return (
@@ -78,6 +78,7 @@ const EditRequest = () => {
             <CForm className="row g-3" onSubmit={handleSubmit}>
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   name="full_name"
                   label="Full Name"
@@ -90,6 +91,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="email"
                   name="email"
                   label="Email"
@@ -102,6 +104,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="tel"
                   label="Phone"
                   name="contact_no"
@@ -114,6 +117,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   label="Address Line 1"
                   name="address_line_1"
@@ -126,6 +130,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   label="Address Line 2"
                   name="address_line_2"
@@ -138,6 +143,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                  disabled
                   name="vehicle_make"
                   label="Vehicle Make"
                   value={data.vehicle_make}
@@ -166,6 +172,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   label="Vehicle Model"
                   name="vehicle_model"
@@ -178,6 +185,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   label="Vehicle Year"
                   name="vehicle_year"
@@ -190,6 +198,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   label="Registration Number"
                   name="registration_number"
@@ -202,6 +211,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   label="VIN"
                   name="vin"
@@ -214,6 +224,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                  disabled
                   name="fuel_type"
                   label="Fuel Type"
                   value={data.fuel_type}
@@ -229,6 +240,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                  disabled
                   name="transmission"
                   label="Transmission"
                   value={data.transmission}
@@ -242,6 +254,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   name="color"
                   label="Vehicle Color"
@@ -254,6 +267,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                  disabled
                   name="car_parked"
                   label="Where Is Car Parked?"
                   value={data.car_parked}
@@ -269,6 +283,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   name="mileage"
                   label="Mileage"
@@ -281,6 +296,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="date"
                   name="preferred_date"
                   label="Preferred Date"
@@ -293,6 +309,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="time"
                   name="preferred_time_slot"
                   label="Preferred Time Slot"
@@ -305,6 +322,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormInput
+                  disabled
                   type="text"
                   name="additional_notes"
                   label="Additional Notes"
@@ -319,6 +337,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                  disabled
                   name="inspector_id"
                   label="Assigned Inspector"
                   value={String(data.inspector_id ?? '')}

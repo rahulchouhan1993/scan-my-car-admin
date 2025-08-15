@@ -20,10 +20,10 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Users',
-    available: 'both',
+    available: 'admin',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
-      { component: CNavItem, name: 'Dealers', available: 'both', href: '/users/dealer' },
+      { component: CNavItem, name: 'Dealers', available: 'admin', href: '/users/dealer' },
       { component: CNavItem, name: 'Inspectors', available: 'admin', href: '/users/inspector' },
     ],
   },

@@ -39,6 +39,7 @@ const WidgetsDropdown = (props) => {
 
   return (
     <CRow className={props.className} xs={{ gutter: 4 }}>
+      {props?.dashboardData?.totalUsers !== undefined && (
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="primary"
@@ -61,6 +62,7 @@ const WidgetsDropdown = (props) => {
           }
         />
       </CCol>
+      )}
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="info"

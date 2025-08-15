@@ -49,12 +49,6 @@ class HandleInertiaRequests extends Middleware
                 }
                 return [];
             },
-            'serviceRequest' => function () {
-                if (Auth::check()) {
-                    return InspectionRequest::where('status', 0)->count();
-                }
-                return [];
-            },
             'dashboardData' => function () {
                 if (Auth::check()) {
                     if(Auth::user()->role=='admin') {

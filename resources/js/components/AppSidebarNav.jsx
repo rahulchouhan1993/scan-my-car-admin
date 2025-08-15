@@ -6,7 +6,8 @@ import 'simplebar-react/dist/simplebar.min.css'
 import { CBadge, CNavLink, CSidebarNav } from '@coreui/react'
 
 export const AppSidebarNav = ({ items }) => {
-  const { auth,notifications,serviceRequest } = usePage().props
+  const { auth,notifications } = usePage().props
+  const serviceRequest = usePage().props.dashboardData.totalServiceRequests;
   
   const navLink = (name, icon, badge, indent = false) => (
     <>

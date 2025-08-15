@@ -82,7 +82,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //service request
         Route::get('/service-request', [UsersController::class, 'serviceRequest'])->name('service-request');
-        Route::get('/edit-request/{id}', [UsersController::class, 'editRequest'])->name('inspections.add');
+        Route::match(['post','get'],'/edit-request/{id}', [UsersController::class, 'editRequest'])->name('inspections.add');
         Route::get('/report/{id}', [UsersController::class, 'report'])->name('inspections.report');
         Route::get('/logs/{id}', [UsersController::class, 'logs'])->name('inspections.logs');
     });
@@ -105,6 +105,11 @@ Route::prefix('inspector')->name('inspector.')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [InspectorController::class, 'dashboard'])->name('dashboard');
         Route::match(['post','get'],'/profile', [InspectorController::class, 'profile'])->name('profile');
-        // Add other inspector-only routes
+        
+        //service request
+        Route::get('/service-request', [InspectorController::class, 'serviceRequest'])->name('service-request');
+        Route::match(['post','get'],'/edit-request/{id}', [InspectorController::class, 'editRequest'])->name('inspections.add');
+        Route::get('/report/{id}', [InspectorController::class, 'report'])->name('inspections.report');
+        Route::get('/logs/{id}', [InspectorController::class, 'logs'])->name('inspections.logs');
     });
 });

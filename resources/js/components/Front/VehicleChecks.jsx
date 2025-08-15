@@ -6,16 +6,20 @@ import { Link } from "@inertiajs/react";
 const services = [
   {
     title: "Pre-Purchase Car Inspection",
-    description: "Know what the seller won't tell you. Avoid hidden damage or overdue repairs.",
+    description: "Get a full report before you buy. Identify hidden damage, accident history, and overdue repairs.",
   },
   {
-    title: "Pre-Purchase Car Inspection",
-    description: "Know what the seller won't tell you. Avoid hidden damage or overdue repairs.",
+    title: "Pre-Sale Car Inspection",
+    description: "Show buyers your vehicle’s true condition. Boost trust and achieve a better selling price.",
   },
   {
-    title: "Pre-Purchase Car Inspection",
-    description: "Know what the seller won't tell you. Avoid hidden damage or overdue repairs.",
+    title: "Home Inspection Service",
+    description: "From roof to foundation, we check every detail so you can buy or sell with confidence.",
   },
+  // {
+  //   title: "Comprehensive Vehicle Health Check",
+  //   description: "An in-depth assessment of your car’s performance, safety, and overall condition.",
+  // },
 ];
 
 const VehicleChecks = () => {
