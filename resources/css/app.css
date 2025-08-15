@@ -41,11 +41,10 @@
          url('../js/assets/fonts/CreatoDisplayBold.svg#CreatoDisplayBold') format('svg');
 }
 
-
-.container { width: 100%;max-width: 1330px; margin: auto;    padding: 0 15px;}
+.container{width:100%;max-width:1330px;margin:auto;padding:0 15px;}
 .ppfont{font-family:'RightGroteskWideMedium';}
-.creatodisplayM {font-family: 'CreatoDisplayMedium';}
-.creatodisplayB {font-family: 'CreatoDisplayBold';}
+.creatodisplayM{font-family:'CreatoDisplayMedium';}
+.creatodisplayB{font-family:'CreatoDisplayBold';}
 .App{text-align:center;}
 .App-logo{height:40vmin;pointer-events:none;}
 @media (prefers-reduced-motion:no-preference){.App-logo{animation:App-logo-spin infinite 20s linear;}
@@ -55,51 +54,17 @@
 @keyframes App-logo-spin{from{transform:rotate(0deg);}
 to{transform:rotate(360deg);}
 }
-.bookbtn {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%); color: #fff;text-align: center; padding: 15px 20px; border-radius: 60px;font-family: 'CreatoDisplayBold'; font-size: 20px; display: inline-block;}
-.carSlider .swiper-button-prev, .carSlider .swiper-button-next{ display: none!important;}
-.redbtn {background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%);}
-.btn:hover {background: #F61221; background: radial-gradient(188.18% 135.42% at 50% -12.5%, #FFFFFF 0%, #F61221 24.58%); color: #fff;}
-.workbreak{word-break: break-word;}
-
-.inspectionSlider .swiper-button-prev {
-    width: 64px;
-    height: 64px;
-    background: #D72638;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 60px;
-    right: inherit;
-    left: 6px;
+.bookbtn{background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#F61221 24.58%);color:#fff;text-align:center;padding:15px 20px;border-radius:60px;font-family:'CreatoDisplayBold';font-size:20px;display:inline-block;}
+.carSlider .swiper-button-prev,.carSlider .swiper-button-next{display:none!important;}
+.redbtn{background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#F61221 24.58%); transition: all ease .3s;}
+.btn:hover{background:#F61221;background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#F61221 24.58%);color:#fff; transition: all ease .3s;}
+.workbreak{word-break:break-word;}
+.inspectionSlider .swiper-button-prev{width:64px;height:64px;background:#D72638;display:flex;align-items:center;justify-content:center;border-radius:60px;right:inherit;left:6px;}
+.inspectionSlider .swiper-button-prev:after{color:#fff;font-size:17px;font-weight:600;}
+.inspectionSlider .swiper-button-next{width:64px;height:64px;background:#D72638;display:flex;align-items:center;justify-content:center;border-radius:60px;left:inherit;right:6px;}
+.inspectionSlider .swiper-button-next:after{color:#fff;font-size:17px;font-weight:600;}
+.progressbar {background: linear-gradient(270deg, #F61221 0%, #900B13 100%);
 }
-
-.inspectionSlider .swiper-button-prev:after {
-    color: #fff;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-
-.inspectionSlider .swiper-button-next {
-    width: 64px;
-    height: 64px;
-    background: #D72638;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 60px;
-    left: inherit;
-    right: 6px;
-}
-
-.inspectionSlider .swiper-button-next:after {
-    color: #fff;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-@media(max-width:767px){
-.inspectionSlider .swiper-button-prev,
-.inspectionSlider .swiper-button-next { width: 45px; height: 45px;}
+@media(max-width:767px){.inspectionSlider .swiper-button-prev,.inspectionSlider .swiper-button-next{width:45px;height:45px;}
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules'; // Correct for Swiper v8+
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 const testimonials = [
@@ -28,28 +28,40 @@ const testimonials = [
 
 const SliderColumn = ({ direction = 'down', delay = 0 }) => {
   return (
-    <Swiper
-      direction="vertical"
-      slidesPerView={3}
-      loop={true}
-      spaceBetween={85}
-      autoplay={{
-        delay: 2000 + delay, // Use `delay` prop to offset start
-        reverseDirection: direction === 'up',
-        disableOnInteraction: false,
-      }}
-      modules={[Autoplay]}
-      className="h-[420px]"
-    >
-      {testimonials.map((testimonial, index) => (
-        <SwiperSlide className='' key={index}>
-          <div className="bg-white rounded-[20px] px-[20px] py-[25px] ">
-            <p className="creatodisplayM text-[18px] leading-[24px] text-[#000315] mb-4">“{testimonial.quote}”</p>
-            <p className="creatodisplayM text-[#F61221] text-[14px] uppercase ">— {testimonial.name}</p>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="relative h-[420px] overflow-hidden">
+      <Swiper
+        direction="vertical"
+        slidesPerView={3}
+        loop={true}
+        spaceBetween={85}
+        autoplay={{
+          delay: 2000 + delay,
+          reverseDirection: direction === 'up',
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay]}
+        className="h-full"
+      >
+        {testimonials.map((testimonial, index) => (
+          <SwiperSlide key={index}>
+            <div className="bg-white rounded-[20px] px-[20px] py-[25px]">
+              <p className="creatodisplayM text-[18px] leading-[24px] text-[#000315] mb-4">
+                “{testimonial.quote}”
+              </p>
+              <p className="creatodisplayM text-[#F61221] text-[14px] uppercase">
+                — {testimonial.name}
+              </p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Top Fade */}
+      <div className="pointer-events-none absolute top-0 left-0 w-full h-[60px] bg-gradient-to-b from-white to-transparent z-10"></div>
+
+      {/* Bottom Fade */}
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-[60px] bg-gradient-to-t from-white to-transparent z-10"></div>
+    </div>
   );
 };
 
@@ -57,13 +69,8 @@ const TestimonialSlider = () => {
   return (
     <div className="w-full">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* First column - top to bottom */}
         <SliderColumn direction="down" />
-
-        {/* Middle column - bottom to top */}
         <SliderColumn direction="up" delay={1000} />
-
-        {/* Third column - top to bottom */}
         <SliderColumn direction="down" delay={2000} />
       </div>
     </div>

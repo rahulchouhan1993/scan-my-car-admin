@@ -35,14 +35,14 @@ const Home = () => {
         </div>
 
         {/* Content */}
-        <div className="absolute z-[2] inset-0 flex items-center px-6 md:px-12 lg:px-20">
+        <div className="absolute z-[2] left-[0] right-[0] inset-0 flex items-center ">
           <div className="text-white container">
-            <h1 className="ppfont  text-white text-[35px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[35px] md:leading-[55px] lg:leading-[65px] xl:leading-[75px] mb-[15px]">
+            <h1 className="ppfont  text-white text-[35px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[35px] md:leading-[55px] lg:leading-[65px] xl:leading-[65px] mb-[15px]">
               Know the Vehicle.<br />
               Before It Becomes<br />
               Your Problem.
             </h1>
-            <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[34px] mb-[30px]">
+            <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[26px] mb-[30px]">
               Smarter vehicle inspections for smarter buyers and owners. Expert checks. Instant reports. No guesswork.
             </p>
             <Link to="/" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
@@ -57,14 +57,14 @@ const Home = () => {
         <div className='absolute left-[0] top-[0] bottom-[0]'>
           <img src={redangleright} alt="" />
         </div>
-        <div className='container'>
+        <div className='container relative z-[1]'>
           <div className="flex items-start flex-wrap md:flex-nowrap gap-[10px] mb-[40px]">
-            <div className='w-full md-w-[50%]'>
+            <div className='w-full md-w-[60%]'>
               <h2 className='ppfont text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-white group-hover:text-[#192735]'>We Inspect What Others Overlook</h2>
             </div>
 
-            <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#fff] group-hover:text-[#192735bf]'>Your local mechanic may do a quick look — but we dive deep into 200+ data points, scan with diagnostics, and capture visual proof that lets you truly understand your car’s health.</p>
+            <div className='w-full md-w-[40%]'>
+              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] text-[#ffffff8f] group-hover:text-[#808080]'>Your local mechanic may do a quick look — but we dive deep into 200+ data points, scan with diagnostics, and capture visual proof that lets you truly understand your car’s health.</p>
             </div>
           </div>
           <CarInspectionSlider />
@@ -82,7 +82,7 @@ const Home = () => {
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#192735ad]'>We’ve simplified the vehicle inspection process into 4 smooth steps — all handled at your location, with zero disruption.</p>
+              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] leading-[24px] text-[#192735bd]'>We’ve simplified the vehicle inspection process into 4 smooth steps — all handled at your location, with zero disruption.</p>
             </div>
           </div>
 
@@ -104,15 +104,15 @@ const Home = () => {
         <div className="absolute z-[2]  top-[0] bottom-[0] left-[0] right-[0] w-full h-full flex items-center justify-center">
           <div className="container relative z-10 text-white text-left px-[15px] py-[15px]">
 
-            <h1 className="ppfont text-[30px] md:text-[45px] lg:text-[60px] leading-[32px] md:leading-[50px] lg:leading-[62px] mb-4">
+            <h1 className="ppfont text-[30px] md:text-[45px] lg:text-[60px] leading-[32px] md:leading-[50px] lg:leading-[56px] mb-4">
               Ready to Make a Confident <br className="hidden sm:block" /> Choice?
             </h1>
-            <p className="creatodisplayM max-w-[800px] text-[18px] leading-[20px] md:text-[24px] md:leading-[28px] text-white  mb-[40px]">
+            <p className="creatodisplayM max-w-[800px] text-[18px] leading-[20px] md:text-[24px] md:leading-[26px] text-white  mb-[50px]">
               Schedule an inspection in minutes. Our experts deliver a detailed
               report so you can buy, sell, or own with total confidence.
             </p>
             <div>
-              <Link href="/book-inspection" className="creatodisplayB bg-white text-[16px] text-[#000315] py-[20px] px-[28px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
+              <Link href="/book-inspection" className="cursor-pointer btn creatodisplayB bg-white text-[16px] text-[#000315] py-[20px] px-[35px] rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300">
                 Schedule Your Inspection
               </Link>
             </div>
@@ -129,7 +129,7 @@ const Home = () => {
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
+              <p className='creatodisplayM text-[#192735c2]  group-hover:text-[#fff] text-[20px] leading-[22px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
             </div>
           </div>
           <CarSlider />
@@ -141,11 +141,11 @@ const Home = () => {
         <div className='container'>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div className='w-full md-w-[50%]'>
-              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Real Reports. Real Results. Real People.</h2>
+              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[36px]'>Real Reports. Real Results. Real People.</h2>
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] '>Here's what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
+              <p className='creatodisplayM text-[#192735bf]  group-hover:text-[#fff] text-[20px] leading-[24px] '>Here's what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
             </div>
           </div>
 

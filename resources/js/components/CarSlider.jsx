@@ -102,7 +102,7 @@ const CarSlider = () => {
               <div className="flex items-start flex-col justify-end bg-[#12263f] w-full h-full absolute  bottom-[-100%] left-0 right-0 px-[15px] py-[15px] md:px-[30px] md:py-[30px] text-white z-20  group-hover/card:bottom-0 transition-all duration-500 ease-in-out rounded-[26px]">
                 <h2 className="ppfont text-white text-[18px] leading-[20px] md:text-[22px] md:leading-[24px] lg:text-[24px] lg:leading-[26px] mb-3">{card.title}</h2>
                 <p className="creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] mb-5">{card.description}</p>
-                <Link href="/book-inspection" className="cursor-pointer w-full border border-white text-white px-[10px] py-[14px] rounded-full hover:bg-white hover:text-black transition creatodisplayM text-[18px]">
+                <Link href="/book-inspection" className="cursor-pointer w-full border border-white text-white px-[10px] py-[14px] rounded-full hover:bg-white hover:text-black transition creatodisplayM text-[18px] text-center">
                   {card.button}
                 </Link>
               </div>

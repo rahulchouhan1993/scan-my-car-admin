@@ -62,17 +62,17 @@ const PricingSection = () => {
             </div>
             <div className="container relative z-[1]">
 
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
-                <div className='w-full md-w-[50%]'>
-                    <h2 className='ppfont text-[#fff] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'> Simple, Flat Pricing That Makes Sense</h2>
-                </div>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
+                    <div className='w-full md:w-[55%]'>
+                        <h2 className='ppfont text-[#fff] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'> Simple, Flat Pricing That Makes Sense</h2>
+                    </div>
 
-                <div className='w-full md-w-[50%]'>
-                    <p className='creatodisplayM text-[#ffffffc2]  group-hover:text-[#fff] text-[20px] '>
-                    We believe in keeping our pricing as transparent as our reports. Choose a plan that fits your need — no hidden charges, no surprises later.
-                    </p>
+                    <div className='w-full md:w-[45%]'>
+                        <p className='creatodisplayM text-[#ffffff91]  group-hover:text-[#fff] text-[20px] leading-[24px] '>
+                            We believe in keeping our pricing as transparent as our reports. Choose a plan that fits your need — no hidden charges, no surprises later.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
 
 
@@ -80,38 +80,43 @@ const PricingSection = () => {
                     {plans.map((plan, index) => (
                         <div
                             key={index}
-                            className={`rounded-[10px] md:rounded-[15px] lg:rounded-[20px] xl:rounded-[30px] p-4 md:p-6 xl:p-8 flex flex-col justify-between shadow-md ${plan.isPrimary
-                                    ? "bg-white text-[#192735]"
-                                    : "bg-[#192735] text-white"
+                            className={`relative rounded-[10px] pb-[90px] md:rounded-[15px] lg:rounded-[20px] xl:rounded-[30px]  flex flex-col justify-start shadow-md ${plan.isPrimary
+                                ? "bg-white text-[#192735] border-b-[1px] border-b-[#ccc]"
+                                : "bg-[#192735] text-white"
                                 }`}
                         >
-                            <div>
-                                <h3 className="creatodisplayM text-[14px] md:text-[16px] lg:text-[18px] tracking-wide uppercase">
+                            <div className="pt-[10px] md:pt-[15px] xl:pt-[35px] px-[15px]  md:px-[10px] lg:px-[20px] xl:px-[35px] min-h-auto md:min-h-[240px] lg:min-h-[280px] xl:min-h-[230px]">
+                                <h3 className="creatodisplayM text-[14px] md:text-[16px] lg:text-[18px] leading-[20px] mb-[5px] tracking-wide uppercase">
                                     {plan.name}
                                 </h3>
-                                <p className="creatodisplayM text-[14px] mb-4">{plan.description}</p>
-                                <div className="ppfont text-[20px] md:text-[30px] lg:text-[40px]  mb-6 border-b border-b-[#ffffff42] pb-[25px] mb-[25px]">{plan.price}</div>
-                                <ul className="space-y-2 creatodisplayM text-[14px] ">
+                                <p className="creatodisplayM text-[14px] leading-[16px] mb-4">{plan.description}</p>
+                                <div className="ppfont text-[20px] md:text-[30px] lg:text-[40px]  ">{plan.price}</div>
+
+                            </div>
+
+                            <div className={` px-[15px] md:px-[15px] lg:px-[20px] xl:px-[30px] pt-[35px] pb-[35px] mt-[25px] border-t ${ plan.isPrimary ? "border-t-[#ccc]" : "border-t-[#ffffff42]" }`} >
+                                <ul className=" flex flex-col gap-[10px] creatodisplayM text-[18px] leading-[22px]  ">
                                     {plan.features.map((feature, i) => (
                                         <li key={i} className="flex items-start">
-                                            <span className="mr-2 text-xl">•</span>
+                                            <span className="mr-2 text-[14px]">•</span>
                                             {feature}
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
-
-                            <div className="mt-8">
-                                <Link href="/book-inspection"
-                                    className={`creatodisplayM text-[20px] text-white inline-flex items-center justify-center w-full py-3 rounded-full transition-all ${plan.isPrimary
+                                <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
+                                    <Link href="/book-inspection"
+                                        className={`creatodisplayM text-[20px] text-white inline-flex items-center justify-center w-full py-3 rounded-full transition-all ${plan.isPrimary
                                             ? "bg-[#D72638] text-white hover:bg-red-700"
                                             : "border border-white hover:bg-white hover:text-[#0b1a2a]"
-                                        }`}
-                                >
-                                    Continue
+                                            }`}
+                                    >
+                                        Continue
 
-                                </Link>
+                                    </Link>
+                                </div>
                             </div>
+
+
                         </div>
                     ))}
                 </div>

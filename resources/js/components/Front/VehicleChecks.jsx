@@ -23,10 +23,10 @@ const VehicleChecks = () => {
     <section className="bg-[#0D1B2A] text-white py-[40px] md:py-[80px] lg:py-[100px] ">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
-          <h2 className="ppfont md:w-[45%]  text-[25px] md:text-[30px] lg:text-[36px] leading-[28px] md:leading-[35px] lg:leading-[38px] text-white">
+          <h2 className="ppfont md:w-[50%]  text-[25px] md:text-[30px] lg:text-[36px] leading-[28px] md:leading-[35px] lg:leading-[38px] text-white">
             A Vehicle Check For Every Situation
           </h2>
-          <p className="md:w-[55%] text-[#ffffffc2] text-[16px] md:text-[18px] lg:text-[20px] max-w-xl">
+          <p className="md:w-[50%] text-[#ffffff8f] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[22px] max-w-xl">
             Every car has a different story. Whether you're buying, selling, or maintaining — we’ve designed inspections that fit your moment.
           </p>
         </div>
@@ -50,7 +50,7 @@ const VehicleChecks = () => {
               {/* Content */}
               <div className="relative z-10 flex items-stretch h-full flex-col justify-between ">
                 <div className="flex items-stretch justify-between mb-6 gap-[10px]">
-                  <h3 className="ppfont text-[22px] md:text-[24px] lg:text-[28px] lg:leading-[32px] text-white">{service.title}</h3>
+                  <h3 className="ppfont text-[22px] md:text-[24px] lg:text-[28px] lg:leading-[28px] text-white">{service.title}</h3>
                   <Link href="/book-inspection">
                   <span className="min-w-[50px] min-h-[50px] md:min-w-[64px] md:min-h-[64px] flex items-center justify-center bg-[#F61221] rounded-[90px]">
                     {/* <ArrowUpRight size={20} /> */}
@@ -58,7 +58,7 @@ const VehicleChecks = () => {
                   </span>
                   </Link>
                 </div>
-                <p className="creatodisplayM text-[18px] text-[#ffffffc2] leading-[20px]">{service.description}</p>
+                <p className="creatodisplayM text-[18px] text-[#ffffff91] leading-[20px]">{service.description}</p>
               </div>
             </div>
           ))}

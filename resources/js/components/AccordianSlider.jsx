@@ -1,33 +1,17 @@
 import React, { useEffect, useState } from "react";
-import sliderdemo01 from '../assets/images/sliderdemo01.jpg';
 import formbookimg01 from '../assets/images/formbookimg01.jpg';
 import formbookimg02 from '../assets/images/carsliderimg03.jpg';
 import formbookimg03 from '../assets/images/carsliderimg02.jpg';
 import formbookimg04 from '../assets/images/carsliderimg01.jpg';
 
-
 const data = [
-  {
-    title: "Book your inspection in 30 seconds",
-    content: `We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.`,
-    image: formbookimg01,
-  },
-  {
-    title: "We send a certified technician to your location",
-    content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.",
-    image: formbookimg02,
-  },
-  {
-    title: "We prepare a complete visual + diagnostic report",
-    content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.",
-    image: formbookimg03,
-  },
-  {
-    title: "You make smarter decisions with real data",
-    content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.",
-    image: formbookimg04,
-  },
+  { title: "Book your inspection in 30 seconds", content: `We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.`, image: formbookimg01 },
+  { title: "We send a certified technician to your location", content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals...", image: formbookimg02 },
+  { title: "We prepare a complete visual + diagnostic report", content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals...", image: formbookimg03 },
+  { title: "You make smarter decisions with real data", content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals...", image: formbookimg04 },
 ];
+
+const SLIDE_TIME = 4000; // ms
 
 const AccordianSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -35,34 +19,34 @@ const AccordianSlider = () => {
   const [fadeImage, setFadeImage] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setFadeImage(false);
-          setTimeout(() => {
-            const nextIndex = (activeIndex + 1) % data.length;
-            setActiveIndex(nextIndex);
-            setFadeImage(true);
-          }, 200);
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 40);
+    setProgress(0);
+    const resetTimeout = setTimeout(() => {
+      setProgress(100);
+    }, 50); // tiny delay for transition to work
 
-    return () => clearInterval(interval);
+    const slideTimeout = setTimeout(() => {
+      setFadeImage(false);
+      setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % data.length);
+        setFadeImage(true);
+      }, 200);
+    }, SLIDE_TIME);
+
+    return () => {
+      clearTimeout(resetTimeout);
+      clearTimeout(slideTimeout);
+    };
   }, [activeIndex]);
 
   return (
-    <div className=" min-h-[750px] flex flex-col md:flex-row items-start gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[70px]">
+    <div className="min-h-[750px] flex flex-col md:flex-row items-start gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[70px]">
       {/* Left Image */}
       <div className="md:w-1/2 w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px]">
         <img
           key={activeIndex}
           src={data[activeIndex].image}
           alt="car"
-          className={`rounded-[10px] md:rounded-[20px] lg:rounded-[30px] w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px] object-cover h-full  transition-opacity duration-500 ${
+          className={`rounded-[10px] md:rounded-[20px] lg:rounded-[30px] w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px] object-cover h-full transition-opacity duration-500 ${
             fadeImage ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -72,28 +56,39 @@ const AccordianSlider = () => {
       <div className="md:w-1/2 w-full flex flex-col gap-4">
         {data.map((item, index) => {
           const isActive = index === activeIndex;
-          const isNextToOpen = index === (activeIndex + 1) % data.length;
 
           return (
-            <div key={index}
-              className={`relative bg-[#19273512] rounded-2xl px-[10px] md:px-[15px] lg:px-[20px] py-[10px] md:py-[15px] lg:py-[20px] transition-all duration-300 shadow-sm`}>
-              <h3 className="ppfont text-[20px] md:text-[22px] lg:text-[20px] xl:text-[26px] leading-[22px] md:leading-[24px] lg:leading-[22px] xl:leading-[30px] text-[#192735] mb-2">{item.title}</h3>
+            <div
+              key={index}
+              className="relative bg-[#19273512] rounded-2xl px-[10px] md:px-[15px] lg:px-[20px] py-[10px] md:py-[15px] lg:py-[20px] transition-all duration-300 shadow-sm overflow-hidden"
+              onClick={() => setActiveIndex(index)}
+            >
+              <h3 className="ppfont text-[20px] md:text-[22px] lg:text-[20px] xl:text-[26px] leading-[22px] md:leading-[24px] lg:leading-[22px] xl:leading-[30px] text-[#192735] mb-2 cursor-pointer">
+                {item.title}
+              </h3>
 
-              {isActive && item.content && (
-                <p className="creatodisplayM text-[12px] md:text-[16px] text-[#192735ad]">{item.content}</p>
-              )}
+              {/* Smooth Content */}
+              <div
+                className="transition-all duration-500 ease-in-out overflow-hidden"
+                style={{
+                  maxHeight: isActive ? "500px" : "0px",
+                  opacity: isActive ? 1 : 0,
+                }}
+              >
+                <p className="creatodisplayM text-[12px] md:text-[16px] text-[#192735ad] pb-3">
+                  {item.content}
+                </p>
+              </div>
 
-              {/* Active red underline */}
+              {/* Smooth Progress Bar */}
               {isActive && (
-                <div className="mt-3 w-0 h-1 rounded-full bg-red-600"></div>
-              )}
-
-              {/* Progress bar for next */}
-              {!isActive && isNextToOpen && (
-                <div className="absolute bottom-[0] left-[0] rounded-[10px] w-full h-[6px] bg-gray-300 mt-3 rounded-full overflow-hidden">
+                <div className="absolute bottom-0 left-0 w-full h-[6px] bg-gray-300 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-red-500 transition-all duration-100"
-                    style={{ width: `${progress}%` }}
+                    className="h-full progressbar"
+                    style={{
+                      width: `${progress}%`,
+                      transition: `width ${SLIDE_TIME}ms linear`,
+                    }}
                   ></div>
                 </div>
               )}
