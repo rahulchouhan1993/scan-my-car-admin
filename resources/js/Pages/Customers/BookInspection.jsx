@@ -110,23 +110,27 @@ const BookInspection = () => {
             <div className="bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
               <div className="p-[10px] md:p-[15px] lg:p-[35px] !pb-[5px] ">
                 <h3 className="creatodisplayM text-[16px] md:text-[18px] text-[#192735] uppercase">
-                  STANDARD PLAN
+                  Regular Inspection
                 </h3>
                 <p className="creatodisplayM text-[12px] lg:text-[14px]  text-[#192735]">
-                  Best for used car buyers or sellers
+                  Ideal for basic condition checks before a quick purchase
                 </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[15px] md:text-[20px] lg:text-[30px] xl:text-[40px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
-                  $199.99
+                  AED 389 (exc. VAT)
                 </p>
               <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
                 <ul className="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px]  lg:pl-[25px]">
-                  <li>200+ point inspection</li>
-                  <li>Pre-purchase/pre-sale diagnostic</li>
-                  <li>Accident & paintwork history</li>
-                  <li>OBD-II scanning & test drive analysis</li>
-                  <li>Full visual report with color-coded findings</li>
-                  <li>Certified technician visit at your location</li>
+                  <li>General Mechanical & Electrical Inspection</li>
+                  <li>Engine & Gear Performance</li>
+                  <li>Test Drive (standard road)</li>
+                  <li>Accident History Check</li>
+                  <li>Interior Condition Review</li>
+                  <li>Exterior Condition Review</li>
+                  <li>Brakes System</li>
+                  <li>Damage/Repairs Detection</li>
+                  <li>Home Inspection</li>
+                  <li>Instant Report</li>
                 </ul>
                 <button  onClick={() => handleContinue("1")}  className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[15px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
                 Continue
@@ -138,23 +142,37 @@ const BookInspection = () => {
             <div className="bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
               <div className="p-[10px] md:p-[15px] lg:p-[35px] !pb-[5px] ">
                 <h3 className="creatodisplayM text-[16px] md:text-[18px] text-[#192735] uppercase">
-                PREMIUM Plan
+                Comprehensive Inspection
                 </h3>
                 <p className="creatodisplayM text-[12px] lg:text-[14px]  text-[#192735]">
-                  Best for used car buyers or sellers
+                  Balanced package for confident purchases of higher-value used cars
                 </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[15px] md:text-[20px] lg:text-[30px] xl:text-[40px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
-                  $199.99
+                  AED 489 (exc. VAT)
                 </p>
               <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
                 <ul className="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px]  lg:pl-[25px]">
-                  <li>200+ point inspection</li>
-                  <li>Pre-purchase/pre-sale diagnostic</li>
-                  <li>Accident & paintwork history</li>
-                  <li>OBD-II scanning & test drive analysis</li>
-                  <li>Full visual report with color-coded findings</li>
-                  <li>Certified technician visit at your location</li>
+                  <li>General Mechanical & Electrical Inspection</li>
+                  <li>Engine & Gear Performance</li>
+                  <li>Test Drive (standard road)</li>
+                  <li>Accident History Check</li>
+                  <li>Interior Condition Review</li>
+                  <li>Exterior Condition Review</li>
+                  <li>Brakes System</li>
+                  <li>Damage/Repairs Detection</li>
+                  <li>Home Inspection</li>
+                  <li>Instant Report</li>
+                  <li>Full Computer Diagnostic Scan (OBD & sensors)</li>
+                  <li>Extended Test Drive</li>
+                  <li>Detailed Damage & Repairs Assessment</li>
+                  <li>Leakages</li>
+                  <li>Gearbox & Engine Checkup</li>
+                  <li>Suspension & Steering</li>
+                  <li>Flood & Stolen Car Checkup</li>
+                  <li>Optional Carfax History Report (+AED 170 if requested)</li>
+                  <li>Battery health report</li>
+                  <li>High-quality Photos of the Car for records</li>
                 </ul>
                 <button onClick={() => handleContinue("2")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[15px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
                 Continue
@@ -166,23 +184,45 @@ const BookInspection = () => {
             <div className="bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
               <div className="p-[10px] md:p-[15px] lg:p-[35px] !pb-[5px] ">
                 <h3 className="creatodisplayM text-[16px] md:text-[18px] text-[#192735] uppercase">
-                GOLD Plan
+                Ultra Inspection
                 </h3>
                 <p className="creatodisplayM text-[12px] lg:text-[14px]  text-[#192735]">
-                  Best for used car buyers or sellers
+                  Premium, luxury cars, high-risk imports, or official resale
                 </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[15px] md:text-[20px] lg:text-[30px] xl:text-[40px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
-                  $199.99
+                  AED 599 (exc. VAT)
                 </p>
               <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
                 <ul className="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px]  lg:pl-[25px]">
-                  <li>200+ point inspection</li>
-                  <li>Pre-purchase/pre-sale diagnostic</li>
-                  <li>Accident & paintwork history</li>
-                  <li>OBD-II scanning & test drive analysis</li>
-                  <li>Full visual report with color-coded findings</li>
-                  <li>Certified technician visit at your location</li>
+                  <li>General Mechanical & Electrical Inspection</li>
+                  <li>Engine & Gear Performance</li>
+                  <li>Test Drive (standard road)</li>
+                  <li>Accident History Check</li>
+                  <li>Interior Condition Review</li>
+                  <li>Exterior Condition Review</li>
+                  <li>Brakes System</li>
+                  <li>Damage/Repairs Detection</li>
+                  <li>Home Inspection</li>
+                  <li>Instant Report</li>
+                  <li>Full Computer Diagnostic Scan (OBD & sensors)</li>
+                  <li>Extended Test Drive</li>
+                  <li>Detailed Damage & Repairs Assessment</li>
+                  <li>Leakages</li>
+                  <li>Gearbox & Engine Checkup</li>
+                  <li>Suspension & Steering</li>
+                  <li>Flood & Stolen Car Checkup</li>
+                  <li>Optional Carfax History Report (+AED 170 if requested)</li>
+                  <li>Battery health report</li>
+                  <li>High-quality Photos of the Car for records</li>
+                  <li>Extended Road Test Drive (highway + city)</li>
+                  <li>Advanced Computer Scan</li>
+                  <li>Detailed Gearbox & Engine Check</li>
+                  <li>Suspension, Brake, Tire, Battery Health Report</li>
+                  <li>Flood & Theft Check (via VIN + local records)</li>
+                  <li>Optional Carfax History Report (+AED 120)</li>
+                  <li>Full deep Body, Interior & Exterior Documentation with 20+ photos</li>
+                  <li>Technician Final Summary + WhatsApp Report + Email</li>
                 </ul>
                 <button  onClick={() => handleContinue("3")}  className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[15px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
                 Continue

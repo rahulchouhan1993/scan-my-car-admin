@@ -46,7 +46,9 @@ const AppHeader = () => {
   return (
     <CHeader position="sticky" className="mb-4 p-0" ref={headerRef}>
       <CContainer className="border-bottom px-4" fluid>
-        <CHeaderToggler className="ps-0">
+        <CHeaderToggler className="ps-0"
+          onClick={() => document.querySelector('.sidebar')?.classList.toggle('sidebar-narrow-unfoldable')}
+        >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
 

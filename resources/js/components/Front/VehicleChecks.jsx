@@ -16,10 +16,10 @@ const services = [
     title: "Home Inspection Service",
     description: "From roof to foundation, we check every detail so you can buy or sell with confidence.",
   },
-  // {
-  //   title: "Comprehensive Vehicle Health Check",
-  //   description: "An in-depth assessment of your car’s performance, safety, and overall condition.",
-  // },
+  {
+    title: "Comprehensive Vehicle Health Check",
+    description: "An in-depth assessment of your car’s performance, safety, and overall condition.",
+  },
 ];
 
 const VehicleChecks = () => {

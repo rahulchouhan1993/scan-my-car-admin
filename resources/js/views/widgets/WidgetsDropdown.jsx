@@ -72,7 +72,7 @@ const WidgetsDropdown = (props) => {
 
             </>
           }
-          title="Total Service Requests"
+          title="Pending Service Requests"
           
           chart={
             <CChartLine

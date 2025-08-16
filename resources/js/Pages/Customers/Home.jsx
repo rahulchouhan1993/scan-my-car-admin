@@ -38,14 +38,14 @@ const Home = () => {
         <div className="absolute z-[2] left-[0] right-[0] inset-0 flex items-center ">
           <div className="text-white container">
             <h1 className="ppfont  text-white text-[35px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[35px] md:leading-[55px] lg:leading-[65px] xl:leading-[65px] mb-[15px]">
-              Know the Vehicle.<br />
+              Certify Your Car Now,<br />
               Before It Becomes<br />
               Your Problem.
             </h1>
             <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[26px] mb-[30px]">
               Smarter vehicle inspections for smarter buyers and owners. Expert checks. Instant reports. No guesswork.
             </p>
-            <Link to="/" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
+            <Link href="/book-inspection" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
               Book an Inspection
             </Link>
           </div>
