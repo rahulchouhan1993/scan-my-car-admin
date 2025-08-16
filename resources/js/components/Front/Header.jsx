@@ -19,7 +19,7 @@ const Header = () => {
           </div>
   
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-[15px] md:gap-[15px] lg:gap-[40px] text-white text-[20px] creatodisplayM ">
+          <div className="hidden lg:flex gap-[15px] md:gap-[15px] lg:gap-[20px] xl:gap-[40px] text-white text-[20px] creatodisplayM ">
             <Link href="/" className="hover:text-red-500">
               Home
             </Link>
@@ -38,17 +38,17 @@ const Header = () => {
           </div>
   
           {/* Buttons */}
-          <div className="hidden md:flex items-center gap-[10px]">
+          <div className="hidden lg:flex items-center gap-[10px]">
            
-            <Link href="/register-dealer" className="creatodisplayM inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[150px] px-[7px] md:px-[8px] lg:px-[10px] py-[8px] md:py-[9px] lg:py-[12px] border border-white rounded-full text-white text-[20px] font-w[500] hover:bg-white hover:text-black transition">Dealer Registration</Link>
+            <Link href="/register-dealer" className="creatodisplayM inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[150px] xl:min-w-[170px] px-[7px] md:px-[8px] lg:px-[15px] py-[8px] md:py-[9px] lg:py-[11px] border border-white rounded-full text-white text-[15px] lg:text-[18px] xl:text-[20px] font-w[500] hover:bg-white hover:text-black transition">Dealer Registration</Link>
 
-            <a href="/dealer" className="creatodisplayM inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[150px] px-[7px] md:px-[8px] lg:px-[10px] py-[8px] md:py-[9px] lg:py-[12px] bg-[#D72638] rounded-full text-white text-[20px] font-[500] hover:bg-[#D72638] transition">Login</a>
+            <a href="/dealer" className="creatodisplayM inline-flex justify-center cursor-pointer creatodisplayM min-w-[90px] md:min-w-[110px] lg:min-w-[100px] xl:min-w-[150px] px-[7px] md:px-[8px] lg:px-[10px] py-[8px] md:py-[9px] lg:py-[12px] bg-[#D72638] rounded-full text-white text-[15px] lg:text-[18px] xl:text-[20px] font-[500] hover:bg-[#D72638] transition">Login</a>
 
            
           </div>
   
           {/* Mobile Menu Icon */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-white">
               {isOpen ? <IoMdClose size={28} />:  <RxHamburgerMenu size={28} />}
             </button>
@@ -57,7 +57,7 @@ const Header = () => {
   
         {/* Mobile Menu Dropdown */}
         {isOpen && (
-          <div className="creatodisplayM md:hidden bg-black bg-opacity-90 text-white flex flex-col absolute right-[15px] top-[55px] min-w-[250px] ">
+          <div className="creatodisplayM lg:hidden bg-black bg-opacity-90 text-white flex flex-col absolute z-[1] right-[15px] top-[55px] min-w-[250px] ">
              <Link href="/" className="flex items-center px-[10px] py-[8px] text-[15px] text-white border-b-[1px] border-b-[#2c2c2c] hover:text-red-500 ">
               Home
             </Link>

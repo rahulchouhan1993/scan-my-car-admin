@@ -106,7 +106,7 @@ const InspectionDetails = () => {
         <div className="container ">
           {/* Header */}
           <div className="mb-4 mb-[50px]">
-            <p className="text-[18px] text-red-600">
+            <p className="creatodisplayM text-[18px] text-[#D72638]">
               #174118512 | APR 26, 2024, 12:03 PM
             </p>
             <h1 className="text-2xl text-[#192735] font-bold">

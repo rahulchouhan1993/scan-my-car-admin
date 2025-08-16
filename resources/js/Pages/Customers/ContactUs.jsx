@@ -107,54 +107,68 @@ const ContactUs = () => {
 
           {/* Right: Form */}
           <div className="w-full md:w-1/2">
-            <div className='mb-[40px] pb-[30px] border-b-[1px] border-b-[#00000021]'>
-            <h2 className="ppfont text-[22px] md:text-[26px] lg:text-[36px] text-[#192735] mb-1">Write to us!</h2>
+            <div className='mb-[20px] pb-[15px] lg:mb-[40px] lg:pb-[30px] border-b-[1px] border-b-[#00000021]'>
+            <h2 className="ppfont text-[22px] md:text-[26px] lg:text-[36px] lg:leading-[37px] text-[#192735] mb-[5px]">Write to us!</h2>
             <p className="creatodisplayM text-[20px] text-[#192735a8]">
               We’ll get back to you as soon as possible
             </p>
             </div>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-3 lg:space-y-5" onSubmit={handleSubmit}>
+             
+
+              <div className='relative'> 
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
                 value={data.name}
                 onChange={(e) => setData('name', e.target.value)}
               />
               {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
+              </div>
+
+              <div className='relative'> 
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
                 value={data.email}
                 onChange={(e) => setData('email', e.target.value)}
               />
               {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
+              </div>
+
+              <div className='relative'> 
               <input
                 type="tel"
                 placeholder="Phone"
-                className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
                 value={data.phone_no}
                 onChange={(e) => setData('phone_no', e.target.value)}
               />
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
+              </div>
+              <div className='relative'> 
               <input
                 type="text"
                 placeholder="Service Type"
-                className="w-full border rounded-full px-[30px] py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
                 value={data.service_type}
                 onChange={(e) => setData('service_type', e.target.value)}
               />
               {errors.service_type && <div className="text-red-500 text-sm">{errors.service_type}</div>}
+              </div>
+              <div className='relative'> 
               <textarea
                 placeholder="Message"
                 rows="4"
-                className="w-full border rounded-[20px] px-[30px] py-[18px] outline-none resize-none focus:ring-2 focus:ring-[#ccc]"
+                className="w-full border rounded-[20px] px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none resize-none focus:ring-2 focus:ring-[#ccc]"
                 value={data.description}
                 onChange={(e) => setData('description', e.target.value)}
               ></textarea>
               {errors.description && <div className="text-red-500 text-sm">{errors.description}</div>}
+              </div>
               <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[247px] bg-[#F61221] text-[20px] text-white rounded-full py-[17px] hover:opacity-90 transition">
                 Submit
               </button>

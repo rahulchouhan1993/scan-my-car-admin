@@ -53,7 +53,7 @@ const Register = () => {
         />
 
         {/* Content */}
-        <div className="container relative z-10 flex flex-col lg:flex-row w-full max-w-6xl shadow-lg rounded-lg overflow-hidden">
+        <div className="container relative z-1 flex flex-col lg:flex-row w-full max-w-6xl shadow-lg rounded-lg overflow-hidden">
           
           {/* Left Side - Form */}
           <div className="w-full lg:w-1/2 bg-[#192735] p-[25px] rounded-[15px] md:rounded-[30px]">
@@ -65,7 +65,8 @@ const Register = () => {
               </p>
             </div>
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-5 registerForm" onSubmit={handleSubmit}>
+            <div className='relative'> 
               <input
                 type="text"
                 placeholder="Full Name"
@@ -74,6 +75,8 @@ const Register = () => {
                 onChange={(e) => setData('name', e.target.value)}
               />
                {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
+               </div>
+               <div className='relative'> 
               <input
                 type="text"
                 placeholder="Company Name"
@@ -82,6 +85,9 @@ const Register = () => {
                 onChange={(e) => setData('company_name', e.target.value)}
               />
                {errors.company_name && <div className="text-red-500 text-sm">{errors.company_name}</div>}
+               </div>
+
+               <div className='relative'> 
               <input
                 type="email"
                 placeholder="Email"
@@ -90,6 +96,8 @@ const Register = () => {
                 onChange={(e) => setData('email', e.target.value)}
               />
               {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
+              </div>
+              <div className='relative'> 
               <input
                 type="tel"
                 placeholder="Phone"
@@ -98,6 +106,8 @@ const Register = () => {
                 onChange={(e) => setData('phone_no', e.target.value)}
               />
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
+              </div>
+              <div className='relative'> 
                <input
                 type="number"
                 placeholder="Buying Limit"
@@ -106,6 +116,8 @@ const Register = () => {
                 onChange={(e) => setData('buying_limit', e.target.value)}
               />
               {errors.buying_limit && <div className="text-red-500 text-sm">{errors.buying_limit}</div>}
+              </div>
+              <div className='relative'> 
               <input
                 type="text"
                 placeholder="Car Model"
@@ -114,6 +126,9 @@ const Register = () => {
                 onChange={(e) => setData('car_model', e.target.value)}
               />
               {errors.car_model && <div className="text-red-500 text-sm">{errors.car_model}</div>}
+              </div>
+
+              <div className='relative'> 
               <input
                 type="number"
                 placeholder="Model Year"
@@ -122,6 +137,8 @@ const Register = () => {
                 onChange={(e) => setData('model_year', e.target.value)}
               />
               {errors.model_year && <div className="text-red-500 text-sm">{errors.model_year}</div>}
+              </div>
+              <div className='relative'> 
               <input
                 type="number"
                 placeholder="Milage"
@@ -130,6 +147,9 @@ const Register = () => {
                 onChange={(e) => setData('milage', e.target.value)}
               />
               {errors.milage && <div className="text-red-500 text-sm">{errors.milage}</div>}
+              </div>
+
+              <div className='relative'> 
               <input
                 type="text"
                 placeholder="Account Manager"
@@ -138,6 +158,8 @@ const Register = () => {
                 onChange={(e) => setData('account_manager', e.target.value)}
               />
               {errors.account_manager && <div className="text-red-500 text-sm">{errors.account_manager}</div>}
+              </div>
+              <div className='relative'> 
               <input
                 type="password"
                 placeholder="Password"
@@ -146,6 +168,8 @@ const Register = () => {
                 onChange={(e) => setData('password', e.target.value)}
               />
               {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
+              </div>
+              <div className='relative'> 
               <input
                 type="password"
                 placeholder="Confirm Password"
@@ -154,6 +178,7 @@ const Register = () => {
                 onChange={(e) => setData('password_confirmation', e.target.value)}
               />
               {errors.password_confirmation && <div className="text-red-500 text-sm">{errors.password_confirmation}</div>}
+              </div>
 
               <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[247px] bg-[#F61221] text-[20px] text-white rounded-full py-[17px] hover:opacity-90 transition">Register</button>
             </form>
