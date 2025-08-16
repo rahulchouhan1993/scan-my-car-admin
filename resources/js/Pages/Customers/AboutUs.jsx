@@ -68,7 +68,7 @@ const AboutUs = () => {
             <h2 className="ppfont text-white  text-[28px] md:text-[26px] text-[28px] mb-[5px] md:mb-[10px] ">
               What Defines Us
             </h2>
-            <p className="creatodisplayM text-[#ffffffbf] text-[16px] md:text-[16px] lg:text-[18px] leading-[22px]">
+            <p className="creatodisplayM text-[#ffffffa1] text-[16px] md:text-[16px] lg:text-[18px] leading-[22px]">
               We believe in thorough inspections that leave no stone unturned — and in reports that are simple enough for anyone to understand. Our identity is shaped by two forces: precision and transparency. We inspect every car like it’s our own, and we only succeed when you feel fully informed, not overwhelmed.
             </p>
           </div>
@@ -78,7 +78,7 @@ const AboutUs = () => {
             <h2 className="ppfont text-white  text-[28px] md:text-[26px] text-[28px] mb-[5px] md:mb-[10px] ">
               What Inspires Us
             </h2>
-            <p className="creatodisplayM text-[#ffffffbf] text-[16px] md:text-[16px] lg:text-[18px] leading-[22px]">
+            <p className="creatodisplayM text-[#ffffffa1] text-[16px] md:text-[16px] lg:text-[18px] leading-[22px]">
               We’ve met buyers who were one bad decision away from a nightmare... and sellers who just wanted to prove their vehicle’s real value. Those moments — where knowledge changed the outcome — are why we do this. We’re inspired by the idea that confidence is contagious. And when people feel sure about their vehicle, everything that follows becomes smoother.
             </p>
           </div>
@@ -86,22 +86,22 @@ const AboutUs = () => {
         </div>
       </section>
 
-      <section className="bg-[#F9F9F9] py-[40px] md:py-[60px] lg:py-[80px]">
+      <section className="group bg-[#F9F9F9] hover:bg-[#0D1B2A] py-[40px] md:py-[60px] lg:py-[80px]">
         <div className='container'>
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div class="w-full md-w-[50%]">
-              <h2 class="ppfont text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-[#192735]">Every Inspection Tells a Story and We Make Sure It’s the Real One</h2>
+              <h2 class="ppfont  text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-[#192735] group-hover:text-[#fff]">Every Inspection Tells a Story and We Make Sure It’s the Real One</h2>
             </div>
 
             <div class="w-full md-w-[50%]">
-              <p class="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#192735ad]">We don’t just assess vehicles — we reveal their journeys, their condition, and their truth. With every inspection we do, there’s one common outcome: clients walking away smarter, more confident, and in control of their next move.</p>
+              <p class="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] text-[#192735ad] group-hover:text-[#fff]">We don’t just assess vehicles — we reveal their journeys, their condition, and their truth. With every inspection we do, there’s one common outcome: clients walking away smarter, more confident, and in control of their next move.</p>
             </div>
           </div>
         </div>
         <MarqueeSlider />
       </section>
 
-      <div className='group relative overflow-hidden  bg-[#0D1B2A] flex items-center '>
+      <div className='1 relative overflow-hidden  bg-[#0D1B2A] flex items-center '>
         <div class="container">
           <div className='absolute left-[0] top-[0] bottom-[0]'>
             <img src={redangleright} alt="" />
@@ -111,15 +111,15 @@ const AboutUs = () => {
       </div>
 
 
-      <section className='group bg-[#F9F9F9] hover:bg-[#0D1B2A] py-[80px]'>
+      <section className='group bg-[#F9F9F9] hover:bg-[#0D1B2A] py-[20px] md:py-[60px] lg:py-[80px]'>
         <div className='container'>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div className='w-full md-w-[50%]'>
-              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
+              <h2 className='ppfont text-[#192735] group-hover:text-[#fff]  text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
+              <p className='creatodisplayM text-[#192735bf]  group-hover:text-[#fff] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
             </div>
           </div>
           <CarSlider />
@@ -131,11 +131,11 @@ const AboutUs = () => {
         <div className='container'>
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div class="w-full md-w-[50%]">
-              <h2 class="ppfont text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-[#192735]">A blend of gearheads, tech minds, and real people who care.</h2>
+              <h2 class="ppfont  text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-[#192735]">A blend of gearheads, tech minds, and real people who care.</h2>
             </div>
 
             <div class="w-full md-w-[50%]">
-              <p class="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#192735ad]">We're not a faceless startup. We're a close-knit team built on passion, expertise, and a shared obsession with doing things right.</p>
+              <p class="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] text-[#192735bf]">We're not a faceless startup. We're a close-knit team built on passion, expertise, and a shared obsession with doing things right.</p>
             </div>
           </div>
         

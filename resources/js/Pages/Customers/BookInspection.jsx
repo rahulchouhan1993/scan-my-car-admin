@@ -107,7 +107,7 @@ const BookInspection = () => {
         {activeStep === 1 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto container">
             {/* Standard Plan */}
-            <div className="bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
+            <div className="relative pb-[90px] bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
               <div className="p-[10px] md:p-[15px] lg:p-[35px] !pb-[5px] ">
                 <h3 className="creatodisplayM text-[16px] md:text-[18px] text-[#192735] uppercase">
                   Regular Inspection
@@ -116,7 +116,7 @@ const BookInspection = () => {
                   Ideal for basic condition checks before a quick purchase
                 </p>
                 </div>
-                <p className="ppfont border-b-[1px] border-b-[#ccc] text-[15px] md:text-[20px] lg:text-[30px] xl:text-[40px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
+                <p className="ppfont border-b-[1px] border-b-[#ccc] text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
                   AED 389 (exc. VAT)
                 </p>
               <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
@@ -132,14 +132,16 @@ const BookInspection = () => {
                   <li>Home Inspection</li>
                   <li>Instant Report</li>
                 </ul>
+                <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                 <button  onClick={() => handleContinue("1")}  className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[15px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
                 Continue
               </button>
               </div>
+              </div>
             </div>
 
             {/* Premium Plan */}
-            <div className="bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
+            <div className="relative pb-[90px] bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
               <div className="p-[10px] md:p-[15px] lg:p-[35px] !pb-[5px] ">
                 <h3 className="creatodisplayM text-[16px] md:text-[18px] text-[#192735] uppercase">
                 Comprehensive Inspection
@@ -148,7 +150,7 @@ const BookInspection = () => {
                   Balanced package for confident purchases of higher-value used cars
                 </p>
                 </div>
-                <p className="ppfont border-b-[1px] border-b-[#ccc] text-[15px] md:text-[20px] lg:text-[30px] xl:text-[40px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
+                <p className="ppfont border-b-[1px] border-b-[#ccc] text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
                   AED 489 (exc. VAT)
                 </p>
               <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
@@ -174,14 +176,16 @@ const BookInspection = () => {
                   <li>Battery health report</li>
                   <li>High-quality Photos of the Car for records</li>
                 </ul>
+                <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                 <button onClick={() => handleContinue("2")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[15px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
                 Continue
               </button>
               </div>
+              </div>
             </div>
 
             {/* Gold Plan */}
-            <div className="bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
+            <div className="relative pb-[90px] bg-[#EDEEEF] rounded-[10px] lg:rounded-[25px] flex flex-col gap-[0 0] justify-start">
               <div className="p-[10px] md:p-[15px] lg:p-[35px] !pb-[5px] ">
                 <h3 className="creatodisplayM text-[16px] md:text-[18px] text-[#192735] uppercase">
                 Ultra Inspection
@@ -190,11 +194,11 @@ const BookInspection = () => {
                   Premium, luxury cars, high-risk imports, or official resale
                 </p>
                 </div>
-                <p className="ppfont border-b-[1px] border-b-[#ccc] text-[15px] md:text-[20px] lg:text-[30px] xl:text-[40px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
+                <p className="ppfont border-b-[1px] border-b-[#ccc] text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
                   AED 599 (exc. VAT)
                 </p>
               <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
-                <ul className="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px]  lg:pl-[25px]">
+                <ul className="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] leading-[22px] text-[#192735] list-disc pl-[20px]  lg:pl-[25px]">
                   <li>General Mechanical & Electrical Inspection</li>
                   <li>Engine & Gear Performance</li>
                   <li>Test Drive (standard road)</li>
@@ -224,9 +228,11 @@ const BookInspection = () => {
                   <li>Full deep Body, Interior & Exterior Documentation with 20+ photos</li>
                   <li>Technician Final Summary + WhatsApp Report + Email</li>
                 </ul>
+                <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                 <button  onClick={() => handleContinue("3")}  className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[15px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
                 Continue
               </button>
+              </div>
               </div>
             </div>
           </div>
@@ -241,8 +247,10 @@ const BookInspection = () => {
 
             <form className="grid grid-cols-1 md:grid-cols-2 gap-[20px]" onSubmit={handleSubmit}>
             <input type="hidden" id="packageId" name="package_name" value={packageId} />
-              {/* First Name */}
-              <input
+
+            <div>
+               {/* First Name */}
+               <input
                 type="text"
                 name="full_name"
                 placeholder="Full Name"
@@ -251,6 +259,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('full_name', e.target.value)}
               />
                 {errors.full_name && <div className="text-red-500 text-sm">{errors.full_name}</div>}
+            </div>
+             
+            <div>
               {/* Email */}
               <input
                 type="email"
@@ -261,6 +272,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('email', e.target.value)}
               />
                 {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
+                </div>
+
+                <div>
               {/* Phone */}
               <input
                 type="tel"
@@ -271,6 +285,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('contact_no', e.target.value)}
               />
                 {errors.contact_no && <div className="text-red-500 text-sm">{errors.contact_no}</div>}
+                </div>
+
+              <div>
               <input
                 type="text"
                 placeholder="Address Line 1"
@@ -280,6 +297,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('address_line_1', e.target.value)}
               />
                 {errors.address_line_1 && <div className="text-red-500 text-sm">{errors.address_line_1}</div>}
+                </div>
+
+                <div>
               <input
                 type="text"
                 placeholder="Address Line 2"
@@ -289,6 +309,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('address_line_2', e.target.value)}
               />
                 {errors.address_line_2 && <div className="text-red-500 text-sm">{errors.address_line_2}</div>}
+                </div>
+
+                <div>
               {/* Car Model */}
               <select value={data.vehicle_make} onChange={(e) => setData("vehicle_make", e.target.value)} name="vehicle_make" className="border border-[#192735] rounded-full px-[25px] py-[15px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                 <option value="">-- Select Vehicle Make --</option>
@@ -368,6 +391,9 @@ const BookInspection = () => {
                 <option value="Volvo">Volvo</option>
               </select>
                 {errors.vehicle_make && <div className="text-red-500 text-sm">{errors.vehicle_make}</div>}
+                </div>
+
+                <div>
               <input
                 type="text"
                 placeholder="Vehicle Model"
@@ -377,7 +403,10 @@ const BookInspection = () => {
                 onChange={(e) => setData('vehicle_model', e.target.value)}
               />
                 {errors.vehicle_model && <div className="text-red-500 text-sm">{errors.vehicle_model}</div>}
+                </div>
+
               {/* Year */}
+              <div>
              <input
                 type="text"
                 placeholder="Vehicle Year"
@@ -387,6 +416,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('vehicle_year', e.target.value)}
               />
                 {errors.vehicle_year && <div className="text-red-500 text-sm">{errors.vehicle_year}</div>}
+                </div>
+
+                <div>
                <input
                 type="text"
                 placeholder="Registration Number"
@@ -396,6 +428,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('registration_number', e.target.value)}
               />
                 {errors.registration_number && <div className="text-red-500 text-sm">{errors.registration_number}</div>}
+                </div>
+
+                <div>
                <input
                 type="text"
                 placeholder="VIN"
@@ -405,6 +440,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('vin', e.target.value)}
               />
                 {errors.vin && <div className="text-red-500 text-sm">{errors.vin}</div>}
+                </div>
+
+                <div>
                 <select value={data.fuel_type} onChange={(e) => setData("fuel_type", e.target.value)}  name="fuel_type" className="border border-[#192735] rounded-full px-[25px] py-[15px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                 <option value="">-- Select Fuel Type --</option>
                 <option value="Petrol">Petrol</option>
@@ -413,12 +451,17 @@ const BookInspection = () => {
                 <option value="Electric">Electric</option>
               </select>
                  {errors.fuel_type && <div className="text-red-500 text-sm">{errors.fuel_type}</div>}
+                 </div>
+
+                 <div>
                <select value={data.transmission} onChange={(e) => setData("transmission", e.target.value)} name="transmission" className="border border-[#192735] rounded-full px-[25px] py-[15px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                 <option value="">-- Select Transmission --</option>
                 <option value="Manual">Manual</option>
                 <option value="Automatic">Automatic</option>
               </select>
              {errors.transmission && <div className="text-red-500 text-sm">{errors.transmission}</div>}
+             </div>
+             <div>
               <input
                 type="text"
                 name="color"
@@ -428,6 +471,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('color', e.target.value)}
               />
                 {errors.color && <div className="text-red-500 text-sm">{errors.color}</div>}
+                </div>
+
+                <div>
                 <select value={data.car_parked} onChange={(e) => setData("car_parked", e.target.value)}  name="car_parked" className="border border-[#192735] rounded-full px-[25px] py-[15px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                 <option value="">-- Where is the car parked? --</option>
                 <option value="Outdoor">Outdoor</option>
@@ -436,6 +482,8 @@ const BookInspection = () => {
                 <option value="Parking basement">Parking basement</option>
               </select>
                  {errors.car_parked && <div className="text-red-500 text-sm">{errors.car_parked}</div>}
+                 </div>
+                 <div>
               <input
                 type="text"
                 name="mileage"
@@ -445,6 +493,9 @@ const BookInspection = () => {
                 onChange={(e) => setData('mileage', e.target.value)}
               />
                 {errors.mileage && <div className="text-red-500 text-sm">{errors.mileage}</div>}
+                </div>
+
+                <div>
 
             <input
                 type="date"
@@ -455,6 +506,10 @@ const BookInspection = () => {
                 onChange={(e) => setData('preferred_date', e.target.value)}
               />
                 {errors.preferred_date && <div className="text-red-500 text-sm">{errors.preferred_date}</div>}
+                </div>
+
+
+                <div>
               <input
                 type="time"
                 name="preferred_time_slot"
@@ -464,10 +519,15 @@ const BookInspection = () => {
                 onChange={(e) => setData('preferred_time_slot', e.target.value)}
               />
                 {errors.preferred_time_slot && <div className="text-red-500 text-sm">{errors.preferred_time_slot}</div>}
+                </div>
 
-              <textarea name="additional_notes" placeholder="Additional Notes" className="border border-[#192735] rounded-[10px] px-[25px] py-[15px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none focus:none focus:none"></textarea>
+                <div>
+
+              <textarea name="additional_notes" placeholder="Additional Notes" className="h-[67px] border border-[#192735] rounded-[60px] px-[25px] py-[15px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none focus:none focus:none"></textarea>
 
               {errors.additional_notes && <div className="text-red-500 text-sm">{errors.additional_notes}</div>}
+              </div>
+
               {/* Submit Button */}
               <div className="col-span-1 md:col-span-2 flex">
                 <button

@@ -11,9 +11,9 @@ const Footer = () => {
         <img className='w-full' src={redangleleft2} alt="img" />
       </div>
       <div className="relative z-[1] w-full border-b border-b-[#ffffff3b] pb-[40px]">
-        <div className="container   grid md:grid-cols-4 gap-8">
+        <div className="container  flex flex-wrap md:flex-nowrap gap-4 md:gap-8">
           {/* Logo & Social Icons */}
-          <div>
+          <div className='w-full md:w-[35%]'>
             <h1 className="text-4xl font-cursive text-white mb-6">
               <Link href="/">
               <img src={footlogo} alt="" />
@@ -39,7 +39,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className='md:pl-[50px]'>
+          <div className='md:pl-[50px] w-full md:w-[35%] border-b-[#ffffff3b] border-b-[1px] border-t-[#ffffff3b] border-t-[1px] pt-[20px] pb-[20px] md:border-none'>
             <h3 className="creatodisplayM text-[24px] mb-4">Quick Links</h3>
             <ul className="space-y-2 creatodisplayM text-[18px] text-[#ffffffc7] hover:text-[#fff]">
              
@@ -62,7 +62,7 @@ const Footer = () => {
           </div> */}
 
           {/* Contact Info */}
-          <div>
+          <div className='w-full md:w-[30%]'>
             <h3 className="creatodisplayM text-[24px] mb-4">Contact Us</h3>
             <p className="text-xl creatodisplayM text-[18px] md:text-[22px] lg:text-[28px] xl:lg:text-[36px]  text-[#ffffffc7]  mb-2">+1 (202) 456 8798</p>
             <p className="creatodisplayM text-[18px]  text-[#ffffffc7]  mb-2">info@certifycars.ae</p>

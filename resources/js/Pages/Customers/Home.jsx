@@ -82,7 +82,7 @@ const Home = () => {
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] leading-[24px] text-[#192735bd]'>We’ve simplified the vehicle inspection process into 4 smooth steps — all handled at your location, with zero disruption.</p>
+              <p className='creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] text-[#192735bd]'>We’ve simplified the vehicle inspection process into 4 smooth steps — all handled at your location, with zero disruption.</p>
             </div>
           </div>
 
@@ -121,15 +121,15 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='group bg-[#F9F9F9] hover:bg-[#0D1B2A] py-[80px]'>
+      <section className='group bg-[#F9F9F9] hover:bg-[#0D1B2A] py-[30px] md:py-[40px] lg:py-[60px] xl:py-[80px]'>
         <div className='container'>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div className='w-full md-w-[50%]'>
-              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
+              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] font-[500] leading-[38px]'>Designed With Trust, Tech & Transparency At The Core</h2>
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[#192735c2]  group-hover:text-[#fff] text-[20px] leading-[22px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
+              <p className='creatodisplayM text-[#192735c2] group-hover:text-[#fff] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] '>We’re not just another garage service — we’re a full-stack inspection platform built to remove doubt and restore confidence in every vehicle decision.</p>
             </div>
           </div>
           <CarSlider />
@@ -141,11 +141,11 @@ const Home = () => {
         <div className='container'>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div className='w-full md-w-[50%]'>
-              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[30px] lg:text-[36px] font-[500] leading-[36px]'>Real Reports. Real Results. Real People.</h2>
+              <h2 className='ppfont text-[#192735] group-hover:text-[#fff] text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] font-[500] leading-[36px]'>Real Reports. Real Results. Real People.</h2>
             </div>
 
             <div className='w-full md-w-[50%]'>
-              <p className='creatodisplayM text-[#192735bf]  group-hover:text-[#fff] text-[20px] leading-[24px] '>Here's what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
+              <p className='creatodisplayM text-[#192735bf]  group-hover:text-[#fff] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] '>Here's what our users say after using Vehicheck — from used car buyers to car owners who avoided costly repairs, they all found value in one thing: clarity.</p>
             </div>
           </div>
 

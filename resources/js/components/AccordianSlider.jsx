@@ -14,41 +14,36 @@ const data = [
 const SLIDE_TIME = 4000; // ms
 
 const AccordianSlider = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0); // default first open
   const [progress, setProgress] = useState(0);
-  const [fadeImage, setFadeImage] = useState(true);
 
+  // whenever activeIndex changes → run progress
   useEffect(() => {
     setProgress(0);
-    const resetTimeout = setTimeout(() => {
+    const timer = setTimeout(() => {
       setProgress(100);
-    }, 50); // tiny delay for transition to work
+    }, 50);
 
-    const slideTimeout = setTimeout(() => {
-      setFadeImage(false);
-      setTimeout(() => {
-        setActiveIndex((prev) => (prev + 1) % data.length);
-        setFadeImage(true);
-      }, 200);
-    }, SLIDE_TIME);
-
-    return () => {
-      clearTimeout(resetTimeout);
-      clearTimeout(slideTimeout);
-    };
+    return () => clearTimeout(timer);
   }, [activeIndex]);
+
+  const handleMouseEnter = (index) => {
+    setActiveIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setActiveIndex(0);   // fallback to first accordion
+    setProgress(0);      // reset progress
+  };
 
   return (
     <div className="min-h-[750px] flex flex-col md:flex-row items-start gap-[20px] md:gap-[30px] lg:gap-[40px] xl:gap-[70px]">
       {/* Left Image */}
       <div className="md:w-1/2 w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px]">
         <img
-          key={activeIndex}
           src={data[activeIndex].image}
           alt="car"
-          className={`rounded-[10px] md:rounded-[20px] lg:rounded-[30px] w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px] object-cover h-full transition-opacity duration-500 ${
-            fadeImage ? "opacity-100" : "opacity-0"
-          }`}
+          className="rounded-[10px] md:rounded-[20px] lg:rounded-[30px] w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] xl:min-h-[680px] object-cover h-full transition-opacity duration-500"
         />
       </div>
 
@@ -60,14 +55,15 @@ const AccordianSlider = () => {
           return (
             <div
               key={index}
-              className="relative bg-[#19273512] rounded-2xl px-[10px] md:px-[15px] lg:px-[20px] py-[10px] md:py-[15px] lg:py-[20px] transition-all duration-300 shadow-sm overflow-hidden"
-              onClick={() => setActiveIndex(index)}
+              className="relative bg-[#19273512] rounded-2xl px-[10px] md:px-[15px] lg:px-[20px] py-[10px] md:py-[15px] lg:py-[20px] transition-all duration-300 shadow-sm overflow-hidden cursor-pointer"
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
             >
-              <h3 className="ppfont text-[20px] md:text-[22px] lg:text-[20px] xl:text-[26px] leading-[22px] md:leading-[24px] lg:leading-[22px] xl:leading-[30px] text-[#192735] mb-2 cursor-pointer">
+              <h3 className="ppfont text-[20px] md:text-[22px] lg:text-[20px] xl:text-[26px] leading-[22px] md:leading-[24px] lg:leading-[22px] xl:leading-[30px] text-[#192735] mb-2">
                 {item.title}
               </h3>
 
-              {/* Smooth Content */}
+              {/* Content */}
               <div
                 className="transition-all duration-500 ease-in-out overflow-hidden"
                 style={{
@@ -80,7 +76,7 @@ const AccordianSlider = () => {
                 </p>
               </div>
 
-              {/* Smooth Progress Bar */}
+              {/* Progress Bar */}
               {isActive && (
                 <div className="absolute bottom-0 left-0 w-full h-[6px] bg-gray-300 rounded-full overflow-hidden">
                   <div

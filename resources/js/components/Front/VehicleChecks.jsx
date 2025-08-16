@@ -27,10 +27,10 @@ const VehicleChecks = () => {
     <section className="bg-[#0D1B2A] text-white py-[40px] md:py-[80px] lg:py-[100px] ">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
-          <h2 className="ppfont md:w-[50%]  text-[25px] md:text-[30px] lg:text-[36px] leading-[28px] md:leading-[35px] lg:leading-[38px] text-white">
+          <h2 className="ppfont md:w-[50%]  text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-white">
             A Vehicle Check For Every Situation
           </h2>
-          <p className="md:w-[50%] text-[#ffffff8f] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[22px] max-w-xl">
+          <p className="md:w-[50%] text-[#ffffff8f] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] max-w-xl">
             Every car has a different story. Whether you're buying, selling, or maintaining — we’ve designed inspections that fit your moment.
           </p>
         </div>
@@ -39,7 +39,7 @@ const VehicleChecks = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className="relative group bg-[#192735] rounded-2xl p-6 flex flex-col justify-between min-h-[250px] md:min-h-[280px] lg:min-h-[310px] hover:shadow-lg transition duration-300 overflow-hidden"
+              className="relative group bg-[#192735] rounded-2xl p-3 md:p-6 flex flex-col justify-between min-h-[250px] md:min-h-[280px] lg:min-h-[310px] hover:shadow-lg transition duration-300 overflow-hidden"
             >
               {/* Hover Image */}
               <img
@@ -54,9 +54,9 @@ const VehicleChecks = () => {
               {/* Content */}
               <div className="relative z-10 flex items-stretch h-full flex-col justify-between ">
                 <div className="flex items-stretch justify-between mb-6 gap-[10px]">
-                  <h3 className="ppfont text-[22px] md:text-[24px] lg:text-[28px] lg:leading-[28px] text-white">{service.title}</h3>
+                  <h3 className="ppfont text-[18px] md:text-[24px] lg:text-[28px]  leading-[20px] md:leading-[24px] lg:leading-[28px] text-white">{service.title}</h3>
                   <Link href="/book-inspection">
-                  <span className="min-w-[50px] min-h-[50px] md:min-w-[64px] md:min-h-[64px] flex items-center justify-center bg-[#F61221] rounded-[90px]">
+                  <span className="min-w-[35px] min-h-[35px] md:min-w-[55px] md:min-h-[55px] lg:min-w-[64px] lg:min-h-[64px] flex items-center justify-center bg-[#F61221] rounded-[90px]">
                     {/* <ArrowUpRight size={20} /> */}
                     <MdOutlineArrowOutward size={20} />
                   </span>

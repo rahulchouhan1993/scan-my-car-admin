@@ -1,80 +1,86 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
+import React, { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, A11y, Keyboard } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
-const testimonials = [
-  {
-    quote: "I almost bought a used SUV that looked spotless — until Vehicheck's report flagged frame damage...",
-    name: "RAGHAV MEHTA, DELHI",
-  },
-  {
-    quote: "Bought my first car through OLX. Wouldn’t have dared without this inspection...",
-    name: "RAGHAV MEHTA, DELHI",
-  },
-  {
-    quote: "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention...",
-    name: "RAGHAV MEHTA, DELHI",
-  },
-  {
-    quote: "As a single mom with zero car knowledge, I was terrified of being tricked...",
-    name: "RAGHAV MEHTA, DELHI",
-  },
-  {
-    quote: "Quick, professional, and detailed. Highly recommend.",
-    name: "RAGHAV MEHTA, DELHI",
-  },
-];
+export default function TestimonialSlider() {
+  const swiperRef = useRef(null);
 
-const SliderColumn = ({ direction = 'down', delay = 0 }) => {
+  const testimonials = [
+    {
+      quote:
+        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That ₹999 inspection saved me from a ₹60,000 mistake.",
+      name: "— Raghav Mehta, Delhi",
+    },
+    {
+      quote:
+        "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate ₹15k off. Absolutely worth it.",
+      name: "— Raghav Mehta, Delhi",
+    },
+    {
+      quote:
+        "As a single mom with zero car knowledge, I was terrified of being tricked into buying a bad car. Vehicheck was like having a mechanic in my pocket.",
+      name: "— Raghav Mehta, Delhi",
+    },
+
+    {
+      quote:
+        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That ₹999 inspection saved me from a ₹60,000 mistake.",
+      name: "— Raghav Mehta, Delhi",
+    },
+    {
+      quote:
+        "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate ₹15k off. Absolutely worth it.",
+      name: "— Raghav Mehta, Delhi",
+    },
+    {
+      quote:
+        "As a single mom with zero car knowledge, I was terrified of being tricked into buying a bad car. Vehicheck was like having a mechanic in my pocket.",
+      name: "— Raghav Mehta, Delhi",
+    },
+  ];
+
   return (
-    <div className="relative h-[420px] overflow-hidden">
-      <Swiper
-        direction="vertical"
-        slidesPerView={3}
-        loop={true}
-        spaceBetween={85}
-        autoplay={{
-          delay: 2000 + delay,
-          reverseDirection: direction === 'up',
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay]}
-        className="h-full"
+    <section className="testimonialSlider">
+      <div
+        onMouseEnter={() => swiperRef.current?.swiper?.autoplay?.stop()}
+        onMouseLeave={() => swiperRef.current?.swiper?.autoplay?.start()}
       >
-        {testimonials.map((testimonial, index) => (
-          <SwiperSlide key={index}>
-            <div className="bg-white rounded-[20px] px-[20px] py-[25px]">
-              <p className="creatodisplayM text-[18px] leading-[24px] text-[#000315] mb-4">
-                “{testimonial.quote}”
-              </p>
-              <p className="creatodisplayM text-[#F61221] text-[14px] uppercase">
-                — {testimonial.name}
-              </p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      {/* Top Fade */}
-      <div className="pointer-events-none absolute top-0 left-0 w-full h-[60px] bg-gradient-to-b from-white to-transparent z-10"></div>
-
-      {/* Bottom Fade */}
-      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-[60px] bg-gradient-to-t from-white to-transparent z-10"></div>
-    </div>
-  );
-};
-
-const TestimonialSlider = () => {
-  return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <SliderColumn direction="down" />
-        <SliderColumn direction="up" delay={1000} />
-        <SliderColumn direction="down" delay={2000} />
+        <Swiper
+          ref={swiperRef}
+          modules={[Autoplay, Navigation, A11y, Keyboard]}
+          a11y={{ enabled: true }}
+          keyboard={{ enabled: true }}
+          spaceBetween={24}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true}
+          navigation={true} // ✅ Next / Prev buttons enabled
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="!pb-10"
+        >
+          {testimonials.map((t, idx) => (
+            <SwiperSlide key={idx} className="h-auto">
+              <article className=" flex h-full min-h-[230px] flex-col justify-start rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:shadow-md">
+               
+                <p className="mb-4 line-clamp-5 creatodisplayM text-[#000]">
+                  “{t.quote}”
+                </p>
+                <div className="flex items-center gap-4">
+                  <h3 className="creatodisplayM text-[14px] text-[#F61221] uppercase">
+                    {t.name}
+                  </h3>
+                </div>
+              </article>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default TestimonialSlider;
+}
