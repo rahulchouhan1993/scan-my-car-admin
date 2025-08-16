@@ -105,14 +105,14 @@ const InspectionDetails = () => {
       <div className="py-[30px] md:py-[40px] lg:py-[55px] xl:py-[65px] ">
         <div className="container ">
           {/* Header */}
-          <div className="mb-4 mb-[50px]">
-            <p className="creatodisplayM text-[18px] text-[#D72638]">
+          <div className="mb-4 mb-[20px] md:mb-[30px] lg:mb-[50px]">
+            <p className="creatodisplayM text-[16px] md:text-[18px] text-[#D72638]">
               #174118512 | APR 26, 2024, 12:03 PM
             </p>
-            <h1 className="text-2xl text-[#192735] font-bold">
+            <h1 className="ppfont text-[20px] md:text-[24px] lg:text-[28px] text-[#192735]">
               Jeep Grand Cherokee
             </h1>
-            <p className="text-[#192735c9] text-[20px]">
+            <p className="creatodisplayM text-[#192735c9] text-[16px] md:text-[18px] lg:text-[20px]">
               The battery needs to be replaced. The tires need to be replaced ASAP.
               2019
             </p>
@@ -142,13 +142,13 @@ const InspectionDetails = () => {
               </div>
 
               {/* Specs / Tags */}
-              <div className="flex flex-wrap gap-2 mt-6">
+              <div className="flex flex-wrap gap-[10px] md:gap-2 mt-6">
                 {specs.map((spec, i) => (
-                  <div key={i} className="flex flex-col gap-[2px] bg-white border border-[#19273521] rounded-[10px] md:rounded-[15px] px-[10px] py-[10px] md:px-[15px] md:py-[15px]">
+                  <div key={i} className="flex flex-col gap-[2px] bg-white border border-[#19273521] rounded-[5px] md:rounded-[15px] px-[5px] py-[5px] md:px-[15px] md:py-[15px]">
                     <span className="creatodisplayM text-[12px] md:text-[13px] lg:text-[15px] text-[16px] text-[#192735b5]">
                       {spec.label}:
                     </span>{" "}
-                    <span className="ppfont text-[16px] md:text-[18px] lg:text-[22px] leading-[22px] text-[#192735]">
+                    <span className="ppfont text-[13px] md:text-[18px] lg:text-[22px] leading-[22px] text-[#192735]">
                       {spec.value}
                     </span>
                   </div>
@@ -156,8 +156,8 @@ const InspectionDetails = () => {
               </div>
               
               <div className=" mt-[50px]">
-                <h2 className="creatodisplayM text-[20px] text-[#192735d6] uppercase ">Body inspection</h2>
-                <div className="flex flex-col items-center justify-center px-[30px] py-[30px] border-[1px] border-[#e5e5e5] mt-[20px]  rounded-[15px]">
+                <h2 className="creatodisplayM text-[16px] text-[#192735b0] uppercase ">Body inspection</h2>
+                <div className="carbx flex flex-col items-center justify-center px-[30px] py-[30px] border-[1px] border-[#e5e5e5] mt-[20px]  rounded-[15px]">
                   <svg className="w-full" viewBox="0 0 531 708" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_393_1573)">
                       <path d="M236.874 187.144L257.066 186.41L282.909 186.741L306.188 188.948L328.469 193.218L347.008 199.186L359.167 204.397L368.016 209.043L364.331 222.035L357.784 249.306L346.499 290.163L339.606 289.221L317.358 285.95L289.876 283.987L256.504 283.332L236.219 283.987L208.737 285.95L183.502 291.299L169.4 245.38L164.959 227.696L160.484 208.679L167.513 204.811L178.637 199.576L198.268 193.033L213.972 189.761L236.874 187.144Z" fill="#D0EDF8" stroke="black" stroke-width="1.30869" />
@@ -306,8 +306,8 @@ const InspectionDetails = () => {
                                 ? "creatodisplayM text-[#00973F] text-[16px]  md:text-[18px]"
                                 : item.value === "Repainted" ||
                                   item.value === "Replaced"
-                                  ? "text-orange-500"
-                                  : "text-[#192735]"
+                                  ? "creatodisplayM  text-[16px]  md:text-[18px] text-orange-500"
+                                  : "creatodisplayM  text-[#192735]"
                             }
                           >
                             {item.value}

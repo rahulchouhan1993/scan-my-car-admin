@@ -66,7 +66,11 @@ to{transform:rotate(360deg);}
 .progressbar{background:linear-gradient(270deg,#F61221 0%,#900B13 100%);}
 .testimonialSlider .swiper-button-prev,.testimonialSlider .swiper-button-next{width:40px;height:40px;background:#d72638d6;border-radius:60px;top:0!important;bottom:0!important;margin:auto;}
 .testimonialSlider .swiper{padding-top:30px;}
+
 .testimonialSlider .swiper-button-next:after,.testimonialSlider .swiper-button-prev:after{font-size:15px;color:#fff;}
+
+.carbx svg { max-width: 80%;}
+
 textarea{overflow:auto;scrollbar-width:none;}
 textarea::-webkit-scrollbar{display:none;}
 input::placeholder{color:#292929;opacity:1;}
@@ -77,43 +81,24 @@ select option[disabled]{color:#292929;}
 input[type="date"]{color:#292929;}
 input[type="time"]{color:#292929;}
 input[type="date"]:valid,input[type="time"]:valid{color:#000;}
-
-
 .registerForm input::placeholder{color:#FFFFFF66;opacity:1;}
 .registerForm textarea::placeholder{color:#FFFFFF66;opacity:1;}
 
-
-/* Autofill background remove / custom */
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #192735 inset !important; /* apna background */
-    -webkit-text-fill-color: #FFFFFF66 !important;  /* text color */
-    caret-color: #FFFFFF66; /* cursor ka color */
-    transition: background-color 9999s ease-in-out 0s; /* flicker avoid */
-    border: 1px solid #ffffff29 !important; /* apna border color */
-    outline: none !important;
-  }
-  
-  /* Dark mode ke liye consistent */
-  input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #192735 inset !important;
-    -webkit-text-fill-color: #FFFFFF66 !important;
-
-    border: 1px solid #f00000 !important; /* focus border (apne hisaab se change) */
-    outline: none !important;
-  }
-
-  input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
+input:-webkit-autofill{-webkit-box-shadow:0 0 0px 1000px #192735 inset !important;
+ -webkit-text-fill-color:#FFFFFF66 !important;
+ caret-color:#FFFFFF66;
+ transition:background-color 9999s ease-in-out 0s;
+ border:1px solid #ffffff29 !important;
+ outline:none !important;}
+/* Dark mode ke liye consistent */
+ input:-webkit-autofill:focus{-webkit-box-shadow:0 0 0px 1000px #192735 inset !important;-webkit-text-fill-color:#FFFFFF66 !important;border:1px solid #f00000 !important;/* focus border (apne hisaab se change) */
+ outline:none !important;}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 /* Firefox ke liye */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+input[type=number]{-moz-appearance:textfield;}
 @media(max-width:767px){.inspectionSlider .swiper-button-prev,.inspectionSlider .swiper-button-next{width:45px;height:45px;}
 .testimonialSlider .swiper-button-prev,.testimonialSlider .swiper-button-next{display:none!important;}
 }
+
 
 
