@@ -120,16 +120,16 @@ const PricingSection = () => {
                                 }`}
                         >
                             <div className="pt-[10px] md:pt-[15px] xl:pt-[35px] px-[15px]  md:px-[10px] lg:px-[20px] xl:px-[35px] min-h-auto md:min-h-[240px] lg:min-h-[200px] xl:min-h-[220px]">
-                                <h3 className="creatodisplayM text-[14px] md:text-[16px] lg:text-[18px] leading-[20px] mb-[5px] tracking-wide uppercase">
+                                <h3 className="creatodisplayM text-[15px] md:text-[16px] lg:text-[18px] leading-[20px] mb-[5px] tracking-wide uppercase">
                                     {plan.name}
                                 </h3>
-                                <p className="creatodisplayM text-[14px] leading-[16px] mb-4">{plan.description}</p>
-                                <div className="ppfont text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px]  ">{plan.price}</div>
+                                <p className="creatodisplayM text-[15px] leading-[16px] mb-4">{plan.description}</p>
+                                <div className="ppfont text-[19px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px]  ">{plan.price}</div>
 
                             </div>
 
                             <div className={` px-[15px] md:px-[15px] lg:px-[20px] xl:px-[30px] pt-[35px] pb-[35px] mt-[25px] border-t ${ plan.isPrimary ? "border-t-[#ccc]" : "border-t-[#ffffff42]" }`} >
-                                <ul className=" flex flex-col gap-[10px] creatodisplayM text-[14px] md:text-[16px] lg:text-[18px] leading-[22px]  ">
+                                <ul className=" flex flex-col gap-[10px] creatodisplayM text-[15px] md:text-[16px] lg:text-[18px] leading-[22px]  ">
                                     {plan.features.map((feature, i) => (
                                         <li key={i} className="flex items-start">
                                             <span className="mr-2 text-[12px] md:text-[14px]">•</span>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import footlogo from "../../assets/images/footlogo.png";
+import logo from "../../assets/images/logo.png"; 
 import redangleleft2 from "../../assets/images/redangleright.png";
 import { Link } from '@inertiajs/react';
 
@@ -15,9 +16,13 @@ const Footer = () => {
           {/* Logo & Social Icons */}
           <div className='w-full md:w-[35%]'>
             <h1 className="text-4xl font-cursive text-white mb-[20px] md:mb-[40px]">
-              <Link href="/">
+              {/* <Link href="/">
               <img src={footlogo} alt="" />
-              </Link>
+              </Link> */}
+
+              <Link href="/">
+                <img src={logo} alt="Logo" className="" />
+            </Link>
             </h1>
             <div className="flex space-x-4">
               <div>

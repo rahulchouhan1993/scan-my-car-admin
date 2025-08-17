@@ -65,7 +65,7 @@ to{transform:rotate(360deg);}
 .inspectionSlider .swiper-button-next:after{color:#fff;font-size:17px;font-weight:600;}
 .progressbar{background:linear-gradient(270deg,#F61221 0%,#900B13 100%);}
 .testimonialSlider .swiper-button-prev,.testimonialSlider .swiper-button-next{width:40px;height:40px;background:#d72638d6;border-radius:60px;top:0!important;bottom:0!important;margin:auto;}
-.testimonialSlider .swiper{padding-top:30px;}
+
 
 .testimonialSlider .swiper-button-next:after,.testimonialSlider .swiper-button-prev:after{font-size:15px;color:#fff;}
 

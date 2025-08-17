@@ -57,27 +57,28 @@ const Header = () => {
   
         {/* Mobile Menu Dropdown */}
         {isOpen && (
-          <div className="creatodisplayM lg:hidden bg-black bg-opacity-90 text-white flex flex-col absolute z-[1] right-[15px] top-[55px] min-w-[250px] ">
-             <Link href="/" className="flex items-center px-[10px] py-[8px] text-[15px] text-white border-b-[1px] border-b-[#2c2c2c] hover:text-red-500 ">
+          <div className="creatodisplayM lg:hidden bg-white bg-opacity-90 text-black flex flex-col absolute z-[1] right-[15px] top-[55px] w-[220px]  ">
+             <Link href="/" className="flex items-center justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
               Home
             </Link>
 
-            <Link href="/" className="flex items-center px-[10px] py-[8px] text-[15px] text-white border-b-[1px] border-b-[#2c2c2c] hover:text-red-500 ">
-              Service
+            <Link href="/book-inspection" className="flex items-center  justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
+            Book An Inspection
             </Link>
 
-            <Link href="/about-us" className="flex items-center px-[10px] py-[8px] text-[15px] text-white border-b-[1px] border-b-[#2c2c2c] hover:text-red-500 ">
+            <Link href="/about-us" className="flex items-center  justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
               About
             </Link>
 
-            <Link href="/contact-us" className="flex items-center px-[10px] py-[8px] text-[15px] text-white border-b-[1px] border-b-[#2c2c2c] hover:text-red-500 ">
-              Contact
+            <Link href="/contact-us" className="flex items-center  justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
+            Contact
             </Link>
-            <div className="creatodisplayM flex flex-col space-y-2 mt-4 px-[40px] pb-[15px]">
-            <Link href="/register-dealer" className=" inline-flex justify-center px-6 py-2 border border-white rounded-full text-white text-sm hover:bg-white hover:text-black transition">
-              Register
+
+            <div className="creatodisplayM flex flex-col space-y-2 mt-4 px-[10px] pb-[15px]">
+            <Link href="/register-dealer" className=" inline-flex justify-center px-6 py-2 border border-white rounded-full text-white text-sm bg-black hover:bg-white hover:text-black transition text-center">
+            Dealer Registration
             </Link>
-            <Link href="/" className="creatodisplayM inline-flex justify-center px-6 py-2 bg-red-600 rounded-full text-white text-sm hover:bg-red-700 transition">
+            <Link href="/dealer" className="creatodisplayM inline-flex justify-center px-6 py-2 bg-red-600 rounded-full text-white text-sm hover:bg-red-700 transition text-center">
                 Login 
             </Link>
             </div>

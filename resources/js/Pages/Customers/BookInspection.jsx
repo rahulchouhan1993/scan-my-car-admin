@@ -69,7 +69,7 @@ const BookInspection = () => {
         <div className=" container  ">
           {/* Steps Navigation */}
           <div className="w-full md:max-w-[960px] m-auto flex justify-center mb-8">
-            <div className="w-full relative flex flex-wrap md:flex-nowrap bg-[#EDEEEF] p-[2px] md:p-[10px] rounded-[80px] gap-[5px] md:gap-4">
+            <div className="w-full relative flex flex-wrap sm:flex-nowrap bg-[#EDEEEF] p-[2px] md:p-[10px] rounded-[80px] gap-[5px] md:gap-4">
               <div className="absolute w-[90%] h-[2px] top-[26px] md:top-[41px] border-b-[2px] border-b-[#000]"></div>
               {steps.map((step, index) => {
                 const isActive = activeStep === index + 1;
@@ -77,7 +77,7 @@ const BookInspection = () => {
                   <div
                     key={index}
                     onClick={() => setActiveStep(index + 1)}
-                    className={`w-full md:w-[50%] ppfont flex z-[1] items-center justify-center gap-[5px] md:gap-2 px-[10px] py-[10px] md:px-[15px] md:py-[15px] rounded-full border-[2px]  cursor-pointer transition-all  md:text-[20px] text-[#192735] ${isActive
+                    className={`w-full md:w-[50%] ppfont flex z-[1] items-center justify-between sm:justify-center gap-[5px] md:gap-2 px-[10px] py-[10px] md:px-[15px] md:py-[15px] rounded-full border-[2px]  cursor-pointer transition-all  md:text-[20px] text-[#192735] ${isActive
                       ? "bg-[#192735] text-white border-black"
                       : "bg-[#EDEEEF] text-black border-[#192735]"
                       }`}

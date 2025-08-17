@@ -31,7 +31,7 @@ const ContactUs = () => {
   }
   return (
     <>
-      <section className="relative text-white py-16  overflow-hidden">
+      <section className="relative text-white pb-[20px] pt-16 md:pb-16  overflow-hidden">
         <div className='flex items-center absolute right-[0] top-[0] bottom-[inherit] md:bottom-[0] m-auto z-[1]'>
           <img src={redarrowRg} alt="img" className='block md:hidden max-w-full max-h-[300px]' />
           <img src={redarrowRg} alt="img" className='hidden md:block max-w-full' />
@@ -41,40 +41,52 @@ const ContactUs = () => {
         {/* Heading */}
         <div className="relative container z-[1] mb-12 !pt-[130px] md:!pt-[150px] !mb-[60px] ">
           <h2 className="ppfont text-[40px] md:text-[60px] lg:text-[70px] leading-tight">Contact Us</h2>
-          <p className="creatodisplayM text-[24px]">Get in touch today!</p>
+          <p className="creatodisplayM text-[22px]">Get in touch today!</p>
         </div>
 
         <div className='relative z-[1]'>
           <div className='container'>
-            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
               {/* Visit Us */}
-              <div className="bg-[#192735] min-h-[270px] px-[15px] py-[15px] md:px-[20px] md:py-[30px] xl:px-[50px] lg:py-[40px] rounded-[20px] flex flex-col items-start gap-4">
-                <div className="flex items-center justify-center bg-[#F61221] w-[64px] h-[64px] rounded-full">
-                  <FiMapPin className="text-white text-[25px]" />
+              <div className="bg-[#192735] min-h-auto px-[15px] py-[15px] md:px-[20px] md:py-[30px] xl:px-[50px] lg:py-[40px] rounded-[20px] flex flex-wrap items-center sm:flex-nowrap md:flex-col md:items-start gap-4">
+                <div className="flex items-center justify-center bg-[#F61221] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-full">
+                  <FiMapPin className="text-white text-[20px] md:text-[25px]" />
                 </div>
-                <h3 className="ppfont text-[24px] md:text-[28px]">Visit Us at</h3>
-                <p className="creatodisplayM text-[18px] text-[#ffffffa1]">
-                  3433 boul. de la Pinière, suite 203, <br />
-                  Terrebonne, QC J6X 0A1
-                </p>
+                <div className='w-full max-w-[75%] md:max-w-[100%]'>
+                  <h3 className="ppfont w-full sm:w-auto text-[22px] md:text-[28px]">Visit Us at</h3>
+                  <p className="creatodisplayM  text-[15px] md:text-[18px] text-[#ffffffa1]">
+                    3433 boul. de la Pinière, suite 203, <br />
+                    Terrebonne, QC J6X 0A1
+                  </p>
+                </div>
               </div>
 
-              {/* Call Us */}
-              <div className="bg-[#192735] min-h-[270px] px-[15px] py-[15px] md:px-[20px] md:py-[30px] xl:px-[50px] lg:py-[40px] rounded-[20px] flex flex-col items-start gap-4">
-                <div className="flex items-center justify-center bg-[#F61221] w-[64px] h-[64px] rounded-full">
-                  <FiPhone className="text-white text-[25px]" />
+
+
+              <div className="bg-[#192735] min-h-auto px-[15px] py-[15px] md:px-[20px] md:py-[30px] xl:px-[50px] lg:py-[40px] rounded-[20px] flex flex-wrap items-center sm:flex-nowrap md:flex-col md:items-start gap-4">
+                <div className="flex items-center justify-center bg-[#F61221] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-full">
+                <FiPhone className="text-white text-[20px] md:text-[25px]" />
                 </div>
-                <h3 className="ppfont text-[24px] md:text-[28px]">Call Us at</h3>
-                <p className="creatodisplayM text-[18px] text-[#ffffffa1]">(450) 968-0300</p>
+                <div className='w-full max-w-[75%] md:max-w-[100%]'>
+                  <h3 className="ppfont w-full sm:w-auto text-[22px] md:text-[28px]">Call Us at</h3>
+                  <p className="creatodisplayM  text-[15px] md:text-[18px] text-[#ffffffa1]">
+                  (450) 968-0300
+                  </p>
+                </div>
               </div>
 
-              {/* Mail Us */}
-              <div className="bg-[#192735] min-h-[270px] px-[15px] py-[15px] md:px-[20px] md:py-[30px] xl:px-[50px] lg:py-[40px] rounded-[20px] flex flex-col items-start gap-4">
-                <div className="flex items-center justify-center bg-[#F61221] w-[64px] h-[64px] rounded-full">
-                  <AiOutlineMail className="text-white text-[25px]" />
+
+
+              <div className="bg-[#192735] min-h-auto px-[15px] py-[15px] md:px-[20px] md:py-[30px] xl:px-[50px] lg:py-[40px] rounded-[20px] flex flex-wrap items-center sm:flex-nowrap md:flex-col md:items-start gap-4">
+                <div className="flex items-center justify-center bg-[#F61221] w-[44px] h-[44px] md:w-[64px] md:h-[64px] rounded-full">
+                <AiOutlineMail className="text-white text-[20px] md:text-[25px]" />
                 </div>
-                <h3 className="ppfont text-[24px] md:text-[28px]">Mail Us at</h3>
-                <p className="creatodisplayM text-[18px] text-[#ffffffa1] break-words whitespace-normal workbreak">info@certifycars.ae</p>
+                <div className='w-full max-w-[75%] md:max-w-[100%]'>
+                  <h3 className="ppfont w-full sm:w-auto text-[22px] md:text-[28px]">Mail Us at</h3>
+                  <p className="creatodisplayM  text-[15px] md:text-[18px] text-[#ffffffa1]">
+                  info@certifycars.ae
+                  </p>
+                </div>
               </div>
             </div>
           </div>
