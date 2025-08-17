@@ -118,19 +118,8 @@ const InspectionDetails = () => {
 
       <div className="py-[30px] md:py-[40px] lg:py-[55px] xl:py-[65px] ">
         <div className="container ">
-          {/* Header */}
-          <div className="mb-4 mb-[20px] md:mb-[30px] lg:mb-[50px]">
-            <p className="creatodisplayM text-[16px] md:text-[18px] text-[#D72638]">
-              #174118512 | APR 26, 2024, 12:03 PM
-            </p>
-            <h1 className="ppfont text-[20px] md:text-[24px] lg:text-[28px] text-[#192735]">
-              Jeep Grand Cherokee
-            </h1>
-            <p className="creatodisplayM text-[#192735c9] text-[16px] md:text-[18px] lg:text-[20px]">
-              The battery needs to be replaced. The tires need to be replaced ASAP.
-              2019
-            </p>
-          </div>
+        
+         
 
           {/* Responsive Grid */}
           <div className="flex flex-wrap md:flex-nowrap gap-6">
@@ -224,6 +213,18 @@ const InspectionDetails = () => {
 
             {/* Swiper Slider */}
             <div className="w-full md:w-[60%] order-2 md:order-1">
+            <div className="mb-4 mb-[20px] md:mb-[30px] lg:mb-[50px]">
+            <p className="creatodisplayM text-[16px] md:text-[18px] text-[#D72638]">
+              #174118512 | APR 26, 2024, 12:03 PM
+            </p>
+            <h1 className="ppfont text-[20px] md:text-[24px] lg:text-[28px] text-[#192735]">
+              Jeep Grand Cherokee
+            </h1>
+            <p className="creatodisplayM text-[#192735c9] text-[16px] md:text-[18px] lg:text-[20px]">
+              The battery needs to be replaced. The tires need to be replaced ASAP.
+              2019
+            </p>
+          </div>
               <div className="w-full">
                 <Swiper
                   modules={[Navigation]}
