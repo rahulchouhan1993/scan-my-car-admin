@@ -75,6 +75,8 @@ textarea{overflow:auto;scrollbar-width:none;}
 textarea::-webkit-scrollbar{display:none;}
 input::placeholder{color:#292929;opacity:1;}
 textarea::placeholder{color:#292929;opacity:1;}
+
+
 select{color:#292929;}
 select option{color:#000;}
 select option[disabled]{color:#292929;}
@@ -101,4 +103,42 @@ input[type=number]{-moz-appearance:textfield;}
 }
 
 
+.contactForm input, .contactForm textarea {font-family:'CreatoDisplayMedium';color: #000;}
+.contactForm input::placeholder{color:#9f9f9f;opacity:1;}
+.contactForm textarea::placeholder{color:#9f9f9f;opacity:1;}
 
+.registerForm input::placeholder{color:#9f9f9f;opacity:1;}
+.registerForm textarea::placeholder{color:#9f9f9f;opacity:1;}
+.registerForm input, .registerForm textarea {font-family:'CreatoDisplayMedium'; color: #fff;}
+
+.inspectionForm input::placeholder{color:#9f9f9f;opacity:1;}
+.inspectionForm textarea::placeholder{color:#9f9f9f;opacity:1;}
+.inspectionForm input,.inspectionForm textarea{font-family:'CreatoDisplayMedium';color:#000;}
+
+.inspectionForm select option.placeholder-option{color:#9ca3af;}
+.inspectionForm select option:disabled{color:#9ca3af;}
+
+
+.inspectionForm select:invalid {
+    color: #9ca3af; /* placeholder grey */
+  }
+  
+  required
+  /* Normal selected text */
+  .inspectionForm select option {
+    color: #192735; /* your text color */
+  }
+  
+  /* Disabled options ka color */
+  .inspectionForm select option:disabled {
+    color: #9ca3af;
+  }
+
+  input[type="date"]:invalid {
+    color: #9ca3af; /* placeholder जैसा grey */
+  }
+  
+  /* जब user date चुन ले (valid state) */
+  input[type="date"]:valid {
+    color: #192735; /* आपका main text color */
+  }

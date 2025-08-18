@@ -56,34 +56,59 @@ const Header = () => {
         </div>
   
         {/* Mobile Menu Dropdown */}
-        {isOpen && (
-          <div className="creatodisplayM lg:hidden bg-white bg-opacity-90 text-black flex flex-col absolute z-[1] right-[15px] top-[55px] w-[220px]  ">
-             <Link href="/" className="flex items-center justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
-              Home
-            </Link>
+{isOpen && (
+  <div className="creatodisplayM lg:hidden bg-white bg-opacity-90 text-black flex flex-col absolute z-[1] right-[15px] top-[55px] w-[220px]">
+    <Link 
+      href="/" 
+      onClick={() => setIsOpen(false)}
+      className="flex items-center justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500"
+    >
+      Home
+    </Link>
 
-            <Link href="/book-inspection" className="flex items-center  justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
-            Book An Inspection
-            </Link>
+    <Link 
+      href="/book-inspection" 
+      onClick={() => setIsOpen(false)}
+      className="flex items-center justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500"
+    >
+      Book An Inspection
+    </Link>
 
-            <Link href="/about-us" className="flex items-center  justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
-              About
-            </Link>
+    <Link 
+      href="/about-us" 
+      onClick={() => setIsOpen(false)}
+      className="flex items-center justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500"
+    >
+      About
+    </Link>
 
-            <Link href="/contact-us" className="flex items-center  justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500 ">
-            Contact
-            </Link>
+    <Link 
+      href="/contact-us" 
+      onClick={() => setIsOpen(false)}
+      className="flex items-center justify-end px-[10px] py-[8px] text-[15px] text-black border-b-[1px] border-b-[#f2f2f2] hover:text-red-500"
+    >
+      Contact
+    </Link>
 
-            <div className="creatodisplayM flex flex-col space-y-2 mt-4 px-[10px] pb-[15px]">
-            <Link href="/register-dealer" className=" inline-flex justify-center px-6 py-2 border border-white rounded-full text-white text-sm bg-black hover:bg-white hover:text-black transition text-center">
-            Dealer Registration
-            </Link>
-            <Link href="/dealer" className="creatodisplayM inline-flex justify-center px-6 py-2 bg-red-600 rounded-full text-white text-sm hover:bg-red-700 transition text-center">
-                Login 
-            </Link>
-            </div>
-          </div>
-        )}
+    <div className="creatodisplayM flex flex-col space-y-2 mt-4 px-[10px] pb-[15px]">
+      <Link 
+        href="/register-dealer" 
+        onClick={() => setIsOpen(false)}
+        className="inline-flex justify-center px-6 py-2 border border-white rounded-full text-white text-sm bg-black hover:bg-white hover:text-black transition text-center"
+      >
+        Dealer Registration
+      </Link>
+      <Link 
+        href="/dealer" 
+        onClick={() => setIsOpen(false)}
+        className="creatodisplayM inline-flex justify-center px-6 py-2 bg-red-600 rounded-full text-white text-sm hover:bg-red-700 transition text-center"
+      >
+        Login
+      </Link>
+    </div>
+  </div>
+)}
+
       </nav>
     );
   };

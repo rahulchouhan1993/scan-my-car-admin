@@ -126,11 +126,11 @@ const ContactUs = () => {
             </p>
             </div>
 
-            <form className="space-y-3 lg:space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-3 lg:space-y-5 contactForm" onSubmit={handleSubmit}>
              
 
               <div className='relative'> 
-                <label>Full Name</label>
+                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
@@ -142,7 +142,7 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
-                <label>Email</label>
+                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Email</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -154,7 +154,7 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
-                <label>Phone</label>
+                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Phone</label>
               <input
                 type="tel"
                 placeholder="Phone"
@@ -165,7 +165,7 @@ const ContactUs = () => {
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               <div className='relative'> 
-                <label>Service Type</label>
+                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Service Type</label>
               <input
                 type="text"
                 placeholder="Service Type"
@@ -176,7 +176,7 @@ const ContactUs = () => {
               {errors.service_type && <div className="text-red-500 text-sm">{errors.service_type}</div>}
               </div>
               <div className='relative'> 
-                <label>Message</label>
+                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Message</label>
               <textarea
                 placeholder="Message"
                 rows="4"

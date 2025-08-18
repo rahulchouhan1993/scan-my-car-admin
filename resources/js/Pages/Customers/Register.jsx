@@ -67,7 +67,7 @@ const Register = () => {
 
             <form className="space-y-5 registerForm" onSubmit={handleSubmit}>
             <div className='relative'> 
-              <label>Full Name</label>
+              <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
@@ -78,7 +78,7 @@ const Register = () => {
                {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
                </div>
                <div className='relative'> 
-                <label>Company Name</label>
+                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Company Name</label>
               <input
                 type="text"
                 placeholder="Company Name"
@@ -90,7 +90,7 @@ const Register = () => {
                </div>
 
                <div className='relative'> 
-                 <label>Email</label>
+                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Email</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -101,7 +101,7 @@ const Register = () => {
               {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
               </div>
               <div className='relative'> 
-                 <label>Phone Number</label>
+                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Phone Number</label>
               <input
                 type="tel"
                 placeholder="Phone Number"
@@ -112,7 +112,7 @@ const Register = () => {
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               <div className='relative'> 
-                 <label>Buying Limit</label>
+                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Buying Limit</label>
                <input
                 type="number"
                 placeholder="Buying Limit"
@@ -123,7 +123,7 @@ const Register = () => {
               {errors.buying_limit && <div className="text-red-500 text-sm">{errors.buying_limit}</div>}
               </div>
               <div className='relative'> 
-                <label>Car Model</label>
+                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Car Model</label>
               <input
                 type="text"
                 placeholder="Car Model"
@@ -135,7 +135,7 @@ const Register = () => {
               </div>
 
               <div className='relative'> 
-                <label>Model Year </label>
+                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Model Year </label>
               <input
                 type="number"
                 placeholder="Model Year"
@@ -146,7 +146,7 @@ const Register = () => {
               {errors.model_year && <div className="text-red-500 text-sm">{errors.model_year}</div>}
               </div>
               <div className='relative'> 
-                <label>Milage</label>
+                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Milage</label>
               <input
                 type="number"
                 placeholder="Milage"
@@ -158,7 +158,7 @@ const Register = () => {
               </div>
 
               <div className='relative'> 
-                <label>Account Manager</label>
+                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Account Manager</label>
               <input
                 type="text"
                 placeholder="Account Manager"
@@ -169,7 +169,7 @@ const Register = () => {
               {errors.account_manager && <div className="text-red-500 text-sm">{errors.account_manager}</div>}
               </div>
               <div className='relative'> 
-                 <label>Password</label>
+                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Password</label>
               <input
                 type="password"
                 placeholder="Password"
@@ -180,7 +180,7 @@ const Register = () => {
               {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
               </div>
               <div className='relative'> 
-                <label>Confirm Password</label>
+                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Confirm Password</label>
               <input
                 type="password"
                 placeholder="Confirm Password"
