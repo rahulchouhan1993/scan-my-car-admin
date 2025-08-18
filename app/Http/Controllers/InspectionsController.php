@@ -22,14 +22,14 @@ class InspectionsController extends Controller
                 'full_name'            => 'required|string|max:50',
                 'contact_no'           => 'required|string|max:15',
                 'email'                => 'required|string|max:50',
+                'pin_code'             => 'required',
+                'city'                 => 'required',
                 'address_line_1'       => 'required|string|max:100',
                 'address_line_2'       => 'required|string|max:100',
                 'car_parked'           => 'required|string|max:20',
                 'vehicle_make'         => 'required|string|max:30',
                 'vehicle_model'        => 'required|string|max:30',
                 'vehicle_year'         => 'nullable|integer|min:1900|max:' . now()->year,
-                'registration_number'  => 'required|string|max:50',
-                'vin'                  => 'required|string|max:100',
                 'fuel_type'            => 'required|string|in:Petrol,Diesel,Hybrid,Electric',
                 'transmission'         => 'required|string|in:Manual,Automatic',
                 'mileage'              => 'required',
@@ -57,8 +57,6 @@ class InspectionsController extends Controller
                 'vehicle_make'        => $request->vehicle_make,
                 'vehicle_model'       => $request->vehicle_model,
                 'vehicle_year'        => $request->vehicle_year,
-                'registration_number' => $request->registration_number,
-                'vin'                 => $request->vin,
                 'fuel_type'           => $request->fuel_type,
                 'transmission'        => $request->transmission,
                 'mileage'             => $request->mileage,
@@ -67,6 +65,9 @@ class InspectionsController extends Controller
                 'additional_notes'    => $request->additional_notes,
                 'status'              => $request->status ?? 0,
                 'assign_date'         => $assignDate,
+                'pin_code'            => $request->pin_code,
+                'city'                => $request->city,
+                'request_no'          => rand()
             ]);
 
             InspectionLog::create([

@@ -130,6 +130,7 @@ const ContactUs = () => {
              
 
               <div className='relative'> 
+                <label>Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
@@ -141,6 +142,7 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
+                <label>Email</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -152,6 +154,7 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
+                <label>Phone</label>
               <input
                 type="tel"
                 placeholder="Phone"
@@ -162,6 +165,7 @@ const ContactUs = () => {
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               <div className='relative'> 
+                <label>Service Type</label>
               <input
                 type="text"
                 placeholder="Service Type"
@@ -172,6 +176,7 @@ const ContactUs = () => {
               {errors.service_type && <div className="text-red-500 text-sm">{errors.service_type}</div>}
               </div>
               <div className='relative'> 
+                <label>Message</label>
               <textarea
                 placeholder="Message"
                 rows="4"

@@ -17,11 +17,8 @@ const BookInspection = () => {
     vehicle_make: props?.vehicle_make || '',
     vehicle_model: props?.vehicle_model || '',
     vehicle_year: props?.vehicle_year || '',
-    registration_number: props?.registration_number || '',
-    vin: props?.vin || '',
     fuel_type: props?.fuel_type || '',
     transmission: props?.transmission || '',
-    color: props?.color || '',
     mileage: props?.mileage || '',
     preferred_date: props?.preferred_date || '',
     preferred_time_slot: props?.preferred_time_slot || '',
@@ -30,7 +27,9 @@ const BookInspection = () => {
     email: props?.email || '',
     address_line_1: props?.address_line_1 || '',
     address_line_2: props?.address_line_2 || '',
-    car_parked: props?.car_parked || ''
+    car_parked: props?.car_parked || '',
+    pin_code: props?.pin_code || '',
+    city: props?.city || '',
   })
 
   const handleSubmit = (e) => {
@@ -134,7 +133,7 @@ const BookInspection = () => {
                   </ul>
                   <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                     <button onClick={() => handleContinue("1")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[12px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
-                      Continue
+                      Book Now
                     </button>
                   </div>
                 </div>
@@ -178,7 +177,7 @@ const BookInspection = () => {
                   </ul>
                   <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                     <button onClick={() => handleContinue("2")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[12px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
-                      Continue
+                      Book Now
                     </button>
                   </div>
                 </div>
@@ -230,7 +229,7 @@ const BookInspection = () => {
                   </ul>
                   <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                     <button onClick={() => handleContinue("3")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[12px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
-                      Continue
+                      Book Now
                     </button>
                   </div>
                 </div>
@@ -249,7 +248,7 @@ const BookInspection = () => {
                 <input type="hidden" id="packageId" name="package_name" value={packageId} />
 
                 <div>
-                  {/* First Name */}
+                  <label>Full Name</label>
                   <input
                     type="text"
                     name="full_name"
@@ -262,7 +261,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  {/* Email */}
+                  <label>Email</label>
                   <input
                     type="email"
                     name="email"
@@ -275,10 +274,10 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  {/* Phone */}
+                  <label>Phone (With Country Code)</label>
                   <input
                     type="tel"
-                    placeholder="Phone"
+                    placeholder="+971 987654321"
                     name="contact_no"
                     className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none"
                     value={data.contact_no}
@@ -286,8 +285,9 @@ const BookInspection = () => {
                   />
                   {errors.contact_no && <div className="text-red-500 text-[12px]">{errors.contact_no}</div>}
                 </div>
-
+                
                 <div>
+                  <label>Address Line 1</label>
                   <input
                     type="text"
                     placeholder="Address Line 1"
@@ -300,6 +300,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
+                  <label>Address Line 2</label>
                   <input
                     type="text"
                     placeholder="Address Line 2"
@@ -310,9 +311,36 @@ const BookInspection = () => {
                   />
                   {errors.address_line_2 && <div className="text-red-500 text-[12px]">{errors.address_line_2}</div>}
                 </div>
+                <div>
+                  <label>Pin Code</label>
+                  <input
+                    type="text"
+                    placeholder="Pin Code"
+                    name="pin_code"
+                    className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none"
+                    value={data.pin_code}
+                    onChange={(e) => setData('pin_code', e.target.value)}
+                  />
+                  {errors.pin_code && <div className="text-red-500 text-[12px]">{errors.pin_code}</div>}
+                </div>
+                
+                <div>
+                  <label>City</label>
+                  <select value={data.city} onChange={(e) => setData("city", e.target.value)} name="city" className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
+                    <option value="">-- Select City --</option>
+                    <option value="Abudhabi" disabled>Abudhabi (Not Servicable)</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="Fujeirah" disabled>Fujeirah (Not Servicable)</option>
+                    <option value="Sharjah">Sharjah</option>
+                    <option value="Ajman" disabled>Ajman (Not Servicable)</option>
+                    <option value="Ras Al Khaimah" disabled>Ras Al Khaimah (Not Servicable)</option>
+                    <option value="Umm Al Quwain" disabled>Umm Al Quwain (Not Servicable)</option>
+                  </select>
+                  {errors.city && <div className="text-red-500 text-[12px]">{errors.city}</div>}
+                </div>
 
                 <div>
-                  {/* Car Model */}
+                  <label>Vehicle Make</label>
                   <select value={data.vehicle_make} onChange={(e) => setData("vehicle_make", e.target.value)} name="vehicle_make" className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                     <option value="">-- Select Vehicle Make --</option>
                     <option value="Acura">Acura</option>
@@ -394,6 +422,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
+                  <label>Vehicle Model</label>
                   <input
                     type="text"
                     placeholder="Vehicle Model"
@@ -407,6 +436,7 @@ const BookInspection = () => {
 
                 {/* Year */}
                 <div>
+                  <label>Vehicle Year</label>
                   <input
                     type="text"
                     placeholder="Vehicle Year"
@@ -419,30 +449,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <input
-                    type="text"
-                    placeholder="Registration Number"
-                    name="registration_number"
-                    className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none"
-                    value={data.registration_number}
-                    onChange={(e) => setData('registration_number', e.target.value)}
-                  />
-                  {errors.registration_number && <div className="text-red-500 text-[12px]">{errors.registration_number}</div>}
-                </div>
-
-                <div>
-                  <input
-                    type="text"
-                    placeholder="VIN"
-                    name="vin"
-                    className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none"
-                    value={data.vin}
-                    onChange={(e) => setData('vin', e.target.value)}
-                  />
-                  {errors.vin && <div className="text-red-500 text-[12px]">{errors.vin}</div>}
-                </div>
-
-                <div>
+                  <label>Fuel Type</label>
                   <select value={data.fuel_type} onChange={(e) => setData("fuel_type", e.target.value)} name="fuel_type" className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                     <option value="">-- Select Fuel Type --</option>
                     <option value="Petrol">Petrol</option>
@@ -454,6 +461,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
+                  <label>Transmission</label>
                   <select value={data.transmission} onChange={(e) => setData("transmission", e.target.value)} name="transmission" className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                     <option value="">-- Select Transmission --</option>
                     <option value="Manual">Manual</option>
@@ -461,19 +469,9 @@ const BookInspection = () => {
                   </select>
                   {errors.transmission && <div className="text-red-500 text-[12px]">{errors.transmission}</div>}
                 </div>
+                
                 <div>
-                  <input
-                    type="text"
-                    name="color"
-                    placeholder="Vehicle Color"
-                    className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none"
-                    value={data.color}
-                    onChange={(e) => setData('color', e.target.value)}
-                  />
-                  {errors.color && <div className="text-red-500 text-[12px]">{errors.color}</div>}
-                </div>
-
-                <div>
+                  <label>Car Parked</label>
                   <select value={data.car_parked} onChange={(e) => setData("car_parked", e.target.value)} name="car_parked" className="border border-[#192735] rounded-full px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full bg-white focus:outline-none noneocusnone-red-200">
                     <option value="">-- Where is the car parked? --</option>
                     <option value="Outdoor">Outdoor</option>
@@ -484,6 +482,7 @@ const BookInspection = () => {
                   {errors.car_parked && <div className="text-red-500 text-[12px]">{errors.car_parked}</div>}
                 </div>
                 <div>
+                  <label>Mileage</label>
                   <input
                     type="text"
                     name="mileage"
@@ -496,7 +495,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-
+                  <label>Inspection Date</label>
                   <input
                     type="date"
                     name="preferred_date"
@@ -510,6 +509,7 @@ const BookInspection = () => {
 
 
                 <div>
+                  <label>Inspection Time Slot</label>
                   <input
                     type="time"
                     name="preferred_time_slot"
@@ -522,8 +522,8 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-
-                  <textarea name="additional_notes" placeholder="Additional Notes" className="h-[50px] md:h-[55px] lg:h-[67px] border border-[#192735] rounded-[60px] px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none"></textarea>
+                  <label>Additional Notes</label>
+                  <textarea onChange={(e) => setData('additional_notes', e.target.value)} name="additional_notes" placeholder="Additional Notes" className="h-[50px] md:h-[55px] lg:h-[67px] border border-[#192735] rounded-[60px] px-[25px] py-[10px] md:px-[30px] md:py-[18px] creatodisplayM text-[#192735] text-[12px] md:text-[20px] w-full focus:outline-none focus:none focus:none">{data.additional_notes}</textarea>
 
                   {errors.additional_notes && <div className="text-red-500 text-[12px]">{errors.additional_notes}</div>}
                 </div>

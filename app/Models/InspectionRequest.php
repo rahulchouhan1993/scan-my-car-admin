@@ -17,8 +17,6 @@ class InspectionRequest extends Model
         'vehicle_make',
         'vehicle_model',
         'vehicle_year',
-        'registration_number',
-        'vin',
         'fuel_type',
         'transmission',
         'mileage',
@@ -28,7 +26,9 @@ class InspectionRequest extends Model
         'status',
         'assign_date',
         'package_id',
-        'color',
+        'request_no',
+        'pin_code',
+        'city'
     ];
 
     public function user()

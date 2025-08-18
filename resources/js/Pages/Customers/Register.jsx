@@ -67,6 +67,7 @@ const Register = () => {
 
             <form className="space-y-5 registerForm" onSubmit={handleSubmit}>
             <div className='relative'> 
+              <label>Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
@@ -77,6 +78,7 @@ const Register = () => {
                {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
                </div>
                <div className='relative'> 
+                <label>Company Name</label>
               <input
                 type="text"
                 placeholder="Company Name"
@@ -88,6 +90,7 @@ const Register = () => {
                </div>
 
                <div className='relative'> 
+                 <label>Email</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -98,9 +101,10 @@ const Register = () => {
               {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
               </div>
               <div className='relative'> 
+                 <label>Phone Number</label>
               <input
                 type="tel"
-                placeholder="Phone"
+                placeholder="Phone Number"
                 className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
                 value={data.phone_no}
                 onChange={(e) => setData('phone_no', e.target.value)}
@@ -108,6 +112,7 @@ const Register = () => {
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               <div className='relative'> 
+                 <label>Buying Limit</label>
                <input
                 type="number"
                 placeholder="Buying Limit"
@@ -118,6 +123,7 @@ const Register = () => {
               {errors.buying_limit && <div className="text-red-500 text-sm">{errors.buying_limit}</div>}
               </div>
               <div className='relative'> 
+                <label>Car Model</label>
               <input
                 type="text"
                 placeholder="Car Model"
@@ -129,6 +135,7 @@ const Register = () => {
               </div>
 
               <div className='relative'> 
+                <label>Model Year </label>
               <input
                 type="number"
                 placeholder="Model Year"
@@ -139,6 +146,7 @@ const Register = () => {
               {errors.model_year && <div className="text-red-500 text-sm">{errors.model_year}</div>}
               </div>
               <div className='relative'> 
+                <label>Milage</label>
               <input
                 type="number"
                 placeholder="Milage"
@@ -150,6 +158,7 @@ const Register = () => {
               </div>
 
               <div className='relative'> 
+                <label>Account Manager</label>
               <input
                 type="text"
                 placeholder="Account Manager"
@@ -160,6 +169,7 @@ const Register = () => {
               {errors.account_manager && <div className="text-red-500 text-sm">{errors.account_manager}</div>}
               </div>
               <div className='relative'> 
+                 <label>Password</label>
               <input
                 type="password"
                 placeholder="Password"
@@ -170,6 +180,7 @@ const Register = () => {
               {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
               </div>
               <div className='relative'> 
+                <label>Confirm Password</label>
               <input
                 type="password"
                 placeholder="Confirm Password"

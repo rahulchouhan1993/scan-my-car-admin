@@ -26,11 +26,8 @@ const EditRequest = () => {
     vehicle_make: props?.inspectionsDetail?.vehicle_make || '',
     vehicle_model: props?.inspectionsDetail?.vehicle_model || '',
     vehicle_year: props?.inspectionsDetail?.vehicle_year || '',
-    registration_number: props?.inspectionsDetail?.registration_number || '',
-    vin: props?.inspectionsDetail?.vin || '',
     fuel_type: props?.inspectionsDetail?.fuel_type || '',
     transmission: props?.inspectionsDetail?.transmission || '',
-    color: props?.inspectionsDetail?.color || '',
     mileage: props?.inspectionsDetail?.mileage || '',
     preferred_date: props?.inspectionsDetail?.preferred_date || '',
     preferred_time_slot: props?.inspectionsDetail?.preferred_time_slot || '',
@@ -42,6 +39,8 @@ const EditRequest = () => {
     car_parked: props?.inspectionsDetail?.car_parked || '',
     inspector_id: String(props?.inspectionsDetail?.inspector_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
+    city: props?.inspectionsDetail?.city || '',
+    pin_code: props?.inspectionsDetail?.pin_code || '',
     // identifier to send for logging
     change_identifier: '',
   })
@@ -137,6 +136,38 @@ const EditRequest = () => {
               </CCol>
 
               <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  label="Pin Code"
+                  name="pin_code"
+                  value={data.pin_code}
+                  onChange={(e) => setData('pin_code', e.target.value)}
+                  invalid={!!errors.pin_code}
+                  feedbackInvalid={errors.pin_code}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                    name="city"
+                    label="City"
+                    value={data.city}
+                    onChange={(e) => setData('city', e.target.value)}
+                    invalid={!!errors.city}
+                    feedbackInvalid={errors.city}
+                  >
+                    <option value="">-- Select City --</option>
+                    <option value="Abudhabi" disabled>Abudhabi (Not Serviceable)</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="Fujeirah" disabled>Fujeirah (Not Serviceable)</option>
+                    <option value="Sharjah">Sharjah</option>
+                    <option value="Ajman" disabled>Ajman (Not Serviceable)</option>
+                    <option value="Ras Al Khaimah" disabled>Ras Al Khaimah (Not Serviceable)</option>
+                    <option value="Umm Al Quwain" disabled>Umm Al Quwain (Not Serviceable)</option>
+                  </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
                 <CFormSelect
                   name="vehicle_make"
                   label="Vehicle Make"
@@ -189,30 +220,6 @@ const EditRequest = () => {
               </CCol>
 
               <CCol md={4}>
-                <CFormInput
-                  type="text"
-                  label="Registration Number"
-                  name="registration_number"
-                  value={data.registration_number}
-                  onChange={(e) => setData('registration_number', e.target.value)}
-                  invalid={!!errors.registration_number}
-                  feedbackInvalid={errors.registration_number}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <CFormInput
-                  type="text"
-                  label="VIN"
-                  name="vin"
-                  value={data.vin}
-                  onChange={(e) => setData('vin', e.target.value)}
-                  invalid={!!errors.vin}
-                  feedbackInvalid={errors.vin}
-                />
-              </CCol>
-
-              <CCol md={4}>
                 <CFormSelect
                   name="fuel_type"
                   label="Fuel Type"
@@ -238,18 +245,6 @@ const EditRequest = () => {
                   <option value="Manual">Manual</option>
                   <option value="Automatic">Automatic</option>
                 </CFormSelect>
-              </CCol>
-
-              <CCol md={4}>
-                <CFormInput
-                  type="text"
-                  name="color"
-                  label="Vehicle Color"
-                  value={data.color}
-                  onChange={(e) => setData('color', e.target.value)}
-                  invalid={!!errors.color}
-                  feedbackInvalid={errors.color}
-                />
               </CCol>
 
               <CCol md={4}>

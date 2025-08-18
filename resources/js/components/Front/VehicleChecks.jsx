@@ -41,7 +41,7 @@ const VehicleChecks = () => {
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
           <h2 className="ppfont md:w-[50%]  text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-white">
-            A Vehicle Check For Every Situation
+            A Vehicle Package For Every Situation
           </h2>
           <p className="md:w-[50%] text-[#ffffff8f] text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] max-w-xl">
             Every car has a different story. Whether you're buying, selling, or
