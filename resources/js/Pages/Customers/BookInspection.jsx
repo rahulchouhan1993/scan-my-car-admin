@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { Link } from '@inertiajs/react';
 import CustomerLayout from '../../layout/CustomerLayout'
 import redarrowRg from "../../assets/images/redarrowRg.png";
@@ -10,7 +10,7 @@ const BookInspection = () => {
   const [activeStep, setActiveStep] = useState(1);
   const [packageId, setpackage] = useState(1);
   const steps = ["Choose Package", "Enter Details"];
-
+  const detailsRef = useRef(null);
   const { props } = usePage()
   const { data, setData, post, processing, errors, reset } = useForm({
     full_name: props?.full_name || '',
@@ -45,8 +45,23 @@ const BookInspection = () => {
 
   function handleContinue(packageid) {
     setpackage(packageid);
-    setActiveStep(2)
+    setActiveStep(2);
   }
+
+  useLayoutEffect(() => {
+    if (activeStep === 2 || activeStep === 3) {
+      requestAnimationFrame(() => {
+        const el = detailsRef.current;
+        if (!el) return;
+
+        // Adjust if you have a sticky/fixed header
+        const headerOffset = 0; 
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+        window.scrollTo({ top: y, behavior: "smooth" });
+      });
+    }
+  }, [activeStep]);
 
   return (
     <>
@@ -239,7 +254,8 @@ const BookInspection = () => {
 
           {/* Tab 2 & 3: Contact Form */}
           {(activeStep === 2 || activeStep === 3) && (
-            <div className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]">
+            <div className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]" ref={detailsRef}
+          id="enter-details-booking">
               {/* Title */}
               <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Enter your details</h2>
 
