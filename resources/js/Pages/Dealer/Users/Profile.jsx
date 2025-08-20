@@ -26,6 +26,11 @@ const Profile = (props) => {
     city: props?.userDetails?.city || '',
     state: props?.userDetails?.state || '',
     zip: props?.userDetails?.zip || '',
+    buying_limit: props?.userDetails?.buying_limit || '',
+    car_model: props?.userDetails?.car_model || '',
+    model_year: props?.userDetails?.model_year || '',
+    milage: props?.userDetails?.milage || '',
+    account_manager: props?.userDetails?.account_manager || '',
     check: false,
     password: '',
     confirmPassword: '',
@@ -119,6 +124,64 @@ const Profile = (props) => {
                   onChange={(e) => setData('zip', e.target.value)}
                   invalid={!!errors.zip}
                   feedbackInvalid={errors.zip}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="buyingLimit"
+                  label="Buying Limit"
+                  value={data.buying_limit}
+                  onChange={(e) => setData('buying_limit', e.target.value)}
+                  invalid={!!errors.buying_limit}
+                  feedbackInvalid={errors.buying_limit}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="car_model"
+                  label="Car Model"
+                  value={data.car_model}
+                  onChange={(e) => setData('car_model', e.target.value)}
+                  invalid={!!errors.car_model}
+                  feedbackInvalid={errors.car_model}
+                />
+              </CCol>
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="model_year"
+                  label="Model Year"
+                  value={data.model_year}
+                  onChange={(e) => setData('model_year', e.target.value)}
+                  invalid={!!errors.model_year}
+                  feedbackInvalid={errors.model_year}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="milage"
+                  label="Milage"
+                  value={data.milage}
+                  onChange={(e) => setData('milage', e.target.value)}
+                  invalid={!!errors.milage}
+                  feedbackInvalid={errors.milage}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  id="account_manager"
+                  label="Account Manager"
+                  value={data.account_manager}
+                  onChange={(e) => setData('account_manager', e.target.value)}
+                  invalid={!!errors.account_manager}
+                  feedbackInvalid={errors.account_manager}
                 />
               </CCol>
 

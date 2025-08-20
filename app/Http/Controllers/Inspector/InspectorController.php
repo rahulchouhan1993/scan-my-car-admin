@@ -89,7 +89,7 @@ class InspectorController extends Controller
         $inspectionsDetail = InspectionRequest::find($id);
         $alInspectors = User::where('role','inspector')->where('status',1)->get();
         if($request->isMethod('post')){
-            $inspectionsDetail->status              = $request->status ?? 0;
+            $inspectionsDetail->status = $request->status ?? 0;
             $inspectionsDetail->save();
 
             if($request->change_identifier=='status_and_inspector_changed' || $request->change_identifier=='status_changed' || $request->change_identifier=='inspector_changed'){
@@ -140,5 +140,11 @@ class InspectorController extends Controller
         $inspectinLogs = InspectionLog::where('inspection_request_id', $id)->orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Inspector | Logs';
         return inertia('Inspector/Users/Logs',compact('pageTitle','inspectinLogs'));
+    }
+
+    public function startInspection($id){
+        $inspectionDetails = InspectionRequest::find($id);
+        $pageTitle = 'Inspector | Add Inspection';
+        return inertia('Inspector/Users/AddInspection',compact('pageTitle','inspectionDetails'));
     }
 }

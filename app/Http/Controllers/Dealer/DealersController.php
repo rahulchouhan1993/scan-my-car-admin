@@ -23,12 +23,17 @@ class DealersController extends Controller
         $userDetails = User::find(auth()->user()->id);
         if($request->isMethod('post')){
             $validator = Validator::make($request->all(), [
-                'name'      => ['required', 'string', 'max:50'],
-                'address'   => ['required', 'string', 'max:200'],
-                'address2'  => ['required', 'string', 'max:200'],
-                'city'      => ['required', 'string', 'max:50'],
-                'state'     => ['required', 'string', 'max:50'],
-                'zip'       => ['required', 'max:8', 'max:6'],
+                'name'              => ['required', 'string', 'max:50'],
+                'address'           => ['required', 'string', 'max:200'],
+                'address2'          => ['required', 'string', 'max:200'],
+                'city'              => ['required', 'string', 'max:50'],
+                'state'             => ['required', 'string', 'max:50'],
+                'zip'               => ['required', 'max:8', 'max:6'],
+                'buying_limit'      => ['required'],
+                'car_model'         => ['required'],
+                'model_year'        => ['required'],
+                'milage'            => ['required'],
+                'account_manager'   => ['required'],
             ]);
 
             if ($validator->fails()) {
@@ -40,6 +45,11 @@ class DealersController extends Controller
             $userDetails->city = $request->city;
             $userDetails->state = $request->state;
             $userDetails->zip = $request->zip;
+            $userDetails->buying_limit = $request->buying_limit;
+            $userDetails->car_model = $request->car_model;
+            $userDetails->model_year = $request->model_year;
+            $userDetails->milage = $request->milage;
+            $userDetails->account_manager = $request->account_manager;
             if(!empty($request->password) && !empty($request->confirmPassword)){
                 if($request->password==$request->confirmPassword){
                     $userDetails->password = Hash::make($request->password);

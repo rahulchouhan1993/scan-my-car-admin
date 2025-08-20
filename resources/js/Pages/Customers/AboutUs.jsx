@@ -127,7 +127,7 @@ const AboutUs = () => {
       </section>
 
 
-      <section className="bg-[#F9F9F9] py-[20px] md:py-[60px] lg:py-[80px]">
+      {/* <section className="bg-[#F9F9F9] py-[20px] md:py-[60px] lg:py-[80px]">
         <div className='container'>
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">
             <div class="w-full md-w-[50%]">
@@ -163,7 +163,7 @@ const AboutUs = () => {
           ))}
         </div>
         </div>
-      </section>
+      </section> */}
 
 
     </>

@@ -39,6 +39,7 @@ const ServiceRequest = (props) => {
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
+                     <CTableHeaderCell scope="col">Package</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Name</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Contact No.</CTableHeaderCell>
@@ -53,6 +54,17 @@ const ServiceRequest = (props) => {
                   {allInspections?.data?.map((inspection, index) => (
                   <CTableRow key={inspection.id || index}>
                     <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+                    <CTableDataCell>
+                      {inspection.package_id === 1 && (
+                        "Regular"
+                      )}
+                      {inspection.status === 2 && (
+                        "Comprehensive"
+                      )}
+                      {inspection.status === 3 && (
+                        "Ultra"
+                      )}
+                    </CTableDataCell>
                     <CTableDataCell>{inspection.full_name}</CTableDataCell>
                     <CTableDataCell>{inspection.email}</CTableDataCell>
                     <CTableDataCell>{inspection.contact_no}</CTableDataCell>
@@ -93,6 +105,7 @@ const ServiceRequest = (props) => {
                         </CDropdownToggle>
                         <CDropdownMenu>
                            <CDropdownItem href={route('inspector.inspections.add',{id:inspection.id})}>Edit</CDropdownItem>
+                           <CDropdownItem href={route('inspector.start-inspection',{id:inspection.id})}>Start Inspection</CDropdownItem>
                            <CDropdownItem href={route('inspector.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
                            <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem>
                         </CDropdownMenu>

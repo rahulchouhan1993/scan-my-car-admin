@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import hoverImg from "../../assets/images/carsliderimg01.jpg";
+import hoverImg1 from "../../assets/images/carsliderimg01.jpg";
+import hoverImg2 from "../../assets/images/carsliderimg02.jpg";
+import hoverImg3 from "../../assets/images/carsliderimg03.jpg";
+import hoverImg4 from "../../assets/images/carsliderimg04.jpg";
 import { Link } from "@inertiajs/react";
 
 const services = [
   {
     title: "Pre-Purchase Car Inspection",
-    description:
-      "Get a full report before you buy. Identify hidden damage, accident history, and overdue repairs.",
+    img: hoverImg1,
+    description: "Get a full report before you buy. Identify hidden damage, accident history, and overdue repairs.",
   },
   {
     title: "Pre-Sale Car Inspection",
+    img: hoverImg2,
     description:
       "Show buyers your vehicle’s true condition. Boost trust and achieve a better selling price.",
   },
   {
     title: "Home Inspection Service",
+    img: hoverImg3,
     description:
       "From roof to foundation, we check every detail so you can buy or sell with confidence.",
   },
   {
     title: "Comprehensive Vehicle Health Check",
+    img: hoverImg4,
     description:
       "An in-depth assessment of your car’s performance, safety, and overall condition.",
   },
@@ -53,19 +59,19 @@ const VehicleChecks = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              onClick={() => handleTouch(index)} // अब सिर्फ mobile पर काम करेगा
+              onClick={() => handleTouch(index)}
               className="relative group bg-[#192735] rounded-2xl p-3 md:p-6 flex flex-col justify-between 
                 min-h-auto md:min-h-[280px] lg:min-h-[310px] hover:shadow-lg transition duration-300 overflow-hidden cursor-pointer"
             >
               {/* Hover / Touch Image */}
               <img
-                src={hoverImg}
+                src={service.img}
                 alt="hover effect"
                 className={`absolute top-0 left-0 w-full h-full object-cover transition duration-500 rounded-2xl transform
                   ${
                     activeIndex === index
-                      ? "opacity-100 scale-110" // 👈 Mobile tap
-                      : "opacity-0 scale-100 sm:group-hover:opacity-100 sm:group-hover:scale-110" // 👈 Desktop hover
+                      ? "opacity-100 scale-110" 
+                      : "opacity-0 scale-100 sm:group-hover:opacity-100 sm:group-hover:scale-110" 
                   }`}
               />
 

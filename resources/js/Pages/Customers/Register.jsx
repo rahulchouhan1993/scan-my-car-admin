@@ -11,11 +11,11 @@ const Register = () => {
     name: props?.name || '',
     company_name: props?.company_name || '',
     email: props?.email || '',
-    buying_limit: props?.buying_limit || '',
-    car_model: props?.car_model || '',
-    model_year: props?.model_year || '',
-    milage: props?.milage || '',
-    account_manager: props?.account_manager || '',
+    // buying_limit: props?.buying_limit || '',
+    // car_model: props?.car_model || '',
+    // model_year: props?.model_year || '',
+    // milage: props?.milage || '',
+    // account_manager: props?.account_manager || '',
     phone_no: props?.phone_no || '',
     password: props?.password || '',
     password_confirmation: props?.password_confirmation || ''
@@ -111,7 +111,7 @@ const Register = () => {
               />
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
-              <div className='relative'> 
+              {/* <div className='relative'> 
                  <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Buying Limit</label>
                <input
                 type="number"
@@ -167,7 +167,7 @@ const Register = () => {
                 onChange={(e) => setData('account_manager', e.target.value)}
               />
               {errors.account_manager && <div className="text-red-500 text-sm">{errors.account_manager}</div>}
-              </div>
+              </div> */}
               <div className='relative'> 
                  <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Password</label>
               <input

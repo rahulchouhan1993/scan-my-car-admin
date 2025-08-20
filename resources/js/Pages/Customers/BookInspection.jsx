@@ -66,7 +66,7 @@ const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClas
 
 const BookInspection = () => {
   const [activeStep, setActiveStep] = useState(1);
-  const [packageId, setpackage] = useState(1);
+  const [packageId, setpackage] = useState(0);
   const steps = ["Choose Package", "Enter Details"];
   const detailsRef = useRef(null);
   const { props } = usePage();
@@ -102,6 +102,15 @@ const BookInspection = () => {
   function handleContinue(packageid) {
     setpackage(packageid);
     setActiveStep(2);
+  }
+
+  function setActiveStepFun(step) {
+    if(packageId){
+       setActiveStep(step);
+    }else{
+      alert('Please select a package');
+    }
+   
   }
 
   useLayoutEffect(() => {
@@ -211,7 +220,7 @@ const BookInspection = () => {
                 return (
                   <div
                     key={index}
-                    onClick={() => setActiveStep(index + 1)}
+                    onClick={() => setActiveStepFun(index + 1)}
                     className={`w-full md:w-[50%] ppfont flex z-[1] items-center justify-between sm:justify-center gap-[5px] md:gap-2 px-[10px] py-[10px] md:px-[15px] md:py-[15px] rounded-full border-[2px]  cursor-pointer transition-all  md:text-[20px] text-[#192735] ${isActive
                       ? "bg-[#192735] text-white border-black"
                       : "bg-[#EDEEEF] text-black border-[#192735]"
@@ -317,7 +326,7 @@ const BookInspection = () => {
           )}
 
           {/* Tab 2 & 3: Contact Form */}
-          {(activeStep === 2 || activeStep === 3) && (
+          {((activeStep === 2 || activeStep === 3) && packageId>0) && (
             <div
               className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]"
               ref={detailsRef}

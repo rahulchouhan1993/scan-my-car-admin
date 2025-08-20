@@ -22,6 +22,7 @@ const EditRequest = () => {
   const initialInspectorId = String(props?.inspectionsDetail?.inspector_id ?? '')
 
   const { data, setData, post, processing, errors } = useForm({
+    package_id: props?.inspectionsDetail?.package_id || '',
     full_name: props?.inspectionsDetail?.full_name || '',
     vehicle_make: props?.inspectionsDetail?.vehicle_make || '',
     vehicle_model: props?.inspectionsDetail?.vehicle_model || '',
@@ -44,7 +45,7 @@ const EditRequest = () => {
     // identifier to send for logging
     change_identifier: '',
   })
-
+  
   // Set identifier when status or inspector changes
   useEffect(() => {
     const statusChanged = String(data.status ?? '') !== initialStatus
@@ -71,7 +72,16 @@ const EditRequest = () => {
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Edit Inspection Request</strong>
+            <strong>Edit Inspection Request 
+              <small>{data.package_id === 1 && (
+                " (Regular Package)"
+              )}
+              {data.status === 2 && (
+                " (Comprehensive Package)"
+              )}
+              {data.status === 3 && (
+                " (Ultra Package)"
+              )}</small></strong>
           </CCardHeader>
           <CCardBody>
             <CForm className="row g-3" onSubmit={handleSubmit}>

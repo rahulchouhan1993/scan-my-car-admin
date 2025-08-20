@@ -111,5 +111,6 @@ Route::prefix('inspector')->name('inspector.')->group(function () {
         Route::match(['post','get'],'/edit-request/{id}', [InspectorController::class, 'editRequest'])->name('inspections.add');
         Route::get('/report/{id}', [InspectorController::class, 'report'])->name('inspections.report');
         Route::get('/logs/{id}', [InspectorController::class, 'logs'])->name('inspections.logs');
+        Route::get('/start-inspection/{id}', [InspectorController::class, 'startInspection'])->name('start-inspection');
     });
 });

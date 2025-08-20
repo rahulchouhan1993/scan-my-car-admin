@@ -14,7 +14,7 @@ import { useForm, usePage } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
 
-const EditRequest = () => {
+const AddInspection = () => {
   const { props } = usePage();
 
   // Keep originals to compare later
@@ -388,5 +388,5 @@ const EditRequest = () => {
   )
 }
 
-EditRequest.layout = (page) => <DefaultLayout>{page}</DefaultLayout>
-export default EditRequest
+AddInspection.layout = (page) => <DefaultLayout>{page}</DefaultLayout>
+export default AddInspection
