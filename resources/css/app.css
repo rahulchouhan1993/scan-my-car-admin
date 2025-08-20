@@ -66,11 +66,12 @@ to{transform:rotate(360deg);}
 .progressbar{background:linear-gradient(270deg,#F61221 0%,#900B13 100%);}
 .testimonialSlider .swiper-button-prev,.testimonialSlider .swiper-button-next{width:40px;height:40px;background:#d72638d6;border-radius:60px;top:0!important;bottom:0!important;margin:auto;}
 
-
+.whatsapp { position: fixed;z-index: 999999; right: 15px; bottom: 40px;}
+.whatsapp svg { width: 80px;     color: #60d669;}
 .testimonialSlider .swiper-button-next:after,.testimonialSlider .swiper-button-prev:after{font-size:15px;color:#fff;}
 
 .carbx svg { max-width: 80%;}
-
+.buttonLink { text-decoration: none; cursor: pointer;}
 textarea{overflow:auto;scrollbar-width:none;}
 textarea::-webkit-scrollbar{display:none;}
 input::placeholder{color:#292929;opacity:1;}

@@ -51,14 +51,15 @@ const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClas
       )}
 
       {hidden.length > 0 && (
-        <button
-          type="button"
-          onClick={() => setExpanded((v) => !v)}
-          className={toggleClassName}
-          aria-expanded={expanded}
-        >
-          {expanded ? "Show Less" : "Show More"}
-        </button>
+       <button
+       type="button"
+       onClick={() => setExpanded((v) => !v)}
+       className={`${toggleClassName} buttonLink w-auto cursor-pointer creatodisplayM mt-[10px] border border-[#192735] rounded-full px-[13px] py-[5px] text-[12px] text-[#192735] hover:bg-black hover:text-white transition no-underline`}
+       aria-expanded={expanded}
+     >
+       {expanded ? "Show Less" : "Show More"}
+     </button>
+     
       )}
     </>
   );
@@ -285,7 +286,7 @@ const BookInspection = () => {
                     items={comprehensiveItems}
                     maxVisible={6}
                     listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#fff] list-disc pl-[20px] lg:pl-[25px]"
-                    toggleClassName="mt-3 text-[14px] underline text-white"
+                    toggleClassName="mt-3 text-[14px]  text-white border-[#fff]"
                   />
                   <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                     <button onClick={() => handleContinue("2")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[12px] md:text-[20px] text-[#fff] bg-[#D72638] hover:bg-white hover:text-black transition">
@@ -312,7 +313,7 @@ const BookInspection = () => {
                   <CollapsibleList
                     items={ultraItems}
                     maxVisible={6}
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] leading-[22px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
                     toggleClassName="mt-3 text-[14px] underline text-[#192735]"
                   />
                   <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
