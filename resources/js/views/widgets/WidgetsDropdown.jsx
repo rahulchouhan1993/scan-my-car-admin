@@ -63,9 +63,33 @@ const WidgetsDropdown = (props) => {
         />
       </CCol>
       )}
+      {props?.dashboardData?.totalInspector !== undefined && (
       <CCol sm={6} xl={4} xxl={3}>
         <CWidgetStatsA
           color="info"
+          value={
+            <>
+              {props?.dashboardData?.totalInspector}
+
+            </>
+          }
+          title="Total Inspectors"
+          
+          chart={
+            <CChartLine
+              ref={widgetChartRef2}
+              className="mt-3 mx-3"
+              style={{ height: '20px' }}
+              
+            />
+          }
+        />
+      </CCol>
+      )}
+      {props?.dashboardData?.totalServiceRequests !== undefined && (
+      <CCol sm={6} xl={4} xxl={3}>
+        <CWidgetStatsA
+          color="warning"
           value={
             <>
               {props?.dashboardData?.totalServiceRequests}
@@ -84,7 +108,51 @@ const WidgetsDropdown = (props) => {
           }
         />
       </CCol>
-      
+      )}
+      {props?.dashboardData?.totalInProcessRequest !== undefined && (    
+      <CCol sm={6} xl={4} xxl={3}>
+        <CWidgetStatsA
+          color="secondary"
+          value={
+            <>
+              {props?.dashboardData?.totalInProcessRequest}
+
+            </>
+          }
+          title="In Process Requests"
+          chart={
+            <CChartLine
+              ref={widgetChartRef2}
+              className="mt-3 mx-3"
+              style={{ height: '20px' }}
+              
+            />
+          }
+        />
+      </CCol>
+      )}
+      {props?.dashboardData?.totalCompletedRequest !== undefined && (
+      <CCol sm={6} xl={4} xxl={3}>
+        <CWidgetStatsA
+          color="success"
+          value={
+            <>
+              {props?.dashboardData?.totalCompletedRequest}
+
+            </>
+          }
+          title="Completed Requests"
+          chart={
+            <CChartLine
+              ref={widgetChartRef2}
+              className="mt-3 mx-3"
+              style={{ height: '20px' }}
+              
+            />
+          }
+        />
+      </CCol>
+      )}
     </CRow>
   )
 }

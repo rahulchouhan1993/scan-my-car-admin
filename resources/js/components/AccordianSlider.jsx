@@ -5,10 +5,10 @@ import formbookimg03 from '../assets/images/carsliderimg02.jpg';
 import formbookimg04 from '../assets/images/carsliderimg01.jpg';
 
 const data = [
-  { title: "Book your inspection in 30 seconds", content: `We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals. Every Vehicle Is Inspected Using Certified Tools, Diagnostic Scanners, And Methodical Checklists Designed By Experts. Our Inspectors Don’t Guess — They Verify. The Result? A Smarter, Sharper, And More Reliable Inspection That You Can Trust With Your Money And Your Safety.`, image: formbookimg01 },
-  { title: "We send a certified technician to your location", content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals...", image: formbookimg02 },
-  { title: "We prepare a complete visual + diagnostic report", content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals...", image: formbookimg03 },
-  { title: "You make smarter decisions with real data", content: "We Blend The Precision Of Technology With The Instincts Of Seasoned Professionals...", image: formbookimg04 },
+  { title: "Book your inspection in 30 seconds", content: `Save time with our quick and easy booking process. In just a few clicks, you can schedule your car inspection at your convenience.`, image: formbookimg01 },
+  { title: "We send a certified technician to your location", content: "No need to travel or wait at workshops—our qualified, certified technician will come directly to your home, office, or any location you choose.", image: formbookimg02 },
+  { title: "We prepare a complete visual + diagnostic report", content: "Receive a thorough, professional inspection that covers both visual checks and advanced diagnostic testing, giving you a full picture of your car’s condition.", image: formbookimg03 },
+  { title: "You make smarter decisions with real data", content: "With accurate, transparent insights at your fingertips, you can make confident decisions about repairs, purchases, or maintenance—backed by real data.", image: formbookimg04 },
 ];
 
 const SLIDE_TIME = 4000; // ms

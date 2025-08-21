@@ -247,7 +247,7 @@ const BookInspection = () => {
                     Regular Inspection
                   </h3>
                   <p className="creatodisplayM text-[12px] lg:text-[14px]  text-[#192735]">
-                    Ideal for basic condition checks before a quick purchase
+                    Provides clarity and confidence for buyers before a purchase.
                   </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
@@ -275,7 +275,7 @@ const BookInspection = () => {
                     Comprehensive Inspection
                   </h3>
                   <p className="creatodisplayM text-[12px] lg:text-[14px]  text-[#fff]">
-                    Balanced package for confident purchases of higher-value used cars
+                    In-depth review for safer, solid used car purchases.
                   </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px] text-[#fff] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
@@ -303,7 +303,7 @@ const BookInspection = () => {
                     Ultra Inspection
                   </h3>
                   <p className="creatodisplayM text-[12px] lg:text-[14px]  text-[#192735]">
-                    Premium, luxury cars, high-risk imports, or official resale
+                    Premium inspection for luxury or resale-ready vehicles.
                   </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[18px] md:text-[20px] lg:text-[25px] xl:text-[30px] lg:leading-[32px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">

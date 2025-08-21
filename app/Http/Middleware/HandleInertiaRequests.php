@@ -53,12 +53,23 @@ class HandleInertiaRequests extends Middleware
                 if (Auth::check()) {
                     if(Auth::user()->role=='admin') {
                         return [
-                            'totalUsers' => User::where('role','!=', 'admin')->count(),
+                            'totalUsers' => User::where('role','=', 'dealer')->count(),
+                            'totalInspector' => User::where('role','=', 'inspector')->count(),
+                            'totalInProcessRequest' => InspectionRequest::where('status', 2)->count(),
+                            'totalCompletedRequest' => InspectionRequest::where('status', 4)->count(),
                             'totalServiceRequests' => InspectionRequest::where('status', 0)->count(),
                         ];
-                    }else{
+                    }elseif(Auth::user()->role=='inspector'){
                         return [
-                            'totalServiceRequests' => InspectionRequest::where('inspector_id', Auth::user()->id)->count(),
+                            'totalServiceRequests' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status','=',1)->count(),
+                            'totalInProcessRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 2)->count(),
+                            'totalCompletedRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 4)->count(),
+                        ];
+                    }elseif(Auth::user()->role=='dealer'){
+                        return [
+                            // 'totalServiceRequests' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status','=',1)->count(),
+                            // 'totalInProcessRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 2)->count(),
+                            // 'totalCompletedRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 4)->count(),
                         ];
                     }
                 }
