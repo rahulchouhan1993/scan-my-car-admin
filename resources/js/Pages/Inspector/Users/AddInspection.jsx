@@ -41,7 +41,7 @@ const AddInspection = () => {
     car_parked: props?.inspectionsDetail?.car_parked || '',
     inspector_id: String(props?.inspectionsDetail?.inspector_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
-     city: props?.inspectionsDetail?.city || '',
+    city: props?.inspectionsDetail?.city || '',
     pin_code: props?.inspectionsDetail?.pin_code || '',
     // identifier to send for logging
     change_identifier: '',
@@ -168,7 +168,7 @@ const AddInspection = () => {
                 invalid={!!errors.city}
                 feedbackInvalid={errors.city}
                 >
-                <option value="">-- Select City --</option>
+                <option value="">-- Select --</option>
                 <option value="Abudhabi" disabled>Abudhabi (Not Serviceable)</option>
                 <option value="Dubai">Dubai</option>
                 <option value="Fujeirah" disabled>Fujeirah (Not Serviceable)</option>
@@ -242,7 +242,7 @@ const AddInspection = () => {
               invalid={!!errors.vehicle_make}
               feedbackInvalid={errors.vehicle_make}
               >
-              <option value="">-- Select Vehicle Make --</option>
+              <option value="">-- Select --</option>
               {[
               'Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Bugatti', 'Buick',
               'Cadillac', 'Chevrolet', 'Chrysler', 'Citroën', 'Dacia', 'Daewoo', 'Daihatsu', 'Dodge',
@@ -295,7 +295,7 @@ const AddInspection = () => {
               value={data.fuel_type}
               onChange={(e) => setData('fuel_type', e.target.value)}
               >
-              <option value="">-- Select Fuel Type --</option>
+              <option value="">-- Select --</option>
               <option value="Petrol">Petrol</option>
               <option value="Diesel">Diesel</option>
               <option value="Hybrid">Hybrid</option>
@@ -311,7 +311,7 @@ const AddInspection = () => {
               value={data.transmission}
               onChange={(e) => setData('transmission', e.target.value)}
               >
-              <option value="">-- Select Transmission --</option>
+              <option value="">-- Select --</option>
               <option value="Manual">Manual</option>
               <option value="Automatic">Automatic</option>
               </CFormSelect>
@@ -325,7 +325,7 @@ const AddInspection = () => {
               value={data.car_parked}
               onChange={(e) => setData('car_parked', e.target.value)}
               >
-              <option value="">-- Where is the car parked? --</option>
+              <option value="">-- Select --</option>
               <option value="Outdoor">Outdoor</option>
               <option value="Showroom">Showroom</option>
               <option value="Home">Home</option>
@@ -392,7 +392,7 @@ const AddInspection = () => {
                 value={data.drive_type}
                 onChange={(e) => setData('drive_type', e.target.value)}
                 >
-                <option value="">-- Select Drive Type --</option>
+                <option value="">-- Select --</option>
                 <option value="2WD">2WD</option>
                 <option value="4WD">4WD</option>
                 <option value="AWD">AWD</option>
@@ -407,7 +407,7 @@ const AddInspection = () => {
                 value={data.body_type}
                 onChange={(e) => setData('body_type', e.target.value)}
                 >
-                <option value="">-- Select Body Type --</option>
+                <option value="">-- Select --</option>
                 <option value="Sedan">Sedan</option>
                 <option value="SUV">SUV</option>
                 <option value="Truck">Truck</option>
@@ -673,7 +673,7 @@ const AddInspection = () => {
                   value={data.windshield_condition}
                   onChange={(e) => setData('windshield_condition', e.target.value)}
                 >
-                  <option value="">-- Select Windshield Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="No damage / Excellent condition">No damage / Excellent condition</option>
                   <option value="Minor scratches">Minor scratches</option>
                   <option value="Chips present">Chips present</option>
@@ -692,7 +692,7 @@ const AddInspection = () => {
                   value={data.windshield_wiper_function}
                   onChange={(e) => setData('windshield_wiper_function', e.target.value)}
                 >
-                  <option value="">-- Select Windshield Wiper Function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Working properly">Working properly</option>
                   <option value="Slow / irregular movement">Slow / irregular movement</option>
                   <option value="Not working">Not working</option>
@@ -707,7 +707,7 @@ const AddInspection = () => {
                   value={data.wiper_blade_wear}
                   onChange={(e) => setData('wiper_blade_wear', e.target.value)}
                 >
-                  <option value="">-- Select Wiper Blade Wear --</option>
+                  <option value="">-- Select --</option>
                   <option value="Good condition">Good condition</option>
                   <option value="Slight wear">Slight wear</option>
                   <option value="Moderate wear">Moderate wear</option>
@@ -723,7 +723,7 @@ const AddInspection = () => {
                   value={data.rear_wiper_function}
                   onChange={(e) => setData('rear_wiper_function', e.target.value)}
                 >
-                  <option value="">-- Select Rear Wiper Function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Working properly">Working properly</option>
                   <option value="Slow / irregular movement">Slow / irregular movement</option>
                   <option value="Not working">Not working</option>
@@ -738,7 +738,7 @@ const AddInspection = () => {
                   value={data.side_window_operation_lf}
                   onChange={(e) => setData('side_window_operation_lf', e.target.value)}
                 >
-                  <option value="">-- Select Side Window (LF) Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Smooth operation">Smooth operation</option>
                   <option value="Slow movement">Slow movement</option>
                   <option value="Stuck / jammed">Stuck / jammed</option>
@@ -753,7 +753,7 @@ const AddInspection = () => {
                   value={data.side_window_operation_rf}
                   onChange={(e) => setData('side_window_operation_rf', e.target.value)}
                 >
-                  <option value="">-- Select Side Window (RF) Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Smooth operation">Smooth operation</option>
                   <option value="Slow movement">Slow movement</option>
                   <option value="Stuck / jammed">Stuck / jammed</option>
@@ -770,7 +770,7 @@ const AddInspection = () => {
                   value={data.side_window_operation_lr}
                   onChange={(e) => setData('side_window_operation_lr', e.target.value)}
                 >
-                  <option value="">-- Select Side Window (LR) Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Smooth operation">Smooth operation</option>
                   <option value="Slow movement">Slow movement</option>
                   <option value="Stuck / jammed">Stuck / jammed</option>
@@ -785,7 +785,7 @@ const AddInspection = () => {
                   value={data.side_window_operation_rr}
                   onChange={(e) => setData('side_window_operation_rr', e.target.value)}
                 >
-                  <option value="">-- Select Side Window (RR) Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Smooth operation">Smooth operation</option>
                   <option value="Slow movement">Slow movement</option>
                   <option value="Stuck / jammed">Stuck / jammed</option>
@@ -800,7 +800,7 @@ const AddInspection = () => {
                   value={data.rear_window_condition}
                   onChange={(e) => setData('rear_window_condition', e.target.value)}
                 >
-                  <option value="">-- Select Rear Window Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="No damage / Excellent condition">No damage / Excellent condition</option>
                   <option value="Minor scratches">Minor scratches</option>
                   <option value="Chips present">Chips present</option>
@@ -818,7 +818,7 @@ const AddInspection = () => {
                   value={data.sunroof_operation}
                   onChange={(e) => setData('sunroof_operation', e.target.value)}
                 >
-                  <option value="">-- Select Sunroof Operation --</option>
+                  <option value="">-- Select --</option>
                   <option value="Smooth operation">Smooth operation</option>
                   <option value="Slow / noisy operation">Slow / noisy operation</option>
                   <option value="Jammed / stuck">Jammed / stuck</option>
@@ -833,7 +833,7 @@ const AddInspection = () => {
                   value={data.sunroof_drainage_check}
                   onChange={(e) => setData('sunroof_drainage_check', e.target.value)}
                 >
-                  <option value="">-- Select Sunroof Drainage Check --</option>
+                  <option value="">-- Select --</option>
                   <option value="No leakage / Proper drainage">No leakage / Proper drainage</option>
                   <option value="Minor clogging">Minor clogging</option>
                   <option value="Leakage detected">Leakage detected</option>
@@ -849,7 +849,7 @@ const AddInspection = () => {
                   value={data.sunroof_glass_condition}
                   onChange={(e) => setData('sunroof_glass_condition', e.target.value)}
                 >
-                  <option value="">-- Select Sunroof Glass Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Excellent / No damage">Excellent / No damage</option>
                   <option value="Minor scratches">Minor scratches</option>
                   <option value="Chips present">Chips present</option>
@@ -867,7 +867,7 @@ const AddInspection = () => {
                   value={data.left_external_mirror_function}
                   onChange={(e) => setData('left_external_mirror_function', e.target.value)}
                 >
-                  <option value="">-- Select Left External Mirror Function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Fully functional">Fully functional</option>
                   <option value="Adjustment slow">Adjustment slow</option>
                   <option value="Mirror loose / vibrating">Mirror loose / vibrating</option>
@@ -882,7 +882,7 @@ const AddInspection = () => {
                   value={data.right_external_mirror_function}
                   onChange={(e) => setData('right_external_mirror_function', e.target.value)}
                 >
-                  <option value="">-- Select Right External Mirror Function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Fully functional">Fully functional</option>
                   <option value="Adjustment slow">Adjustment slow</option>
                   <option value="Mirror loose / vibrating">Mirror loose / vibrating</option>
@@ -898,7 +898,7 @@ const AddInspection = () => {
                   value={data.mirror_adjustment_motors}
                   onChange={(e) => setData('mirror_adjustment_motors', e.target.value)}
                 >
-                  <option value="">-- Select Mirror Adjustment Motors --</option>
+                  <option value="">-- Select --</option>
                   <option value="Working properly">Working properly</option>
                   <option value="Slow movement">Slow movement</option>
                   <option value="Noisy operation">Noisy operation</option>
@@ -1213,6 +1213,32 @@ const AddInspection = () => {
                 </CFormSelect>
               </CCol>
 
+              <CCol md={4}>
+                <CFormInput
+                  
+                  type="text"
+                  name="any_noice"
+                  label="Any Noice"
+                  value={data.any_noice}
+                  onChange={(e) => setData('any_noice', e.target.value)}
+                  invalid={!!errors.any_noice}
+                  feedbackInvalid={errors.any_noice}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  
+                  type="text"
+                  name="comments_engine"
+                  label="Comments"
+                  value={data.comments_engine}
+                  onChange={(e) => setData('comments_engine', e.target.value)}
+                  invalid={!!errors.comments_engine}
+                  feedbackInvalid={errors.comments_engine}
+                />
+              </CCol>
+
               
             </CRow>
             
@@ -1233,7 +1259,7 @@ const AddInspection = () => {
                   value={data.engine_light}
                   onChange={(e) => setData('engine_light', e.target.value)}
                 >
-                  <option value="">-- Select Engine light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1246,7 +1272,7 @@ const AddInspection = () => {
                   value={data.abs_light}
                   onChange={(e) => setData('abs_light', e.target.value)}
                 >
-                  <option value="">-- Select ABS light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1259,7 +1285,7 @@ const AddInspection = () => {
                   value={data.oil_pressure_light}
                   onChange={(e) => setData('oil_pressure_light', e.target.value)}
                 >
-                  <option value="">-- Select Oil pressure light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1272,7 +1298,7 @@ const AddInspection = () => {
                   value={data.battery_charging_system_light}
                   onChange={(e) => setData('battery_charging_system_light', e.target.value)}
                 >
-                  <option value="">-- Select Battery/charging system light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1285,7 +1311,7 @@ const AddInspection = () => {
                   value={data.coolant_temperature_warning_light}
                   onChange={(e) => setData('coolant_temperature_warning_light', e.target.value)}
                 >
-                  <option value="">-- Select Coolant temperature warning light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1298,7 +1324,7 @@ const AddInspection = () => {
                   value={data.brake_system_warning_light}
                   onChange={(e) => setData('brake_system_warning_light', e.target.value)}
                 >
-                  <option value="">-- Select Brake system warning light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1311,7 +1337,7 @@ const AddInspection = () => {
                   value={data.airbag_warning_light}
                   onChange={(e) => setData('airbag_warning_light', e.target.value)}
                 >
-                  <option value="">-- Select Airbag warning light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1324,7 +1350,7 @@ const AddInspection = () => {
                   value={data.seatbelt_reminder_light}
                   onChange={(e) => setData('seatbelt_reminder_light', e.target.value)}
                 >
-                  <option value="">-- Select Seatbelt reminder light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1337,7 +1363,7 @@ const AddInspection = () => {
                   value={data.traction_control_light}
                   onChange={(e) => setData('traction_control_light', e.target.value)}
                 >
-                  <option value="">-- Select Traction control light --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1350,7 +1376,7 @@ const AddInspection = () => {
                   value={data.tpms}
                   onChange={(e) => setData('tpms', e.target.value)}
                 >
-                  <option value="">-- Select Tyre Pressure Monitoring System (TPMS) --</option>
+                  <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
                   <option value="Not Visible">Not Visible</option>
                 </CFormSelect>
@@ -1377,7 +1403,7 @@ const AddInspection = () => {
                 value={data.transmission_fluid_level_auto}
                 onChange={(e) => setData('transmission_fluid_level_auto', e.target.value)}
               >
-                <option value="">-- Select Transmission fluid level (auto) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1391,7 +1417,7 @@ const AddInspection = () => {
                 value={data.transmission_fluid_condition_auto}
                 onChange={(e) => setData('transmission_fluid_condition_auto', e.target.value)}
               >
-                <option value="">-- Select Transmission fluid condition (auto) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1405,7 +1431,7 @@ const AddInspection = () => {
                 value={data.manual_gearbox_oil_check}
                 onChange={(e) => setData('manual_gearbox_oil_check', e.target.value)}
               >
-                <option value="">-- Select Manual gearbox oil check (if access) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1419,7 +1445,7 @@ const AddInspection = () => {
                 value={data.transmission_mount_integrity}
                 onChange={(e) => setData('transmission_mount_integrity', e.target.value)}
               >
-                <option value="">-- Select Transmission mount integrity --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1433,7 +1459,7 @@ const AddInspection = () => {
                 value={data.gear_selection_smoothness}
                 onChange={(e) => setData('gear_selection_smoothness', e.target.value)}
               >
-                <option value="">-- Select Gear selection smoothness --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1447,7 +1473,7 @@ const AddInspection = () => {
                 value={data.clutch_bite_slippage}
                 onChange={(e) => setData('clutch_bite_slippage', e.target.value)}
               >
-                <option value="">-- Select Clutch bite & slippage (manual) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1461,7 +1487,7 @@ const AddInspection = () => {
                 value={data.automatic_shift_quality}
                 onChange={(e) => setData('automatic_shift_quality', e.target.value)}
               >
-                <option value="">-- Select Automatic shift quality & hesitation --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1475,7 +1501,7 @@ const AddInspection = () => {
                 value={data.transfer_case_engagement}
                 onChange={(e) => setData('transfer_case_engagement', e.target.value)}
               >
-                <option value="">-- Select Transfer case engagement (4x4) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1489,7 +1515,7 @@ const AddInspection = () => {
                 value={data.drive_shaft_visual_inspection}
                 onChange={(e) => setData('drive_shaft_visual_inspection', e.target.value)}
               >
-                <option value="">-- Select Drive shaft visual inspection --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1503,7 +1529,7 @@ const AddInspection = () => {
                 value={data.cv_joint_boot_integrity}
                 onChange={(e) => setData('cv_joint_boot_integrity', e.target.value)}
               >
-                <option value="">-- Select CV joint boot integrity (all shafts) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1517,7 +1543,7 @@ const AddInspection = () => {
                 value={data.u_joints_coupling_check}
                 onChange={(e) => setData('u_joints_coupling_check', e.target.value)}
               >
-                <option value="">-- Select U-joints or coupling check --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1531,7 +1557,7 @@ const AddInspection = () => {
                 value={data.differential_oil_condition}
                 onChange={(e) => setData('differential_oil_condition', e.target.value)}
               >
-                <option value="">-- Select Differential oil condition (front/rear) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1545,7 +1571,7 @@ const AddInspection = () => {
                 value={data.differential_housing_leaks}
                 onChange={(e) => setData('differential_housing_leaks', e.target.value)}
               >
-                <option value="">-- Select Differential housing leaks --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -1554,7 +1580,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
-                disabled
+                
                 type="text"
                 name="gearbox_unusual_noise"
                 label="Gearbox unusual noise under load"
@@ -1567,7 +1593,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
-                disabled
+                
                 type="text"
                 name="comments_transmission"
                 label="Comments"
@@ -1873,7 +1899,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
-                  disabled
+                  
                   type="text"
                   name="comments_suspension"
                   label="Comments"
@@ -1903,7 +1929,7 @@ const AddInspection = () => {
                   value={data.brake_system.master_cylinder_seal_condition}
                   onChange={(e) => setData('brake_system.master_cylinder_seal_condition', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -1917,7 +1943,7 @@ const AddInspection = () => {
                   value={data.brake_system.brake_booster_operation}
                   onChange={(e) => setData('brake_system.brake_booster_operation', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -1931,7 +1957,7 @@ const AddInspection = () => {
                   value={data.brake_system.front_disc_condition_runout}
                   onChange={(e) => setData('brake_system.front_disc_condition_runout', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -1945,7 +1971,7 @@ const AddInspection = () => {
                   value={data.brake_system.rear_disc_drum_condition}
                   onChange={(e) => setData('brake_system.rear_disc_drum_condition', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -1959,7 +1985,7 @@ const AddInspection = () => {
                   value={data.brake_system.front_pad}
                   onChange={(e) => setData('brake_system.front_pad', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -1973,7 +1999,7 @@ const AddInspection = () => {
                   value={data.brake_system.rear_pad}
                   onChange={(e) => setData('brake_system.rear_pad', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -1987,7 +2013,7 @@ const AddInspection = () => {
                   value={data.brake_system.handbrake_adjustment_holding}
                   onChange={(e) => setData('brake_system.handbrake_adjustment_holding', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2001,7 +2027,7 @@ const AddInspection = () => {
                   value={data.brake_system.abs_function_wheel_speed_check}
                   onChange={(e) => setData('brake_system.abs_function_wheel_speed_check', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2015,7 +2041,7 @@ const AddInspection = () => {
                   value={data.brake_system.brake_pedal_travel_firmness}
                   onChange={(e) => setData('brake_system.brake_pedal_travel_firmness', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2029,7 +2055,7 @@ const AddInspection = () => {
                   value={data.brake_system.brake_fluid_contamination_test_note}
                   onChange={(e) => setData('brake_system.brake_fluid_contamination_test_note', e.target.value)}
                 >
-                  <option value="">-- Select Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2040,7 +2066,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
-                  disabled
+                  
                   type="text"
                   name="comments_brakes"
                   label="Comments"
@@ -2062,7 +2088,186 @@ const AddInspection = () => {
           </CCardHeader>
           <CCardBody>
             <CRow className='g-3'>
-              
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_brand_size_lf"
+                  label="Tyre brand & size (LF)"
+                  value={data.tyre_brand_size_lf}
+                  onChange={(e) => setData('tyre_brand_size_lf', e.target.value)}
+                  invalid={!!errors.tyre_brand_size_lf}
+                  feedbackInvalid={errors.tyre_brand_size_lf}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_brand_size_rf"
+                  label="Tyre brand & size (RF)"
+                  value={data.tyre_brand_size_rf}
+                  onChange={(e) => setData('tyre_brand_size_rf', e.target.value)}
+                  invalid={!!errors.tyre_brand_size_rf}
+                  feedbackInvalid={errors.tyre_brand_size_rf}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_brand_size_lr"
+                  label="Tyre brand & size (LR)"
+                  value={data.tyre_brand_size_lr}
+                  onChange={(e) => setData('tyre_brand_size_lr', e.target.value)}
+                  invalid={!!errors.tyre_brand_size_lr}
+                  feedbackInvalid={errors.tyre_brand_size_lr}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_brand_size_rr"
+                  label="Tyre brand & size (RR)"
+                  value={data.tyre_brand_size_rr}
+                  onChange={(e) => setData('tyre_brand_size_rr', e.target.value)}
+                  invalid={!!errors.tyre_brand_size_rr}
+                  feedbackInvalid={errors.tyre_brand_size_rr}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_manufacture_date_lf"
+                  label="Tyre manufacture date (LF)"
+                  value={data.tyre_manufacture_date_lf}
+                  onChange={(e) => setData('tyre_manufacture_date_lf', e.target.value)}
+                  invalid={!!errors.tyre_manufacture_date_lf}
+                  feedbackInvalid={errors.tyre_manufacture_date_lf}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_manufacture_date_rf"
+                  label="Tyre manufacture date (RF)"
+                  value={data.tyre_manufacture_date_rf}
+                  onChange={(e) => setData('tyre_manufacture_date_rf', e.target.value)}
+                  invalid={!!errors.tyre_manufacture_date_rf}
+                  feedbackInvalid={errors.tyre_manufacture_date_rf}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_manufacture_date_lr"
+                  label="Tyre manufacture date (LR)"
+                  value={data.tyre_manufacture_date_lr}
+                  onChange={(e) => setData('tyre_manufacture_date_lr', e.target.value)}
+                  invalid={!!errors.tyre_manufacture_date_lr}
+                  feedbackInvalid={errors.tyre_manufacture_date_lr}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tyre_manufacture_date_rr"
+                  label="Tyre manufacture date (RR)"
+                  value={data.tyre_manufacture_date_rr}
+                  onChange={(e) => setData('tyre_manufacture_date_rr', e.target.value)}
+                  invalid={!!errors.tyre_manufacture_date_rr}
+                  feedbackInvalid={errors.tyre_manufacture_date_rr}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tread_depth_lf"
+                  label="Tread depth (LF)"
+                  value={data.tread_depth_lf}
+                  onChange={(e) => setData('tread_depth_lf', e.target.value)}
+                  invalid={!!errors.tread_depth_lf}
+                  feedbackInvalid={errors.tread_depth_lf}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tread_depth_rf"
+                  label="Tread depth (RF)"
+                  value={data.tread_depth_rf}
+                  onChange={(e) => setData('tread_depth_rf', e.target.value)}
+                  invalid={!!errors.tread_depth_rf}
+                  feedbackInvalid={errors.tread_depth_rf}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tread_depth_lr"
+                  label="Tread depth (LR)"
+                  value={data.tread_depth_lr}
+                  onChange={(e) => setData('tread_depth_lr', e.target.value)}
+                  invalid={!!errors.tread_depth_lr}
+                  feedbackInvalid={errors.tread_depth_lr}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="tread_depth_rr"
+                  label="Tread depth (RR)"
+                  value={data.tread_depth_rr}
+                  onChange={(e) => setData('tread_depth_rr', e.target.value)}
+                  invalid={!!errors.tread_depth_rr}
+                  feedbackInvalid={errors.tread_depth_rr}
+                />
+              </CCol>
+
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  name="tyre_pressure"
+                  label="Tyre pressure (LF/RF/LR/RR)"
+                  value={data.tyre_pressure}
+                  onChange={(e) => setData('tyre_pressure', e.target.value)}
+                  invalid={!!errors.tyre_pressure}
+                  feedbackInvalid={errors.tyre_pressure}
+                />
+              </CCol>
+
+              <CCol md={6}>
+                <CFormInput
+                  type="text"
+                  name="spare_wheel_condition"
+                  label="Spare wheel presence & condition"
+                  value={data.spare_wheel_condition}
+                  onChange={(e) => setData('spare_wheel_condition', e.target.value)}
+                  invalid={!!errors.spare_wheel_condition}
+                  feedbackInvalid={errors.spare_wheel_condition}
+                />
+              </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="tyre_comment"
+                  label="Comment"
+                  value={data.tyre_comment}
+                  onChange={(e) => setData('tyre_comment', e.target.value)}
+                  invalid={!!errors.tyre_comment}
+                  feedbackInvalid={errors.tyre_comment}
+                />
+              </CCol>
+
               
             </CRow>
             
@@ -2083,7 +2288,7 @@ const AddInspection = () => {
                 value={data.dashboard_fit_finish}
                 onChange={(e) => setData('dashboard_fit_finish', e.target.value)}
               >
-                <option value="">-- Select Dashboard fit & finish --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2097,7 +2302,7 @@ const AddInspection = () => {
                 value={data.instrument_cluster_illumination}
                 onChange={(e) => setData('instrument_cluster_illumination', e.target.value)}
               >
-                <option value="">-- Select Instrument cluster illumination --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2111,7 +2316,7 @@ const AddInspection = () => {
                 value={data.warning_lights_active_start}
                 onChange={(e) => setData('warning_lights_active_start', e.target.value)}
               >
-                <option value="">-- Select Warning lights active on start --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2125,7 +2330,7 @@ const AddInspection = () => {
                 value={data.odometer_function}
                 onChange={(e) => setData('odometer_function', e.target.value)}
               >
-                <option value="">-- Select Odometer function --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2139,7 +2344,7 @@ const AddInspection = () => {
                 value={data.interior_lighting}
                 onChange={(e) => setData('interior_lighting', e.target.value)}
               >
-                <option value="">-- Select Interior lighting (dome/map) --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2153,7 +2358,7 @@ const AddInspection = () => {
                 value={data.glove_box_latching}
                 onChange={(e) => setData('glove_box_latching', e.target.value)}
               >
-                <option value="">-- Select Glove box latching --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2167,7 +2372,7 @@ const AddInspection = () => {
                 value={data.carpet_wear_retention}
                 onChange={(e) => setData('carpet_wear_retention', e.target.value)}
               >
-                <option value="">-- Select Carpet wear & retention --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2181,7 +2386,7 @@ const AddInspection = () => {
                 value={data.interior_contamination_odour}
                 onChange={(e) => setData('interior_contamination_odour', e.target.value)}
               >
-                <option value="">-- Select Interior contamination/odour check --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2195,7 +2400,7 @@ const AddInspection = () => {
                 value={data.trunk_boot_interior_condition}
                 onChange={(e) => setData('trunk_boot_interior_condition', e.target.value)}
               >
-                <option value="">-- Select Trunk/boot interior condition --</option>
+                <option value="">-- Select --</option>
                 <option value="Normal">Normal</option>
                 <option value="Good">Good</option>
                 <option value="Excellent">Excellent</option>
@@ -2222,7 +2427,7 @@ const AddInspection = () => {
                   value={data.driver_seat_adjust_locks}
                   onChange={(e) => setData('driver_seat_adjust_locks', e.target.value)}
                 >
-                  <option value="">-- Select Driver seat adjust & locks --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2236,7 +2441,7 @@ const AddInspection = () => {
                   value={data.passenger_seat_adjust_locks}
                   onChange={(e) => setData('passenger_seat_adjust_locks', e.target.value)}
                 >
-                  <option value="">-- Select Passenger seat adjust & locks --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2250,7 +2455,7 @@ const AddInspection = () => {
                   value={data.seat_sliding_rails}
                   onChange={(e) => setData('seat_sliding_rails', e.target.value)}
                 >
-                  <option value="">-- Select Seat sliding rails lubrication & function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2264,7 +2469,7 @@ const AddInspection = () => {
                   value={data.seat_cushion_wear}
                   onChange={(e) => setData('seat_cushion_wear', e.target.value)}
                 >
-                  <option value="">-- Select Seat cushion wear --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2278,7 +2483,7 @@ const AddInspection = () => {
                   value={data.seat_upholstery_integrity}
                   onChange={(e) => setData('seat_upholstery_integrity', e.target.value)}
                 >
-                  <option value="">-- Select Seat upholstery integrity (front/rear) --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2305,7 +2510,7 @@ const AddInspection = () => {
                   value={data.air_condition}
                   onChange={(e) => setData('air_condition', e.target.value)}
                 >
-                  <option value="">-- Select Air Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2319,7 +2524,7 @@ const AddInspection = () => {
                   value={data.radio_condition}
                   onChange={(e) => setData('radio_condition', e.target.value)}
                 >
-                  <option value="">-- Select Radio Condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2333,7 +2538,7 @@ const AddInspection = () => {
                   value={data.heating_cooling_system}
                   onChange={(e) => setData('heating_cooling_system', e.target.value)}
                 >
-                  <option value="">-- Select Heating/ Cooling System --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2360,7 +2565,7 @@ const AddInspection = () => {
                   value={data.radiator_core_condition}
                   onChange={(e) => setData('radiator_core_condition', e.target.value)}
                 >
-                  <option value="">-- Select Radiator core condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2374,7 +2579,7 @@ const AddInspection = () => {
                   value={data.radiator_fan_operation}
                   onChange={(e) => setData('radiator_fan_operation', e.target.value)}
                 >
-                  <option value="">-- Select Radiator fan operation --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2388,7 +2593,7 @@ const AddInspection = () => {
                   value={data.cycling_observation}
                   onChange={(e) => setData('cycling_observation', e.target.value)}
                 >
-                  <option value="">-- Select Cycling observation --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2402,7 +2607,7 @@ const AddInspection = () => {
                   value={data.overflow_expansion_tank_condition}
                   onChange={(e) => setData('overflow_expansion_tank_condition', e.target.value)}
                 >
-                  <option value="">-- Select Overflow/expansion tank condition --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2416,7 +2621,7 @@ const AddInspection = () => {
                   value={data.heater_core_performance}
                   onChange={(e) => setData('heater_core_performance', e.target.value)}
                 >
-                  <option value="">-- Select Heater core performance --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2430,7 +2635,7 @@ const AddInspection = () => {
                   value={data.fuel_tank_inspection}
                   onChange={(e) => setData('fuel_tank_inspection', e.target.value)}
                 >
-                  <option value="">-- Select Fuel tank inspection --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2457,7 +2662,7 @@ const AddInspection = () => {
                   value={data.starter_engagement_reliability}
                   onChange={(e) => setData('starter_engagement_reliability', e.target.value)}
                 >
-                  <option value="">-- Select Starter engagement reliability --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2471,7 +2676,7 @@ const AddInspection = () => {
                   value={data.front_indicators_function}
                   onChange={(e) => setData('front_indicators_function', e.target.value)}
                 >
-                  <option value="">-- Select Front indicators function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2485,7 +2690,7 @@ const AddInspection = () => {
                   value={data.rear_indicators_function}
                   onChange={(e) => setData('rear_indicators_function', e.target.value)}
                 >
-                  <option value="">-- Select Rear indicators function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2499,7 +2704,7 @@ const AddInspection = () => {
                   value={data.reverse_light_function}
                   onChange={(e) => setData('reverse_light_function', e.target.value)}
                 >
-                  <option value="">-- Select Reverse light function --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2513,7 +2718,7 @@ const AddInspection = () => {
                   value={data.fog_lights_front_rear}
                   onChange={(e) => setData('fog_lights_front_rear', e.target.value)}
                 >
-                  <option value="">-- Select Fog lights front/rear --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2527,7 +2732,7 @@ const AddInspection = () => {
                   value={data.interior_control_switches_backlight}
                   onChange={(e) => setData('interior_control_switches_backlight', e.target.value)}
                 >
-                  <option value="">-- Select Interior control switches backlight --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2541,7 +2746,7 @@ const AddInspection = () => {
                   value={data.parking_sensor_functionality}
                   onChange={(e) => setData('parking_sensor_functionality', e.target.value)}
                 >
-                  <option value="">-- Select Parking sensor functionality --</option>
+                  <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
                   <option value="Good">Good</option>
                   <option value="Excellent">Excellent</option>
@@ -2561,7 +2766,204 @@ const AddInspection = () => {
           </CCardHeader>
           <CCardBody>
             <CRow className='g-3'>
-              
+              <CCol md={4}>
+                <CFormSelect
+                  name="start_performance"
+                  label="Start Performance"
+                  value={data.start_performance}
+                  onChange={(e) => setData('start_performance', e.target.value)}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Cold start performance">Cold start performance</option>
+                  <option value="Warm start performance">Warm start performance</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="acceleration_responsiveness"
+                  label="Acceleration Responsiveness"
+                  value={data.acceleration_responsiveness}
+                  onChange={(e) => setData('acceleration_responsiveness', e.target.value)}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="cruise_control_engagement_test"
+                  label="Cruise Control Engagement Test"
+                  value={data.cruise_control_engagement_test}
+                  onChange={(e) => setData('cruise_control_engagement_test', e.target.value)}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="garebox_performance"
+                  label="Gearbox Performance"
+                  value={data.garebox_performance}
+                  onChange={(e) => setData('garebox_performance', e.target.value)}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Automatic gearbox shift points">Automatic gearbox shift points</option>
+                  <option value="Manual gearbox synchro smoothness">Manual gearbox synchro smoothness</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="engine_vibration_idle"
+                  label="Engine vibration at idle"
+                  value={data.engine_vibration_idle}
+                  onChange={(e) => setData('engine_vibration_idle', e.target.value)}
+                  invalid={!!errors.engine_vibration_idle}
+                  feedbackInvalid={errors.engine_vibration_idle}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="mid_range_power"
+                  label="Mid-range power delivery"
+                  value={data.mid_range_power}
+                  onChange={(e) => setData('mid_range_power', e.target.value)}
+                  invalid={!!errors.mid_range_power}
+                  feedbackInvalid={errors.mid_range_power}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="highway_stability"
+                  label="Highway stability"
+                  value={data.highway_stability}
+                  onChange={(e) => setData('highway_stability', e.target.value)}
+                  invalid={!!errors.highway_stability}
+                  feedbackInvalid={errors.highway_stability}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="steering_feedback"
+                  label="Steering feedback & centering"
+                  value={data.steering_feedback}
+                  onChange={(e) => setData('steering_feedback', e.target.value)}
+                  invalid={!!errors.steering_feedback}
+                  feedbackInvalid={errors.steering_feedback}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="abs_intervention"
+                  label="ABS intervention feel"
+                  value={data.abs_intervention}
+                  onChange={(e) => setData('abs_intervention', e.target.value)}
+                  invalid={!!errors.abs_intervention}
+                  feedbackInvalid={errors.abs_intervention}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="braking_performance"
+                  label="Braking performance under test"
+                  value={data.braking_performance}
+                  onChange={(e) => setData('braking_performance', e.target.value)}
+                  invalid={!!errors.braking_performance}
+                  feedbackInvalid={errors.braking_performance}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="transmission_harshness"
+                  label="Transmission harshness under load"
+                  value={data.transmission_harshness}
+                  onChange={(e) => setData('transmission_harshness', e.target.value)}
+                  invalid={!!errors.transmission_harshness}
+                  feedbackInvalid={errors.transmission_harshness}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="clutch_engagement"
+                  label="Clutch engagement smoothness (manual)"
+                  value={data.clutch_engagement}
+                  onChange={(e) => setData('clutch_engagement', e.target.value)}
+                  invalid={!!errors.clutch_engagement}
+                  feedbackInvalid={errors.clutch_engagement}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSelect
+                  name="noise_levels"
+                  label="Noise levels at various speeds"
+                  value={data.noise_levels}
+                  onChange={(e) => setData('noise_levels', e.target.value)}
+                  invalid={!!errors.noise_levels}
+                  feedbackInvalid={errors.noise_levels}
+                >
+                  <option value="">-- Select --</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Good">Good</option>
+                  <option value="Excellent">Excellent</option>
+                </CFormSelect>
+              </CCol>
+
               
             </CRow>
             
