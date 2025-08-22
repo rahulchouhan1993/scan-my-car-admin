@@ -66,7 +66,7 @@ to{transform:rotate(360deg);}
 .progressbar{background:linear-gradient(270deg,#F61221 0%,#900B13 100%);}
 .testimonialSlider .swiper-button-prev,.testimonialSlider .swiper-button-next{width:40px;height:40px;background:#d72638d6;border-radius:60px;top:0!important;bottom:0!important;margin:auto;}
 
-.whatsapp { position: fixed;z-index: 999999; right: 15px; bottom: 40px;}
+.whatsapp { position: fixed;z-index: 999999; right: 0; bottom: 10px;}
 .whatsapp svg { width: 80px;     color: #60d669;}
 .testimonialSlider .swiper-button-next:after,.testimonialSlider .swiper-button-prev:after{font-size:15px;color:#fff;}
 
@@ -124,7 +124,7 @@ input[type=number]{-moz-appearance:textfield;}
     color: #9ca3af; /* placeholder grey */
   }
   
-  required
+
   /* Normal selected text */
   .inspectionForm select option {
     color: #192735; /* your text color */
