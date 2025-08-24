@@ -130,11 +130,11 @@ const ContactUs = () => {
              
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Full Name</label>
+                <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                 value={data.name}
                 onChange={(e) => setData('name', e.target.value)}
               />
@@ -142,11 +142,11 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Email</label>
+                <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label>
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                 value={data.email}
                 onChange={(e) => setData('email', e.target.value)}
               />
@@ -154,39 +154,39 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Phone</label>
+                <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone</label>
               <input
                 type="tel"
                 placeholder="Phone"
-                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                 value={data.phone_no}
                 onChange={(e) => setData('phone_no', e.target.value)}
               />
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Service Type</label>
+                <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Service Type</label>
               <input
                 type="text"
                 placeholder="Service Type"
-                className="w-full border rounded-full px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none focus:ring-2 focus:ring-[#ccc]"
+                className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                 value={data.service_type}
                 onChange={(e) => setData('service_type', e.target.value)}
               />
               {errors.service_type && <div className="text-red-500 text-sm">{errors.service_type}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#192735bd] ps-[25px] pb-[5px]'>Message</label>
+                <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Message</label>
               <textarea
                 placeholder="Message"
                 rows="4"
-                className="w-full border rounded-[20px] px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] outline-none resize-none focus:ring-2 focus:ring-[#ccc]"
+                className="border border-[#192735] rounded-[20px] px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                 value={data.description}
                 onChange={(e) => setData('description', e.target.value)}
               ></textarea>
               {errors.description && <div className="text-red-500 text-sm">{errors.description}</div>}
               </div>
-              <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[247px] bg-[#F61221] text-[20px] text-white rounded-full py-[17px] hover:opacity-90 transition">
+              <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[200px] md:w-[247px] bg-[#F61221] text-[15px] md:text-[20px] text-white rounded-full py-[13px] md:py-[17px] hover:opacity-90 transition">
                 Submit
               </button>
             </form>

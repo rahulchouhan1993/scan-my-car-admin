@@ -92,14 +92,14 @@ const CarSlider = () => {
               <div className="absolute top-[0] bottom-[0] left-[0] right-[0] w-full h-full rounded-[25px]">
               <img src={card.image} alt={card.title} className="w-full h-full object-cover rounded-[25px]" />
               </div>
-              <div className="z-[2] absolute bottom-[0] left-[0] px-[15px] py-[15px] md:px-[20px] md:py-[20px] lg:px-[30px] lg:py-[30px]">
+              <div className="z-[2] absolute min-h-[100px] bottom-[0] left-[0] px-[15px] py-[15px] md:px-[20px] md:py-[10px] lg:px-[30px] lg:py-[10px]">
                 <h3 className="ppfont text-white text-[18px] leading-[20px] md:text-[22px] md:leading-[24px] lg:text-[24px] lg:leading-[26px]">{card.title}</h3>
               </div>
 
 
 
               {/* Slide-up content on hover */}
-              <div className="flex items-start flex-col justify-end bg-[#12263f] w-full h-full absolute  bottom-[-100%] left-0 right-0 px-[15px] py-[15px] md:px-[30px] md:py-[30px] text-white z-20  group-hover/card:bottom-0 transition-all duration-500 ease-in-out rounded-[26px]">
+              <div className="flex items-start flex-col justify-end bg-[#12263f] w-full h-full absolute  bottom-[-150%] left-0 right-0 px-[15px] py-[15px] md:px-[30px] md:py-[30px] text-white z-20  group-hover/card:bottom-0 transition-all duration-500 ease-in-out rounded-[26px]">
                 <h2 className="ppfont text-white text-[18px] leading-[20px] md:text-[22px] md:leading-[24px] lg:text-[24px] lg:leading-[26px] mb-3">{card.title}</h2>
                 <p className="creatodisplayM text-[#192735ab]  group-hover:text-[#fff] text-[20px] mb-5">{card.description}</p>
                 <Link href="/book-inspection" className="cursor-pointer w-full border border-white text-white px-[10px] py-[14px] rounded-full hover:bg-white hover:text-black transition creatodisplayM text-[18px] text-center">

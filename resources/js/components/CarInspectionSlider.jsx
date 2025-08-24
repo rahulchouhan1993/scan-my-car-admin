@@ -49,8 +49,10 @@ const CarInspectionSlider = () => {
               <img
                 src={item.img}
                 alt={item.title}
-                className="h-[400px] w-full object-cover rounded-[20px]"
+                className="h-[300px] md:h-[400px] w-full object-cover rounded-[10px] md:rounded-[20px]"
               />
+              <div className="absolute overlaybx top-[0] bottom-[0] left-[0] right-[0] w-full h-full "></div>
+
               <div className="absolute left-0 bottom-0 px-[20px] py-[20px]">
                 <h3 className="ppfont text-[18px] md:text-[22px] lg:text-[24px] text-white leading-[28px]">
                   {item.title}

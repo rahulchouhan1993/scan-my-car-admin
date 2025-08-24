@@ -66,7 +66,7 @@ to{transform:rotate(360deg);}
 .progressbar{background:linear-gradient(270deg,#F61221 0%,#900B13 100%);}
 .testimonialSlider .swiper-button-prev,.testimonialSlider .swiper-button-next{width:40px;height:40px;background:#d72638d6;border-radius:60px;top:0!important;bottom:0!important;margin:auto;}
 
-.whatsapp { position: fixed;z-index: 999999; right: 0; bottom: 10px;}
+.whatsapp { position: fixed;z-index: 99; right: 0; bottom: 10px;}
 .whatsapp svg { width: 80px;     color: #60d669;}
 .testimonialSlider .swiper-button-next:after,.testimonialSlider .swiper-button-prev:after{font-size:15px;color:#fff;}
 
@@ -142,4 +142,13 @@ input[type=number]{-moz-appearance:textfield;}
   /* जब user date चुन ले (valid state) */
   input[type="date"]:valid {
     color: #192735; /* आपका main text color */
+  }
+.overlaybx { background: #00000069; border-radius: 20px;}
+  @media(max-width:767px){
+    .whatsapp img {
+      max-width: 80px;
+  }
+  .mobileName { z-index: 9999;}
+  .bookbtn {      padding: 11px 15px; font-size: 16px;}
+  .overlaybx { border-radius: 10px;}
   }
