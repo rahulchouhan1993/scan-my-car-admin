@@ -35,4 +35,79 @@ class InspectionRequest extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function bodyDetail()
+    {
+        return $this->hasOne(InspectionBodyDetail::class, 'request_id');
+    }
+
+    public function vehicleDetail()
+    {
+        return $this->hasOne(InspectionVehicleDetail::class, 'request_id');
+    }
+
+    public function interiorDetails()
+    {
+        return $this->hasOne(InspectionInteriorDetail::class, 'request_id');
+    }
+
+    public function glassDetails()
+    {
+        return $this->hasOne(InspectionGlassDetail::class, 'request_id');
+    }
+
+    public function engineDetails()
+    {
+        return $this->hasOne(InspectionEngineDetail::class, 'request_id');
+    }
+
+    public function clusterDetails()
+    {
+        return $this->hasOne(InspectionClusterDetail::class, 'request_id');
+    }
+
+    public function transmissionDetails()
+    {
+        return $this->hasOne(InspectionTransmissionDetail::class, 'request_id');
+    }
+
+    public function suspensionDetails()
+    {
+        return $this->hasOne(InspectionSuspensionDetail::class, 'request_id');
+    }
+
+    public function brakesDetails()
+    {
+        return $this->hasOne(InspectionBreaksDetail::class, 'request_id');
+    }
+
+    public function tyresDetails()
+    {
+        return $this->hasOne(InspectionTyreDetail::class, 'request_id');
+    }
+
+    public function seatDetails()
+    {
+        return $this->hasOne(InspectionSeatDetail::class, 'request_id');
+    }
+
+    public function hvacDetails()
+    {
+        return $this->hasOne(InspectionHvacDetail::class, 'request_id');
+    }
+
+    public function coolingFuelDetails()
+    {
+        return $this->hasOne(InspectionCoolingDetail::class, 'request_id');
+    }
+
+    public function electricalLightingDetails()
+    {
+        return $this->hasOne(InspectionElectricalDetail::class, 'request_id');
+    }
+
+    public function performanceRoadTestDetails()
+    {
+        return $this->hasOne(InspectionRoadTestDetail::class, 'request_id');
+    }
 }

@@ -19,13 +19,6 @@ return new class extends Migration
             $table->foreign('request_id')->references('id')->on('inspection_requests')->onDelete('cascade');
 
             // Vehicle details fields
-            $table->string('vehicle_make')->nullable();
-            $table->string('vehicle_model')->nullable();
-            $table->string('vehicle_year')->nullable();
-            $table->string('fuel_type')->nullable();
-            $table->string('transmission')->nullable();
-            $table->string('car_parked')->nullable();
-            $table->string('mileage')->nullable();
             $table->string('engine_capacity')->nullable();
             $table->string('engine_cylinders')->nullable();
             $table->string('drive_type')->nullable();

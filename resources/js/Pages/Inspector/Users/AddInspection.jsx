@@ -3,14 +3,13 @@ import {
   CCardHeader,
   CCard,
   CRow,
-  CButton,
   CCol,
   CForm,
   CFormInput,
   CFormSelect,
-  CFormSwitch
+  CFormSwitch,
+  CButton
 } from '@coreui/react'
-import { useEffect } from 'react'
 import { useForm, usePage } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
@@ -18,56 +17,106 @@ import { route } from 'ziggy-js'
 const AddInspection = () => {
   const { props } = usePage();
 
-  // Keep originals to compare later
-  const initialStatus = String(props?.inspectionsDetail?.status ?? '')
-  const initialInspectorId = String(props?.inspectionsDetail?.inspector_id ?? '')
-
   const { data, setData, post, processing, errors } = useForm({
     package_id: props?.inspectionsDetail?.package_id || '',
     full_name: props?.inspectionsDetail?.full_name || '',
+    email: props?.inspectionsDetail?.email || '',
+    contact_no: props?.inspectionsDetail?.contact_no || '',
+    address_line_1: props?.inspectionsDetail?.address_line_1 || '',
+    address_line_2: props?.inspectionsDetail?.address_line_2 || '',
+    pin_code: props?.inspectionsDetail?.pin_code || '',
+    city: props?.inspectionsDetail?.city || '',
+    preferred_date: props?.inspectionsDetail?.preferred_date || '',
+    preferred_time_slot: props?.inspectionsDetail?.preferred_time_slot || '',
+    additional_notes: props?.inspectionsDetail?.additional_notes || '',
     vehicle_make: props?.inspectionsDetail?.vehicle_make || '',
     vehicle_model: props?.inspectionsDetail?.vehicle_model || '',
     vehicle_year: props?.inspectionsDetail?.vehicle_year || '',
     fuel_type: props?.inspectionsDetail?.fuel_type || '',
     transmission: props?.inspectionsDetail?.transmission || '',
-    mileage: props?.inspectionsDetail?.mileage || '',
-    preferred_date: props?.inspectionsDetail?.preferred_date || '',
-    preferred_time_slot: props?.inspectionsDetail?.preferred_time_slot || '',
-    additional_notes: props?.inspectionsDetail?.additional_notes || '',
-    contact_no: props?.inspectionsDetail?.contact_no || '',
-    email: props?.inspectionsDetail?.email || '',
-    address_line_1: props?.inspectionsDetail?.address_line_1 || '',
-    address_line_2: props?.inspectionsDetail?.address_line_2 || '',
     car_parked: props?.inspectionsDetail?.car_parked || '',
+    mileage: props?.inspectionsDetail?.mileage || '',
     inspector_id: String(props?.inspectionsDetail?.inspector_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
-    city: props?.inspectionsDetail?.city || '',
-    pin_code: props?.inspectionsDetail?.pin_code || '',
-    // identifier to send for logging
-    change_identifier: '',
-    body_condition: {},
-    brake_system: {}
+    vehicle_detail: {
+      ...props?.inspectionsDetail?.vehicle_detail
+    },
+
+    // 🛠️ Body details
+    body_condition: {
+      ...props?.inspectionsDetail?.body_detail
+    },
+
+    // 🛠️ Brakes
+    brakes_detail: {
+      ...props?.inspectionsDetail?.brakes_detail
+    },
+
+    // ⚡ Cluster
+    cluster_detail: {
+      ...props?.inspectionsDetail?.cluster_detail
+    },
+
+    // 🌡️ Cooling & Fuel
+    cooling_detail: {
+      ...props?.inspectionsDetail?.cooling_detail
+    },
+
+    // 🔋 Electrical & Lighting
+    electrical_detail: {
+      ...props?.inspectionsDetail?.electrical_detail
+    },
+
+    // 🛠️ Engine
+    engine_detail: {
+      ...props?.inspectionsDetail?.engine_detail
+    },
+
+    // 🔲 Glass
+    glass_detail: {
+      ...props?.inspectionsDetail?.glass_detail
+    },
+
+    // ❄️ HVAC
+    hvac_detail: {
+      ...props?.inspectionsDetail?.hvac_detail
+    },
+
+    // 🏠 Interior
+    interior_detail: {
+      ...props?.inspectionsDetail?.interior_detail
+    },
+
+    // 🚦 Road Test / Performance
+    road_test_detail: {
+      ...props?.inspectionsDetail?.road_test_detail
+    },
+
+    // 🪑 Seats
+    seat_detail: {
+      ...props?.inspectionsDetail?.seat_detail
+    },
+
+    // 🔧 Suspension
+    suspension_detail: {
+      ...props?.inspectionsDetail?.suspension_detail
+    },
+
+    // ⚙️ Transmission
+    transmission_detail: {
+      ...props?.inspectionsDetail?.transmission_detail
+    },
+
+    // 🛞 Tyres
+    tyre_detail: {
+      ...props?.inspectionsDetail?.tyre_detail
+    },
   })
 
-  // Set identifier when status or inspector changes
-  useEffect(() => {
-    const statusChanged = String(data.status ?? '') !== initialStatus
-    const inspectorChanged = String(data.inspector_id ?? '') !== initialInspectorId
-
-    let id = ''
-    if (statusChanged && inspectorChanged) id = 'status_and_inspector_changed'
-    else if (statusChanged) id = 'status_changed'
-    else if (inspectorChanged) id = 'inspector_changed'
-
-    // Only update if necessary to avoid extra renders
-    if (data.change_identifier !== id) {
-      setData('change_identifier', id)
-    }
-  }, [data.status, data.inspector_id]) // eslint-disable-line react-hooks/exhaustive-deps
-
+  
   const handleSubmit = (e) => {
     e.preventDefault()
-    post(route(`inspector.inspections.add`, { id: props.inspectionsDetail.id }))
+    post(route(`inspector.submit-test`, { id: props.inspectionsDetail.id }))
   }
 
   return (
@@ -82,7 +131,8 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="text"
                 name="full_name"
                 label="Full Name"
@@ -94,7 +144,8 @@ const AddInspection = () => {
               </CCol>
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="email"
                 name="email"
                 label="Email"
@@ -107,7 +158,8 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="tel"
                 label="Phone"
                 name="contact_no"
@@ -121,7 +173,8 @@ const AddInspection = () => {
             
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="text"
                 label="Address Line 1"
                 name="address_line_1"
@@ -134,7 +187,8 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="text"
                 label="Address Line 2"
                 name="address_line_2"
@@ -146,7 +200,8 @@ const AddInspection = () => {
               </CCol>
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="text"
                 label="Pin Code"
                 name="pin_code"
@@ -160,8 +215,9 @@ const AddInspection = () => {
             
               <CCol md={4}>
                 <CFormSelect
+                required
                 name="city"
-                disabled
+                
                 label="City"
                 value={data.city}
                 onChange={(e) => setData('city', e.target.value)}
@@ -180,7 +236,8 @@ const AddInspection = () => {
               </CCol>
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="date"
                 name="preferred_date"
                 label="Preferred Date"
@@ -193,7 +250,8 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
-                disabled
+                required
+                
                 type="time"
                 name="preferred_time_slot"
                 label="Preferred Time Slot"
@@ -207,7 +265,8 @@ const AddInspection = () => {
             
               <CCol md={12}>
                 <CFormInput
-                disabled
+                required
+                
                 type="text"
                 name="additional_notes"
                 label="Additional Notes"
@@ -218,11 +277,7 @@ const AddInspection = () => {
                 />
               </CCol>  
             </CRow>
-            {/* <CCol xs={12}>
-            <CButton type="submit" color="primary" className="px-4" disabled={processing}>
-            {processing ? 'Saving...' : 'Save'}
-            </CButton>
-            </CCol> */}
+            
           </CCardBody>
         </CCard>
 
@@ -234,7 +289,8 @@ const AddInspection = () => {
           <CRow className='g-3'>
             <CCol md={4}>
               <CFormSelect
-              disabled
+              required
+              
               name="vehicle_make"
               label="Vehicle Make"
               value={data.vehicle_make}
@@ -263,7 +319,8 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
-              disabled
+              required
+              
               type="text"
               label="Vehicle Model"
               name="vehicle_model"
@@ -276,7 +333,8 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
-              disabled
+              required
+              
               type="text"
               label="Vehicle Year"
               name="vehicle_year"
@@ -289,7 +347,8 @@ const AddInspection = () => {
           
             <CCol md={4}>
               <CFormSelect
-              disabled
+              required
+              
               name="fuel_type"
               label="Fuel Type"
               value={data.fuel_type}
@@ -305,7 +364,8 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
-              disabled
+              required
+              
               name="transmission"
               label="Transmission"
               value={data.transmission}
@@ -319,7 +379,8 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
-              disabled
+              required
+              
               name="car_parked"
               label="Where Is Car Parked?"
               value={data.car_parked}
@@ -335,7 +396,8 @@ const AddInspection = () => {
           
             <CCol md={4}>
               <CFormInput
-              disabled
+              required
+              
               type="text"
               name="mileage"
               label="Mileage"
@@ -348,49 +410,41 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="engine_capacity"
+                name="vehicle_detail[engine_capacity]"
                 label="Engine Capacity(L)"
-                value={data.engine_capacity}
-                onChange={(e) => setData('engine_capacity', e.target.value)}
+                value={data.vehicle_detail.engine_capacity}
+                onChange={(e) => setData('vehicle_detail[engine_capacity]', e.target.value)}
                 invalid={!!errors.engine_capacity}
                 feedbackInvalid={errors.engine_capacity}
               />
             </CCol>
              <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="engine_cylinders"
+                name="vehicle_detail[engine_cylinders]"
                 label=" Engine Cylinders"
-                value={data.engine_cylinders}
-                onChange={(e) => setData('engine_cylinders', e.target.value)}
+                value={data.vehicle_detail.engine_cylinders}
+                onChange={(e) => setData('vehicle_detail[engine_cylinders]', e.target.value)}
                 invalid={!!errors.engine_cylinders}
                 feedbackInvalid={errors.engine_cylinders}
               />
             </CCol>
          
-            <CCol md={4}>
-              <CFormInput
-                disabled
-                type="text"
-                name="drive_type"
-                label="Drive Type"
-                value={data.drive_type}
-                onChange={(e) => setData('drive_type', e.target.value)}
-                invalid={!!errors.drive_type}
-                feedbackInvalid={errors.drive_type}
-              />
-            </CCol>
+            
 
             <CCol md={4}>
               <CFormSelect
-                disabled
-                name="drive_type"
+              required
+
+                name="vehicle_detail[drive_type]"
                 label="Drive Type"
-                value={data.drive_type}
-                onChange={(e) => setData('drive_type', e.target.value)}
+                value={data.vehicle_detail.drive_type}
+                onChange={(e) => setData('vehicle_detail[drive_type]', e.target.value)}
                 >
                 <option value="">-- Select --</option>
                 <option value="2WD">2WD</option>
@@ -401,11 +455,12 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
-                disabled
-                name="body_type"
+              required
+
+                name="vehicle_detail[body_type]"
                 label="Body Type"
-                value={data.body_type}
-                onChange={(e) => setData('body_type', e.target.value)}
+                value={data.vehicle_detail.body_type}
+                onChange={(e) => setData('vehicle_detail[body_type]', e.target.value)}
                 >
                 <option value="">-- Select --</option>
                 <option value="Sedan">Sedan</option>
@@ -416,36 +471,39 @@ const AddInspection = () => {
           
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="exterior_color"
+                name="vehicle_detail[exterior_color]"
                 label="Exterior Color"
-                value={data.exterior_color}
-                onChange={(e) => setData('exterior_color', e.target.value)}
+                value={data.vehicle_detail.exterior_color}
+                onChange={(e) => setData('vehicle_detail[exterior_color]', e.target.value)}
                 invalid={!!errors.exterior_color}
                 feedbackInvalid={errors.exterior_color}
               />
             </CCol>
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="interior_color"
+                name="vehicle_detail[interior_color]"
                 label="Interior Colour/Trim"
-                value={data.interior_color}
-                onChange={(e) => setData('interior_color', e.target.value)}
+                value={data.vehicle_detail.interior_color}
+                onChange={(e) => setData('vehicle_detail[interior_color]', e.target.value)}
                 invalid={!!errors.interior_color}
                 feedbackInvalid={errors.interior_color}
               />
             </CCol>
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="number_keys"
+                name="vehicle_detail[number_keys]"
                 label="Number of Keys"
-                value={data.number_keys}
-                onChange={(e) => setData('number_keys', e.target.value)}
+                value={data.vehicle_detail.number_keys}
+                onChange={(e) => setData('vehicle_detail[number_keys]', e.target.value)}
                 invalid={!!errors.number_keys}
                 feedbackInvalid={errors.number_keys}
               />
@@ -453,36 +511,39 @@ const AddInspection = () => {
           
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="service_history"
+                name="vehicle_detail[service_history]"
                 label="Service History Summary"
-                value={data.service_history}
-                onChange={(e) => setData('service_history', e.target.value)}
+                value={data.vehicle_detail.service_history}
+                onChange={(e) => setData('vehicle_detail[service_history]', e.target.value)}
                 invalid={!!errors.service_history}
                 feedbackInvalid={errors.service_history}
               />
             </CCol>
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="date"
-                name="last_service_date"
+                name="vehicle_detail[last_service_date]"
                 label="Last Service Date"
-                value={data.last_service_date}
-                onChange={(e) => setData('last_service_date', e.target.value)}
+                value={data.vehicle_detail.last_service_date}
+                onChange={(e) => setData('vehicle_detail[last_service_date]', e.target.value)}
                 invalid={!!errors.last_service_date}
                 feedbackInvalid={errors.last_service_date}
               />
             </CCol>
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="registration_emirate"
+                name="vehicle_detail[registration_emirate]"
                 label="Registration Emirate"
-                value={data.registration_emirate}
-                onChange={(e) => setData('registration_emirate', e.target.value)}
+                value={data.vehicle_detail.registration_emirate}
+                onChange={(e) => setData('vehicle_detail[registration_emirate]', e.target.value)}
                 invalid={!!errors.registration_emirate}
                 feedbackInvalid={errors.registration_emirate}
               />
@@ -490,24 +551,26 @@ const AddInspection = () => {
           
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="warranty_status"
+                name="vehicle_detail[warranty_status]"
                 label="Warranty Status"
-                value={data.warranty_status}
-                onChange={(e) => setData('warranty_status', e.target.value)}
+                value={data.vehicle_detail.warranty_status}
+                onChange={(e) => setData('vehicle_detail[warranty_status]', e.target.value)}
                 invalid={!!errors.warranty_status}
                 feedbackInvalid={errors.warranty_status}
               />
             </CCol>
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="plate_type"
+                name="vehicle_detail[plate_type]"
                 label="Plate Type"
-                value={data.plate_type}
-                onChange={(e) => setData('plate_type', e.target.value)}
+                value={data.vehicle_detail.plate_type}
+                onChange={(e) => setData('vehicle_detail[plate_type]', e.target.value)}
                 invalid={!!errors.plate_type}
                 feedbackInvalid={errors.plate_type}
               />
@@ -515,12 +578,13 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="registration_number"
+                name="vehicle_detail[registration_number]"
                 label="Registration Number"
-                value={data.registration_number}
-                onChange={(e) => setData('registration_number', e.target.value)}
+                value={data.vehicle_detail.registration_number}
+                onChange={(e) => setData('vehicle_detail[registration_number]', e.target.value)}
                 invalid={!!errors.registration_number}
                 feedbackInvalid={errors.registration_number}
               />
@@ -528,12 +592,13 @@ const AddInspection = () => {
           
             <CCol md={4}>
               <CFormInput
-                disabled
+              required
+                
                 type="text"
-                name="chasis_no"
+                name="vehicle_detail[chasis_no]"
                 label="Chasis Number"
-                value={data.chasis_no}
-                onChange={(e) => setData('chasis_no', e.target.value)}
+                value={data.vehicle_detail.chasis_no}
+                onChange={(e) => setData('vehicle_detail[chasis_no]', e.target.value)}
                 invalid={!!errors.chasis_no}
                 feedbackInvalid={errors.chasis_no}
               />
@@ -668,6 +733,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="windshield_condition"
                   label="Windshield Condition"
                   value={data.windshield_condition}
@@ -687,6 +753,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="windshield_wiper_function"
                   label="Windshield Wiper Function"
                   value={data.windshield_wiper_function}
@@ -702,6 +769,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="wiper_blade_wear"
                   label="Wiper Blade Wear"
                   value={data.wiper_blade_wear}
@@ -718,6 +786,7 @@ const AddInspection = () => {
             
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rear_wiper_function"
                   label="Rear Wiper Function"
                   value={data.rear_wiper_function}
@@ -733,6 +802,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="side_window_operation_lf"
                   label="Side Window Operation (LF)"
                   value={data.side_window_operation_lf}
@@ -748,6 +818,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="side_window_operation_rf"
                   label="Side Window Operation (RF)"
                   value={data.side_window_operation_rf}
@@ -765,6 +836,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="side_window_operation_lr"
                   label="Side Window Operation (LR)"
                   value={data.side_window_operation_lr}
@@ -780,6 +852,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="side_window_operation_rr"
                   label="Side Window Operation (RR)"
                   value={data.side_window_operation_rr}
@@ -795,6 +868,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rear_window_condition"
                   label="Rear Window Condition"
                   value={data.rear_window_condition}
@@ -813,6 +887,7 @@ const AddInspection = () => {
             
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="sunroof_operation"
                   label="Sunroof Operation"
                   value={data.sunroof_operation}
@@ -828,6 +903,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="sunroof_drainage_check"
                   label="Sunroof Drainage Check"
                   value={data.sunroof_drainage_check}
@@ -844,6 +920,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="sunroof_glass_condition"
                   label="Sunroof Glass Condition"
                   value={data.sunroof_glass_condition}
@@ -862,6 +939,7 @@ const AddInspection = () => {
            
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="left_external_mirror_function"
                   label="Left External Mirror Function"
                   value={data.left_external_mirror_function}
@@ -877,6 +955,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="right_external_mirror_function"
                   label="Right External Mirror Function"
                   value={data.right_external_mirror_function}
@@ -893,6 +972,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="mirror_adjustment_motors"
                   label="Mirror Adjustment Motors"
                   value={data.mirror_adjustment_motors}
@@ -921,6 +1001,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="engine_start_behavior_cold"
                   label="Engine start behavior (cold)"
                   value={data.engine_start_behavior_cold}
@@ -935,6 +1016,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="engine_start_behavior_warm"
                   label="Engine start behavior (warm)"
                   value={data.engine_start_behavior_warm}
@@ -949,6 +1031,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="idle_stability"
                   label="Idle stability"
                   value={data.idle_stability}
@@ -963,6 +1046,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="throttle_response"
                   label="Throttle response"
                   value={data.throttle_response}
@@ -977,6 +1061,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="abnormal_engine_noises"
                   label="Abnormal engine noises (tick/knock)"
                   value={data.abnormal_engine_noises}
@@ -991,6 +1076,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="engine_oil_level_check"
                   label="Engine oil level check"
                   value={data.engine_oil_level_check}
@@ -1005,6 +1091,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="engine_oil_appearance"
                   label="Engine oil appearance"
                   value={data.engine_oil_appearance}
@@ -1019,6 +1106,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="visible_oil_leaks"
                   label="Visible oil leaks around head/covers"
                   value={data.visible_oil_leaks}
@@ -1033,6 +1121,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="oil_filter_housing_condition"
                   label="Oil filter housing condition"
                   value={data.oil_filter_housing_condition}
@@ -1047,6 +1136,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="coolant_level_check"
                   label="Coolant level check"
                   value={data.coolant_level_check}
@@ -1061,6 +1151,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="coolant_color"
                   label="Coolant color & contamination"
                   value={data.coolant_color}
@@ -1075,6 +1166,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="coolant_leaks"
                   label="Coolant leaks visible (hoses/rad)"
                   value={data.coolant_leaks}
@@ -1089,6 +1181,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="signs_of_coolant_in_oil"
                   label="Signs of coolant in oil (milky)"
                   value={data.signs_of_coolant_in_oil}
@@ -1103,6 +1196,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="hose_condition"
                   label="Hose condition & clamps"
                   value={data.hose_condition}
@@ -1117,6 +1211,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="drive_belt_condition"
                   label="Drive belt tension & wear"
                   value={data.drive_belt_condition}
@@ -1131,6 +1226,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="timing_belt_condition"
                   label="Timing belt/chain visible condition"
                   value={data.timing_belt_condition}
@@ -1145,6 +1241,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="turbo_boost_check"
                   label="Turbocharger boost check"
                   value={data.turbo_boost_check}
@@ -1159,6 +1256,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="air_intake_condition"
                   label="Air intake ducting condition"
                   value={data.air_intake_condition}
@@ -1173,6 +1271,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="air_filter_element"
                   label="Air filter element"
                   value={data.air_filter_element}
@@ -1187,6 +1286,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="starter_motor_cranking"
                   label="Starter motor cranking quality"
                   value={data.starter_motor_cranking}
@@ -1201,6 +1301,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="fuse_box_access"
                   label="Fuse box access"
                   value={data.fuse_box_access}
@@ -1215,6 +1316,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   
                   type="text"
                   name="any_noice"
@@ -1228,6 +1330,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   
                   type="text"
                   name="comments_engine"
@@ -1254,6 +1357,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="engine_light"
                   label="Engine light"
                   value={data.engine_light}
@@ -1267,6 +1371,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="abs_light"
                   label="ABS light"
                   value={data.abs_light}
@@ -1280,6 +1385,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="oil_pressure_light"
                   label="Oil pressure light"
                   value={data.oil_pressure_light}
@@ -1293,6 +1399,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="battery_charging_system_light"
                   label="Battery/charging system light"
                   value={data.battery_charging_system_light}
@@ -1306,6 +1413,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="coolant_temperature_warning_light"
                   label="Coolant temperature warning light"
                   value={data.coolant_temperature_warning_light}
@@ -1319,10 +1427,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system_warning_light"
+                required
+                  name="brakes_detail_warning_light"
                   label="Brake system warning light"
-                  value={data.brake_system_warning_light}
-                  onChange={(e) => setData('brake_system_warning_light', e.target.value)}
+                  value={data.brakes_detail_warning_light}
+                  onChange={(e) => setData('brakes_detail_warning_light', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Visible">Visible</option>
@@ -1332,6 +1441,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="airbag_warning_light"
                   label="Airbag warning light"
                   value={data.airbag_warning_light}
@@ -1345,6 +1455,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="seatbelt_reminder_light"
                   label="Seatbelt reminder light"
                   value={data.seatbelt_reminder_light}
@@ -1358,6 +1469,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="traction_control_light"
                   label="Traction control light"
                   value={data.traction_control_light}
@@ -1371,6 +1483,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="tpms"
                   label="Tyre Pressure Monitoring System (TPMS)"
                   value={data.tpms}
@@ -1398,6 +1511,7 @@ const AddInspection = () => {
 
              <CCol md={4}>
               <CFormSelect
+              required
                 name="transmission_fluid_level_auto"
                 label="Transmission fluid level (auto)"
                 value={data.transmission_fluid_level_auto}
@@ -1412,6 +1526,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="transmission_fluid_condition_auto"
                 label="Transmission fluid condition (auto)"
                 value={data.transmission_fluid_condition_auto}
@@ -1426,6 +1541,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="manual_gearbox_oil_check"
                 label="Manual gearbox oil check (if access)"
                 value={data.manual_gearbox_oil_check}
@@ -1440,6 +1556,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="transmission_mount_integrity"
                 label="Transmission mount integrity"
                 value={data.transmission_mount_integrity}
@@ -1454,6 +1571,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="gear_selection_smoothness"
                 label="Gear selection smoothness"
                 value={data.gear_selection_smoothness}
@@ -1468,6 +1586,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="clutch_bite_slippage"
                 label="Clutch bite & slippage (manual)"
                 value={data.clutch_bite_slippage}
@@ -1482,6 +1601,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="automatic_shift_quality"
                 label="Automatic shift quality & hesitation"
                 value={data.automatic_shift_quality}
@@ -1496,6 +1616,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="transfer_case_engagement"
                 label="Transfer case engagement (4x4)"
                 value={data.transfer_case_engagement}
@@ -1510,6 +1631,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="drive_shaft_visual_inspection"
                 label="Drive shaft visual inspection"
                 value={data.drive_shaft_visual_inspection}
@@ -1524,6 +1646,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="cv_joint_boot_integrity"
                 label="CV joint boot integrity (all shafts)"
                 value={data.cv_joint_boot_integrity}
@@ -1538,6 +1661,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="u_joints_coupling_check"
                 label="U-joints or coupling check"
                 value={data.u_joints_coupling_check}
@@ -1552,6 +1676,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="differential_oil_condition"
                 label="Differential oil condition (front/rear)"
                 value={data.differential_oil_condition}
@@ -1566,6 +1691,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="differential_housing_leaks"
                 label="Differential housing leaks"
                 value={data.differential_housing_leaks}
@@ -1580,6 +1706,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
+              required
                 
                 type="text"
                 name="gearbox_unusual_noise"
@@ -1593,6 +1720,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormInput
+              required
                 
                 type="text"
                 name="comments_transmission"
@@ -1619,6 +1747,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="front_strut_mount_condition"
                   label="Front strut mount condition"
                   value={data.front_strut_mount_condition}
@@ -1633,6 +1762,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rear_strut_mount_condition"
                   label="Rear strut mount condition"
                   value={data.rear_strut_mount_condition}
@@ -1647,6 +1777,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="front_shock_absorber_function"
                   label="Front shock absorber function"
                   value={data.front_shock_absorber_function}
@@ -1661,6 +1792,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rear_shock_absorber_function"
                   label="Rear shock absorber function"
                   value={data.rear_shock_absorber_function}
@@ -1675,6 +1807,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="front_spring_integrity"
                   label="Front spring integrity"
                   value={data.front_spring_integrity}
@@ -1689,6 +1822,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rear_spring_integrity"
                   label="Rear spring integrity"
                   value={data.rear_spring_integrity}
@@ -1703,6 +1837,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="control_arm_bush_condition"
                   label="Control arm bush condition"
                   value={data.control_arm_bush_condition}
@@ -1717,6 +1852,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="lower_ball_joint_play"
                   label="Lower ball joint play"
                   value={data.lower_ball_joint_play}
@@ -1731,6 +1867,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="upper_ball_joint_play"
                   label="Upper ball joint play"
                   value={data.upper_ball_joint_play}
@@ -1745,6 +1882,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="anti_roll_bar_links_bushes"
                   label="Anti-roll bar links & bushes"
                   value={data.anti_roll_bar_links_bushes}
@@ -1759,6 +1897,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="steering_rack_seal_condition"
                   label="Steering rack seal condition"
                   value={data.steering_rack_seal_condition}
@@ -1773,6 +1912,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="steering_rack_play_check"
                   label="Steering rack play check"
                   value={data.steering_rack_play_check}
@@ -1787,6 +1927,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rack_end_condition"
                   label="Rack end condition"
                   value={data.rack_end_condition}
@@ -1801,6 +1942,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="tie_rod_end_play"
                   label="Tie rod end play"
                   value={data.tie_rod_end_play}
@@ -1815,6 +1957,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="steering_column_noises"
                   label="Steering column noises"
                   value={data.steering_column_noises}
@@ -1829,6 +1972,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="power_steering_fluid_level_color"
                   label="Power steering fluid level & color"
                   value={data.power_steering_fluid_level_color}
@@ -1843,6 +1987,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="power_steering_pump_noise"
                   label="Power steering pump noise"
                   value={data.power_steering_pump_noise}
@@ -1857,6 +2002,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="subframe_mount_condition"
                   label="Subframe mount condition"
                   value={data.subframe_mount_condition}
@@ -1871,6 +2017,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="chassis_mounts_security"
                   label="Chassis mounts security"
                   value={data.chassis_mounts_security}
@@ -1885,6 +2032,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="steering_wheel_free_play"
                   label="Steering wheel free play"
                   value={data.steering_wheel_free_play}
@@ -1899,6 +2047,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   
                   type="text"
                   name="comments_suspension"
@@ -1924,10 +2073,11 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[master_cylinder_seal_condition]"
+                required
+                  name="brakes_detail[master_cylinder_seal_condition]"
                   label="Master cylinder seal condition"
-                  value={data.brake_system.master_cylinder_seal_condition}
-                  onChange={(e) => setData('brake_system.master_cylinder_seal_condition', e.target.value)}
+                  value={data.brakes_detail.master_cylinder_seal_condition}
+                  onChange={(e) => setData('brakes_detail.master_cylinder_seal_condition', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -1938,10 +2088,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[brake_booster_operation]"
+                required
+                  name="brakes_detail[brake_booster_operation]"
                   label="Brake booster operation"
-                  value={data.brake_system.brake_booster_operation}
-                  onChange={(e) => setData('brake_system.brake_booster_operation', e.target.value)}
+                  value={data.brakes_detail.brake_booster_operation}
+                  onChange={(e) => setData('brakes_detail.brake_booster_operation', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -1952,10 +2103,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[front_disc_condition_runout]"
+                required
+                  name="brakes_detail[front_disc_condition_runout]"
                   label="Front disc condition & runout"
-                  value={data.brake_system.front_disc_condition_runout}
-                  onChange={(e) => setData('brake_system.front_disc_condition_runout', e.target.value)}
+                  value={data.brakes_detail.front_disc_condition_runout}
+                  onChange={(e) => setData('brakes_detail.front_disc_condition_runout', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -1966,10 +2118,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[rear_disc_drum_condition]"
+                required
+                  name="brakes_detail[rear_disc_drum_condition]"
                   label="Rear disc/drum condition"
-                  value={data.brake_system.rear_disc_drum_condition}
-                  onChange={(e) => setData('brake_system.rear_disc_drum_condition', e.target.value)}
+                  value={data.brakes_detail.rear_disc_drum_condition}
+                  onChange={(e) => setData('brakes_detail.rear_disc_drum_condition', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -1980,10 +2133,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[front_pad]"
+                required
+                  name="brakes_detail[front_pad]"
                   label="Front pad"
-                  value={data.brake_system.front_pad}
-                  onChange={(e) => setData('brake_system.front_pad', e.target.value)}
+                  value={data.brakes_detail.front_pad}
+                  onChange={(e) => setData('brakes_detail.front_pad', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -1994,10 +2148,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[rear_pad]"
+                required
+                  name="brakes_detail[rear_pad]"
                   label="Rear pad"
-                  value={data.brake_system.rear_pad}
-                  onChange={(e) => setData('brake_system.rear_pad', e.target.value)}
+                  value={data.brakes_detail.rear_pad}
+                  onChange={(e) => setData('brakes_detail.rear_pad', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -2008,10 +2163,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[handbrake_adjustment_holding]"
+                required
+                  name="brakes_detail[handbrake_adjustment_holding]"
                   label="Handbrake adjustment & holding"
-                  value={data.brake_system.handbrake_adjustment_holding}
-                  onChange={(e) => setData('brake_system.handbrake_adjustment_holding', e.target.value)}
+                  value={data.brakes_detail.handbrake_adjustment_holding}
+                  onChange={(e) => setData('brakes_detail.handbrake_adjustment_holding', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -2022,10 +2178,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[abs_function_wheel_speed_check]"
+                required
+                  name="brakes_detail[abs_function_wheel_speed_check]"
                   label="ABS function / wheel speed check"
-                  value={data.brake_system.abs_function_wheel_speed_check}
-                  onChange={(e) => setData('brake_system.abs_function_wheel_speed_check', e.target.value)}
+                  value={data.brakes_detail.abs_function_wheel_speed_check}
+                  onChange={(e) => setData('brakes_detail.abs_function_wheel_speed_check', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -2036,10 +2193,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[brake_pedal_travel_firmness]"
+                required
+                  name="brakes_detail[brake_pedal_travel_firmness]"
                   label="Brake pedal travel & firmness"
-                  value={data.brake_system.brake_pedal_travel_firmness}
-                  onChange={(e) => setData('brake_system.brake_pedal_travel_firmness', e.target.value)}
+                  value={data.brakes_detail.brake_pedal_travel_firmness}
+                  onChange={(e) => setData('brakes_detail.brake_pedal_travel_firmness', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -2050,10 +2208,11 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
-                  name="brake_system[brake_fluid_contamination_test_note]"
+                required
+                  name="brakes_detail[brake_fluid_contamination_test_note]"
                   label="Brake fluid contamination test note"
-                  value={data.brake_system.brake_fluid_contamination_test_note}
-                  onChange={(e) => setData('brake_system.brake_fluid_contamination_test_note', e.target.value)}
+                  value={data.brakes_detail.brake_fluid_contamination_test_note}
+                  onChange={(e) => setData('brakes_detail.brake_fluid_contamination_test_note', e.target.value)}
                 >
                   <option value="">-- Select --</option>
                   <option value="Normal">Normal</option>
@@ -2066,6 +2225,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   
                   type="text"
                   name="comments_brakes"
@@ -2090,6 +2250,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_brand_size_lf"
                   label="Tyre brand & size (LF)"
@@ -2102,6 +2263,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_brand_size_rf"
                   label="Tyre brand & size (RF)"
@@ -2114,6 +2276,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_brand_size_lr"
                   label="Tyre brand & size (LR)"
@@ -2126,6 +2289,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_brand_size_rr"
                   label="Tyre brand & size (RR)"
@@ -2138,6 +2302,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_manufacture_date_lf"
                   label="Tyre manufacture date (LF)"
@@ -2150,6 +2315,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_manufacture_date_rf"
                   label="Tyre manufacture date (RF)"
@@ -2162,6 +2328,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_manufacture_date_lr"
                   label="Tyre manufacture date (LR)"
@@ -2174,6 +2341,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_manufacture_date_rr"
                   label="Tyre manufacture date (RR)"
@@ -2186,6 +2354,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tread_depth_lf"
                   label="Tread depth (LF)"
@@ -2198,6 +2367,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tread_depth_rf"
                   label="Tread depth (RF)"
@@ -2210,6 +2380,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tread_depth_lr"
                   label="Tread depth (LR)"
@@ -2222,6 +2393,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormInput
+                required
                   type="text"
                   name="tread_depth_rr"
                   label="Tread depth (RR)"
@@ -2234,6 +2406,7 @@ const AddInspection = () => {
 
               <CCol md={6}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_pressure"
                   label="Tyre pressure (LF/RF/LR/RR)"
@@ -2246,6 +2419,7 @@ const AddInspection = () => {
 
               <CCol md={6}>
                 <CFormInput
+                required
                   type="text"
                   name="spare_wheel_condition"
                   label="Spare wheel presence & condition"
@@ -2258,6 +2432,7 @@ const AddInspection = () => {
 
               <CCol md={12}>
                 <CFormInput
+                required
                   type="text"
                   name="tyre_comment"
                   label="Comment"
@@ -2283,6 +2458,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
               <CFormSelect
+              required
                 name="dashboard_fit_finish"
                 label="Dashboard fit & finish"
                 value={data.dashboard_fit_finish}
@@ -2297,6 +2473,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="instrument_cluster_illumination"
                 label="Instrument cluster illumination"
                 value={data.instrument_cluster_illumination}
@@ -2311,6 +2488,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="warning_lights_active_start"
                 label="Warning lights active on start"
                 value={data.warning_lights_active_start}
@@ -2325,6 +2503,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="odometer_function"
                 label="Odometer function"
                 value={data.odometer_function}
@@ -2339,6 +2518,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="interior_lighting"
                 label="Interior lighting (dome/map)"
                 value={data.interior_lighting}
@@ -2353,6 +2533,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="glove_box_latching"
                 label="Glove box latching"
                 value={data.glove_box_latching}
@@ -2367,6 +2548,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="carpet_wear_retention"
                 label="Carpet wear & retention"
                 value={data.carpet_wear_retention}
@@ -2381,6 +2563,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="interior_contamination_odour"
                 label="Interior contamination/odour check"
                 value={data.interior_contamination_odour}
@@ -2395,6 +2578,7 @@ const AddInspection = () => {
 
             <CCol md={4}>
               <CFormSelect
+              required
                 name="trunk_boot_interior_condition"
                 label="Trunk/boot interior condition"
                 value={data.trunk_boot_interior_condition}
@@ -2422,6 +2606,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="driver_seat_adjust_locks"
                   label="Driver seat adjust & locks"
                   value={data.driver_seat_adjust_locks}
@@ -2436,6 +2621,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="passenger_seat_adjust_locks"
                   label="Passenger seat adjust & locks"
                   value={data.passenger_seat_adjust_locks}
@@ -2450,6 +2636,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="seat_sliding_rails"
                   label="Seat sliding rails lubrication & function"
                   value={data.seat_sliding_rails}
@@ -2464,6 +2651,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="seat_cushion_wear"
                   label="Seat cushion wear"
                   value={data.seat_cushion_wear}
@@ -2478,6 +2666,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="seat_upholstery_integrity"
                   label="Seat upholstery integrity (front/rear)"
                   value={data.seat_upholstery_integrity}
@@ -2505,6 +2694,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="air_condition"
                   label="Air Condition"
                   value={data.air_condition}
@@ -2519,6 +2709,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="radio_condition"
                   label="Radio Condition"
                   value={data.radio_condition}
@@ -2533,6 +2724,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="heating_cooling_system"
                   label="Heating/ Cooling System"
                   value={data.heating_cooling_system}
@@ -2560,6 +2752,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="radiator_core_condition"
                   label="Radiator core condition"
                   value={data.radiator_core_condition}
@@ -2574,6 +2767,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="radiator_fan_operation"
                   label="Radiator fan operation (low/high speed)"
                   value={data.radiator_fan_operation}
@@ -2588,6 +2782,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="cycling_observation"
                   label="Cycling observation"
                   value={data.cycling_observation}
@@ -2602,6 +2797,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="overflow_expansion_tank_condition"
                   label="Overflow/expansion tank condition"
                   value={data.overflow_expansion_tank_condition}
@@ -2616,6 +2812,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="heater_core_performance"
                   label="Heater core performance (cab heat)"
                   value={data.heater_core_performance}
@@ -2630,6 +2827,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="fuel_tank_inspection"
                   label="Fuel tank inspection (visual)"
                   value={data.fuel_tank_inspection}
@@ -2657,6 +2855,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="starter_engagement_reliability"
                   label="Starter engagement reliability"
                   value={data.starter_engagement_reliability}
@@ -2671,6 +2870,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="front_indicators_function"
                   label="Front indicators function"
                   value={data.front_indicators_function}
@@ -2685,6 +2885,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="rear_indicators_function"
                   label="Rear indicators function"
                   value={data.rear_indicators_function}
@@ -2699,6 +2900,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="reverse_light_function"
                   label="Reverse light function"
                   value={data.reverse_light_function}
@@ -2713,6 +2915,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="fog_lights_front_rear"
                   label="Fog lights front/rear"
                   value={data.fog_lights_front_rear}
@@ -2727,6 +2930,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="interior_control_switches_backlight"
                   label="Interior control switches backlight"
                   value={data.interior_control_switches_backlight}
@@ -2741,6 +2945,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="parking_sensor_functionality"
                   label="Parking sensor functionality"
                   value={data.parking_sensor_functionality}
@@ -2760,7 +2965,7 @@ const AddInspection = () => {
         </CCard>
 
 
-         <CCard className="mb-4">
+        <CCard className="mb-4">
           <CCardHeader>
             <strong>Road Test & Performance</strong>
           </CCardHeader>
@@ -2768,6 +2973,7 @@ const AddInspection = () => {
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="start_performance"
                   label="Start Performance"
                   value={data.start_performance}
@@ -2781,6 +2987,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="acceleration_responsiveness"
                   label="Acceleration Responsiveness"
                   value={data.acceleration_responsiveness}
@@ -2795,6 +3002,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="cruise_control_engagement_test"
                   label="Cruise Control Engagement Test"
                   value={data.cruise_control_engagement_test}
@@ -2809,6 +3017,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="garebox_performance"
                   label="Gearbox Performance"
                   value={data.garebox_performance}
@@ -2822,6 +3031,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="engine_vibration_idle"
                   label="Engine vibration at idle"
                   value={data.engine_vibration_idle}
@@ -2838,6 +3048,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="mid_range_power"
                   label="Mid-range power delivery"
                   value={data.mid_range_power}
@@ -2854,6 +3065,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="highway_stability"
                   label="Highway stability"
                   value={data.highway_stability}
@@ -2870,6 +3082,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="steering_feedback"
                   label="Steering feedback & centering"
                   value={data.steering_feedback}
@@ -2886,6 +3099,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="abs_intervention"
                   label="ABS intervention feel"
                   value={data.abs_intervention}
@@ -2902,6 +3116,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="braking_performance"
                   label="Braking performance under test"
                   value={data.braking_performance}
@@ -2918,6 +3133,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="transmission_harshness"
                   label="Transmission harshness under load"
                   value={data.transmission_harshness}
@@ -2934,6 +3150,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="clutch_engagement"
                   label="Clutch engagement smoothness (manual)"
                   value={data.clutch_engagement}
@@ -2950,6 +3167,7 @@ const AddInspection = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="noise_levels"
                   label="Noise levels at various speeds"
                   value={data.noise_levels}
@@ -2969,13 +3187,19 @@ const AddInspection = () => {
             
           </CCardBody>
         </CCard>
-
+        <CCol xs={12}>
+            <CButton type="submit" color="primary" className="px-4" disabled={processing}>
+            {processing ? 'Saving...' : 'Save'}
+            </CButton>
+        </CCol>
 
       </CCol>
     </CForm>
   </CRow>
   )
 }
+
+
 
 AddInspection.layout = (page) => <DefaultLayout>{page}</DefaultLayout>
 export default AddInspection
