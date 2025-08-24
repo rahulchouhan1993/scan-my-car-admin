@@ -1,8 +1,67 @@
-import React from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import { Link } from '@inertiajs/react';
 import pricingred from '../assets/images/pricingred.png';
+import { useForm, usePage } from '@inertiajs/react'
 
+const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClassName = "" }) => {
+  const [expanded, setExpanded] = useState(false); 
+  const innerRef = useRef(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (expanded && innerRef.current) {
+      setHeight(innerRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [expanded, items]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (expanded && innerRef.current) {
+        setHeight(innerRef.current.scrollHeight);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [expanded]);
+
+  const visible = items.slice(0, maxVisible);
+  const hidden = items.slice(maxVisible);
+
+  return (
+    <>
+      <ul className={listClassName}>
+        {visible.map((item, i) => <li key={i}>{item}</li>)}
+      </ul>
+
+      {/* Sliding container for the hidden items */}
+      {hidden.length > 0 && (
+        <div
+          style={{ height, overflow: "hidden", transition: "height 300ms ease" }}
+          aria-hidden={!expanded}
+        >
+          <ul ref={innerRef} className={listClassName}>
+            {hidden.map((item, i) => <li key={i}>{item}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {hidden.length > 0 && (
+       <button
+       type="button"
+       onClick={() => setExpanded((v) => !v)}
+       className={`${toggleClassName} buttonLink w-auto cursor-pointer creatodisplayM mt-[10px] border border-[#192735] rounded-full px-[13px] py-[5px] text-[12px] text-[#192735] hover:bg-black hover:text-white transition no-underline`}
+       aria-expanded={expanded}
+     >
+       {expanded ? "Show Less" : "Show More"}
+     </button>
+     
+      )}
+    </>
+  );
+};
 const plans = [
     {
         name: "Regular Inspection (Ideal for basic condition checks before a quick purchase)",
@@ -130,12 +189,17 @@ const PricingSection = () => {
 
                             <div className={` px-[15px] md:px-[15px] lg:px-[20px] xl:px-[30px] pt-[35px] pb-[35px] mt-[25px] border-t ${ plan.isPrimary ? "border-t-[#ccc]" : "border-t-[#ffffff42]" }`} >
                                 <ul className=" flex flex-col gap-[10px] creatodisplayM text-[15px] md:text-[16px] lg:text-[18px] leading-[22px]  ">
-                                    {plan.features.map((feature, i) => (
-                                        <li key={i} className="flex items-start">
-                                            <span className="mr-2 text-[12px] md:text-[14px]">•</span>
-                                            {feature}
-                                        </li>
-                                    ))}
+                                    <CollapsibleList
+                                        items={plan.features}
+                                        maxVisible={6}
+                                        listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
+                                        toggleClassName="mt-3 text-[14px] underline text-[#192735]"
+                                    />
+                                    <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
+                                        <button onClick={() => handleContinue("1")} className="w-full cursor-pointer creatodisplayM mt-6 border border-[#192735] rounded-full px-[10px] py-[10px] md:px-[15px] md:py-[14px] text-[12px] md:text-[20px] text-[#192735] hover:bg-black hover:text-white transition">
+                                        Book Now
+                                        </button>
+                                    </div>
                                 </ul>
                                 <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full ">
                                     <Link href="/book-inspection"

@@ -7,7 +7,7 @@ import { useForm, usePage } from '@inertiajs/react'
 
 /** Collapsible “Show more” list with smooth height animation (no dependencies) */
 const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClassName = "" }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false); 
   const innerRef = useRef(null);
   const [height, setHeight] = useState(0);
 
