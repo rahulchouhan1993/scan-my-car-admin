@@ -335,7 +335,7 @@ const EditRequest = () => {
                 />
               </CCol>
 
-              <hr />
+              {/* <hr />
 
               <CCol md={4}>
                 <CFormSelect
@@ -370,16 +370,16 @@ const EditRequest = () => {
                   <option value="3" disabled>Cancelled</option>
                   <option value="4">Completed</option>
                 </CFormSelect>
-              </CCol>
+              </CCol> */}
 
               {/* Hidden field to send the identifier for logs */}
               <input type="hidden" name="change_identifier" value={data.change_identifier} />
 
-              <CCol xs={12}>
+              {/* <CCol xs={12}>
                 <CButton type="submit" color="primary" className="px-4" disabled={processing}>
                   {processing ? 'Saving...' : 'Save'}
                 </CButton>
-              </CCol>
+              </CCol> */}
             </CForm>
           </CCardBody>
         </CCard>

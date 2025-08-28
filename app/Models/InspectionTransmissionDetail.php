@@ -9,10 +9,8 @@ class InspectionTransmissionDetail extends Model
     protected $fillable = [
         'request_id',
         'transmission_fluid_level_auto',
-        'transmission_fluid_condition_auto',
         'manual_gearbox_oil_check',
         'transmission_mount_integrity',
-        'gear_selection_smoothness',
         'clutch_bite_slippage',
         'automatic_shift_quality',
         'transfer_case_engagement',

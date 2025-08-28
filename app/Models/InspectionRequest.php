@@ -25,6 +25,7 @@ class InspectionRequest extends Model
         'additional_notes',
         'status',
         'assign_date',
+        'completed_date',
         'package_id',
         'request_no',
         'pin_code',

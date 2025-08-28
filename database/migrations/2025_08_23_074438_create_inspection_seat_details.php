@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('driver_seat_adjust_locks')->nullable();
             $table->string('passenger_seat_adjust_locks')->nullable();
             $table->string('seat_sliding_rails')->nullable();
+            $table->string('seat_type')->nullable();
             $table->string('seat_cushion_wear')->nullable();
             $table->string('seat_upholstery_integrity')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

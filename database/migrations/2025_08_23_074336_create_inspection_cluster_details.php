@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('seatbelt_reminder_light')->nullable();
             $table->string('traction_control_light')->nullable();
             $table->string('tpms')->nullable();
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

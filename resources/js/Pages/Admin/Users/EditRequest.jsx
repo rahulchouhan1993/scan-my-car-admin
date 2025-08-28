@@ -333,12 +333,10 @@ const EditRequest = () => {
                   onChange={(e) => {
                     const inspectorId = e.target.value
                     setData('inspector_id', inspectorId)
-
-                    // Automatically set status based on inspector selection
                     if (inspectorId) {
-                      setData('status', '1') // Assigned
+                      setData('status', '1')
                     } else {
-                      setData('status', '0') // Unassigned
+                      setData('status', '0') 
                     }
                   }}
                   invalid={!!errors.inspector_id}
@@ -362,11 +360,9 @@ const EditRequest = () => {
                   invalid={!!errors.status}
                   feedbackInvalid={errors.status}
                 >
-                  <option value="0">Unassigned</option>
-                  <option value="1">Assigned</option>
-                  <option value="2">In Progress</option>
-                  <option value="3">Cancelled</option>
-                  <option value="4">Completed</option>
+                  <option value="0"  disabled={!!data.inspector_id}>Unassigned</option>
+                  <option value="1" disabled={!data.inspector_id}>Assigned</option>
+                  <option value="3"  disabled={!!data.inspector_id}>Cancelled</option>
                 </CFormSelect>
               </CCol>
 

@@ -43,10 +43,8 @@ const ServiceRequest = (props) => {
                     <CTableHeaderCell scope="col">Name</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Contact No.</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Vehicle Detail</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Date & Time</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Created</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -55,20 +53,21 @@ const ServiceRequest = (props) => {
                   <CTableRow key={inspection.id || index}>
                     <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
                     <CTableDataCell>
-                      {inspection.package_id === 1 && (
+                      
+                      {inspection.package_id === 1 ? (
                         "Regular"
-                      )}
-                      {inspection.status === 2 && (
+                      ) : inspection.package_id === 2 ? (
                         "Comprehensive"
-                      )}
-                      {inspection.status === 3 && (
+                      ) : inspection.package_id === 3 ? (
                         "Ultra"
+                      ) : (
+                        "Unknown"
                       )}
                     </CTableDataCell>
                     <CTableDataCell>{inspection.full_name}</CTableDataCell>
                     <CTableDataCell>{inspection.email}</CTableDataCell>
                     <CTableDataCell>{inspection.contact_no}</CTableDataCell>
-                    <CTableDataCell>{inspection.vehicle_make} | {inspection.vehicle_model} | {inspection.vehicle_year}</CTableDataCell>
+                    {/* <CTableDataCell>{inspection.vehicle_make} | {inspection.vehicle_model} | {inspection.vehicle_year}</CTableDataCell> */}
                     <CTableDataCell>{inspection.preferred_date} {inspection.preferred_time_slot}</CTableDataCell>
                     <CTableDataCell>
                       {inspection.status === 0 && (
@@ -92,22 +91,33 @@ const ServiceRequest = (props) => {
                         </CButton>
                       )}
                       {inspection.status === 4 && (
+                        <CButton color="secondary" size="sm">
+                          Revision Period
+                        </CButton>
+                      )}
+                      {inspection.status === 5 && (
                         <CButton color="success" size="sm">
                           Completed
                         </CButton>
                       )}
                     </CTableDataCell>
-                    <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell>
+                    {/* <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell> */}
                     <CTableDataCell>
                       <CDropdown variant="btn-group">
                         <CDropdownToggle color="secondary" size="sm">
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu>
-                           <CDropdownItem href={route('inspector.inspections.add',{id:inspection.id})}>Edit</CDropdownItem>
-                           <CDropdownItem href={route('inspector.start-inspection',{id:inspection.id})}>Start Inspection</CDropdownItem>
+                           <CDropdownItem href={route('inspector.inspections.add',{id:inspection.id})}>View Details</CDropdownItem>
+                            {(inspection.status === 1 || inspection.status === 2 || inspection.status === 4) && (
+                              <CDropdownItem href={route('inspector.start-inspection', { id: inspection.id })}>
+                                {inspection.status === 4 ? "Edit Inspection" : "Start Inspection"}
+                              </CDropdownItem>
+                            )}
+                           {(inspection.status === 4 || inspection.status === 5) && (
                            <CDropdownItem href={route('inspector.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
-                           <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem>
+                           )}
+                           {/* <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
                         </CDropdownMenu>
                       </CDropdown>
                     </CTableDataCell>

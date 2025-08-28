@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('fog_lights_front_rear')->nullable();
             $table->string('interior_control_switches_backlight')->nullable();
             $table->string('parking_sensor_functionality')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

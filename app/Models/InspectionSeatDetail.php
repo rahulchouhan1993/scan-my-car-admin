@@ -11,8 +11,10 @@ class InspectionSeatDetail extends Model
         'driver_seat_adjust_locks',
         'passenger_seat_adjust_locks',
         'seat_sliding_rails',
+        'seat_type',
         'seat_cushion_wear',
         'seat_upholstery_integrity',
+        'comment',
     ];
 
     /**

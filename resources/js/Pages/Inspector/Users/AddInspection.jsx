@@ -13,10 +13,11 @@ import {
 import { useForm, usePage } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
-
+import CarInspectionImage from '../../../components/CarInspectionImage'
+import Select2Multi from '../../../components/Select2Multi'
 const AddInspection = () => {
   const { props } = usePage();
-
+  const savedMappingFromServer = {};  
   const { data, setData, post, processing, errors } = useForm({
     package_id: props?.inspectionsDetail?.package_id || '',
     full_name: props?.inspectionsDetail?.full_name || '',
@@ -38,86 +39,81 @@ const AddInspection = () => {
     mileage: props?.inspectionsDetail?.mileage || '',
     inspector_id: String(props?.inspectionsDetail?.inspector_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
+    svg_code: '',
     vehicle_detail: {
       ...props?.inspectionsDetail?.vehicle_detail
     },
-
-    // 🛠️ Body details
+    
     body_condition: {
       ...props?.inspectionsDetail?.body_detail
     },
 
-    // 🛠️ Brakes
-    brakes_detail: {
-      ...props?.inspectionsDetail?.brakes_detail
-    },
-
-    // ⚡ Cluster
-    cluster_detail: {
-      ...props?.inspectionsDetail?.cluster_detail
-    },
-
-    // 🌡️ Cooling & Fuel
-    cooling_detail: {
-      ...props?.inspectionsDetail?.cooling_detail
-    },
-
-    // 🔋 Electrical & Lighting
-    electrical_detail: {
-      ...props?.inspectionsDetail?.electrical_detail
-    },
-
-    // 🛠️ Engine
-    engine_detail: {
-      ...props?.inspectionsDetail?.engine_detail
-    },
-
-    // 🔲 Glass
     glass_detail: {
-      ...props?.inspectionsDetail?.glass_detail
+      ...props?.inspectionsDetail?.glass_details
     },
 
-    // ❄️ HVAC
-    hvac_detail: {
-      ...props?.inspectionsDetail?.hvac_detail
+    engine_detail: {
+      ...props?.inspectionsDetail?.engine_details
     },
 
-    // 🏠 Interior
-    interior_detail: {
-      ...props?.inspectionsDetail?.interior_detail
+    cluster_detail: {
+      ...props?.inspectionsDetail?.cluster_details
     },
 
-    // 🚦 Road Test / Performance
-    road_test_detail: {
-      ...props?.inspectionsDetail?.road_test_detail
-    },
-
-    // 🪑 Seats
-    seat_detail: {
-      ...props?.inspectionsDetail?.seat_detail
-    },
-
-    // 🔧 Suspension
-    suspension_detail: {
-      ...props?.inspectionsDetail?.suspension_detail
-    },
-
-    // ⚙️ Transmission
     transmission_detail: {
-      ...props?.inspectionsDetail?.transmission_detail
+      ...props?.inspectionsDetail?.transmission_details
     },
 
-    // 🛞 Tyres
-    tyre_detail: {
-      ...props?.inspectionsDetail?.tyre_detail
+    suspension_detail: {
+      ...props?.inspectionsDetail?.suspension_details
     },
+
+    brakes_detail: {
+      ...props?.inspectionsDetail?.brakes_details
+    },
+
+    tyre_detail: {
+      ...props?.inspectionsDetail?.tyres_details
+    },
+
+    interior_detail: {
+      ...props?.inspectionsDetail?.interior_details
+    },
+
+    seat_detail: {
+      ...props?.inspectionsDetail?.seat_details
+    },
+
+    hvac_detail: {
+      ...props?.inspectionsDetail?.hvac_details
+    },
+    
+    cooling_detail: {
+      ...props?.inspectionsDetail?.cooling_fuel_details
+    },
+
+    electrical_detail: {
+      ...props?.inspectionsDetail?.electrical_lighting_details
+    },
+
+    road_test_detail: {
+      ...props?.inspectionsDetail?.performance_road_test_details
+    },
+    
   })
 
-  
   const handleSubmit = (e) => {
     e.preventDefault()
-    post(route(`inspector.submit-test`, { id: props.inspectionsDetail.id }))
+    const confirmed = window.confirm("Are you sure you want to submit this inspection?");
+    if (!confirmed) {
+      return; // stop if user cancels
+    }
+    post(route(`inspector.submit-test`, { id: props.inspectionsDetail.id}))
   }
+
+  const handleSvgChange = ({ svg, mapping }) => {
+  setData("svg_code", svg || "");
+};
 
   return (
   <CRow>
@@ -127,12 +123,13 @@ const AddInspection = () => {
           <CCardHeader>
             <strong>Customer Details</strong>
           </CCardHeader>
+          
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="text"
                 name="full_name"
                 label="Full Name"
@@ -145,7 +142,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="email"
                 name="email"
                 label="Email"
@@ -159,7 +156,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="tel"
                 label="Phone"
                 name="contact_no"
@@ -174,7 +171,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="text"
                 label="Address Line 1"
                 name="address_line_1"
@@ -188,7 +185,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="text"
                 label="Address Line 2"
                 name="address_line_2"
@@ -201,7 +198,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="text"
                 label="Pin Code"
                 name="pin_code"
@@ -217,7 +214,7 @@ const AddInspection = () => {
                 <CFormSelect
                 required
                 name="city"
-                
+                disabled
                 label="City"
                 value={data.city}
                 onChange={(e) => setData('city', e.target.value)}
@@ -237,7 +234,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="date"
                 name="preferred_date"
                 label="Preferred Date"
@@ -251,7 +248,7 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormInput
                 required
-                
+                disabled
                 type="time"
                 name="preferred_time_slot"
                 label="Preferred Time Slot"
@@ -266,7 +263,7 @@ const AddInspection = () => {
               <CCol md={12}>
                 <CFormInput
                 required
-                
+                disabled
                 type="text"
                 name="additional_notes"
                 label="Additional Notes"
@@ -615,109 +612,109 @@ const AddInspection = () => {
             <CRow className='g-3'>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[front_bumper]" value={data.body_condition.front_bumper} onChange={(e) => setData('body_condition.front_bumper', e.target.checked)} label="Front bumper fit & alignment" id="check_1"/>
+                <CFormSwitch name="body_condition[front_bumper]" checked={data.body_condition.front_bumper} value={data.body_condition.front_bumper} onChange={(e) => setData('body_condition.front_bumper', e.target.checked)} label="Front bumper fit & alignment" id="check_1"/>
               </CCol>
               <CCol md={4}>
-                <CFormSwitch name="body_condition[rear_bumper]" value={data.body_condition.rear_bumper} onChange={(e) => setData('body_condition.rear_bumper', e.target.checked)} label="Rear bumper fit & alignment" id="check_2"/>
-              </CCol>
-
-              <CCol md={4}>
-                <CFormSwitch name="body_condition[bonnet]" value={data.body_condition.bonnet} onChange={(e) => setData('body_condition.bonnet', e.target.checked)} label="Bonnet fit & latch" id="check_3"/>
-              </CCol>
-              <CCol md={4}>
-                <CFormSwitch name="body_condition[boot_lid]" value={data.body_condition.boot_lid} onChange={(e) => setData('body_condition.boot_lid', e.target.checked)} label="Boot lid fit & latch" id="check_4"/>
-              </CCol>
-              <CCol md={4}>
-                <CFormSwitch name="body_condition[left_front_wing]" value={data.body_condition.left_front_wing} onChange={(e) => setData('body_condition.left_front_wing', e.target.checked)} label="Left front wing fit" id="check_5"/>
-              </CCol>
-              <CCol md={4}>
-                <CFormSwitch name="body_condition[right_front_wing]" value={data.body_condition.right_front_wing} onChange={(e) => setData('body_condition.right_front_wing', e.target.checked)} label="Right front wing fit" id="check_6"/>
-              </CCol>
-              <CCol md={4}>
-                <CFormSwitch name="body_condition[left_front_door_fit]" value={data.body_condition.left_front_door_fit} onChange={(e) => setData('body_condition.left_front_door_fit', e.target.checked)} label="Left front door fit" id="check_6"/>
-              </CCol>
-              <CCol md={4}>
-                <CFormSwitch name="body_condition[right_front_wing_fit]" value={data.body_condition.right_front_wing_fit} onChange={(e) => setData('body_condition.right_front_wing_fit', e.target.checked)} label="Right front wing fit" id="check_1"/>
+                <CFormSwitch name="body_condition[rear_bumper]" checked={data.body_condition.rear_bumper} value={data.body_condition.rear_bumper} onChange={(e) => setData('body_condition.rear_bumper', e.target.checked)} label="Rear bumper fit & alignment" id="check_2"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[left_front_door_fit]" value={data.body_condition.left_front_door_fit} onChange={(e) => setData('body_condition.left_front_door_fit', e.target.checked)} label="Left front door fit" id="check_2"/>
+                <CFormSwitch name="body_condition[bonnet]" checked={data.body_condition.bonnet} value={data.body_condition.bonnet} onChange={(e) => setData('body_condition.bonnet', e.target.checked)} label="Bonnet fit & latch" id="check_3"/>
+              </CCol>
+              <CCol md={4}>
+                <CFormSwitch name="body_condition[boot_lid]" checked={data.body_condition.boot_lid} value={data.body_condition.boot_lid} onChange={(e) => setData('body_condition.boot_lid', e.target.checked)} label="Boot lid fit & latch" id="check_4"/>
+              </CCol>
+              <CCol md={4}>
+                <CFormSwitch name="body_condition[left_front_wing]" checked={data.body_condition.left_front_wing} value={data.body_condition.left_front_wing} onChange={(e) => setData('body_condition.left_front_wing', e.target.checked)} label="Left front wing fit" id="check_5"/>
+              </CCol>
+              <CCol md={4}>
+                <CFormSwitch name="body_condition[right_front_wing]" checked={data.body_condition.right_front_wing} value={data.body_condition.right_front_wing} onChange={(e) => setData('body_condition.right_front_wing', e.target.checked)} label="Right front wing fit" id="check_6"/>
+              </CCol>
+              {/* <CCol md={4}>
+                <CFormSwitch name="body_condition[left_front_door_fit]" checked={data.body_condition.left_front_door_fit} value={data.body_condition.left_front_door_fit} onChange={(e) => setData('body_condition.left_front_door_fit', e.target.checked)} label="Left front door fit" id="check_6"/>
+              </CCol> */}
+              <CCol md={4}>
+                <CFormSwitch name="body_condition[right_front_wing_fit]" checked={data.body_condition.right_front_wing_fit} value={data.body_condition.right_front_wing_fit} onChange={(e) => setData('body_condition.right_front_wing_fit', e.target.checked)} label="Right front wing fit" id="check_1"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[right_front_door_fit]" value={data.body_condition.right_front_door_fit} onChange={(e) => setData('body_condition.right_front_door_fit', e.target.checked)} label="Right front door fit" id="check_3"/>
+                <CFormSwitch name="body_condition[left_front_door_fit]" checked={data.body_condition.left_front_door_fit} value={data.body_condition.left_front_door_fit} onChange={(e) => setData('body_condition.left_front_door_fit', e.target.checked)} label="Left front door fit" id="check_2"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[left_rear_door_fit]" value={data.body_condition.left_rear_door_fit} onChange={(e) => setData('body_condition.left_rear_door_fit', e.target.checked)} label="Left rear door fit" id="check_4"/>
+                <CFormSwitch name="body_condition[right_front_door_fit]" checked={data.body_condition.right_front_door_fit} value={data.body_condition.right_front_door_fit} onChange={(e) => setData('body_condition.right_front_door_fit', e.target.checked)} label="Right front door fit" id="check_3"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[right_rear_door_fit]" value={data.body_condition.right_rear_door_fit} onChange={(e) => setData('body_condition.right_rear_door_fit', e.target.checked)} label="Right rear door fit" id="check_5"/>
+                <CFormSwitch name="body_condition[left_rear_door_fit]" checked={data.body_condition.left_rear_door_fit} value={data.body_condition.left_rear_door_fit} onChange={(e) => setData('body_condition.left_rear_door_fit', e.target.checked)} label="Left rear door fit" id="check_4"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[left_rear_quarter_panel_fit]" value={data.body_condition.left_rear_quarter_panel_fit} onChange={(e) => setData('body_condition.left_rear_quarter_panel_fit', e.target.checked)} label="Left rear quarter panel fit" id="check_6"/>
+                <CFormSwitch name="body_condition[right_rear_door_fit]" checked={data.body_condition.right_rear_door_fit} value={data.body_condition.right_rear_door_fit} onChange={(e) => setData('body_condition.right_rear_door_fit', e.target.checked)} label="Right rear door fit" id="check_5"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[right_rear_quarter_panel_fit]" value={data.body_condition.right_rear_quarter_panel_fit} onChange={(e) => setData('body_condition.right_rear_quarter_panel_fit', e.target.checked)} label="Right rear quarter panel fit" id="check_7"/>
+                <CFormSwitch name="body_condition[left_rear_quarter_panel_fit]" checked={data.body_condition.left_rear_quarter_panel_fit} value={data.body_condition.left_rear_quarter_panel_fit} onChange={(e) => setData('body_condition.left_rear_quarter_panel_fit', e.target.checked)} label="Left rear quarter panel fit" id="check_6"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[roof_panel_alignment]" value={data.body_condition.roof_panel_alignment} onChange={(e) => setData('body_condition.roof_panel_alignment', e.target.checked)} label="Roof panel alignment" id="check_8"/>
+                <CFormSwitch name="body_condition[right_rear_quarter_panel_fit]" checked={data.body_condition.right_rear_quarter_panel_fit} value={data.body_condition.right_rear_quarter_panel_fit} onChange={(e) => setData('body_condition.right_rear_quarter_panel_fit', e.target.checked)} label="Right rear quarter panel fit" id="check_7"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[fender_mounting_condition]" value={data.body_condition.fender_mounting_condition} onChange={(e) => setData('body_condition.fender_mounting_condition', e.target.checked)} label="Fender mounting & condition" id="check_9"/>
+                <CFormSwitch name="body_condition[roof_panel_alignment]" checked={data.body_condition.roof_panel_alignment} value={data.body_condition.roof_panel_alignment} onChange={(e) => setData('body_condition.roof_panel_alignment', e.target.checked)} label="Roof panel alignment" id="check_8"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[panel_gap_uniformity]" value={data.body_condition.panel_gap_uniformity} onChange={(e) => setData('body_condition.panel_gap_uniformity', e.target.checked)} label="Panel gap uniformity" id="check_10"/>
+                <CFormSwitch name="body_condition[fender_mounting_condition]" checked={data.body_condition.fender_mounting_condition} value={data.body_condition.fender_mounting_condition} onChange={(e) => setData('body_condition.fender_mounting_condition', e.target.checked)} label="Fender mounting & condition" id="check_9"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[external_trim_condition]" value={data.body_condition.external_trim_condition} onChange={(e) => setData('body_condition.external_trim_condition', e.target.checked)} label="External trim condition" id="check_11"/>
+                <CFormSwitch name="body_condition[panel_gap_uniformity]" checked={data.body_condition.panel_gap_uniformity} value={data.body_condition.panel_gap_uniformity} onChange={(e) => setData('body_condition.panel_gap_uniformity', e.target.checked)} label="Panel gap uniformity" id="check_10"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[molding_clips_present]" value={data.body_condition.molding_clips_present} onChange={(e) => setData('body_condition.molding_clips_present', e.target.checked)} label="Molding & clips present" id="check_12"/>
+                <CFormSwitch name="body_condition[external_trim_condition]" checked={data.body_condition.external_trim_condition} value={data.body_condition.external_trim_condition} onChange={(e) => setData('body_condition.external_trim_condition', e.target.checked)} label="External trim condition" id="check_11"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[door_seals_fitment]" value={data.body_condition.door_seals_fitment} onChange={(e) => setData('body_condition.door_seals_fitment', e.target.checked)} label="Door seals fitment" id="check_13"/>
+                <CFormSwitch name="body_condition[molding_clips_present]" checked={data.body_condition.molding_clips_present} value={data.body_condition.molding_clips_present} onChange={(e) => setData('body_condition.molding_clips_present', e.target.checked)} label="Molding & clips present" id="check_12"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[boot_seal_fitment]" value={data.body_condition.boot_seal_fitment} onChange={(e) => setData('body_condition.boot_seal_fitment', e.target.checked)} label="Boot seal fitment" id="check_14"/>
+                <CFormSwitch name="body_condition[door_seals_fitment]" checked={data.body_condition.door_seals_fitment} value={data.body_condition.door_seals_fitment} onChange={(e) => setData('body_condition.door_seals_fitment', e.target.checked)} label="Door seals fitment" id="check_13"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[fuel_filler_door_operation]" value={data.body_condition.fuel_filler_door_operation} onChange={(e) => setData('body_condition.fuel_filler_door_operation', e.target.checked)} label="Fuel filler door operation" id="check_15"/>
+                <CFormSwitch name="body_condition[boot_seal_fitment]" checked={data.body_condition.boot_seal_fitment} value={data.body_condition.boot_seal_fitment} onChange={(e) => setData('body_condition.boot_seal_fitment', e.target.checked)} label="Boot seal fitment" id="check_14"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[body_fasteners_intact]" value={data.body_condition.body_fasteners_intact} onChange={(e) => setData('body_condition.body_fasteners_intact', e.target.checked)} label="Body fasteners intact" id="check_16"/>
+                <CFormSwitch name="body_condition[fuel_filler_door_operation]" checked={data.body_condition.fuel_filler_door_operation} value={data.body_condition.fuel_filler_door_operation} onChange={(e) => setData('body_condition.fuel_filler_door_operation', e.target.checked)} label="Fuel filler door operation" id="check_15"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[tow_eye_point_secure]" value={data.body_condition.tow_eye_point_secure} onChange={(e) => setData('body_condition.tow_eye_point_secure', e.target.checked)} label="Tow eye/point present & secure" id="check_17"/>
+                <CFormSwitch name="body_condition[body_fasteners_intact]" checked={data.body_condition.body_fasteners_intact} value={data.body_condition.body_fasteners_intact} onChange={(e) => setData('body_condition.body_fasteners_intact', e.target.checked)} label="Body fasteners intact" id="check_16"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[bumper_reinforcement_visible]" value={data.body_condition.bumper_reinforcement_visible} onChange={(e) => setData('body_condition.bumper_reinforcement_visible', e.target.checked)} label="Bumper reinforcement visible" id="check_18"/>
+                <CFormSwitch name="body_condition[tow_eye_point_secure]" checked={data.body_condition.tow_eye_point_secure} value={data.body_condition.tow_eye_point_secure} onChange={(e) => setData('body_condition.tow_eye_point_secure', e.target.checked)} label="Tow eye/point present & secure" id="check_17"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[undercarriage_guards]" value={data.body_condition.undercarriage_guards} onChange={(e) => setData('body_condition.undercarriage_guards', e.target.checked)} label="Undercarriage guards" id="check_19"/>
+                <CFormSwitch name="body_condition[bumper_reinforcement_visible]" checked={data.body_condition.bumper_reinforcement_visible} value={data.body_condition.bumper_reinforcement_visible} onChange={(e) => setData('body_condition.bumper_reinforcement_visible', e.target.checked)} label="Bumper reinforcement visible" id="check_18"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[panel_repair_signs]" value={data.body_condition.panel_repair_signs} onChange={(e) => setData('body_condition.panel_repair_signs', e.target.checked)} label="Panel repair signs" id="check_20"/>
+                <CFormSwitch name="body_condition[undercarriage_guards]" checked={data.body_condition.undercarriage_guards} value={data.body_condition.undercarriage_guards} onChange={(e) => setData('body_condition.undercarriage_guards', e.target.checked)} label="Undercarriage guards" id="check_19"/>
               </CCol>
 
               <CCol md={4}>
-                <CFormSwitch name="body_condition[exterior_accessory_fitment]" value={data.body_condition.exterior_accessory_fitment} onChange={(e) => setData('body_condition.exterior_accessory_fitment', e.target.checked)} label="Exterior accessory fitment" id="check_21"/>
+                <CFormSwitch name="body_condition[panel_repair_signs]" checked={data.body_condition.panel_repair_signs} value={data.body_condition.panel_repair_signs} onChange={(e) => setData('body_condition.panel_repair_signs', e.target.checked)} label="Panel repair signs" id="check_20"/>
+              </CCol>
+
+              <CCol md={4}>
+                <CFormSwitch name="body_condition[exterior_accessory_fitment]" checked={data.body_condition.exterior_accessory_fitment} value={data.body_condition.exterior_accessory_fitment} onChange={(e) => setData('body_condition.exterior_accessory_fitment', e.target.checked)} label="Exterior accessory fitment" id="check_21"/>
               </CCol>
             </CRow>
             
@@ -732,261 +729,278 @@ const AddInspection = () => {
             <CRow className='g-3'>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="windshield_condition"
+                 <Select2Multi
+                  multiple
+                  name="glass_detail[windshield_condition]"
                   label="Windshield Condition"
-                  value={data.windshield_condition}
-                  onChange={(e) => setData('windshield_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="No damage / Excellent condition">No damage / Excellent condition</option>
-                  <option value="Minor scratches">Minor scratches</option>
-                  <option value="Chips present">Chips present</option>
-                  <option value="Cracks present">Cracks present</option>
-                  <option value="Hazy / Reduced visibility">Hazy / Reduced visibility</option>
-                  <option value="Loose / Improper fitment">Loose / Improper fitment</option>
-                  <option value="Repaired (chip/crack repair visible)">Repaired (chip/crack repair visible)</option>
-                  <option value="Replacement recommended">Replacement recommended</option>
-                </CFormSelect>
+                  value={data.glass_detail.windshield_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "No damage / Excellent condition", label: "No damage / Excellent condition" },
+                    { value: "Minor scratches", label: "Minor scratches" },
+                    { value: "Chips present", label: "Chips present" },
+                    { value: "Cracks present", label: "Cracks present" },
+                    { value: "Hazy / Reduced visibility", label: "Hazy / Reduced visibility" },
+                    { value: "Loose / Improper fitment", label: "Loose / Improper fitment" },
+                    { value: "Repaired (chip/crack repair visible)", label: "Repaired (chip/crack repair visible)" },
+                    { value: "Replacement recommended", label: "Replacement recommended" },
+                  ]}
+                />
               </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="windshield_wiper_function"
-                  label="Windshield Wiper Function"
-                  value={data.windshield_wiper_function}
-                  onChange={(e) => setData('windshield_wiper_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Working properly">Working properly</option>
-                  <option value="Slow / irregular movement">Slow / irregular movement</option>
-                  <option value="Not working">Not working</option>
-                  <option value="Noise during operation">Noise during operation</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[windshield_wiper_function]"
+                    label="Windshield Wiper Function"
+                    value={data.glass_detail.windshield_wiper_function}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Working properly", label: "Working properly" },
+                      { value: "Slow / irregular movement", label: "Slow / irregular movement" },
+                      { value: "Not working", label: "Not working" },
+                      { value: "Noise during operation", label: "Noise during operation" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="wiper_blade_wear"
-                  label="Wiper Blade Wear"
-                  value={data.wiper_blade_wear}
-                  onChange={(e) => setData('wiper_blade_wear', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Good condition">Good condition</option>
-                  <option value="Slight wear">Slight wear</option>
-                  <option value="Moderate wear">Moderate wear</option>
-                  <option value="Heavy wear / Replacement required">Heavy wear / Replacement required</option>
-                </CFormSelect>
-              </CCol>
-              
-            
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="rear_wiper_function"
-                  label="Rear Wiper Function"
-                  value={data.rear_wiper_function}
-                  onChange={(e) => setData('rear_wiper_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Working properly">Working properly</option>
-                  <option value="Slow / irregular movement">Slow / irregular movement</option>
-                  <option value="Not working">Not working</option>
-                  <option value="Noise during operation">Noise during operation</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[wiper_blade_wear]"
+                    label="Wiper Blade Wear"
+                    value={data.glass_detail.wiper_blade_wear}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Good condition", label: "Good condition" },
+                      { value: "Slight wear", label: "Slight wear" },
+                      { value: "Moderate wear", label: "Moderate wear" },
+                      { value: "Heavy wear / Replacement required", label: "Heavy wear / Replacement required" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="side_window_operation_lf"
-                  label="Side Window Operation (LF)"
-                  value={data.side_window_operation_lf}
-                  onChange={(e) => setData('side_window_operation_lf', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Smooth operation">Smooth operation</option>
-                  <option value="Slow movement">Slow movement</option>
-                  <option value="Stuck / jammed">Stuck / jammed</option>
-                  <option value="Motor noise present">Motor noise present</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[rear_wiper_function]"
+                    label="Rear Wiper Function"
+                    value={data.glass_detail.rear_wiper_function}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Working properly", label: "Working properly" },
+                      { value: "Slow / irregular movement", label: "Slow / irregular movement" },
+                      { value: "Not working", label: "Not working" },
+                      { value: "Noise during operation", label: "Noise during operation" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="side_window_operation_rf"
-                  label="Side Window Operation (RF)"
-                  value={data.side_window_operation_rf}
-                  onChange={(e) => setData('side_window_operation_rf', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Smooth operation">Smooth operation</option>
-                  <option value="Slow movement">Slow movement</option>
-                  <option value="Stuck / jammed">Stuck / jammed</option>
-                  <option value="Motor noise present">Motor noise present</option>
-                </CFormSelect>
-              </CCol>
-              
-           
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[side_window_operation_lf]"
+                    label="Side Window Operation (LF)"
+                    value={data.glass_detail.side_window_operation_lf}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Smooth operation", label: "Smooth operation" },
+                      { value: "Slow movement", label: "Slow movement" },
+                      { value: "Stuck / jammed", label: "Stuck / jammed" },
+                      { value: "Motor noise present", label: "Motor noise present" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="side_window_operation_lr"
-                  label="Side Window Operation (LR)"
-                  value={data.side_window_operation_lr}
-                  onChange={(e) => setData('side_window_operation_lr', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Smooth operation">Smooth operation</option>
-                  <option value="Slow movement">Slow movement</option>
-                  <option value="Stuck / jammed">Stuck / jammed</option>
-                  <option value="Motor noise present">Motor noise present</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[side_window_operation_rf]"
+                    label="Side Window Operation (RF)"
+                    value={data.glass_detail.side_window_operation_rf}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Smooth operation", label: "Smooth operation" },
+                      { value: "Slow movement", label: "Slow movement" },
+                      { value: "Stuck / jammed", label: "Stuck / jammed" },
+                      { value: "Motor noise present", label: "Motor noise present" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="side_window_operation_rr"
-                  label="Side Window Operation (RR)"
-                  value={data.side_window_operation_rr}
-                  onChange={(e) => setData('side_window_operation_rr', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Smooth operation">Smooth operation</option>
-                  <option value="Slow movement">Slow movement</option>
-                  <option value="Stuck / jammed">Stuck / jammed</option>
-                  <option value="Motor noise present">Motor noise present</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple  
+                    required
+                    name="glass_detail[side_window_operation_lr]"
+                    label="Side Window Operation (LR)"
+                    value={data.glass_detail.side_window_operation_lr}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Smooth operation", label: "Smooth operation" },
+                      { value: "Slow movement", label: "Slow movement" },
+                      { value: "Stuck / jammed", label: "Stuck / jammed" },
+                      { value: "Motor noise present", label: "Motor noise present" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="rear_window_condition"
-                  label="Rear Window Condition"
-                  value={data.rear_window_condition}
-                  onChange={(e) => setData('rear_window_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="No damage / Excellent condition">No damage / Excellent condition</option>
-                  <option value="Minor scratches">Minor scratches</option>
-                  <option value="Chips present">Chips present</option>
-                  <option value="Cracks present">Cracks present</option>
-                  <option value="Tint / defogger working fine">Tint / defogger working fine</option>
-                  <option value="Replacement recommended">Replacement recommended</option>
-                </CFormSelect>
-              </CCol>
-              
-            
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="sunroof_operation"
-                  label="Sunroof Operation"
-                  value={data.sunroof_operation}
-                  onChange={(e) => setData('sunroof_operation', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Smooth operation">Smooth operation</option>
-                  <option value="Slow / noisy operation">Slow / noisy operation</option>
-                  <option value="Jammed / stuck">Jammed / stuck</option>
-                  <option value="Not working">Not working</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[side_window_operation_rr]"
+                    label="Side Window Operation (RR)"
+                    value={data.glass_detail.side_window_operation_rr}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Smooth operation", label: "Smooth operation" },
+                      { value: "Slow movement", label: "Slow movement" },
+                      { value: "Stuck / jammed", label: "Stuck / jammed" },
+                      { value: "Motor noise present", label: "Motor noise present" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="sunroof_drainage_check"
-                  label="Sunroof Drainage Check"
-                  value={data.sunroof_drainage_check}
-                  onChange={(e) => setData('sunroof_drainage_check', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="No leakage / Proper drainage">No leakage / Proper drainage</option>
-                  <option value="Minor clogging">Minor clogging</option>
-                  <option value="Leakage detected">Leakage detected</option>
-                  <option value="Drainage system blocked">Drainage system blocked</option>
-                </CFormSelect>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[rear_window_condition]"
+                    label="Rear Window Condition"
+                    value={data.glass_detail.rear_window_condition}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "No damage / Excellent condition", label: "No damage / Excellent condition" },
+                      { value: "Minor scratches", label: "Minor scratches" },
+                      { value: "Chips present", label: "Chips present" },
+                      { value: "Cracks present", label: "Cracks present" },
+                      { value: "Tint / defogger working fine", label: "Tint / defogger working fine" },
+                      { value: "Replacement recommended", label: "Replacement recommended" },
+                    ]}
+                  />
+                </CCol>
 
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[sunroof_operation]"
+                    label="Sunroof Operation"
+                    value={data.glass_detail.sunroof_operation}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Smooth operation", label: "Smooth operation" },
+                      { value: "Slow / noisy operation", label: "Slow / noisy operation" },
+                      { value: "Jammed / stuck", label: "Jammed / stuck" },
+                      { value: "Not working", label: "Not working" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="sunroof_glass_condition"
-                  label="Sunroof Glass Condition"
-                  value={data.sunroof_glass_condition}
-                  onChange={(e) => setData('sunroof_glass_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Excellent / No damage">Excellent / No damage</option>
-                  <option value="Minor scratches">Minor scratches</option>
-                  <option value="Chips present">Chips present</option>
-                  <option value="Cracks present">Cracks present</option>
-                  <option value="Replacement recommended">Replacement recommended</option>
-                </CFormSelect>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[sunroof_drainage_check]"
+                    label="Sunroof Drainage Check"
+                    value={data.glass_detail.sunroof_drainage_check}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "No leakage / Proper drainage", label: "No leakage / Proper drainage" },
+                      { value: "Minor clogging", label: "Minor clogging" },
+                      { value: "Leakage detected", label: "Leakage detected" },
+                      { value: "Drainage system blocked", label: "Drainage system blocked" },
+                    ]}
+                  />
+                </CCol>
 
-              </CCol>
-              
-           
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="left_external_mirror_function"
-                  label="Left External Mirror Function"
-                  value={data.left_external_mirror_function}
-                  onChange={(e) => setData('left_external_mirror_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Fully functional">Fully functional</option>
-                  <option value="Adjustment slow">Adjustment slow</option>
-                  <option value="Mirror loose / vibrating">Mirror loose / vibrating</option>
-                  <option value="Not functional">Not functional</option>
-                </CFormSelect>
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[sunroof_glass_condition]"
+                    label="Sunroof Glass Condition"
+                    value={data.glass_detail.sunroof_glass_condition}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Excellent / No damage", label: "Excellent / No damage" },
+                      { value: "Minor scratches", label: "Minor scratches" },
+                      { value: "Chips present", label: "Chips present" },
+                      { value: "Cracks present", label: "Cracks present" },
+                      { value: "Replacement recommended", label: "Replacement recommended" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="right_external_mirror_function"
-                  label="Right External Mirror Function"
-                  value={data.right_external_mirror_function}
-                  onChange={(e) => setData('right_external_mirror_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Fully functional">Fully functional</option>
-                  <option value="Adjustment slow">Adjustment slow</option>
-                  <option value="Mirror loose / vibrating">Mirror loose / vibrating</option>
-                  <option value="Not functional">Not functional</option>
-                </CFormSelect>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[left_external_mirror_function]"
+                    label="Left External Mirror Function"
+                    value={data.glass_detail.left_external_mirror_function}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Fully functional", label: "Fully functional" },
+                      { value: "Adjustment slow", label: "Adjustment slow" },
+                      { value: "Mirror loose / vibrating", label: "Mirror loose / vibrating" },
+                      { value: "Not functional", label: "Not functional" },
+                    ]}
+                  />
+                </CCol>
 
-              </CCol>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[right_external_mirror_function]"
+                    label="Right External Mirror Function"
+                    value={data.glass_detail.right_external_mirror_function}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Fully functional", label: "Fully functional" },
+                      { value: "Adjustment slow", label: "Adjustment slow" },
+                      { value: "Mirror loose / vibrating", label: "Mirror loose / vibrating" },
+                      { value: "Not functional", label: "Not functional" },
+                    ]}
+                  />
+                </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="mirror_adjustment_motors"
-                  label="Mirror Adjustment Motors"
-                  value={data.mirror_adjustment_motors}
-                  onChange={(e) => setData('mirror_adjustment_motors', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Working properly">Working properly</option>
-                  <option value="Slow movement">Slow movement</option>
-                  <option value="Noisy operation">Noisy operation</option>
-                  <option value="Not working">Not working</option>
-                </CFormSelect>
+                <CCol md={4}>
+                  <Select2Multi
+                    multiple
+                    required
+                    name="glass_detail[mirror_adjustment_motors]"
+                    label="Mirror Adjustment Motors"
+                    value={data.glass_detail.mirror_adjustment_motors}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    options={[
+                      { value: "Working properly", label: "Working properly" },
+                      { value: "Slow movement", label: "Slow movement" },
+                      { value: "Noisy operation", label: "Noisy operation" },
+                      { value: "Not working", label: "Not working" },
+                    ]}
+                  />
+                </CCol>
 
-              </CCol>
-              
+                <CCol md={4}>
+                  <CFormInput
+                    type="text"
+                    name="glass_detail[comments]"
+                    label="Comments"
+                    value={data.glass_detail.comments}
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                    invalid={!!errors.comments}
+                    feedbackInvalid={errors.comments}
+                  />
+                </CCol>
+
             </CRow>
             
           </CCardBody>
@@ -1000,343 +1014,385 @@ const AddInspection = () => {
             <CRow className='g-3'>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="engine_start_behavior_cold"
+                <Select2Multi
+                  multiple
+                  required
+                  name="engine_detail[engine_start_behavior_cold]"
                   label="Engine start behavior (cold)"
-                  value={data.engine_start_behavior_cold}
-                  onChange={(e) => setData('engine_start_behavior_cold', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.engine_start_behavior_cold}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="engine_start_behavior_warm"
+                <Select2Multi
+                  multiple
+                  required
+                  name="engine_detail[engine_start_behavior_warm]"
                   label="Engine start behavior (warm)"
-                  value={data.engine_start_behavior_warm}
-                  onChange={(e) => setData('engine_start_behavior_warm', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.engine_start_behavior_warm}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="idle_stability"
+                  name="engine_detail[idle_stability]"
                   label="Idle stability"
-                  value={data.idle_stability}
-                  onChange={(e) => setData('idle_stability', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.idle_stability}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="throttle_response"
+                  name="engine_detail[throttle_response]"
                   label="Throttle response"
-                  value={data.throttle_response}
-                  onChange={(e) => setData('throttle_response', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.throttle_response}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="abnormal_engine_noises"
+                  name="engine_detail[abnormal_engine_noises]"
                   label="Abnormal engine noises (tick/knock)"
-                  value={data.abnormal_engine_noises}
-                  onChange={(e) => setData('abnormal_engine_noises', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.abnormal_engine_noises}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="engine_oil_level_check"
+                  name="engine_detail[engine_oil_level_check]"
                   label="Engine oil level check"
-                  value={data.engine_oil_level_check}
-                  onChange={(e) => setData('engine_oil_level_check', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.engine_oil_level_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="engine_oil_appearance"
+                  name="engine_detail[engine_oil_appearance]"
                   label="Engine oil appearance"
-                  value={data.engine_oil_appearance}
-                  onChange={(e) => setData('engine_oil_appearance', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.engine_oil_appearance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                 <Select2Multi
+                 multiple
                 required
-                  name="visible_oil_leaks"
+                  name="engine_detail[visible_oil_leaks]"
                   label="Visible oil leaks around head/covers"
-                  value={data.visible_oil_leaks}
-                  onChange={(e) => setData('visible_oil_leaks', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.visible_oil_leaks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="oil_filter_housing_condition"
+                  name="engine_detail[oil_filter_housing_condition]"
                   label="Oil filter housing condition"
-                  value={data.oil_filter_housing_condition}
-                  onChange={(e) => setData('oil_filter_housing_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.oil_filter_housing_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="coolant_level_check"
+                  name="engine_detail[coolant_level_check]"
                   label="Coolant level check"
-                  value={data.coolant_level_check}
-                  onChange={(e) => setData('coolant_level_check', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.coolant_level_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="coolant_color"
+                  name="engine_detail[coolant_color]"
                   label="Coolant color & contamination"
-                  value={data.coolant_color}
-                  onChange={(e) => setData('coolant_color', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.coolant_color}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="coolant_leaks"
+                  name="engine_detail[coolant_leaks]"
                   label="Coolant leaks visible (hoses/rad)"
-                  value={data.coolant_leaks}
-                  onChange={(e) => setData('coolant_leaks', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.coolant_leaks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="signs_of_coolant_in_oil"
+                  name="engine_detail[signs_of_coolant_in_oil]"
                   label="Signs of coolant in oil (milky)"
-                  value={data.signs_of_coolant_in_oil}
-                  onChange={(e) => setData('signs_of_coolant_in_oil', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.signs_of_coolant_in_oil}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="hose_condition"
+                  name="engine_detail[hose_condition]"
                   label="Hose condition & clamps"
-                  value={data.hose_condition}
-                  onChange={(e) => setData('hose_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.hose_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="drive_belt_condition"
+                  name="engine_detail[drive_belt_condition]"
                   label="Drive belt tension & wear"
-                  value={data.drive_belt_condition}
-                  onChange={(e) => setData('drive_belt_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.drive_belt_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                
+                <Select2Multi
+                multiple
                 required
-                  name="timing_belt_condition"
+                  name="engine_detail[timing_belt_condition]"
                   label="Timing belt/chain visible condition"
-                  value={data.timing_belt_condition}
-                  onChange={(e) => setData('timing_belt_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.timing_belt_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="turbo_boost_check"
+                  name="engine_detail[turbo_boost_check]"
                   label="Turbocharger boost check"
-                  value={data.turbo_boost_check}
-                  onChange={(e) => setData('turbo_boost_check', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.turbo_boost_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="air_intake_condition"
+                  name="engine_detail[air_intake_condition]"
                   label="Air intake ducting condition"
-                  value={data.air_intake_condition}
-                  onChange={(e) => setData('air_intake_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.air_intake_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="air_filter_element"
+                  name="engine_detail[air_filter_element]"
                   label="Air filter element"
-                  value={data.air_filter_element}
-                  onChange={(e) => setData('air_filter_element', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.air_filter_element}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="starter_motor_cranking"
+                  name="engine_detail[starter_motor_cranking]"
                   label="Starter motor cranking quality"
-                  value={data.starter_motor_cranking}
-                  onChange={(e) => setData('starter_motor_cranking', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.engine_detail.starter_motor_cranking}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="fuse_box_access"
+                  name="engine_detail[fuse_box_access]"
                   label="Fuse box access"
-                  value={data.fuse_box_access}
-                  onChange={(e) => setData('fuse_box_access', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
-              </CCol>
-
-              <CCol md={4}>
-                <CFormInput
-                required
-                  
-                  type="text"
-                  name="any_noice"
-                  label="Any Noice"
-                  value={data.any_noice}
-                  onChange={(e) => setData('any_noice', e.target.value)}
-                  invalid={!!errors.any_noice}
-                  feedbackInvalid={errors.any_noice}
+                  value={data.engine_detail.fuse_box_access}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
                 />
               </CCol>
 
               <CCol md={4}>
                 <CFormInput
-                required
                   
                   type="text"
-                  name="comments_engine"
+                  name="engine_detail[any_noice]"
+                  label="Any Noice"
+                  value={data.engine_detail.any_noice}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.any_noice}
+                  feedbackInvalid={errors.any_noice}
+                />
+                
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  
+                  type="text"
+                  name="engine_detail[comments_engine]"
                   label="Comments"
-                  value={data.comments_engine}
-                  onChange={(e) => setData('comments_engine', e.target.value)}
+                  value={data.engine_detail.comments_engine}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.comments_engine}
                   feedbackInvalid={errors.comments_engine}
                 />
@@ -1356,147 +1412,157 @@ const AddInspection = () => {
             <CRow className='g-3'>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="engine_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[engine_light]"
                   label="Engine light"
-                  value={data.engine_light}
-                  onChange={(e) => setData('engine_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail.engine_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="abs_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[abs_light]"
                   label="ABS light"
-                  value={data.abs_light}
-                  onChange={(e) => setData('abs_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.abs_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="oil_pressure_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[oil_pressure_light]"
                   label="Oil pressure light"
-                  value={data.oil_pressure_light}
-                  onChange={(e) => setData('oil_pressure_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.oil_pressure_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="battery_charging_system_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[battery_charging_system_light]"
                   label="Battery/charging system light"
-                  value={data.battery_charging_system_light}
-                  onChange={(e) => setData('battery_charging_system_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.battery_charging_system_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="coolant_temperature_warning_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[coolant_temperature_warning_light]"
                   label="Coolant temperature warning light"
-                  value={data.coolant_temperature_warning_light}
-                  onChange={(e) => setData('coolant_temperature_warning_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.coolant_temperature_warning_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="brakes_detail_warning_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[brakes_detail_warning_light]"
                   label="Brake system warning light"
-                  value={data.brakes_detail_warning_light}
-                  onChange={(e) => setData('brakes_detail_warning_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.brakes_detail_warning_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="airbag_warning_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[airbag_warning_light]"
                   label="Airbag warning light"
-                  value={data.airbag_warning_light}
-                  onChange={(e) => setData('airbag_warning_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.airbag_warning_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="seatbelt_reminder_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[seatbelt_reminder_light]"
                   label="Seatbelt reminder light"
-                  value={data.seatbelt_reminder_light}
-                  onChange={(e) => setData('seatbelt_reminder_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.seatbelt_reminder_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="traction_control_light"
+                <Select2Multi
+                  required
+                  name="cluster_detail[traction_control_light]"
                   label="Traction control light"
-                  value={data.traction_control_light}
-                  onChange={(e) => setData('traction_control_light', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.traction_control_light}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="tpms"
+                <Select2Multi
+                  required
+                  name="cluster_detail[tpms]"
                   label="Tyre Pressure Monitoring System (TPMS)"
-                  value={data.tpms}
-                  onChange={(e) => setData('tpms', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Visible">Visible</option>
-                  <option value="Not Visible">Not Visible</option>
-                </CFormSelect>
+                  value={data.cluster_detail?.tpms}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Visible", label: "Visible" },
+                    { value: "Not Visible", label: "Not Visible" }
+                  ]}
+                />
               </CCol>
 
+               <CCol md={4}>
+                <CFormInput
+                  type="text"
+                  name="cluster_detail[comments]"
+                  label="Comments"
+                  value={data.cluster_detail.comments}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comments}
+                  feedbackInvalid={errors.comments}
+                />
+              </CCol>
 
-              
             </CRow>
             
           </CCardBody>
@@ -1509,228 +1575,222 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className='g-3'>
 
-             <CCol md={4}>
-              <CFormSelect
-              required
-                name="transmission_fluid_level_auto"
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[transmission_fluid_level_auto]"
                 label="Transmission fluid level (auto)"
-                value={data.transmission_fluid_level_auto}
-                onChange={(e) => setData('transmission_fluid_level_auto', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail.transmission_fluid_level_auto}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="transmission_fluid_condition_auto"
-                label="Transmission fluid condition (auto)"
-                value={data.transmission_fluid_condition_auto}
-                onChange={(e) => setData('transmission_fluid_condition_auto', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
-            </CCol>
-
-            <CCol md={4}>
-              <CFormSelect
-              required
-                name="manual_gearbox_oil_check"
+              <Select2Multi
+                required
+                name="transmission_detail[manual_gearbox_oil_check]"
                 label="Manual gearbox oil check (if access)"
-                value={data.manual_gearbox_oil_check}
-                onChange={(e) => setData('manual_gearbox_oil_check', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.manual_gearbox_oil_check}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="transmission_mount_integrity"
+              <Select2Multi
+                required
+                name="transmission_detail[transmission_mount_integrity]"
                 label="Transmission mount integrity"
-                value={data.transmission_mount_integrity}
-                onChange={(e) => setData('transmission_mount_integrity', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.transmission_mount_integrity}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
-            <CCol md={4}>
-              <CFormSelect
-              required
-                name="gear_selection_smoothness"
-                label="Gear selection smoothness"
-                value={data.gear_selection_smoothness}
-                onChange={(e) => setData('gear_selection_smoothness', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
-            </CCol>
+          
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="clutch_bite_slippage"
+              <Select2Multi
+                required
+                name="transmission_detail[clutch_bite_slippage]"
                 label="Clutch bite & slippage (manual)"
-                value={data.clutch_bite_slippage}
-                onChange={(e) => setData('clutch_bite_slippage', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.clutch_bite_slippage}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="automatic_shift_quality"
+              <Select2Multi
+                required
+                name="transmission_detail[automatic_shift_quality]"
                 label="Automatic shift quality & hesitation"
-                value={data.automatic_shift_quality}
-                onChange={(e) => setData('automatic_shift_quality', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.automatic_shift_quality}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Gear Shifting Not Smooth", label: "Gear Shifting Not Smooth" },
+                  { value: "Hard To Change Gear", label: "Hard To Change Gear" },
+                  { value: "Jurky Gear", label: "Jurky Gear" },
+                  { value: "Delay In Shifting", label: "Delay In Shifting" },
+                  { value: "Juddring", label: "Juddring" },
+                  { value: "Gear Shocking", label: "Gear Shocking" },
+                  { value: "Gear Slipping", label: "Gear Slipping" },
+                  { value: "Gear Vibration", label: "Gear Vibration" },
+                  { value: "Gear Not Engaging", label: "Gear Not Engaging" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Good", label: "Good" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="transfer_case_engagement"
+              <Select2Multi
+                required
+                name="transmission_detail[transfer_case_engagement]"
                 label="Transfer case engagement (4x4)"
-                value={data.transfer_case_engagement}
-                onChange={(e) => setData('transfer_case_engagement', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.transfer_case_engagement}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Not Engaging", label: "Not Engaging" },
+                  { value: "Transfer Case Fold", label: "Transfer Case Fold" },
+                  { value: "4WD Not Engaging", label: "4WD Not Engaging" },
+                  { value: "Delay In 4*4", label: "Delay In 4*4" },
+                  { value: "Low-Hi Not Shifting", label: "Low-Hi Not Shifting" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Good", label: "Good" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="drive_shaft_visual_inspection"
+              <Select2Multi
+                required
+                name="transmission_detail[drive_shaft_visual_inspection]"
                 label="Drive shaft visual inspection"
-                value={data.drive_shaft_visual_inspection}
-                onChange={(e) => setData('drive_shaft_visual_inspection', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.drive_shaft_visual_inspection}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="cv_joint_boot_integrity"
+              <Select2Multi
+                required
+                name="transmission_detail[cv_joint_boot_integrity]"
                 label="CV joint boot integrity (all shafts)"
-                value={data.cv_joint_boot_integrity}
-                onChange={(e) => setData('cv_joint_boot_integrity', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.cv_joint_boot_integrity}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="u_joints_coupling_check"
+              <Select2Multi
+                required
+                name="transmission_detail[u_joints_coupling_check]"
                 label="U-joints or coupling check"
-                value={data.u_joints_coupling_check}
-                onChange={(e) => setData('u_joints_coupling_check', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.u_joints_coupling_check}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="differential_oil_condition"
+              <Select2Multi
+                required
+                name="transmission_detail[differential_oil_condition]"
                 label="Differential oil condition (front/rear)"
-                value={data.differential_oil_condition}
-                onChange={(e) => setData('differential_oil_condition', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.differential_oil_condition}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
-              required
-                name="differential_housing_leaks"
+              <Select2Multi
+                required
+                name="transmission_detail[differential_housing_leaks]"
                 label="Differential housing leaks"
-                value={data.differential_housing_leaks}
-                onChange={(e) => setData('differential_housing_leaks', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.transmission_detail?.differential_housing_leaks}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
               <CFormInput
-              required
-                
                 type="text"
-                name="gearbox_unusual_noise"
+                name="transmission_detail[gearbox_unusual_noise]"
                 label="Gearbox unusual noise under load"
-                value={data.gearbox_unusual_noise}
-                onChange={(e) => setData('gearbox_unusual_noise', e.target.value)}
-                invalid={!!errors.gearbox_unusual_noise}
-                feedbackInvalid={errors.gearbox_unusual_noise}
+                value={data.transmission_detail?.gearbox_unusual_noise}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                invalid={!!errors.transmission_detail?.gearbox_unusual_noise}
+                feedbackInvalid={errors.transmission_detail?.gearbox_unusual_noise}
               />
             </CCol>
 
             <CCol md={4}>
               <CFormInput
-              required
                 
                 type="text"
-                name="comments_transmission"
+                name="transmission_detail[comments_transmission]"
                 label="Comments"
-                value={data.comments_transmission}
-                onChange={(e) => setData('comments_transmission', e.target.value)}
-                invalid={!!errors.comments_transmission}
-                feedbackInvalid={errors.comments_transmission}
+                value={data.transmission_detail?.comments_transmission}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                invalid={!!errors.transmission_detail?.comments_transmission}
+                feedbackInvalid={errors.transmission_detail?.comments_transmission}
               />
             </CCol>
+
 
 
               
@@ -1746,314 +1806,361 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="front_strut_mount_condition"
+                <Select2Multi
+                  required
+                  name="suspension_detail[front_strut_mount_condition]"
                   label="Front strut mount condition"
-                  value={data.front_strut_mount_condition}
-                  onChange={(e) => setData('front_strut_mount_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail.front_strut_mount_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Maintainance", label: "Need Maintainance" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="rear_strut_mount_condition"
+                <Select2Multi
+                  required
+                  name="suspension_detail[rear_strut_mount_condition]"
                   label="Rear strut mount condition"
-                  value={data.rear_strut_mount_condition}
-                  onChange={(e) => setData('rear_strut_mount_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.rear_strut_mount_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Maintainance", label: "Need Maintainance" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="front_shock_absorber_function"
+                <Select2Multi
+                  required
+                  name="suspension_detail[front_shock_absorber_function]"
                   label="Front shock absorber function"
-                  value={data.front_shock_absorber_function}
-                  onChange={(e) => setData('front_shock_absorber_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.front_shock_absorber_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="rear_shock_absorber_function"
+                <Select2Multi
+                  required
+                  name="suspension_detail[rear_shock_absorber_function]"
                   label="Rear shock absorber function"
-                  value={data.rear_shock_absorber_function}
-                  onChange={(e) => setData('rear_shock_absorber_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.rear_shock_absorber_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="front_spring_integrity"
+                <Select2Multi
+                  required
+                  name="suspension_detail[front_spring_integrity]"
                   label="Front spring integrity"
-                  value={data.front_spring_integrity}
-                  onChange={(e) => setData('front_spring_integrity', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.front_spring_integrity}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="rear_spring_integrity"
+                <Select2Multi
+                  required
+                  name="suspension_detail[rear_spring_integrity]"
                   label="Rear spring integrity"
-                  value={data.rear_spring_integrity}
-                  onChange={(e) => setData('rear_spring_integrity', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.rear_spring_integrity}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="control_arm_bush_condition"
+                <Select2Multi
+                  required
+                  name="suspension_detail[control_arm_bush_condition]"
                   label="Control arm bush condition"
-                  value={data.control_arm_bush_condition}
-                  onChange={(e) => setData('control_arm_bush_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.control_arm_bush_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Maintainance", label: "Need Maintainance" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="lower_ball_joint_play"
+                <Select2Multi
+                  required
+                  name="suspension_detail[lower_ball_joint_play]"
                   label="Lower ball joint play"
-                  value={data.lower_ball_joint_play}
-                  onChange={(e) => setData('lower_ball_joint_play', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.lower_ball_joint_play}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="upper_ball_joint_play"
+                <Select2Multi
+                  required
+                  name="suspension_detail[upper_ball_joint_play]"
                   label="Upper ball joint play"
-                  value={data.upper_ball_joint_play}
-                  onChange={(e) => setData('upper_ball_joint_play', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.upper_ball_joint_play}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="anti_roll_bar_links_bushes"
+                <Select2Multi
+                  required
+                  name="suspension_detail[anti_roll_bar_links_bushes]"
                   label="Anti-roll bar links & bushes"
-                  value={data.anti_roll_bar_links_bushes}
-                  onChange={(e) => setData('anti_roll_bar_links_bushes', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.anti_roll_bar_links_bushes}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="steering_rack_seal_condition"
+                <Select2Multi
+                  required
+                  name="suspension_detail[steering_rack_seal_condition]"
                   label="Steering rack seal condition"
-                  value={data.steering_rack_seal_condition}
-                  onChange={(e) => setData('steering_rack_seal_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.steering_rack_seal_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Maintainance", label: "Need Maintainance" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="steering_rack_play_check"
+                <Select2Multi
+                  required
+                  name="suspension_detail[steering_rack_play_check]"
                   label="Steering rack play check"
-                  value={data.steering_rack_play_check}
-                  onChange={(e) => setData('steering_rack_play_check', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.steering_rack_play_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="rack_end_condition"
+                <Select2Multi
+                  required
+                  name="suspension_detail[rack_end_condition]"
                   label="Rack end condition"
-                  value={data.rack_end_condition}
-                  onChange={(e) => setData('rack_end_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.rack_end_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Maintainance", label: "Need Maintainance" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="tie_rod_end_play"
+                <Select2Multi
+                  required
+                  name="suspension_detail[tie_rod_end_play]"
                   label="Tie rod end play"
-                  value={data.tie_rod_end_play}
-                  onChange={(e) => setData('tie_rod_end_play', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.tie_rod_end_play}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="steering_column_noises"
+                <Select2Multi
+                  required
+                  name="suspension_detail[steering_column_noises]"
                   label="Steering column noises"
-                  value={data.steering_column_noises}
-                  onChange={(e) => setData('steering_column_noises', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.steering_column_noises}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "No Sound", label: "No Sound" },
+                    { value: "Rattling Noice", label: "Rattling Noice" },
+                    { value: "Squeaking", label: "Squeaking" },
+                    { value: "Clunking", label: "Clunking" },
+                    { value: "Grinding", label: "Grinding" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good", label: "Good" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="power_steering_fluid_level_color"
+                <Select2Multi
+                  required
+                  name="suspension_detail[power_steering_fluid_level_color]"
                   label="Power steering fluid level & color"
-                  value={data.power_steering_fluid_level_color}
-                  onChange={(e) => setData('power_steering_fluid_level_color', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.power_steering_fluid_level_color}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="power_steering_pump_noise"
+                <Select2Multi
+                  required
+                  name="suspension_detail[power_steering_pump_noise]"
                   label="Power steering pump noise"
-                  value={data.power_steering_pump_noise}
-                  onChange={(e) => setData('power_steering_pump_noise', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.power_steering_pump_noise}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="subframe_mount_condition"
+                <Select2Multi
+                  required
+                  name="suspension_detail[subframe_mount_condition]"
                   label="Subframe mount condition"
-                  value={data.subframe_mount_condition}
-                  onChange={(e) => setData('subframe_mount_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.subframe_mount_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Maintainance", label: "Need Maintainance" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="chassis_mounts_security"
+                <Select2Multi
+                  required
+                  name="suspension_detail[chassis_mounts_security]"
                   label="Chassis mounts security"
-                  value={data.chassis_mounts_security}
-                  onChange={(e) => setData('chassis_mounts_security', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.chassis_mounts_security}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="steering_wheel_free_play"
+                <Select2Multi
+                  required
+                  name="suspension_detail[steering_wheel_free_play]"
                   label="Steering wheel free play"
-                  value={data.steering_wheel_free_play}
-                  onChange={(e) => setData('steering_wheel_free_play', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.suspension_detail?.steering_wheel_free_play}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Average", label: "Average" },
+                    { value: "Need To Change", label: "Need To Change" }
+                  ]}
+                />
               </CCol>
+
 
               <CCol md={4}>
                 <CFormInput
-                required
-                  
                   type="text"
-                  name="comments_suspension"
+                  name="suspension_detail[comments_suspension]"
                   label="Comments"
-                  value={data.comments_suspension}
-                  onChange={(e) => setData('comments_suspension', e.target.value)}
+                  value={data.suspension_detail.comments_suspension}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.comments_suspension}
                   feedbackInvalid={errors.comments_suspension}
                 />
@@ -2071,167 +2178,185 @@ const AddInspection = () => {
           </CCardHeader>
           <CCardBody>
             <CRow className='g-3'>
+              
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[master_cylinder_seal_condition]"
                   label="Master cylinder seal condition"
                   value={data.brakes_detail.master_cylinder_seal_condition}
-                  onChange={(e) => setData('brakes_detail.master_cylinder_seal_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Weak", label: "Weak" },
+                    { value: "Need To Change", label: "Need To Change" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[brake_booster_operation]"
                   label="Brake booster operation"
                   value={data.brakes_detail.brake_booster_operation}
-                  onChange={(e) => setData('brakes_detail.brake_booster_operation', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Weak", label: "Weak" },
+                    { value: "Need To Change", label: "Need To Change" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[front_disc_condition_runout]"
                   label="Front disc condition & runout"
                   value={data.brakes_detail.front_disc_condition_runout}
-                  onChange={(e) => setData('brakes_detail.front_disc_condition_runout', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Weak", label: "Weak" },
+                    { value: "Need To Change", label: "Need To Change" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[rear_disc_drum_condition]"
                   label="Rear disc/drum condition"
                   value={data.brakes_detail.rear_disc_drum_condition}
-                  onChange={(e) => setData('brakes_detail.rear_disc_drum_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Weak", label: "Weak" },
+                    { value: "Need To Change", label: "Need To Change" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[front_pad]"
                   label="Front pad"
                   value={data.brakes_detail.front_pad}
-                  onChange={(e) => setData('brakes_detail.front_pad', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Weak", label: "Weak" },
+                    { value: "Need To Change", label: "Need To Change" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[rear_pad]"
                   label="Rear pad"
                   value={data.brakes_detail.rear_pad}
-                  onChange={(e) => setData('brakes_detail.rear_pad', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Weak", label: "Weak" },
+                    { value: "Need To Change", label: "Need To Change" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[handbrake_adjustment_holding]"
                   label="Handbrake adjustment & holding"
                   value={data.brakes_detail.handbrake_adjustment_holding}
-                  onChange={(e) => setData('brakes_detail.handbrake_adjustment_holding', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Attention", label: "Need Attention" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[abs_function_wheel_speed_check]"
                   label="ABS function / wheel speed check"
                   value={data.brakes_detail.abs_function_wheel_speed_check}
-                  onChange={(e) => setData('brakes_detail.abs_function_wheel_speed_check', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Attention", label: "Need Attention" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[brake_pedal_travel_firmness]"
                   label="Brake pedal travel & firmness"
                   value={data.brakes_detail.brake_pedal_travel_firmness}
-                  onChange={(e) => setData('brakes_detail.brake_pedal_travel_firmness', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                    onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Bad", label: "Bad" },
+                    { value: "Need Attention", label: "Need Attention" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
                   name="brakes_detail[brake_fluid_contamination_test_note]"
                   label="Brake fluid contamination test note"
                   value={data.brakes_detail.brake_fluid_contamination_test_note}
-                  onChange={(e) => setData('brakes_detail.brake_fluid_contamination_test_note', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Average", label: "Average" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
               </CCol>
 
 
 
               <CCol md={4}>
                 <CFormInput
-                required
-                  
                   type="text"
-                  name="comments_brakes"
+                  name="brakes_detail[comments_brakes]"
                   label="Comments"
-                  value={data.comments_brakes}
-                  onChange={(e) => setData('comments_brakes', e.target.value)}
+                  value={data.brakes_detail.comments_brakes}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.comments_brakes}
                   feedbackInvalid={errors.comments_brakes}
                 />
@@ -2252,10 +2377,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_brand_size_lf"
+                  name="tyre_detail[tyre_brand_size_lf]"
                   label="Tyre brand & size (LF)"
-                  value={data.tyre_brand_size_lf}
-                  onChange={(e) => setData('tyre_brand_size_lf', e.target.value)}
+                  value={data.tyre_detail.tyre_brand_size_lf}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_brand_size_lf}
                   feedbackInvalid={errors.tyre_brand_size_lf}
                 />
@@ -2265,10 +2390,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_brand_size_rf"
+                  name="tyre_detail[tyre_brand_size_rf]"
                   label="Tyre brand & size (RF)"
-                  value={data.tyre_brand_size_rf}
-                  onChange={(e) => setData('tyre_brand_size_rf', e.target.value)}
+                  value={data.tyre_detail.tyre_brand_size_rf}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_brand_size_rf}
                   feedbackInvalid={errors.tyre_brand_size_rf}
                 />
@@ -2278,10 +2403,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_brand_size_lr"
+                  name="tyre_detail[tyre_brand_size_lr]"
                   label="Tyre brand & size (LR)"
-                  value={data.tyre_brand_size_lr}
-                  onChange={(e) => setData('tyre_brand_size_lr', e.target.value)}
+                  value={data.tyre_detail.tyre_brand_size_lr}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_brand_size_lr}
                   feedbackInvalid={errors.tyre_brand_size_lr}
                 />
@@ -2291,10 +2416,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_brand_size_rr"
+                  name="tyre_detail[tyre_brand_size_rr]"
                   label="Tyre brand & size (RR)"
-                  value={data.tyre_brand_size_rr}
-                  onChange={(e) => setData('tyre_brand_size_rr', e.target.value)}
+                  value={data.tyre_detail.tyre_brand_size_rr}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_brand_size_rr}
                   feedbackInvalid={errors.tyre_brand_size_rr}
                 />
@@ -2304,10 +2429,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_manufacture_date_lf"
+                  name="tyre_detail[tyre_manufacture_date_lf]"
                   label="Tyre manufacture date (LF)"
-                  value={data.tyre_manufacture_date_lf}
-                  onChange={(e) => setData('tyre_manufacture_date_lf', e.target.value)}
+                  value={data.tyre_detail.tyre_manufacture_date_lf}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_manufacture_date_lf}
                   feedbackInvalid={errors.tyre_manufacture_date_lf}
                 />
@@ -2317,10 +2442,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_manufacture_date_rf"
+                  name="tyre_detail[tyre_manufacture_date_rf]"
                   label="Tyre manufacture date (RF)"
-                  value={data.tyre_manufacture_date_rf}
-                  onChange={(e) => setData('tyre_manufacture_date_rf', e.target.value)}
+                  value={data.tyre_detail.tyre_manufacture_date_rf}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_manufacture_date_rf}
                   feedbackInvalid={errors.tyre_manufacture_date_rf}
                 />
@@ -2330,10 +2455,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_manufacture_date_lr"
+                  name="tyre_detail[tyre_manufacture_date_lr]"
                   label="Tyre manufacture date (LR)"
-                  value={data.tyre_manufacture_date_lr}
-                  onChange={(e) => setData('tyre_manufacture_date_lr', e.target.value)}
+                  value={data.tyre_detail.tyre_manufacture_date_lr}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_manufacture_date_lr}
                   feedbackInvalid={errors.tyre_manufacture_date_lr}
                 />
@@ -2343,10 +2468,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_manufacture_date_rr"
+                  name="tyre_detail[tyre_manufacture_date_rr]"
                   label="Tyre manufacture date (RR)"
-                  value={data.tyre_manufacture_date_rr}
-                  onChange={(e) => setData('tyre_manufacture_date_rr', e.target.value)}
+                  value={data.tyre_detail.tyre_manufacture_date_rr}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_manufacture_date_rr}
                   feedbackInvalid={errors.tyre_manufacture_date_rr}
                 />
@@ -2356,10 +2481,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tread_depth_lf"
+                  name="tyre_detail[tread_depth_lf]"
                   label="Tread depth (LF)"
-                  value={data.tread_depth_lf}
-                  onChange={(e) => setData('tread_depth_lf', e.target.value)}
+                  value={data.tyre_detail.tread_depth_lf}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tread_depth_lf}
                   feedbackInvalid={errors.tread_depth_lf}
                 />
@@ -2369,10 +2494,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tread_depth_rf"
+                  name="tyre_detail[tread_depth_rf]"
                   label="Tread depth (RF)"
-                  value={data.tread_depth_rf}
-                  onChange={(e) => setData('tread_depth_rf', e.target.value)}
+                  value={data.tyre_detail.tread_depth_rf}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tread_depth_rf}
                   feedbackInvalid={errors.tread_depth_rf}
                 />
@@ -2382,10 +2507,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tread_depth_lr"
+                  name="tyre_detail[tread_depth_lr]"
                   label="Tread depth (LR)"
-                  value={data.tread_depth_lr}
-                  onChange={(e) => setData('tread_depth_lr', e.target.value)}
+                  value={data.tyre_detail.tread_depth_lr}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tread_depth_lr}
                   feedbackInvalid={errors.tread_depth_lr}
                 />
@@ -2395,10 +2520,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tread_depth_rr"
+                  name="tyre_detail[tread_depth_rr]"
                   label="Tread depth (RR)"
-                  value={data.tread_depth_rr}
-                  onChange={(e) => setData('tread_depth_rr', e.target.value)}
+                  value={data.tyre_detail.tread_depth_rr}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tread_depth_rr}
                   feedbackInvalid={errors.tread_depth_rr}
                 />
@@ -2408,10 +2533,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="tyre_pressure"
+                  name="tyre_detail[tyre_pressure]"
                   label="Tyre pressure (LF/RF/LR/RR)"
-                  value={data.tyre_pressure}
-                  onChange={(e) => setData('tyre_pressure', e.target.value)}
+                  value={data.tyre_detail.tyre_pressure}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_pressure}
                   feedbackInvalid={errors.tyre_pressure}
                 />
@@ -2421,10 +2546,10 @@ const AddInspection = () => {
                 <CFormInput
                 required
                   type="text"
-                  name="spare_wheel_condition"
+                  name="tyre_detail[spare_wheel_condition]"
                   label="Spare wheel presence & condition"
-                  value={data.spare_wheel_condition}
-                  onChange={(e) => setData('spare_wheel_condition', e.target.value)}
+                  value={data.tyre_detail.spare_wheel_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.spare_wheel_condition}
                   feedbackInvalid={errors.spare_wheel_condition}
                 />
@@ -2432,12 +2557,11 @@ const AddInspection = () => {
 
               <CCol md={12}>
                 <CFormInput
-                required
                   type="text"
-                  name="tyre_comment"
-                  label="Comment"
-                  value={data.tyre_comment}
-                  onChange={(e) => setData('tyre_comment', e.target.value)}
+                  name="tyre_detail[tyre_comment]"
+                  label="Comments"
+                  value={data.tyre_detail.tyre_comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.tyre_comment}
                   feedbackInvalid={errors.tyre_comment}
                 />
@@ -2457,139 +2581,152 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="dashboard_fit_finish"
+                name="interior_detail[dashboard_fit_finish]"
                 label="Dashboard fit & finish"
-                value={data.dashboard_fit_finish}
-                onChange={(e) => setData('dashboard_fit_finish', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.dashboard_fit_finish}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="instrument_cluster_illumination"
+                name="interior_detail[instrument_cluster_illumination]"
                 label="Instrument cluster illumination"
-                value={data.instrument_cluster_illumination}
-                onChange={(e) => setData('instrument_cluster_illumination', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.instrument_cluster_illumination}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="warning_lights_active_start"
-                label="Warning lights active on start"
-                value={data.warning_lights_active_start}
-                onChange={(e) => setData('warning_lights_active_start', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
-            </CCol>
-
-            <CCol md={4}>
-              <CFormSelect
-              required
-                name="odometer_function"
+                name="interior_detail[odometer_function]"
                 label="Odometer function"
-                value={data.odometer_function}
-                onChange={(e) => setData('odometer_function', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.odometer_function}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="interior_lighting"
+                name="interior_detail[interior_lighting]"
                 label="Interior lighting (dome/map)"
-                value={data.interior_lighting}
-                onChange={(e) => setData('interior_lighting', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.interior_lighting}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="glove_box_latching"
+                name="interior_detail[glove_box_latching]"
                 label="Glove box latching"
-                value={data.glove_box_latching}
-                onChange={(e) => setData('glove_box_latching', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.glove_box_latching}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="carpet_wear_retention"
+                name="interior_detail[carpet_wear_retention]"
                 label="Carpet wear & retention"
-                value={data.carpet_wear_retention}
-                onChange={(e) => setData('carpet_wear_retention', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.carpet_wear_retention}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="interior_contamination_odour"
+                name="interior_detail[interior_contamination_odour]"
                 label="Interior contamination/odour check"
-                value={data.interior_contamination_odour}
-                onChange={(e) => setData('interior_contamination_odour', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.interior_contamination_odour}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
 
             <CCol md={4}>
-              <CFormSelect
+              <Select2Multi
               required
-                name="trunk_boot_interior_condition"
+                name="interior_detail[trunk_boot_interior_condition]"
                 label="Trunk/boot interior condition"
-                value={data.trunk_boot_interior_condition}
-                onChange={(e) => setData('trunk_boot_interior_condition', e.target.value)}
-              >
-                <option value="">-- Select --</option>
-                <option value="Normal">Normal</option>
-                <option value="Good">Good</option>
-                <option value="Excellent">Excellent</option>
-              </CFormSelect>
+                value={data.interior_detail.trunk_boot_interior_condition}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
             </CCol>
+
+            <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="interior_detail[comment]"
+                  label="Comments"
+                  value={data.interior_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
 
               
             </CRow>
@@ -2605,78 +2742,125 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="driver_seat_adjust_locks"
+                  name="seat_detail[driver_seat_adjust_locks]"
                   label="Driver seat adjust & locks"
-                  value={data.driver_seat_adjust_locks}
-                  onChange={(e) => setData('driver_seat_adjust_locks', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.seat_detail.driver_seat_adjust_locks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Working Properly", label: "Working Properly" },
+                    { value: "Need Programing", label: "Need Programing" },
+                    { value: "Not Working", label: "Not Working" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  ]}
+                />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="passenger_seat_adjust_locks"
+                  name="seat_detail[passenger_seat_adjust_locks]"
                   label="Passenger seat adjust & locks"
-                  value={data.passenger_seat_adjust_locks}
-                  onChange={(e) => setData('passenger_seat_adjust_locks', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.seat_detail.passenger_seat_adjust_locks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Working Properly", label: "Working Properly" },
+                    { value: "Need Programing", label: "Need Programing" },
+                    { value: "Not Working", label: "Not Working" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  ]}
+              />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="seat_sliding_rails"
+                  name="seat_detail[seat_sliding_rails]"
                   label="Seat sliding rails lubrication & function"
-                  value={data.seat_sliding_rails}
-                  onChange={(e) => setData('seat_sliding_rails', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.seat_detail.seat_sliding_rails}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Working Properly", label: "Working Properly" },
+                    { value: "Need Programing", label: "Need Programing" },
+                    { value: "Not Working", label: "Not Working" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  ]}
+              />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="seat_cushion_wear"
+                  name="seat_detail[seat_type]"
+                  label="Seat Type"
+                  value={data.seat_detail.seat_type}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "GiLeatherArmor", label: "GiLeatherArmor" },
+                    { value: "Fabric", label: "Fabric" },
+                    { value: "Vinyl", label: "Vinyl" },
+                    { value: "Cloth", label: "Cloth" },
+                    { value: "Leather", label: "Leather" },
+                    { value: "Synthetic Leather", label: "Synthetic Leather" },
+                    { value: "Alcantara", label: "Alcantara" },
+                    { value: "Other", label: "Other" },
+                  ]}
+              />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[seat_cushion_wear]"
                   label="Seat cushion wear"
-                  value={data.seat_cushion_wear}
-                  onChange={(e) => setData('seat_cushion_wear', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.seat_detail.seat_cushion_wear}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Worn Out", label: "Worn Out" },
+                    { value: "Torn", label: "Torn" },
+                    { value: "Stained", label: "Stained" },
+                    { value: "Sagging", label: "Sagging" },
+                    { value: "Stiching Lose", label: "Stiching Lose" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  
+                  ]}
+              />
+              </CCol>
+              
+    
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[seat_upholstery_integrity]"
+                  label="Seat upholstery integrity (front/rear)"
+                  value={data.seat_detail.seat_upholstery_integrity}
+                 onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good", label: "Good" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Weak", label: "Weak" },
+                  { value: "Not Working", label: "Not Working" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
               </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="seat_upholstery_integrity"
-                  label="Seat upholstery integrity (front/rear)"
-                  value={data.seat_upholstery_integrity}
-                  onChange={(e) => setData('seat_upholstery_integrity', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+               <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="seat_detail[comment]"
+                  label="Comments"
+                  value={data.seat_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
               </CCol>
 
               
@@ -2686,55 +2870,103 @@ const AddInspection = () => {
         </CCard>
 
 
-         <CCard className="mb-4">
+        <CCard className="mb-4">
           <CCardHeader>
             <strong>HVAC & Infotainment</strong>
           </CCardHeader>
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-                <CFormSelect
-                required
-                  name="air_condition"
+                <Select2Multi
+                  multiple
+                  required
+                  name="hvac_detail[air_condition]"
                   label="Air Condition"
-                  value={data.air_condition}
-                  onChange={(e) => setData('air_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.hvac_detail.air_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "AC Not Cooling", label: "AC Not Cooling" },
+                      { value: "Weak Airflow From Vents", label: "Weak Airflow From Vents" },
+                      { value: "Blower Fan Not Working", label: "Blower Fan Not Working" },
+                      { value: "AC Making Noise", label: "AC Making Noise" },
+                      { value: "AC Smell / Moldy Odor", label: "AC Smell / Moldy Odor" },
+                      { value: "Temperature Control Not Working", label: "Temperature Control Not Working" },
+                      { value: "AC Switches / Buttons Faulty", label: "AC Switches / Buttons Faulty" },
+                      { value: "Rear AC Not Working", label: "Rear AC Not Working" },
+                      { value: "AC Compressor Not Working", label: "AC Compressor Not Working" },
+                      { value: " Compressor Noisy / Rattling", label: " Compressor Noisy / Rattling" },
+                      { value: "Compressor Seized", label: "Compressor Seized" },
+                      { value: "Compressor Clutch Not Engaging", label: "Compressor Clutch Not Engaging" },
+                      { value: "Low Compressor Efficiency", label: "Low Compressor Efficiency" },
+                      { value: "Refrigerant Leak", label: "Refrigerant Leak" },
+                      { value: "Cabin Filter Dirty / Clogged", label: "Cabin Filter Dirty / Clogged" },
+                      { value: "AC Filter Needs Replacement", label: "AC Filter Needs Replacement" },
+                      { value: "Filter Reducing Airflow", label: "Filter Reducing Airflow" },
+                      { value: "Filter Missing / Not Installed", label: "Filter Missing / Not Installed" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                      
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                  multiple
+                  required
+                  name="hvac_detail[infotainment_condition]"
+                  label="Infotainment Problems"
+                  value={data.hvac_detail.infotainment_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Touchscreen Not Working", label: "Touchscreen Not Working" },
+                      { value: "Navigation Malfunction", label: "Navigation Malfunction" },
+                      { value: "Bluetooth / Connectivity Issues", label: "Bluetooth / Connectivity Issues" },
+                      { value: "Screen Flickering", label: "Screen Flickering" },
+                      { value: "System Freezing", label: "System Freezing" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                      
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                multiple
                 required
-                  name="radio_condition"
+                  name="hvac_detail[radio_condition]"
                   label="Radio Condition"
-                  value={data.radio_condition}
-                  onChange={(e) => setData('radio_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.hvac_detail.radio_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "No Sound / Low Volume", label: "No Sound / Low Volume" },
+                      { value: "Station Tuning Issue", label: "Station Tuning Issue" },
+                      { value: "Intermittent Reception", label: "Intermittent Reception" },
+                      { value: "Radio Not Powering On", label: "Radio Not Powering On" },
+                      { value: "Speaker Not Working", label: "Speaker Not Working" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
               </CCol>
 
-              <CCol md={4}>
-                <CFormSelect
-                required
-                  name="heating_cooling_system"
-                  label="Heating/ Cooling System"
-                  value={data.heating_cooling_system}
-                  onChange={(e) => setData('heating_cooling_system', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+               <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="hvac_detail[comment]"
+                  label="Comments"
+                  value={data.hvac_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
               </CCol>
 
               
@@ -2751,94 +2983,127 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="radiator_core_condition"
+                  name="cooling_detail[radiator_core_condition]"
                   label="Radiator core condition"
-                  value={data.radiator_core_condition}
-                  onChange={(e) => setData('radiator_core_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.cooling_detail.radiator_core_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Radiator Leak", label: "Radiator Leak" },
+                    { value: "Coolant Low / Empty", label: "Coolant Low / Empty" },
+                    { value: "Overheating Engine", label: "Overheating Engine" },
+                    { value: "Radiator Fan Not Working", label: "Radiator Fan Not Working" },
+                    { value: "Coolant Hose Leak / Cracked", label: "Coolant Hose Leak / Cracked" },
+                    { value: "Thermostat Malfunction", label: "Thermostat Malfunction" },
+                    { value: "Water Pump Faulty / Noisy", label: "Water Pump Faulty / Noisy" },
+                    { value: "Radiator Clogged / Blocked", label: "Radiator Clogged / Blocked" },
+                    { value: "Coolant Reservoir Damaged / Leaking", label: "Coolant Reservoir Damaged / Leaking" },
+                    { value: "Heater Not Working (due to coolant issue)", label: "Heater Not Working (due to coolant issue)" },
+                    { value: " Radiator Cap Faulty / Leaking", label: " Radiator Cap Faulty / Leaking" },
+                    { value: "Air Trapped In Cooling System", label: "Air Trapped In Cooling System" },
+                  ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="radiator_fan_operation"
+                  name="cooling_detail[radiator_fan_operation]"
                   label="Radiator fan operation (low/high speed)"
-                  value={data.radiator_fan_operation}
-                  onChange={(e) => setData('radiator_fan_operation', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.cooling_detail.radiator_fan_operation}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working Properly", label: "Working Properly" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Noicy", label: "Noicy" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="cycling_observation"
+                  name="cooling_detail[cycling_observation]"
                   label="Cycling observation"
-                  value={data.cycling_observation}
-                  onChange={(e) => setData('cycling_observation', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.cooling_detail.cycling_observation}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="overflow_expansion_tank_condition"
+                  name="cooling_detail[overflow_expansion_tank_condition]"
                   label="Overflow/expansion tank condition"
-                  value={data.overflow_expansion_tank_condition}
-                  onChange={(e) => setData('overflow_expansion_tank_condition', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.cooling_detail.overflow_expansion_tank_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="heater_core_performance"
+                  name="cooling_detail[heater_core_performance]"
                   label="Heater core performance (cab heat)"
-                  value={data.heater_core_performance}
-                  onChange={(e) => setData('heater_core_performance', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.cooling_detail.heater_core_performance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working Properly", label: "Working Properly" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Noicy", label: "Noicy" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
+                multiple
                 required
-                  name="fuel_tank_inspection"
+                  name="cooling_detail[fuel_tank_inspection]"
                   label="Fuel tank inspection (visual)"
-                  value={data.fuel_tank_inspection}
-                  onChange={(e) => setData('fuel_tank_inspection', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.cooling_detail.fuel_tank_inspection}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Need Attention", label: "Need Attention" },
+                      { value: "Leaking", label: "Leaking" },
+                      { value: "Damaged", label: "Damaged" },
+                    ]}
+                  />
               </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="cooling_detail[comment]"
+                  label="Comments"
+                  value={data.cooling_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
 
               
             </CRow>
@@ -2847,115 +3112,129 @@ const AddInspection = () => {
         </CCard>
 
 
-         <CCard className="mb-4">
+        <CCard className="mb-4">
           <CCardHeader>
             <strong>Electrical Systems & Lighting</strong>
           </CCardHeader>
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="starter_engagement_reliability"
+                  name="electrical_detail[starter_engagement_reliability]"
                   label="Starter engagement reliability"
-                  value={data.starter_engagement_reliability}
-                  onChange={(e) => setData('starter_engagement_reliability', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.starter_engagement_reliability}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Works Perfectly", label: "Works Perfectly" },
+                      { value: "Slow Engagement", label: " Slow Engagement" },
+                      { value: "Clicking Sound", label: "Clicking Sound" },
+                      { value: "Fails To Start", label: "Fails To Start" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="front_indicators_function"
+                  name="electrical_detail[front_indicators_function]"
                   label="Front indicators function"
-                  value={data.front_indicators_function}
-                  onChange={(e) => setData('front_indicators_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.front_indicators_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Flickering", label: "Flickering" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="rear_indicators_function"
+                  name="electrical_detail[rear_indicators_function]"
                   label="Rear indicators function"
-                  value={data.rear_indicators_function}
-                  onChange={(e) => setData('rear_indicators_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.rear_indicators_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="reverse_light_function"
+                  name="electrical_detail[reverse_light_function]"
                   label="Reverse light function"
-                  value={data.reverse_light_function}
-                  onChange={(e) => setData('reverse_light_function', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.reverse_light_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Flickering", label: "Flickering" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="fog_lights_front_rear"
+                  name="electrical_detail[fog_lights_front_rear]"
                   label="Fog lights front/rear"
-                  value={data.fog_lights_front_rear}
-                  onChange={(e) => setData('fog_lights_front_rear', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.fog_lights_front_rear}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Flickering", label: "Flickering" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="interior_control_switches_backlight"
+                  name="electrical_detail[interior_control_switches_backlight]"
                   label="Interior control switches backlight"
-                  value={data.interior_control_switches_backlight}
-                  onChange={(e) => setData('interior_control_switches_backlight', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.interior_control_switches_backlight}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Dim / Intermittent", label: "Dim / Intermittent" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="parking_sensor_functionality"
+                  name="electrical_detail[parking_sensor_functionality]"
                   label="Parking sensor functionality"
-                  value={data.parking_sensor_functionality}
-                  onChange={(e) => setData('parking_sensor_functionality', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.electrical_detail.parking_sensor_functionality}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Fully Functional", label: "Fully Functional" },
+                    { value: "Intermittent", label: "Intermittent" },
+                    { value: "Not wWrking", label: "Not Working" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="electrical_detail[comment]"
+                  label="Comments"
+                  value={data.electrical_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
               </CCol>
 
               
@@ -2972,221 +3251,239 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className='g-3'>
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="start_performance"
+                  name="road_test_detail[start_performance]"
                   label="Start Performance"
-                  value={data.start_performance}
-                  onChange={(e) => setData('start_performance', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Cold start performance">Cold start performance</option>
-                  <option value="Warm start performance">Warm start performance</option>
-                </CFormSelect>
+                  value={data.road_test_detail.start_performance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Smooth Start", label: "Smooth Start" },
+                      { value: "Hesitant", label: "Hesitant" },
+                      { value: "Delayed", label: "Delayed" },
+                      { value: "Difficult To Start", label: "Difficult To Start" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="acceleration_responsiveness"
+                  name="road_test_detail[acceleration_responsiveness]"
                   label="Acceleration Responsiveness"
-                  value={data.acceleration_responsiveness}
-                  onChange={(e) => setData('acceleration_responsiveness', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.road_test_detail.acceleration_responsiveness}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Smooth", label: "Smooth" },
+                      { value: "Sluggish", label: "Sluggish" },
+                      { value: "Delayed Response", label: "Delayed Response" },
+                      { value: "Jerky", label: "Jerky" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="cruise_control_engagement_test"
+                  name="road_test_detail[cruise_control_engagement_test]"
                   label="Cruise Control Engagement Test"
-                  value={data.cruise_control_engagement_test}
-                  onChange={(e) => setData('cruise_control_engagement_test', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  value={data.road_test_detail.cruise_control_engagement_test}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Works", label: "Works" },
+                      { value: "Intermittent", label: "Intermittent" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="garebox_performance"
+                  name="road_test_detail[garebox_performance]"
                   label="Gearbox Performance"
-                  value={data.garebox_performance}
-                  onChange={(e) => setData('garebox_performance', e.target.value)}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Automatic gearbox shift points">Automatic gearbox shift points</option>
-                  <option value="Manual gearbox synchro smoothness">Manual gearbox synchro smoothness</option>
-                </CFormSelect>
+                  value={data.road_test_detail.garebox_performance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Smooth Shifting", label: "Smooth Shifting" },
+                    { value: "Hard To Shift", label: "Hard To Shift" },
+                    { value: "Gear Slipping", label: "Gear Slipping" },
+                    { value: "Noisy / Grinding", label: "Noisy / Grinding" },
+                  ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="engine_vibration_idle"
+                  name="road_test_detail[engine_vibration_idle]"
                   label="Engine vibration at idle"
-                  value={data.engine_vibration_idle}
-                  onChange={(e) => setData('engine_vibration_idle', e.target.value)}
+                  value={data.road_test_detail.engine_vibration_idle}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.engine_vibration_idle}
                   feedbackInvalid={errors.engine_vibration_idle}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Smooth", label: "Smooth" },
+                      { value: "Mild Vibration", label: "Mild Vibration" },
+                      { value: "Excessive Vibration", label: "Excessive Vibration" },
+                      { value: "Bad", label: "Bad" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="mid_range_power"
+                  name="road_test_detail[mid_range_power]"
                   label="Mid-range power delivery"
-                  value={data.mid_range_power}
-                  onChange={(e) => setData('mid_range_power', e.target.value)}
+                  value={data.road_test_detail.mid_range_power}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.mid_range_power}
                   feedbackInvalid={errors.mid_range_power}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Smooth And Responsive", label: "Smooth And Responsive" },
+                      { value: "Hesitant", label: "Hesitant" },
+                      { value: "Weak / Laggy", label: "Weak / Laggy" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="highway_stability"
+                  name="road_test_detail[highway_stability]"
                   label="Highway stability"
-                  value={data.highway_stability}
-                  onChange={(e) => setData('highway_stability', e.target.value)}
+                  value={data.road_test_detail.highway_stability}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.highway_stability}
                   feedbackInvalid={errors.highway_stability}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="steering_feedback"
+                  name="road_test_detail[steering_feedback]"
                   label="Steering feedback & centering"
-                  value={data.steering_feedback}
-                  onChange={(e) => setData('steering_feedback', e.target.value)}
+                  value={data.road_test_detail.steering_feedback}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.steering_feedback}
                   feedbackInvalid={errors.steering_feedback}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="abs_intervention"
+                  name="road_test_detail[abs_intervention]"
                   label="ABS intervention feel"
-                  value={data.abs_intervention}
-                  onChange={(e) => setData('abs_intervention', e.target.value)}
+                  value={data.road_test_detail.abs_intervention}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.abs_intervention}
                   feedbackInvalid={errors.abs_intervention}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="braking_performance"
+                  name="road_test_detail[braking_performance]"
                   label="Braking performance under test"
-                  value={data.braking_performance}
-                  onChange={(e) => setData('braking_performance', e.target.value)}
+                  value={data.road_test_detail.braking_performance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.braking_performance}
                   feedbackInvalid={errors.braking_performance}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="transmission_harshness"
+                  name="road_test_detail[transmission_harshness]"
                   label="Transmission harshness under load"
-                  value={data.transmission_harshness}
-                  onChange={(e) => setData('transmission_harshness', e.target.value)}
+                  value={data.road_test_detail.transmission_harshness}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.transmission_harshness}
                   feedbackInvalid={errors.transmission_harshness}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good", label: "Good" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="clutch_engagement"
+                  name="road_test_detail[clutch_engagement]"
                   label="Clutch engagement smoothness (manual)"
-                  value={data.clutch_engagement}
-                  onChange={(e) => setData('clutch_engagement', e.target.value)}
+                  value={data.road_test_detail.clutch_engagement}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.clutch_engagement}
                   feedbackInvalid={errors.clutch_engagement}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Bad", label: "Bad" },
+                  ]} />
               </CCol>
 
               <CCol md={4}>
-                <CFormSelect
+                <Select2Multi
                 required
-                  name="noise_levels"
+                  name="road_test_detail[noise_levels]"
                   label="Noise levels at various speeds"
-                  value={data.noise_levels}
-                  onChange={(e) => setData('noise_levels', e.target.value)}
+                  value={data.road_test_detail.noise_levels}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
                   invalid={!!errors.noise_levels}
                   feedbackInvalid={errors.noise_levels}
-                >
-                  <option value="">-- Select --</option>
-                  <option value="Normal">Normal</option>
-                  <option value="Good">Good</option>
-                  <option value="Excellent">Excellent</option>
-                </CFormSelect>
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good", label: "Good" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Bad", label: "Bad" },
+                  ]} />
               </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="road_test_detail[comment]"
+                  label="Comments"
+                  value={data.road_test_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
 
               
             </CRow>
             
           </CCardBody>
         </CCard>
+
+        
+        <CarInspectionImage inspectionId={props.inspectionsDetail.id} initialMapping={savedMappingFromServer} onSvgChange={handleSvgChange} svgImage={data.vehicle_detail.svg_image} /> 
+
         <CCol xs={12}>
             <CButton type="submit" color="primary" className="px-4" disabled={processing}>
             {processing ? 'Saving...' : 'Save'}

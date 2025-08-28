@@ -10,13 +10,13 @@ class InspectionInteriorDetail extends Model
         'request_id',
         'dashboard_fit_finish',
         'instrument_cluster_illumination',
-        'warning_lights_active_start',
         'odometer_function',
         'interior_lighting',
         'glove_box_latching',
         'carpet_wear_retention',
         'interior_contamination_odour',
         'trunk_boot_interior_condition',
+        'comment',
     ];
 
     /**

@@ -35,6 +35,7 @@ return new class extends Migration
             $table->text('additional_notes')->nullable();
             $table->integer('status')->nullable(true);
             $table->date('assign_date')->nullable(true);
+            $table->dateTime('completed_date')->nullable(true);
             $table->timestamps();
         });
     }

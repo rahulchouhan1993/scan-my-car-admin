@@ -51,6 +51,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+       <PricingSection />
       <VehicleChecks />
 
       <div className='group relative overflow-hidden py-[30px] md:py-[40px] lg:md:py-[70px] bg-[#0D1B2A] hover:bg-[#fff] min-h-[600px] md:min-h-[750px] lg:min-h-[810px] flex items-center '>
@@ -136,7 +137,7 @@ const Home = () => {
         </div>
       </section>
 
-      <PricingSection />
+     
       <section className='bg-[#F9F9F9] py-[30px] md:py-[40px] lg:py-[60px] xl:py-[80px]'>
         <div className='container'>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-[20px] md:mb-[30px] lg:mb-[50px] gap-4">

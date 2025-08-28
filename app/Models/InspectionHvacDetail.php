@@ -9,8 +9,9 @@ class InspectionHvacDetail extends Model
     protected $fillable = [
         'request_id',
         'air_condition',
+        'infotainment_condition',
         'radio_condition',
-        'heating_cooling_system',
+        'comment',
     ];
 
     /**

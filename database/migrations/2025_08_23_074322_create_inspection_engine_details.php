@@ -18,27 +18,27 @@ return new class extends Migration
             $table->foreign('request_id')->references('id')->on('inspection_requests')->onDelete('cascade');
 
             // Engine condition fields
-            $table->string('engine_start_behavior_cold')->nullable();
-            $table->string('engine_start_behavior_warm')->nullable();
-            $table->string('idle_stability')->nullable();
-            $table->string('throttle_response')->nullable();
-            $table->string('abnormal_engine_noises')->nullable();
-            $table->string('engine_oil_level_check')->nullable();
-            $table->string('engine_oil_appearance')->nullable();
-            $table->string('visible_oil_leaks')->nullable();
-            $table->string('oil_filter_housing_condition')->nullable();
-            $table->string('coolant_level_check')->nullable();
-            $table->string('coolant_color')->nullable();
-            $table->string('coolant_leaks')->nullable();
-            $table->string('signs_of_coolant_in_oil')->nullable();
-            $table->string('hose_condition')->nullable();
-            $table->string('drive_belt_condition')->nullable();
-            $table->string('timing_belt_condition')->nullable();
-            $table->string('turbo_boost_check')->nullable();
-            $table->string('air_intake_condition')->nullable();
-            $table->string('air_filter_element')->nullable();
-            $table->string('starter_motor_cranking')->nullable();
-            $table->string('fuse_box_access')->nullable();
+            $table->text('engine_start_behavior_cold')->nullable();
+            $table->text('engine_start_behavior_warm')->nullable();
+            $table->text('idle_stability')->nullable();
+            $table->text('throttle_response')->nullable();
+            $table->text('abnormal_engine_noises')->nullable();
+            $table->text('engine_oil_level_check')->nullable();
+            $table->text('engine_oil_appearance')->nullable();
+            $table->text('visible_oil_leaks')->nullable();
+            $table->text('oil_filter_housing_condition')->nullable();
+            $table->text('coolant_level_check')->nullable();
+            $table->text('coolant_color')->nullable();
+            $table->text('coolant_leaks')->nullable();
+            $table->text('signs_of_coolant_in_oil')->nullable();
+            $table->text('hose_condition')->nullable();
+            $table->text('drive_belt_condition')->nullable();
+            $table->text('timing_belt_condition')->nullable();
+            $table->text('turbo_boost_check')->nullable();
+            $table->text('air_intake_condition')->nullable();
+            $table->text('air_filter_element')->nullable();
+            $table->text('starter_motor_cranking')->nullable();
+            $table->text('fuse_box_access')->nullable();
 
             // Free text fields
             $table->text('any_noice')->nullable();

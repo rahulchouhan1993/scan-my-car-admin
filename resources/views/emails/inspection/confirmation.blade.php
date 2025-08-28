@@ -59,7 +59,7 @@
               <!-- Logo -->
               <tr>
                 <td align="left" style="padding: 40px 50px 20px 50px;">
-                  <img src="{{ env('APP_URL') }}/images/logo.png" alt="BFD Logo" width="130" height="130" style="display: block;">
+                  <img src="{{ env('APP_URL') }}/images/logo.png" alt="Logo" width="130" height="130" style="display: block;">
                 </td>
               </tr>
 
@@ -77,7 +77,7 @@
               <!-- Introduction -->
               <tr>
                 <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
-                  One of our team mebers will review your request and get back to you shortly. You can review your request status by logging into your dashboard.
+                  One of our team mebers will review your request and get back to you shortly.
                 </td>
               </tr>
 
@@ -85,13 +85,13 @@
               <tr><td style="padding: 10px 50px;"></td></tr>
 
               <!-- Call to Action -->
-              <tr>
+              {{-- <tr>
                 <td align="left" style="padding: 30px 50px;">
                   <a href="{{ env('APP_URL') }}/dealer" style="background-color: #D72638; color: #fff; padding: 12px 25px; font-size: 16px; border-radius: 4px; display: inline-block;">
                     Check Status
                   </a>
                 </td>
-              </tr>
+              </tr> --}}
 
               <!-- Footer -->
               <tr>

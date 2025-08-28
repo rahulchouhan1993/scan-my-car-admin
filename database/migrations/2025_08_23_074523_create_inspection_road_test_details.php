@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('transmission_harshness')->nullable();
             $table->string('clutch_engagement')->nullable();
             $table->string('noise_levels')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

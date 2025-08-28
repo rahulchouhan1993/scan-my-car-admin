@@ -20,4 +20,10 @@ export default defineConfig({
             "@":'/resources/js'
         },
     },
+    optimizeDeps: {
+        include: ["jquery", "select2"],
+    },
+    define: {
+        'process.env': {},
+    },
 });

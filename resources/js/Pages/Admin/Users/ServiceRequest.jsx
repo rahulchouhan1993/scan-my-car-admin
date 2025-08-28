@@ -55,14 +55,14 @@ const ServiceRequest = (props) => {
                   <CTableRow key={inspection.id || index}>
                     <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
                     <CTableDataCell>
-                      {inspection.package_id === 1 && (
+                      {inspection.package_id === 1 ? (
                         "Regular"
-                      )}
-                      {inspection.status === 2 && (
+                      ) : inspection.package_id === 2 ? (
                         "Comprehensive"
-                      )}
-                      {inspection.status === 3 && (
+                      ) : inspection.package_id === 3 ? (
                         "Ultra"
+                      ) : (
+                        "Unknown"
                       )}
                     </CTableDataCell>
                     <CTableDataCell>{inspection.full_name}</CTableDataCell>
@@ -92,6 +92,11 @@ const ServiceRequest = (props) => {
                         </CButton>
                       )}
                       {inspection.status === 4 && (
+                        <CButton color="secondary" size="sm">
+                          Revision Period
+                        </CButton>
+                      )}
+                      {inspection.status === 5 && (
                         <CButton color="success" size="sm">
                           Completed
                         </CButton>
@@ -105,8 +110,10 @@ const ServiceRequest = (props) => {
                         </CDropdownToggle>
                         <CDropdownMenu>
                            <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>Edit</CDropdownItem>
-                           <CDropdownItem href={route('admin.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
-                           <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem>
+                           {inspection.status === 4 && (
+                            <CDropdownItem href={route('admin.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
+                           )}
+                           {/* <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
                         </CDropdownMenu>
                       </CDropdown>
                     </CTableDataCell>

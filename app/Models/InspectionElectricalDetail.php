@@ -15,6 +15,7 @@ class InspectionElectricalDetail extends Model
         'fog_lights_front_rear',
         'interior_control_switches_backlight',
         'parking_sensor_functionality',
+        'comment',
     ];
 
     /**

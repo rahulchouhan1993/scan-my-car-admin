@@ -14,6 +14,7 @@ class InspectionCoolingDetail extends Model
         'overflow_expansion_tank_condition',
         'heater_core_performance',
         'fuel_tank_inspection',
+        'comment',
     ];
 
     /**

@@ -84,7 +84,8 @@ class InspectionsController extends Controller
             if ($adminDetails) {
                 Mail::to($adminDetails->email)->send(new InspectionRequestSubmitted($inspectionRequest));
             }
-            return redirect()->back()->with('success', 'Inspection request created successfully.');
+            return redirect()->route('thank-you')->with('success', 'Inspection request created successfully.');
+            //return redirect()->back()->with('success', 'Inspection request created successfully.');
         }
 
         $pageTitle = 'Book An Inspection | CertifyCars';
@@ -92,10 +93,39 @@ class InspectionsController extends Controller
         
     }
 
-    public function inspectionDetails(Request $request){
-
+    public function inspectionDetails($id){
+        $inspectionsDetail = InspectionRequest::with([
+            'bodyDetail',
+            'vehicleDetail',
+            'interiorDetails',
+            'glassDetails',
+            'engineDetails',
+            'clusterDetails',
+            'transmissionDetails',
+            'suspensionDetails',
+            'brakesDetails',
+            'tyresDetails',
+            'seatDetails',
+            'hvacDetails',
+            'coolingFuelDetails',
+            'electricalLightingDetails',
+            'performanceRoadTestDetails',
+        ])->find($id);
+       
         $pageTitle = 'Inspection Details | CertifyCars';
-        return inertia('Customers/InspectionDetails', compact('pageTitle'));
+        return inertia('Customers/InspectionDetails', compact('pageTitle','inspectionsDetail'));
 
+    }
+
+    public function thankYou(){
+        $pageTitle = 'Thank you!';
+        return inertia('Customers/ThankYou', compact('pageTitle'));
+    }
+
+    public function markComplete(){
+        InspectionRequest::where('status', 4)
+        ->where('completed_date', '<=', Carbon::now()->subMinutes(30))
+        ->update(['status' => 5]);
+        die;
     }
 }

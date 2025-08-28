@@ -19,29 +19,30 @@ return new class extends Migration
             $table->foreign('request_id')->references('id')->on('inspection_requests')->onDelete('cascade');
 
             // Windshield
-            $table->string('windshield_condition')->nullable();
-            $table->string('windshield_wiper_function')->nullable();
-            $table->string('wiper_blade_wear')->nullable();
-            $table->string('rear_wiper_function')->nullable();
+            $table->text('windshield_condition')->nullable();
+            $table->text('windshield_wiper_function')->nullable();
+            $table->text('wiper_blade_wear')->nullable();
+            $table->text('rear_wiper_function')->nullable();
             
             // Side windows
-            $table->string('side_window_operation_lf')->nullable();
-            $table->string('side_window_operation_rf')->nullable();
-            $table->string('side_window_operation_lr')->nullable();
-            $table->string('side_window_operation_rr')->nullable();
+            $table->text('side_window_operation_lf')->nullable();
+            $table->text('side_window_operation_rf')->nullable();
+            $table->text('side_window_operation_lr')->nullable();
+            $table->text('side_window_operation_rr')->nullable();
 
             // Rear window
-            $table->string('rear_window_condition')->nullable();
+            $table->text('rear_window_condition')->nullable();
 
             // Sunroof
-            $table->string('sunroof_operation')->nullable();
-            $table->string('sunroof_drainage_check')->nullable();
-            $table->string('sunroof_glass_condition')->nullable();
+            $table->text('sunroof_operation')->nullable();
+            $table->text('sunroof_drainage_check')->nullable();
+            $table->text('sunroof_glass_condition')->nullable();
 
             // Mirrors
-            $table->string('left_external_mirror_function')->nullable();
-            $table->string('right_external_mirror_function')->nullable();
-            $table->string('mirror_adjustment_motors')->nullable();
+            $table->text('left_external_mirror_function')->nullable();
+            $table->text('right_external_mirror_function')->nullable();
+            $table->text('mirror_adjustment_motors')->nullable();
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

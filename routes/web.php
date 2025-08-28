@@ -21,7 +21,9 @@ Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contact
 Route::match(['post','get'],'/register-dealer', [CustomersController::class, 'createUser'])->name('register');
 Route::match(['post','get'],'/book-inspection', [InspectionsController::class, 'requestInspection'])->name('book-inspection');
 Route::post('/request-inspection', [InspectionsController::class, 'requestInspection'])->name('request-inspection');
-Route::get('/inspection-details', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
+Route::get('/inspection-details/{id}', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
+Route::get('/thank-you', [InspectionsController::class, 'thankYou'])->name('thank-you');
+Route::get('/mark-as-completed', [InspectionsController::class, 'markComplete'])->name('markComplete');
 
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
@@ -113,5 +115,6 @@ Route::prefix('inspector')->name('inspector.')->group(function () {
         Route::get('/logs/{id}', [InspectorController::class, 'logs'])->name('inspections.logs');
         Route::get('/start-inspection/{id}', [InspectorController::class, 'startInspection'])->name('start-inspection');
         Route::post('/submit-test/{id}', [InspectorController::class, 'submitTest'])->name('submit-test');
+        
     });
 });

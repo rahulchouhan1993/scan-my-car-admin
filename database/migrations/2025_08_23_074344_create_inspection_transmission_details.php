@@ -16,10 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('inspection_requests')->onDelete('cascade');
             $table->string('transmission_fluid_level_auto')->nullable();
-            $table->string('transmission_fluid_condition_auto')->nullable();
             $table->string('manual_gearbox_oil_check')->nullable();
             $table->string('transmission_mount_integrity')->nullable();
-            $table->string('gear_selection_smoothness')->nullable();
             $table->string('clutch_bite_slippage')->nullable();
             $table->string('automatic_shift_quality')->nullable();
             $table->string('transfer_case_engagement')->nullable();

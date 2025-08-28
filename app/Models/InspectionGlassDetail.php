@@ -33,6 +33,7 @@ class InspectionGlassDetail extends Model
         'left_external_mirror_function',
         'right_external_mirror_function',
         'mirror_adjustment_motors',
+        'comments',
     ];
 
     /**

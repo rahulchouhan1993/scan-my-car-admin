@@ -21,6 +21,7 @@ class InspectionRoadTestDetail extends Model
         'transmission_harshness',
         'clutch_engagement',
         'noise_levels',
+        'comment',
     ];
 
     /**

@@ -56,20 +56,20 @@ class HandleInertiaRequests extends Middleware
                             'totalUsers' => User::where('role','=', 'dealer')->count(),
                             'totalInspector' => User::where('role','=', 'inspector')->count(),
                             'totalInProcessRequest' => InspectionRequest::where('status', 2)->count(),
-                            'totalCompletedRequest' => InspectionRequest::where('status', 4)->count(),
+                            'totalCompletedRequest' => InspectionRequest::where('status', 5)->count(),
                             'totalServiceRequests' => InspectionRequest::where('status', 0)->count(),
                         ];
                     }elseif(Auth::user()->role=='inspector'){
                         return [
                             'totalServiceRequests' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status','=',1)->count(),
                             'totalInProcessRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 2)->count(),
-                            'totalCompletedRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 4)->count(),
+                            'totalCompletedRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 5)->count(),
                         ];
                     }elseif(Auth::user()->role=='dealer'){
                         return [
                             // 'totalServiceRequests' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status','=',1)->count(),
                             // 'totalInProcessRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 2)->count(),
-                            // 'totalCompletedRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 4)->count(),
+                            // 'totalCompletedRequest' => InspectionRequest::where('inspector_id', Auth::user()->id)->where('status', 5)->count(),
                         ];
                     }
                 }

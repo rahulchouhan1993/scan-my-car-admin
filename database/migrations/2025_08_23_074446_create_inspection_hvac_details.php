@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('request_id');
             $table->foreign('request_id')->references('id')->on('inspection_requests')->onDelete('cascade');
-            $table->string('air_condition')->nullable();
-            $table->string('radio_condition')->nullable();
-            $table->string('heating_cooling_system')->nullable();
+            $table->text('air_condition')->nullable();
+            $table->text('infotainment_condition')->nullable();
+            $table->text('radio_condition')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

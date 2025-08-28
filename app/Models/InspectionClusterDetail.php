@@ -18,6 +18,7 @@ class InspectionClusterDetail extends Model
         'seatbelt_reminder_light',
         'traction_control_light',
         'tpms',
+        'comments',
     ];
 
     /**

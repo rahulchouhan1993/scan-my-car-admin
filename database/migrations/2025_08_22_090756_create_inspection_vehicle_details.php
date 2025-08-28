@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('request_id')->references('id')->on('inspection_requests')->onDelete('cascade');
 
             // Vehicle details fields
+            $table->text('svg_image')->nullable();
             $table->string('engine_capacity')->nullable();
             $table->string('engine_cylinders')->nullable();
             $table->string('drive_type')->nullable();

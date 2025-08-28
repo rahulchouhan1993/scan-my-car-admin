@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('overflow_expansion_tank_condition')->nullable();
             $table->string('heater_core_performance')->nullable();
             $table->string('fuel_tank_inspection')->nullable();
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }
