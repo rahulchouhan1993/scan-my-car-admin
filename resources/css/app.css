@@ -144,11 +144,14 @@ input[type=number]{-moz-appearance:textfield;}
     color: #192735; /* आपका main text color */
   }
 .overlaybx { background: #00000069; border-radius: 20px;}
+.carbx svg { width: 100%!important; height: 600px!important;}
   @media(max-width:767px){
     .whatsapp img {
       max-width: 80px;
   }
+  
   .mobileName { z-index: 9999;}
   .bookbtn {      padding: 11px 15px; font-size: 16px;}
   .overlaybx { border-radius: 10px;}
+  .carbx svg { width: 100%!important; height:300px!important;}
   }

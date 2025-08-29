@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import { usePage } from '@inertiajs/react';
 import redarrowRg from "../../assets/images/redarrowRg.png";
 import inspectiondetailbg from "../../assets/images/inspectiondetailbg.jpg";
+import insepectimg1 from "../../assets/images/insepectimg01.jpg";
 import CustomerLayout from '../../layout/CustomerLayout'
 const InspectionDetails = () => {
   const { props } = usePage();
@@ -829,14 +830,14 @@ const InspectionDetails = () => {
                     }}
                     className="transition-all duration-300 ease-in-out overflow-hidden"
                   >
-                    <div className="border-t border-[#dedede] px-[25px] py-[10px]">
+                    <div className="border-t border-[#dedede] px-[15px] md:px-[25px] py-[10px]">
                       {section.items.map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex justify-between py-[6px]"
+                          className="flex justify-between gap-[15px] py-[6px]"
                         >
-                          <span className="creatodisplayM text-[14px]   text-[#192735c7]">{item.label}</span>
-                          <span className="creatodisplayM  text-[12px]  " style={{ color: item.color }}>
+                          <span className="max-w-[70%] flex items-start flex-wrap creatodisplayM text-[14px]   text-[#192735c7] font-bold">{item.label}</span>
+                          <span className="creatodisplayM w-[30%] flex items-start justify-end  text-[12px] text-end " style={{ color: item.color }}>
                             {item.value}
                           </span>
                         </div>
@@ -877,9 +878,9 @@ const InspectionDetails = () => {
                     return (
                       <SwiperSlide key={index}>
                         <img
-                          src={imageUrl}
+                          src={insepectimg1}
                           alt={`Car ${index + 1}`}
-                          className="w-full h-auto object-cover"
+                          className="w-full h-[250px] max-h-[250px] md:h-[400px] md:max-h-[400px]  object-cover"
                         />
                       </SwiperSlide>
                     );
@@ -904,12 +905,12 @@ const InspectionDetails = () => {
               <div className=" mt-[25px] md:mt-[50px]">
                 <h2 className="creatodisplayM text-[16px] text-[#192735b0] uppercase ">Body inspection</h2>
                 <div className="carbx flex flex-col items-center justify-center px-[15px] py-[15px] md:px-[30px] md:py-[30px] border-[1px] border-[#e5e5e5] mt-[10px] md:mt-[20px]  rounded-[15px]">
-                  <div
+                  <div className="flex items-center justify-center"
                     dangerouslySetInnerHTML={{
                       __html: props.inspectionsDetail.vehicle_detail.svg_image,
                     }}
                   />
-                  <div className="flex flex-wrap gap-4 mt-[60px] border-t-[1px] border-t-[#f0f0f0] pt-[30px]">
+                  <div className="flex flex-wrap gap-4 mt-[20px] border-t-[1px] border-t-[#f0f0f0] pt-[30px]">
                   {items.map((item, idx) => (
                     <div key={idx} className="flex items-center space-x-2 min-w-[150px]">
                       <span
