@@ -20,7 +20,7 @@ import CarSlider from '../../components/CarSlider';
 const Home = () => {
   return (
     <>
-      <section className="relative  flex items-center w-full min-h-[450px] md:min-h-[650px] lg:min-h-[750px] overflow-hidden">
+      <section className="relative  flex items-center w-full min-h-[400px] md:min-h-[500px] lg:min-h-[600px] overflow-hidden">
         {/* Image */}
         <div className="absolute inset-0 top-[0] bottom-[0] h-full">
           <img src={heroImage} alt="Vehicle Inspection" className="w-full h-full object-cover" />
@@ -37,7 +37,7 @@ const Home = () => {
         {/* Content */}
         <div className="absolute z-[2] left-[0] right-[0] inset-0 flex items-center ">
           <div className="text-white container ">
-            <h1 className="ppfont  text-white pt-[50px] lg:pt-[80px] text-[25px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[30px] md:leading-[55px] lg:leading-[65px] xl:leading-[65px] mb-[15px]">
+            <h1 className="ppfont  text-white pt-[80px] md:pt-[50px] lg:pt-[80px] text-[25px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[30px] md:leading-[55px] lg:leading-[65px] xl:leading-[65px] mb-[15px]">
               Certify Your Car Now,<br />
               Before It Becomes<br />
               Your Problem.
