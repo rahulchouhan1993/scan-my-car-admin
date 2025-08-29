@@ -43,7 +43,6 @@ const ServiceRequest = (props) => {
                     <CTableHeaderCell scope="col">Name</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Contact No.</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Vehicle Detail</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Date & Time</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Created</CTableHeaderCell>
@@ -68,7 +67,7 @@ const ServiceRequest = (props) => {
                     <CTableDataCell>{inspection.full_name}</CTableDataCell>
                     <CTableDataCell>{inspection.email}</CTableDataCell>
                     <CTableDataCell>{inspection.contact_no}</CTableDataCell>
-                    <CTableDataCell>{inspection.vehicle_make} | {inspection.vehicle_model} | {inspection.vehicle_year}</CTableDataCell>
+                   
                     <CTableDataCell>{inspection.preferred_date} {inspection.preferred_time_slot}</CTableDataCell>
                     <CTableDataCell>
                       {inspection.status === 0 && (

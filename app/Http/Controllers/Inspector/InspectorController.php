@@ -212,16 +212,16 @@ class InspectorController extends Controller
         $roadTestDetail = InspectionRoadTestDetail::where('request_id', $id)->first();
 
         if($request->isMethod('post')){
-            // if ($inspectionsDetail && $inspectionsDetail->completed_date) {
-            //     $completedAt = Carbon::parse($inspectionsDetail->completed_date);
-            //     $now = Carbon::now();
+            if ($inspectionsDetail && $inspectionsDetail->completed_date) {
+                $completedAt = Carbon::parse($inspectionsDetail->completed_date);
+                $now = Carbon::now();
 
-            //     $diffMinutes = $completedAt->diffInMinutes($now);
+                $diffMinutes = $completedAt->diffInMinutes($now);
 
-            //     if ($diffMinutes > 30) {
-            //         return redirect()->route('inspector.service-request')->with('error','You can no longer edit the details now.');
-            //     } 
-            // }
+                if ($diffMinutes > 30) {
+                    return redirect()->route('inspector.service-request')->with('error','You can no longer edit the details now.');
+                } 
+            }
             $inspectionsDetail->update([
                 'vehicle_make' => $request->input('vehicle_make'),
                 'vehicle_model' => $request->input('vehicle_model'),
