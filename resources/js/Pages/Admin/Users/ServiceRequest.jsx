@@ -110,8 +110,8 @@ const ServiceRequest = (props) => {
                         </CDropdownToggle>
                         <CDropdownMenu>
                            <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>Edit</CDropdownItem>
-                           {inspection.status === 4 && (
-                            <CDropdownItem href={route('admin.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
+                           {(inspection.status === 4 || inspection.status === 5) && (
+                            <CDropdownItem target="_blank'" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
                            )}
                            {/* <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
                         </CDropdownMenu>

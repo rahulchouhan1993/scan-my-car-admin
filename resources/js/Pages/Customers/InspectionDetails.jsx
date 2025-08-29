@@ -6,7 +6,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { usePage } from '@inertiajs/react';
 import redarrowRg from "../../assets/images/redarrowRg.png";
-import inspectionslider01 from "../../assets/images/inspectionslider01.jpg";
 import inspectiondetailbg from "../../assets/images/inspectiondetailbg.jpg";
 import CustomerLayout from '../../layout/CustomerLayout'
 const InspectionDetails = () => {
@@ -31,32 +30,32 @@ const InspectionDetails = () => {
     {
       title: "Body Details",
       items: [
-        { label: "Front bumper fit & alignment", value: props.inspectionsDetail.body_detail.front_bumper==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.front_bumper==1 ? '#ff0200' : '#00973F' },
-        { label: "Rear bumper fit & alignment", value: props.inspectionsDetail.body_detail.rear_bumper==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.rear_bumper==1 ? '#ff0200' : '#00973F' },
-        { label: "Bonnet fit & latch", value: props.inspectionsDetail.body_detail.bonnet==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.bonnet==1 ? '#ff0200' : '#00973F' },
-        { label: "Boot lid fit & latch", value: props.inspectionsDetail.body_detail.boot_lid==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.boot_lid==1 ? '#ff0200' : '#00973F' },
-        { label: "Left front wing fit", value: props.inspectionsDetail.body_detail.left_front_wing==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_front_wing==1 ? '#ff0200' : '#00973F' },
-        { label: "Right front wing fit", value: props.inspectionsDetail.body_detail.right_front_wing==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_front_wing==1 ? '#ff0200' : '#00973F' },
-        { label: "Left front door fit", value: props.inspectionsDetail.body_detail.left_front_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_front_door_fit==1 ? '#ff0200' : '#00973F' },
-        { label: "Right front door fit", value: props.inspectionsDetail.body_detail.right_front_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_front_door_fit==1 ? '#ff0200' : '#00973F' },
-        { label: "Left rear door fit", value: props.inspectionsDetail.body_detail.left_rear_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_rear_door_fit==1 ? '#ff0200' : '#00973F' },
-        { label: "Right rear door fit", value: props.inspectionsDetail.body_detail.right_rear_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_rear_door_fit==1 ? '#ff0200' : '#00973F' },
-        { label: "Left rear quarter panel fit", value: props.inspectionsDetail.body_detail.left_rear_quarter_panel_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_rear_quarter_panel_fit==1 ? '#ff0200' : '#00973F' },
-        { label: "Right rear quarter panel fit", value: props.inspectionsDetail.body_detail.right_rear_quarter_panel_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_rear_quarter_panel_fit==1 ? '#ff0200' : '#00973F' },
-        { label: "Roof panel alignment", value: props.inspectionsDetail.body_detail.roof_panel_alignment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.roof_panel_alignment==1 ? '#ff0200' : '#00973F' },
-        { label: "Fender mounting & condition", value: props.inspectionsDetail.body_detail.fender_mounting_condition==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.fender_mounting_condition==1 ? '#ff0200' : '#00973F' },
-        { label: "Panel gap uniformity", value: props.inspectionsDetail.body_detail.panel_gap_uniformity==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.panel_gap_uniformity==1 ? '#ff0200' : '#00973F' },
-        { label: "External trim condition", value: props.inspectionsDetail.body_detail.external_trim_condition==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.external_trim_condition==1 ? '#ff0200' : '#00973F' },
-        { label: "Molding & clips present", value: props.inspectionsDetail.body_detail.molding_clips_present==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.molding_clips_present==1 ? '#ff0200' : '#00973F' },
-        { label: "Door seals fitment", value: props.inspectionsDetail.body_detail.door_seals_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.door_seals_fitment==1 ? '#ff0200' : '#00973F' },
-        { label: "Boot seal fitment", value: props.inspectionsDetail.body_detail.boot_seal_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.boot_seal_fitment==1 ? '#ff0200' : '#00973F' },
-        { label: "Fuel filler door operation", value: props.inspectionsDetail.body_detail.fuel_filler_door_operation==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.fuel_filler_door_operation==1 ? '#ff0200' : '#00973F' },
-        { label: "Body fasteners intact", value: props.inspectionsDetail.body_detail.body_fasteners_intact==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.body_fasteners_intact==1 ? '#ff0200' : '#00973F' },
-        { label: "Tow eye/point present & secure", value: props.inspectionsDetail.body_detail.tow_eye_point_secure==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.tow_eye_point_secure==1 ? '#ff0200' : '#00973F' },
-        { label: "Bumper reinforcement visible", value: props.inspectionsDetail.body_detail.bumper_reinforcement_visible==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.bumper_reinforcement_visible==1 ? '#ff0200' : '#00973F' },
-        { label: "Undercarriage guards", value: props.inspectionsDetail.body_detail.undercarriage_guards==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.undercarriage_guards==1 ? '#ff0200' : '#00973F' },
-        { label: "Panel repair signs", value: props.inspectionsDetail.body_detail.panel_repair_signs==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.panel_repair_signs==1 ? '#ff0200' : '#00973F' },
-        { label: "Exterior accessory fitment", value: props.inspectionsDetail.body_detail.exterior_accessory_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.exterior_accessory_fitment==1 ? '#ff0200' : '#00973F' },
+        { label: "Front bumper fit & alignment", value: props.inspectionsDetail.body_detail.front_bumper==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.front_bumper==1 ? '#000' : '#000' },
+        { label: "Rear bumper fit & alignment", value: props.inspectionsDetail.body_detail.rear_bumper==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.rear_bumper==1 ? '#000' : '#000' },
+        { label: "Bonnet fit & latch", value: props.inspectionsDetail.body_detail.bonnet==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.bonnet==1 ? '#000' : '#000' },
+        { label: "Boot lid fit & latch", value: props.inspectionsDetail.body_detail.boot_lid==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.boot_lid==1 ? '#000' : '#000' },
+        { label: "Left front wing fit", value: props.inspectionsDetail.body_detail.left_front_wing==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_front_wing==1 ? '#000' : '#000' },
+        { label: "Right front wing fit", value: props.inspectionsDetail.body_detail.right_front_wing==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_front_wing==1 ? '#000' : '#000' },
+        { label: "Left front door fit", value: props.inspectionsDetail.body_detail.left_front_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_front_door_fit==1 ? '#000' : '#000' },
+        { label: "Right front door fit", value: props.inspectionsDetail.body_detail.right_front_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_front_door_fit==1 ? '#000' : '#000' },
+        { label: "Left rear door fit", value: props.inspectionsDetail.body_detail.left_rear_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_rear_door_fit==1 ? '#000' : '#000' },
+        { label: "Right rear door fit", value: props.inspectionsDetail.body_detail.right_rear_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_rear_door_fit==1 ? '#000' : '#000' },
+        { label: "Left rear quarter panel fit", value: props.inspectionsDetail.body_detail.left_rear_quarter_panel_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_rear_quarter_panel_fit==1 ? '#000' : '#000' },
+        { label: "Right rear quarter panel fit", value: props.inspectionsDetail.body_detail.right_rear_quarter_panel_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_rear_quarter_panel_fit==1 ? '#000' : '#000' },
+        { label: "Roof panel alignment", value: props.inspectionsDetail.body_detail.roof_panel_alignment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.roof_panel_alignment==1 ? '#000' : '#000' },
+        { label: "Fender mounting & condition", value: props.inspectionsDetail.body_detail.fender_mounting_condition==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.fender_mounting_condition==1 ? '#000' : '#000' },
+        { label: "Panel gap uniformity", value: props.inspectionsDetail.body_detail.panel_gap_uniformity==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.panel_gap_uniformity==1 ? '#000' : '#000' },
+        { label: "External trim condition", value: props.inspectionsDetail.body_detail.external_trim_condition==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.external_trim_condition==1 ? '#000' : '#000' },
+        { label: "Molding & clips present", value: props.inspectionsDetail.body_detail.molding_clips_present==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.molding_clips_present==1 ? '#000' : '#000' },
+        { label: "Door seals fitment", value: props.inspectionsDetail.body_detail.door_seals_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.door_seals_fitment==1 ? '#000' : '#000' },
+        { label: "Boot seal fitment", value: props.inspectionsDetail.body_detail.boot_seal_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.boot_seal_fitment==1 ? '#000' : '#000' },
+        { label: "Fuel filler door operation", value: props.inspectionsDetail.body_detail.fuel_filler_door_operation==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.fuel_filler_door_operation==1 ? '#000' : '#000' },
+        { label: "Body fasteners intact", value: props.inspectionsDetail.body_detail.body_fasteners_intact==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.body_fasteners_intact==1 ? '#000' : '#000' },
+        { label: "Tow eye/point present & secure", value: props.inspectionsDetail.body_detail.tow_eye_point_secure==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.tow_eye_point_secure==1 ? '#000' : '#000' },
+        { label: "Bumper reinforcement visible", value: props.inspectionsDetail.body_detail.bumper_reinforcement_visible==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.bumper_reinforcement_visible==1 ? '#000' : '#000' },
+        { label: "Undercarriage guards", value: props.inspectionsDetail.body_detail.undercarriage_guards==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.undercarriage_guards==1 ? '#000' : '#000' },
+        { label: "Panel repair signs", value: props.inspectionsDetail.body_detail.panel_repair_signs==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.panel_repair_signs==1 ? '#000' : '#000' },
+        { label: "Exterior accessory fitment", value: props.inspectionsDetail.body_detail.exterior_accessory_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.exterior_accessory_fitment==1 ? '#000' : '#000' },
       ],
     },
     {
@@ -133,87 +132,87 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Engine start behavior (cold)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.engine_start_behavior_cold
         },
         {  
           label: "Engine start behavior (warm)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.engine_start_behavior_warm
         },
         {  
           label: "Idle stability", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.idle_stability
         },
         {  
           label: "Throttle response", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.throttle_response
         },
         {  
           label: "Abnormal engine noises (tick/knock)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.abnormal_engine_noises
         },
         {  
           label: "Engine oil level check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.engine_oil_level_check
         },
         {  
           label: "Engine oil appearance", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.engine_oil_appearance
         },
         {  
           label: "Visible oil leaks around head/covers", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.visible_oil_leaks
         },
         {  
           label: "Oil filter housing condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.oil_filter_housing_condition
         },
         {  
           label: "Coolant level check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.coolant_level_check
         },
         {  
           label: "Coolant color & contamination", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.coolant_color
         },
         {  
           label: "Coolant leaks visible (hoses/rad)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.coolant_leaks
         },
         {  
           label: "Signs of coolant in oil (milky)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.signs_of_coolant_in_oil
         },
         {  
           label: "Hose condition & clamps", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.hose_condition
         },
         {  
           label: "Drive belt tension & wear", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.drive_belt_condition
         },
         {  
           label: "Timing belt/chain visible condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.timing_belt_condition
         },
         {  
           label: "Turbocharger boost check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.turbo_boost_check
         },
         {  
           label: "Air intake ducting condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.air_intake_condition
         },
         {  
           label: "Air filter element", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.air_filter_element
         },
         {  
           label: "Starter motor cranking quality", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.starter_motor_cranking
         },
         {  
           label: "Fuse box access", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.engine_details?.fuse_box_access
         },
       ],
     },
@@ -222,43 +221,43 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Engine light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.engine_light
         },
         {  
           label: "ABS light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.abs_light
         },
         {  
           label: "Oil pressure light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.oil_pressure_light
         },
         {  
           label: "Battery/charging system light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.battery_charging_system_light
         },
         {  
           label: "Coolant temperature warning light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.coolant_temperature_warning_light
         },
         {  
           label: "Brake system warning light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.brake_system_warning_light
         },
         {  
           label: "Airbag warning light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.airbag_warning_light
         },
         {  
           label: "Seatbelt reminder light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.seatbelt_reminder_light
         },
         {  
           label: "Traction control light", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.traction_control_light
         },
         {  
           label: "Tyre Pressure Monitoring System (TPMS)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cluster_details?.tpms
         }
       ],
     },
@@ -267,51 +266,51 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Transmission fluid level (auto)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.transmission_fluid_level_auto
         },
         {  
           label: "Manual gearbox oil check (if access)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.manual_gearbox_oil_check
         },
         {  
           label: "Transmission mount integrity", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.transmission_mount_integrity
         },
         {  
           label: "Clutch bite & slippage (manual)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.clutch_bite_slippage
         },
         {  
           label: "Automatic shift quality & hesitation", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.automatic_shift_quality
         },
         {  
           label: "Transfer case engagement (4x4)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.transfer_case_engagement
         },
         {  
           label: "Drive shaft visual inspection", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.drive_shaft_visual_inspection
         },
         {  
           label: "CV joint boot integrity (all shafts)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.cv_joint_boot_integrity
         },
         {  
           label: "U-joints or coupling check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.u_joints_coupling_check
         },
         {  
           label: "Differential oil condition (front/rear)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.differential_oil_condition
         },
         {  
           label: "Differential housing leaks", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.differential_housing_leaks
         },
         {  
           label: "Gearbox unusual noise under load", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.transmission_details?.gearbox_unusual_noise
         }
       ],
     },
@@ -320,83 +319,83 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Front strut mount condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.front_strut_mount_condition
         },
         {  
           label: "Rear strut mount condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.rear_strut_mount_condition
         },
         {  
           label: "Front shock absorber function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.front_shock_absorber_function
         },
         {  
           label: "Rear shock absorber function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.rear_shock_absorber_function
         },
         {  
           label: "Front spring integrity", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.front_spring_integrity
         },
         {  
           label: "Rear spring integrity", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.rear_spring_integrity
         },
         {  
           label: "Control arm bush condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.control_arm_bush_condition
         },
         {  
           label: "Lower ball joint play", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.lower_ball_joint_play
         },
         {  
           label: "Upper ball joint play", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.upper_ball_joint_play
         },
         {  
           label: "Anti-roll bar links & bushes", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.anti_roll_bar_links_bushes
         },
         {  
           label: "Steering rack seal condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.steering_rack_seal_condition
         },
         {  
           label: "Steering rack play check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.steering_rack_play_check
         },
         {  
           label: "Rack end condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.rack_end_condition
         },
         {  
           label: "Tie rod end play", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.tie_rod_end_play
         },
         {  
           label: "Steering column noises", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.steering_column_noises
         },
         {  
           label: "Power steering fluid level & color", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.power_steering_fluid_level_color
         },
         {  
           label: "Power steering pump noise", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.power_steering_pump_noise
         },
         {  
           label: "Subframe mount condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.subframe_mount_condition
         },
         {  
           label: "Chassis mounts security", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.chassis_mounts_security
         },
         {  
           label: "Steering wheel free play", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.suspension_details?.steering_wheel_free_play
         }
       ],
     },
@@ -405,43 +404,43 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Master cylinder seal condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.master_cylinder_seal_condition
         },
         {  
           label: "Brake booster operation", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.brake_booster_operation
         },
         {  
           label: "Front disc condition & runout", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.front_disc_condition_runout
         },
         {  
           label: "Rear disc/drum condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.rear_disc_drum_condition
         },
         {  
           label: "Front pad", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.front_pad
         },
         {  
           label: "Rear pad", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.rear_pad
         },
         {  
           label: "Handbrake adjustment & holding", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.handbrake_adjustment_holding
         },
         {  
           label: "ABS function / wheel speed check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.abs_function_wheel_speed_check
         },
         {  
           label: "Brake pedal travel & firmness", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.brake_pedal_travel_firmness
         },
         {  
           label: "Brake fluid contamination test note", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.brakes_details?.brake_fluid_contamination_test_note
         },
       ],
     },
@@ -450,59 +449,59 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Tyre brand & size (LF)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_brand_size_lf
         },
         {  
           label: "Tyre brand & size (RF)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_brand_size_rf
         },
         {  
           label: "Tyre brand & size (LR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_brand_size_lr
         },
         {  
           label: "Tyre brand & size (RR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_brand_size_rr
         },
         {  
           label: "Tyre manufacture date (LF)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_manufacture_date_lf
         },
         {  
           label: "Tyre manufacture date (RF)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_manufacture_date_rf
         },
         {  
           label: "Tyre manufacture date (LR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_manufacture_date_lr
         },
         {  
           label: "Tyre manufacture date (RR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_manufacture_date_rr
         },
         {  
           label: "Tread depth (LF)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tread_depth_lf
         },
         {  
           label: "Tread depth (RF)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tread_depth_rf
         },
         {  
           label: "Tread depth (LR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tread_depth_lr
         },
         {  
           label: "Tread depth (RR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tread_depth_rr
         },
         {  
           label: "Tyre pressure (LF/RF/LR/RR)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.tyre_pressure
         },
         {  
           label: "Spare wheel presence & condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.tyres_details?.spare_wheel_condition
         },
       ],
     },
@@ -511,35 +510,35 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Dashboard fit & finish", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.dashboard_fit_finish
         },
         {  
           label: "Instrument cluster illumination", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.instrument_cluster_illumination
         },
         {  
           label: "Odometer function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.odometer_function
         },
         {  
           label: "Interior lighting (dome/map)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.interior_lighting
         },
         {  
           label: "Glove box latching", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.glove_box_latching
         },
         {  
           label: "Carpet wear & retention", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.carpet_wear_retention
         },
         {  
           label: "Interior contamination/odour check", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.interior_contamination_odour
         },
         {  
           label: "Trunk/boot interior condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.interior_details?.trunk_boot_interior_condition
         }
       ],
     },
@@ -548,27 +547,27 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Driver seat adjust & locks", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.seat_details?.driver_seat_adjust_locks
         },
         {  
           label: "Passenger seat adjust & locks", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.seat_details?.passenger_seat_adjust_locks
         },
         {  
           label: "Seat sliding rails lubrication & function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.seat_details?.seat_sliding_rails
         },
         {  
           label: "Seat Type", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.seat_details?.seat_type
         },
         {  
           label: "Seat cushion wear", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.seat_details?.seat_cushion_wear
         },
         {  
           label: "Seat upholstery integrity (front/rear)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.seat_details?.seat_upholstery_integrity
         }
       ],
     },
@@ -577,15 +576,15 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Air Condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.hvac_details?.air_condition
         },
         {  
           label: "Infotainment Problems", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.hvac_details?.infotainment_condition
         },
         {  
           label: "Radio Condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.hvac_details?.radio_condition
         },
       ],
     },
@@ -594,27 +593,27 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Radiator core condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cooling_fuel_details?.radiator_core_condition
         },
         {  
           label: "Radiator fan operation (low/high speed)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cooling_fuel_details?.radiator_fan_operation
         },
         {  
           label: "Cycling observation", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cooling_fuel_details?.cycling_observation
         },
         {  
           label: "Overflow/expansion tank condition", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cooling_fuel_details?.overflow_expansion_tank_condition
         },
         {  
           label: "Heater core performance (cab heat)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cooling_fuel_details?.heater_core_performance
         },
         {  
           label: "Fuel tank inspection (visual)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.cooling_fuel_details?.fuel_tank_inspection
         },
       ],
     },
@@ -623,31 +622,31 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Starter engagement reliability", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.starter_engagement_reliability
         },
         {  
           label: "Front indicators function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.front_indicators_function
         },
         {  
           label: "Rear indicators function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.rear_indicators_function
         },
         {  
           label: "Reverse light function", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.reverse_light_function
         },
         {  
           label: "Fog lights front/rear", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.fog_lights_front_rear
         },
         {  
           label: "Interior control switches backlight", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.interior_control_switches_backlight
         },
         {  
           label: "Parking sensor functionality", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.electrical_lighting_details?.parking_sensor_functionality
         },
       ],
     },
@@ -656,55 +655,55 @@ const InspectionDetails = () => {
       items: [
         {  
           label: "Start Performance", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.start_performance
         },
         {  
           label: "Acceleration Responsiveness", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.acceleration_responsiveness
         },
         {  
           label: "Cruise Control Engagement Test", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.cruise_control_engagement_test
         },
         {  
           label: "Gearbox Performance", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.garebox_performance
         },
         {  
           label: "Engine vibration at idle", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.engine_vibration_idle
         },
         {  
           label: "Mid-range power delivery", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.mid_range_power
         },
         {  
           label: "Highway stability", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.highway_stability
         },
         {  
           label: "Steering feedback & centering", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.steering_feedback
         },
         {  
           label: "ABS intervention feel", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.abs_intervention
         },
         {  
           label: "Braking performance under test", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.braking_performance
         },
         {  
           label: "Transmission harshness under load", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.transmission_harshness
         },
         {  
           label: "Clutch engagement smoothness (manual)", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.clutch_engagement
         },
         {  
           label: "Noise levels at various speeds", 
-          value: props?.inspectionsDetail?.glass_details?.windshield_condition
+          value: props?.inspectionsDetail?.performance_road_test_details?.noise_levels
         },
       ],
     },
@@ -737,6 +736,15 @@ const InspectionDetails = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  let images = props.inspectionsDetail.vehicle_detail.images;
+
+  if (typeof images === "string") {
+    try {
+      images = JSON.parse(images); // convert JSON string to array
+    } catch {
+      images = [];
+    }
+  }
   return (
     <>
 
@@ -860,15 +868,22 @@ const InspectionDetails = () => {
                   loop
                   className="rounded-xl overflow-hidden inspectionSlider"
                 >
-                  <SwiperSlide>
-                    <img src={inspectionslider01} alt="Car 1" className="w-full h-auto object-cover" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={inspectionslider01} alt="Car 1" className="w-full h-auto object-cover" />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={inspectionslider01} alt="Car 1" className="w-full h-auto object-cover" />
-                  </SwiperSlide>
+                  {images.map((file, index) => {
+                    let imageUrl =
+                      typeof file === "string"
+                        ? file.replace(/\\\//g, "/")
+                        : URL.createObjectURL(file);
+
+                    return (
+                      <SwiperSlide key={index}>
+                        <img
+                          src={imageUrl}
+                          alt={`Car ${index + 1}`}
+                          className="w-full h-auto object-cover"
+                        />
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
               </div>
 

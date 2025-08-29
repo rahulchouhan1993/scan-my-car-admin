@@ -224,10 +224,12 @@ class UsersController extends Controller
     public function editRequest($id, Request $request){
         $inspectionsDetail = InspectionRequest::find($id);
         $alInspectors = User::where('role','inspector')->where('status',1)->get();
+        $alDealers = User::where('role','dealer')->where('status',1)->get();
         if($request->isMethod('post')){
             $preferredDate = $request->preferred_date ? Carbon::parse($request->preferred_date)->format('Y-m-d') : null;
             $assignDate = $request->assign_date ? Carbon::parse($request->assign_date)->format('Y-m-d') : null;
             $inspectionsDetail->inspector_id        = $request->inspector_id;
+             $inspectionsDetail->dealer_id          = $request->dealer_id ?? NULL;
             $inspectionsDetail->full_name           = $request->full_name;
             $inspectionsDetail->contact_no          = $request->contact_no;
             $inspectionsDetail->email               = $request->email;
@@ -289,7 +291,7 @@ class UsersController extends Controller
             return redirect()->back()->with('success', 'Inspection details updated successfully.');
         }
         $pageTitle = 'Admin | Service Request';
-        return inertia('Admin/Users/EditRequest',compact('pageTitle','inspectionsDetail','alInspectors'));
+        return inertia('Admin/Users/EditRequest',compact('pageTitle','inspectionsDetail','alInspectors','alDealers'));
     }
 
     public function report($id, Request $request){

@@ -8,6 +8,7 @@ class InspectionRequest extends Model
 {
     protected $fillable = [
         'inspector_id',
+         'dealer_id',
         'full_name',
         'contact_no',
         'email',

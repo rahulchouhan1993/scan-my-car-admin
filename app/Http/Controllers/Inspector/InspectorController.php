@@ -212,16 +212,16 @@ class InspectorController extends Controller
         $roadTestDetail = InspectionRoadTestDetail::where('request_id', $id)->first();
 
         if($request->isMethod('post')){
-            if ($inspectionsDetail && $inspectionsDetail->completed_date) {
-                $completedAt = Carbon::parse($inspectionsDetail->completed_date);
-                $now = Carbon::now();
+            // if ($inspectionsDetail && $inspectionsDetail->completed_date) {
+            //     $completedAt = Carbon::parse($inspectionsDetail->completed_date);
+            //     $now = Carbon::now();
 
-                $diffMinutes = $completedAt->diffInMinutes($now);
+            //     $diffMinutes = $completedAt->diffInMinutes($now);
 
-                if ($diffMinutes > 30) {
-                    return redirect()->route('inspector.service-request')->with('error','You can no longer edit the details now.');
-                } 
-            }
+            //     if ($diffMinutes > 30) {
+            //         return redirect()->route('inspector.service-request')->with('error','You can no longer edit the details now.');
+            //     } 
+            // }
             $inspectionsDetail->update([
                 'vehicle_make' => $request->input('vehicle_make'),
                 'vehicle_model' => $request->input('vehicle_model'),
@@ -231,6 +231,15 @@ class InspectorController extends Controller
                 'car_parked' => $request->input('car_parked'),
                 'mileage' => $request->input('mileage'),
             ]);
+
+            $imagePaths = json_decode($vehicleDetail->images ?? '[]', true);
+
+            if ($request->hasFile('vehicle_detail.images')) {
+                foreach ($request->file('vehicle_detail.images') as $file) {
+                    $path = $file->store('vehicle_images', 'public'); 
+                    $imagePaths[] = '/storage/' . $path; 
+                }
+            }
 
             if(empty($vehicleDetail)){
                 $vehicleDetail = new InspectionVehicleDetail();
@@ -251,6 +260,7 @@ class InspectorController extends Controller
                     'registration_number' => $request->input('vehicle_detail.registration_number'),
                     'chasis_no' => $request->input('vehicle_detail.chasis_no'),
                     'svg_image' => $request->input('svg_code'),
+                    'images' =>json_encode($imagePaths)
                 ]);
             }else{
                 $vehicleDetail->update([
@@ -269,6 +279,7 @@ class InspectorController extends Controller
                     'registration_number' => $request->input('vehicle_detail.registration_number'),
                     'chasis_no' => $request->input('vehicle_detail.chasis_no'),
                     'svg_image' => $request->input('svg_code'),
+                    'images' => json_encode($imagePaths)
                 ]);
             }
 
@@ -451,6 +462,7 @@ class InspectorController extends Controller
                     'traction_control_light' => $request->input('cluster_detail.traction_control_light'),
                     'tpms' => $request->input('cluster_detail.tpms'),
                     'comments' => $request->input('cluster_detail.comments') ?? NULL,
+                    'brake_system_warning_light' => $request->input('cluster_detail.brake_system_warning_light') ?? NULL,
                 ]);
             }else{
                 $clusterDetail->update([
@@ -465,6 +477,7 @@ class InspectorController extends Controller
                     'traction_control_light' => $request->input('cluster_detail.traction_control_light'),
                     'tpms' => $request->input('cluster_detail.tpms'),
                     'comments' => $request->input('cluster_detail.comments') ?? NULL,
+                    'brake_system_warning_light' => $request->input('cluster_detail.brake_system_warning_light') ?? NULL,
                 ]);
             }
 

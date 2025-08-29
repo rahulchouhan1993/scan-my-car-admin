@@ -9,6 +9,7 @@ class InspectionVehicleDetail extends Model
     protected $fillable = [
         'request_id',
         'svg_image',
+        'images',
         'engine_capacity',
         'engine_cylinders',
         'drive_type',

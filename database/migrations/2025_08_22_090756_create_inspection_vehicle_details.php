@@ -20,6 +20,7 @@ return new class extends Migration
 
             // Vehicle details fields
             $table->text('svg_image')->nullable();
+            $table->json('images')->nullable();
             $table->string('engine_capacity')->nullable();
             $table->string('engine_cylinders')->nullable();
             $table->string('drive_type')->nullable();

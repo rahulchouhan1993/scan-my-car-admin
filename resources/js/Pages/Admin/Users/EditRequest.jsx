@@ -39,6 +39,7 @@ const EditRequest = () => {
     address_line_2: props?.inspectionsDetail?.address_line_2 || '',
     car_parked: props?.inspectionsDetail?.car_parked || '',
     inspector_id: String(props?.inspectionsDetail?.inspector_id ?? ''),
+    dealer_id: String(props?.inspectionsDetail?.dealer_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
     city: props?.inspectionsDetail?.city || '',
     pin_code: props?.inspectionsDetail?.pin_code || '',
@@ -76,10 +77,10 @@ const EditRequest = () => {
               <small>{data.package_id === 1 && (
                 " (Regular Package)"
               )}
-              {data.status === 2 && (
+              {data.package_id === 2 && (
                 " (Comprehensive Package)"
               )}
-              {data.status === 3 && (
+              {data.package_id === 3 && (
                 " (Ultra Package)"
               )}</small></strong>
           </CCardHeader>
@@ -324,6 +325,30 @@ const EditRequest = () => {
               </CCol>
 
               <hr />
+                {Number(data.status) === 5 && (
+                  <CCol md={4}>
+                    <CFormSelect
+                      name="dealer_id"
+                      label="Assign Dealer"
+                      value={String(data.dealer_id ?? "")}
+                      onChange={(e) => {
+                        const dealerId = e.target.value;
+                        setData("dealer_id", dealerId);
+                      }}
+                      invalid={!!errors.dealer_id}
+                      feedbackInvalid={errors.dealer_id}
+                    >
+                      <option value="">-- Select Dealer --</option>
+                      {props?.alDealers?.map((user) => (
+                        <option key={user.id} value={String(user.id)}>
+                          {user.name}
+                        </option>
+                      ))}
+                    </CFormSelect>
+                  </CCol>
+                )}
+
+               
 
               <CCol md={4}>
                 <CFormSelect

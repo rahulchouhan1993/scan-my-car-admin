@@ -115,7 +115,7 @@ const ServiceRequest = (props) => {
                               </CDropdownItem>
                             )}
                            {(inspection.status === 4 || inspection.status === 5) && (
-                           <CDropdownItem href={route('inspector.inspections.report',{id:inspection.id})}>View Report</CDropdownItem>
+                           <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
                            )}
                            {/* <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
                         </CDropdownMenu>

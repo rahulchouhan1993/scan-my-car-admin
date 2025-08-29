@@ -96,21 +96,7 @@ const Login = () => {
               </CCard>
 
               {/* Signup Card */}
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign Up</h2>
-                    <p>
-                      Create your account today and start your personalized coaching journey.
-                    </p>
-                    <Link href={route('dealer.login')}>
-                      <CButton color="light" className="mt-3" active tabIndex={-1}>
-                        Register Now!
-                      </CButton>
-                    </Link>
-                  </div>
-                </CCardBody>
-              </CCard>
+             
             </CCardGroup>
           </CCol>
         </CRow>

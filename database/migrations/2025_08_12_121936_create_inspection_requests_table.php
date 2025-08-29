@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('package_id')->default(1)->nullable(false);
             $table->integer('inspector_id')->nullable(true);
+            $table->integer('dealer_id')->nullable(true);
             $table->string('full_name',50)->nullable(true);
             $table->string('contact_no',15)->nullable(true);
             $table->string('email',50)->nullable(true);

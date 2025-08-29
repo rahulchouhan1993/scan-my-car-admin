@@ -101,7 +101,15 @@ const AddInspection = () => {
     },
     
   })
+  let images = data.vehicle_detail.images;
 
+  if (typeof images === "string") {
+    try {
+      images = JSON.parse(images); // convert JSON string to array
+    } catch {
+      images = [];
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault()
     const confirmed = window.confirm("Are you sure you want to submit this inspection?");
@@ -117,7 +125,7 @@ const AddInspection = () => {
 
   return (
   <CRow>
-    <CForm onSubmit={handleSubmit}>
+    <CForm onSubmit={handleSubmit} encType='multipart/form-data'>
       <CCol xs={12}>
         <CCard className="mb-4">
           <CCardHeader>
@@ -1484,9 +1492,9 @@ const AddInspection = () => {
               <CCol md={4}>
                 <Select2Multi
                   required
-                  name="cluster_detail[brakes_detail_warning_light]"
+                  name="cluster_detail[brake_system_warning_light]"
                   label="Brake system warning light"
-                  value={data.cluster_detail?.brakes_detail_warning_light}
+                  value={data.cluster_detail?.brake_system_warning_light}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Visible", label: "Visible" },
@@ -3475,6 +3483,93 @@ const AddInspection = () => {
               </CCol>
 
 
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+         <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Vehicle Images</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+              <CCol md={4}>
+                <CFormInput
+                  type="file"
+                  multiple
+                  accept="image/png, image/jpeg, image/jpg"
+                  name="vehicle_detail[images]"
+                  label="Images"
+                  onChange={(e) => {
+                  const newFiles = Array.from(e.target.files);
+
+                  setData("vehicle_detail.images", [
+                    ...(Array.isArray(data.vehicle_detail.images)
+                      ? data.vehicle_detail.images
+                      : typeof data.vehicle_detail.images === "string"
+                      ? JSON.parse(data.vehicle_detail.images)
+                      : []),
+                    ...newFiles,
+                  ]);
+                }}
+                  invalid={!!errors.images}
+                  feedbackInvalid={errors.images}
+                />
+              </CCol>
+
+              <div className="mt-3 d-flex flex-wrap gap-2">
+              {Array.isArray(images) &&
+                images.map((file, index) => {
+                  let imageUrl;
+
+                  // Case 1: DB string path (with or without \/)
+                  if (typeof file === "string") {
+                    imageUrl = file.replace(/\\\//g, "/"); 
+                  }
+                  // Case 2: New uploads (File objects)
+                  else if (file instanceof File) {
+                    imageUrl = URL.createObjectURL(file);
+                  }
+
+                  return (
+                    <div
+                      key={index}
+                      style={{ width: "100px", position: "relative" }}
+                    >
+                      <img
+                        src={imageUrl}
+                        alt={`preview-${index}`}
+                        className="img-fluid rounded"
+                      />
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setData(
+                            "vehicle_detail.images",
+                            images.filter((_, i) => i !== index)
+                          )
+                        }
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          background: "red",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "50%",
+                          width: "20px",
+                          height: "20px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
               
             </CRow>
             
