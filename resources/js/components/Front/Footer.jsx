@@ -85,7 +85,7 @@ const Footer = () => {
             {/* Contact Info */}
             <div className='w-full md:w-[30%]'>
               <h3 className="creatodisplayM text-[24px] mb-4">Contact Us</h3>
-              <p className="text-xl creatodisplayM text-[18px] md:text-[22px] lg:text-[28px] xl:lg:text-[36px]  text-[#ffffffc7]  mb-2">+1 (202) 456 8798</p>
+              <p className="text-xl creatodisplayM text-[18px] md:text-[22px] lg:text-[28px] xl:lg:text-[36px]  text-[#ffffffc7]  mb-2">+971 585581172</p>
               <p className="creatodisplayM text-[18px]  text-[#ffffffc7]  mb-2">info@certifycars.ae</p>
               <p className="creatodisplayM text-[18px] text-[#ffffffc7]">
                 Al Ghaizi Palaza, Al Garhoud, <br /> Dubai

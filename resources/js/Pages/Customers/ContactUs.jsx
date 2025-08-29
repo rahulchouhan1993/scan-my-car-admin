@@ -70,7 +70,7 @@ const ContactUs = () => {
                 <div className='w-full max-w-[75%] md:max-w-[100%]'>
                   <h3 className="ppfont w-full sm:w-auto text-[22px] md:text-[28px]">Call Us at</h3>
                   <p className="creatodisplayM  text-[15px] md:text-[18px] text-[#ffffffa1]">
-                  (450) 968-0300
+                  +971 585581172
                   </p>
                 </div>
               </div>

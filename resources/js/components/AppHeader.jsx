@@ -47,7 +47,7 @@ const AppHeader = () => {
     <CHeader position="sticky" className="mb-4 p-0" ref={headerRef}>
       <CContainer className="border-bottom px-4" fluid>
         <CHeaderToggler className="ps-0"
-          onClick={() => document.querySelector('.sidebar')?.classList.toggle('sidebar-narrow-unfoldable')}
+          onClick={() => document.querySelector('.sidebar')?.classList.toggle('show')}
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
@@ -108,9 +108,9 @@ const AppHeader = () => {
       </CContainer>
 
       {/* Breadcrumb */}
-      <CContainer className="px-4" fluid>
+      {/* <CContainer className="px-4" fluid>
         <AppBreadcrumb />
-      </CContainer>
+      </CContainer> */}
     </CHeader>
   )
 }

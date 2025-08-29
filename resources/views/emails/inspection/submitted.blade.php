@@ -59,7 +59,7 @@
               <!-- Logo -->
               <tr>
                 <td align="left" style="padding: 40px 50px 20px 50px;">
-                  <img src="{{ env('APP_URL') }}/images/logo.png" alt="BFD Logo" width="130" height="130" style="display: block;">
+                  <img src="{{ env('APP_URL') }}/images/logo-black.png" alt="BFD Logo" width="130" height="130" style="display: block;">
                 </td>
               </tr>
 

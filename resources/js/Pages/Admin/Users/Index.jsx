@@ -46,7 +46,7 @@ const Index = (props) => {
           </CCardHeader>
           <CCardBody>
             {/* <DocsExample href="components/table#small-tables"> */}
-              <CTable small>
+              <CTable responsive>
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
