@@ -10,9 +10,10 @@ const Footer = () => {
   return (
     <>
     <div className='whatsapp'>
-      <Link to="/">
+      <a target="_blank" href="https://api.whatsapp.com/send?phone=971501231234&text=Welcome to CertifyCars.ae! 🚗
+      How can we assist you today?">
        <img src={whatsapp} alt="img" />
-      </Link>
+      </a>
     </div>
       <footer className="relative overflow-hidden bg-black text-white pt-[60px] overflow-hidden">
         <div className='absolute h-full top-[-100px] left-[-100px]'>
@@ -50,9 +51,15 @@ const Footer = () => {
                 </div>
                 <div>
                   <Link href="/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9.20159 13.0554L13.1699 18.3462H19.0033L12.4549 9.61452L17.9033 3.34619H15.6949L11.4308 8.25119L7.75326 3.34619H1.91992L8.17826 11.692L2.39492 18.3462H4.60326L9.20159 13.0554ZM14.0033 16.6795L5.25326 5.01286H6.91992L15.6699 16.6795H14.0033Z" fill="#000315" />
-                    </svg>
+                    <svg  width="21" height="21"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1"  viewBox="0 0 93.06 93.06" xml:space="preserve">
+                      <g>
+                        <g>
+                          <path d="M11.185,0.08C5.004,0.08,0.001,5.092,0,11.259c0,6.173,5.003,11.184,11.186,11.184c6.166,0,11.176-5.011,11.176-11.184    C22.362,5.091,17.351,0.08,11.185,0.08z"/>
+                          <rect x="1.538" y="30.926" width="19.287" height="62.054"/>
+                          <path d="M69.925,29.383c-9.382,0-15.673,5.144-18.248,10.022h-0.258v-8.479H32.921H32.92v62.053h19.27V62.281    c0-8.093,1.541-15.932,11.575-15.932c9.89,0,10.022,9.256,10.022,16.451v30.178H93.06V58.942    C93.06,42.235,89.455,29.383,69.925,29.383z"/>
+                        </g>
+                      </g>
+                      </svg>
 
                   </Link>
                 </div>

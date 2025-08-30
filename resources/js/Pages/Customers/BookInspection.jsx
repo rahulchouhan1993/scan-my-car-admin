@@ -66,6 +66,13 @@ const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClas
 };
 
 const BookInspection = () => {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("type")) {
+      handleContinue(params.get("type"));
+    }
+  }, []);
+
   const [activeStep, setActiveStep] = useState(1);
   const [packageId, setpackage] = useState(0);
   const steps = ["Choose Package", "Enter Details"];
@@ -109,7 +116,7 @@ const BookInspection = () => {
     if(packageId){
        setActiveStep(step);
     }else{
-      alert('Please select a package');
+      alert('Please choose the package');
     }
    
   }
@@ -374,7 +381,7 @@ const BookInspection = () => {
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone (With Country Code)</label>
                   <input
                     type="tel"
-                    placeholder="+971 987654321"
+                    placeholder="+971 501231234"
                     name="contact_no"
                     className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.contact_no}
@@ -631,6 +638,7 @@ const BookInspection = () => {
                     placeholder="Preferred Date"
                     className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.preferred_date}
+                    min={new Date().toISOString().split("T")[0]}
                     onChange={(e) => setData('preferred_date', e.target.value)}
                   />
                   {errors.preferred_date && <div className="text-red-500 text-[12px]">{errors.preferred_date}</div>}
@@ -638,15 +646,25 @@ const BookInspection = () => {
 
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Time Slot</label>
-                  <input
+
+                  <select
                     required
-                    type="time"
-                    name="preferred_time_slot"
-                    placeholder="Preferred Time Slot"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.preferred_time_slot}
-                    onChange={(e) => setData('preferred_time_slot', e.target.value)}
-                  />
+                    onChange={(e) => setData("preferred_time_slot", e.target.value)}
+                    name="preferred_time_slot"
+                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                  >
+                    <option value="" hidden>-- Select --</option>
+                    <option value="9:00 AM – 12:00 PM">9:00 AM – 12:00 PM</option>
+                    <option value="10:00 AM – 1:00 PM">10:00 AM – 1:00 PM</option>
+                    <option value="11:00 AM – 2:00 PM">11:00 AM – 2:00 PM</option>
+                    <option value="12:00 PM – 3:00 PM">12:00 PM – 3:00 PM</option>
+                    <option value="1:00 PM – 4:00 PM">1:00 PM – 4:00 PM</option>
+                    <option value="2:00 PM – 5:00 PM">2:00 PM – 5:00 PM</option>
+                    <option value="3:00 PM – 6:00 PM">3:00 PM – 6:00 PM</option>
+                    <option value="4:00 PM – 7:00 PM">4:00 PM – 7:00 PM</option>
+                    <option value="5:00 PM – 8:00 PM">5:00 PM – 8:00 PM</option>
+                  </select>
                   {errors.preferred_time_slot && <div className="text-red-500 text-[12px]">{errors.preferred_time_slot}</div>}
                 </div>
 

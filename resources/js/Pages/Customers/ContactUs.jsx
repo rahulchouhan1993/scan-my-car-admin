@@ -55,8 +55,8 @@ const ContactUs = () => {
                 <div className='w-full max-w-[75%] md:max-w-[100%]'>
                   <h3 className="ppfont w-full sm:w-auto text-[22px] md:text-[28px]">Visit Us at</h3>
                   <p className="creatodisplayM  text-[15px] md:text-[18px] text-[#ffffffa1]">
-                    3433 boul. de la Pinière, suite 203, <br />
-                    Terrebonne, QC J6X 0A1
+                    Al Ghaizi Palaza, Al Garhoud, <br />
+                    Dubai
                   </p>
                 </div>
               </div>

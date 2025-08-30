@@ -10,33 +10,33 @@ export default function TestimonialSlider() {
   const testimonials = [
     {
       quote:
-        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That ₹999 inspection saved me from a ₹60,000 mistake.",
-      name: "— Raghav Mehta, Delhi",
+        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That AED 999 inspection saved me from a AED 60,000 mistake.",
+      name: "— Ethan Carter, Dubai",
     },
     {
       quote:
-        "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate ₹15k off. Absolutely worth it.",
-      name: "— Raghav Mehta, Delhi",
-    },
-    {
-      quote:
-        "As a single mom with zero car knowledge, I was terrified of being tricked into buying a bad car. Vehicheck was like having a mechanic in my pocket.",
-      name: "— Raghav Mehta, Delhi",
-    },
-    {
-      quote:
-        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That ₹999 inspection saved me from a ₹60,000 mistake.",
-      name: "— Raghav Mehta, Delhi",
-    },
-    {
-      quote:
-        "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate ₹15k off. Absolutely worth it.",
-      name: "— Raghav Mehta, Delhi",
+        "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate AED 15k off. Absolutely worth it.",
+      name: "— Zain Al-Mansoori, Sharjah",
     },
     {
       quote:
         "As a single mom with zero car knowledge, I was terrified of being tricked into buying a bad car. Vehicheck was like having a mechanic in my pocket.",
-      name: "— Raghav Mehta, Delhi",
+      name: "— Sophia Mitchell, Dubai",
+    },
+    {
+      quote:
+        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That AED 999 inspection saved me from a AED 60,000 mistake.",
+      name: "— Omar Al-Khalil, Dubai",
+    },
+    {
+      quote:
+        "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate AED 15k off. Absolutely worth it.",
+      name: "— Hana Al-Mutairi, Dubai",
+    },
+    {
+      quote:
+        "As a single mom with zero car knowledge, I was terrified of being tricked into buying a bad car. Vehicheck was like having a mechanic in my pocket.",
+      name: "— Henry Cooper, Sharjah",
     },
   ];
 

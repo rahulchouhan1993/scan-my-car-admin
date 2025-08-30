@@ -36,7 +36,7 @@ const ThankYou = () => {
 
           {/* Heading */}
           <h1 className="ppfont text-[20px] md:text-[30px] lg:text-[40px] xl:text-[50px] font-bold text-[#192735] mb-2">Thank You!</h1>
-          <p className="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] xl:text-[25px] text-[#192735bd] mb-6">
+          <p className="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] text-[#192735bd] mb-6">
           Your request is submitted successfully and One of our team member will contact you shortly.
           </p>
 

@@ -117,7 +117,7 @@ const TermsAndConditions = () => {
 
           <div className='mb-[20px] md:mb-[30px]'>
             <h2 className='ppfont text-[22px] md:text-[25px] lg:text-[28px] text-[#192735] mb-[8px]'>11. Governing Law</h2>
-            <p className='creatodisplayM text-[#192735c2] text-[18px] md:text-[20px] mb-[10px] '>These Terms are governed by and interpreted in accordance with the laws of India. Any disputes arising under these Terms shall be subject to the jurisdiction of the courts located in [Your City].</p>
+            <p className='creatodisplayM text-[#192735c2] text-[18px] md:text-[20px] mb-[10px] '>These Terms are governed by and interpreted in accordance with the laws of Dubai. Any disputes arising under these Terms shall be subject to the jurisdiction of the courts located in [Your City].</p>
            
           </div>
 
