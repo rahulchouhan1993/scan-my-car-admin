@@ -22,7 +22,7 @@ class InspectionsController extends Controller
                 'full_name'            => 'required|string|max:50',
                 'contact_no'           => 'required|string|max:15',
                 'email'                => 'required|string|max:50',
-                'pin_code'             => 'required',
+                // 'pin_code'             => 'required',
                 'city'                 => 'required',
                 'address_line_1'       => 'required|string|max:100',
                 'address_line_2'       => 'required|string|max:100',
@@ -55,6 +55,7 @@ class InspectionsController extends Controller
                 'address_line_2'      => $request->address_line_2,
                 'car_parked'          => $request->car_parked,
                 'vehicle_make'        => $request->vehicle_make,
+                'other_vehicle_make'  => $request->other_vehicle_make,
                 'vehicle_model'       => $request->vehicle_model,
                 'vehicle_year'        => $request->vehicle_year,
                 'fuel_type'           => $request->fuel_type,
@@ -65,7 +66,7 @@ class InspectionsController extends Controller
                 'additional_notes'    => $request->additional_notes,
                 'status'              => $request->status ?? 0,
                 'assign_date'         => $assignDate,
-                'pin_code'            => $request->pin_code,
+                'pin_code'            => $request->pin_code ?? NULL,
                 'city'                => $request->city,
                 'request_no'          => rand()
             ]);

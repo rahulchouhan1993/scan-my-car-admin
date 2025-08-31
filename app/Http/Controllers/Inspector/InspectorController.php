@@ -223,6 +223,7 @@ class InspectorController extends Controller
                 } 
             }
             $inspectionsDetail->update([
+                'other_vehicle_make' => $request->input('other_vehicle_make'),
                 'vehicle_make' => $request->input('vehicle_make'),
                 'vehicle_model' => $request->input('vehicle_model'),
                 'vehicle_year' => $request->input('vehicle_year'),

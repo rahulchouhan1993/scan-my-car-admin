@@ -9,7 +9,7 @@ import {
   CFormInput,
   CFormSelect,
 } from '@coreui/react'
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 import { useForm, usePage } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
@@ -42,7 +42,8 @@ const EditRequest = () => {
     dealer_id: String(props?.inspectionsDetail?.dealer_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
     city: props?.inspectionsDetail?.city || '',
-    pin_code: props?.inspectionsDetail?.pin_code || '',
+    // pin_code: props?.inspectionsDetail?.pin_code || '',
+    other_vehicle_make: props?.inspectionsDetail?.other_vehicle_make || '',
     // identifier to send for logging
     change_identifier: '',
   })
@@ -67,6 +68,16 @@ const EditRequest = () => {
     e.preventDefault()
     post(route(`admin.inspections.add`, { id: props.inspectionsDetail.id }))
   }
+
+  const [isOther, setIsOther] = useState(data.vehicle_make === "Other");
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData("vehicle_make", value);
+    setIsOther(value === "Other");
+    if (value !== "Other") {
+      setData("other_vehicle_make", ""); // reset when not "Other"
+    }
+  };
 
   return (
     <CRow>
@@ -113,7 +124,7 @@ const EditRequest = () => {
               <CCol md={4}>
                 <CFormInput
                   type="tel"
-                  label="Phone"
+                  label="Phone (With Country Code)"
                   name="contact_no"
                   value={data.contact_no}
                   onChange={(e) => setData('contact_no', e.target.value)}
@@ -146,7 +157,7 @@ const EditRequest = () => {
                 />
               </CCol>
 
-              <CCol md={4}>
+              {/* <CCol md={4}>
                 <CFormInput
                   type="text"
                   label="Pin Code"
@@ -156,7 +167,7 @@ const EditRequest = () => {
                   invalid={!!errors.pin_code}
                   feedbackInvalid={errors.pin_code}
                 />
-              </CCol>
+              </CCol> */}
 
               <CCol md={4}>
                 <CFormSelect
@@ -183,7 +194,7 @@ const EditRequest = () => {
                   name="vehicle_make"
                   label="Vehicle Make"
                   value={data.vehicle_make}
-                  onChange={(e) => setData('vehicle_make', e.target.value)}
+                  onChange={handleChange}
                   invalid={!!errors.vehicle_make}
                   feedbackInvalid={errors.vehicle_make}
                 >
@@ -197,14 +208,31 @@ const EditRequest = () => {
                     'Maybach', 'Mazda', 'McLaren', 'Mercedes-Benz', 'MG', 'Mini', 'Mitsubishi', 'Nissan',
                     'Opel', 'Pagani', 'Peugeot', 'Plymouth', 'Pontiac', 'Porsche', 'Proton', 'Ram', 'Renault',
                     'Rolls-Royce', 'Rover', 'Saab', 'Saturn', 'Scion', 'SEAT', 'Škoda', 'Smart', 'SsangYong',
-                    'Subaru', 'Suzuki', 'Tata', 'Tesla', 'Toyota', 'Vauxhall', 'Volkswagen', 'Volvo'
+                    'Subaru', 'Suzuki', 'Tata', 'Tesla', 'Toyota', 'Vauxhall', 'Volkswagen', 'Volvo','Other'
                   ].map((make) => (
                     <option key={make} value={make}>
-                      {make}
+                      {make!='Other' ? make : 'Other Make'}
                     </option>
                   ))}
                 </CFormSelect>
               </CCol>
+
+              {isOther && (
+                <CCol md={4}>
+                  <CFormInput
+                    label="Other"
+                    type="text"
+                    name="other_vehicle_make"
+                    value={data.other_vehicle_make || ""}
+                    onChange={(e) => setData("other_vehicle_make", e.target.value)}
+                    required={isOther}
+                    placeholder="Enter vehicle make"
+                    invalid={!!errors.other_vehicle_make}
+                    feedbackInvalid={errors.other_vehicle_make}
+                  />
+                </CCol>
+              )}
+              
 
               <CCol md={4}>
                 <CFormInput
@@ -291,6 +319,7 @@ const EditRequest = () => {
                   name="preferred_date"
                   label="Preferred Date"
                   value={data.preferred_date}
+                  min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setData('preferred_date', e.target.value)}
                   invalid={!!errors.preferred_date}
                   feedbackInvalid={errors.preferred_date}
@@ -298,18 +327,25 @@ const EditRequest = () => {
               </CCol>
 
               <CCol md={4}>
-                <CFormInput
-                  type="time"
+                <CFormSelect
                   name="preferred_time_slot"
                   label="Preferred Time Slot"
-                  min="10:00"
-                  max="18:00"
-                  step="1800"
                   value={data.preferred_time_slot}
                   onChange={(e) => setData('preferred_time_slot', e.target.value)}
                   invalid={!!errors.preferred_time_slot}
                   feedbackInvalid={errors.preferred_time_slot}
-                />
+                >
+                <option value="">-- Select --</option>
+                <option value="9:00 AM – 12:00 PM">9:00 AM – 12:00 PM</option>
+                <option value="10:00 AM – 1:00 PM">10:00 AM – 1:00 PM</option>
+                <option value="11:00 AM – 2:00 PM">11:00 AM – 2:00 PM</option>
+                <option value="12:00 PM – 3:00 PM">12:00 PM – 3:00 PM</option>
+                <option value="1:00 PM – 4:00 PM">1:00 PM – 4:00 PM</option>
+                <option value="2:00 PM – 5:00 PM">2:00 PM – 5:00 PM</option>
+                <option value="3:00 PM – 6:00 PM">3:00 PM – 6:00 PM</option>
+                <option value="4:00 PM – 7:00 PM">4:00 PM – 7:00 PM</option>
+                <option value="5:00 PM – 8:00 PM">5:00 PM – 8:00 PM</option>
+                </CFormSelect>
               </CCol>
 
               <CCol md={4}>

@@ -32,7 +32,26 @@ const AppSidebar = () => {
     >
       <CSidebarHeader className="border-bottom">
         <CSidebarBrand to="/">
+        {unfoldable===false && (
           <img ClassName="sidebar-brand-full" src={logo} height="32" width="150" />
+        )}
+
+        {unfoldable===true && (
+          <div style={{ maxWidth: "50px", objectFit: "contain" }}>
+            
+            <img ClassName="sidebar-brand-full mobile-view hidden" src='/favicon.ico' 
+            style={{ maxWidth: "100%", height: "30px", objectFit:'contain' }}
+            />
+          </div>
+        )}
+          
+          {/* <div style={{ maxWidth: "50px", objectFit: "contain" }}>
+            
+            <img ClassName="sidebar-brand-full mobile-view hidden" src='/favicon.ico' 
+            style={{ maxWidth: "100%", height: "30px", objectFit:'contain' }}
+            />
+          </div> */}
+          
         </CSidebarBrand>
         <CCloseButton className="d-lg-none" dark onClick={() => setSidebarShow(false)} />
       </CSidebarHeader>

@@ -10,6 +10,7 @@ import {
   CFormSwitch,
   CButton
 } from '@coreui/react'
+import { useState } from 'react'
 import { useForm, usePage } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
@@ -25,7 +26,8 @@ const AddInspection = () => {
     contact_no: props?.inspectionsDetail?.contact_no || '',
     address_line_1: props?.inspectionsDetail?.address_line_1 || '',
     address_line_2: props?.inspectionsDetail?.address_line_2 || '',
-    pin_code: props?.inspectionsDetail?.pin_code || '',
+    // pin_code: props?.inspectionsDetail?.pin_code || '',
+    other_vehicle_make: props?.inspectionsDetail?.other_vehicle_make || '',
     city: props?.inspectionsDetail?.city || '',
     preferred_date: props?.inspectionsDetail?.preferred_date || '',
     preferred_time_slot: props?.inspectionsDetail?.preferred_time_slot || '',
@@ -120,8 +122,18 @@ const AddInspection = () => {
   }
 
   const handleSvgChange = ({ svg, mapping }) => {
-  setData("svg_code", svg || "");
-};
+    setData("svg_code", svg || "");
+  };
+
+  const [isOther, setIsOther] = useState(data.vehicle_make === "Other");
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData("vehicle_make", value);
+    setIsOther(value === "Other");
+    if (value !== "Other") {
+      setData("other_vehicle_make", ""); // reset when not "Other"
+    }
+  };
 
   return (
   <CRow>
@@ -203,7 +215,7 @@ const AddInspection = () => {
                 feedbackInvalid={errors.address_line_2}
                 />
               </CCol>
-              <CCol md={4}>
+              {/* <CCol md={4}>
                 <CFormInput
                 required
                 disabled
@@ -215,7 +227,7 @@ const AddInspection = () => {
                 invalid={!!errors.pin_code}
                 feedbackInvalid={errors.pin_code}
                 />
-              </CCol>
+              </CCol> */}
             
             
               <CCol md={4}>
@@ -247,6 +259,7 @@ const AddInspection = () => {
                 name="preferred_date"
                 label="Preferred Date"
                 value={data.preferred_date}
+                min={new Date().toISOString().split("T")[0]}
                 onChange={(e) => setData('preferred_date', e.target.value)}
                 invalid={!!errors.preferred_date}
                 feedbackInvalid={errors.preferred_date}
@@ -254,17 +267,26 @@ const AddInspection = () => {
               </CCol>
 
               <CCol md={4}>
-                <CFormInput
-                required
-                disabled
-                type="time"
-                name="preferred_time_slot"
-                label="Preferred Time Slot"
-                value={data.preferred_time_slot}
-                onChange={(e) => setData('preferred_time_slot', e.target.value)}
-                invalid={!!errors.preferred_time_slot}
-                feedbackInvalid={errors.preferred_time_slot}
-                />
+                <CFormSelect
+                    disabled
+                    name="preferred_time_slot"
+                    label="Preferred Time Slot"
+                    value={data.preferred_time_slot}
+                    onChange={(e) => setData('preferred_time_slot', e.target.value)}
+                    invalid={!!errors.preferred_time_slot}
+                    feedbackInvalid={errors.preferred_time_slot}
+                  >
+                  <option value="">-- Select --</option>
+                  <option value="9:00 AM – 12:00 PM">9:00 AM – 12:00 PM</option>
+                  <option value="10:00 AM – 1:00 PM">10:00 AM – 1:00 PM</option>
+                  <option value="11:00 AM – 2:00 PM">11:00 AM – 2:00 PM</option>
+                  <option value="12:00 PM – 3:00 PM">12:00 PM – 3:00 PM</option>
+                  <option value="1:00 PM – 4:00 PM">1:00 PM – 4:00 PM</option>
+                  <option value="2:00 PM – 5:00 PM">2:00 PM – 5:00 PM</option>
+                  <option value="3:00 PM – 6:00 PM">3:00 PM – 6:00 PM</option>
+                  <option value="4:00 PM – 7:00 PM">4:00 PM – 7:00 PM</option>
+                  <option value="5:00 PM – 8:00 PM">5:00 PM – 8:00 PM</option>
+                  </CFormSelect>
               </CCol>
             
             
@@ -299,7 +321,7 @@ const AddInspection = () => {
               name="vehicle_make"
               label="Vehicle Make"
               value={data.vehicle_make}
-              onChange={(e) => setData('vehicle_make', e.target.value)}
+              onChange={handleChange}
               invalid={!!errors.vehicle_make}
               feedbackInvalid={errors.vehicle_make}
               >
@@ -313,14 +335,31 @@ const AddInspection = () => {
               'Maybach', 'Mazda', 'McLaren', 'Mercedes-Benz', 'MG', 'Mini', 'Mitsubishi', 'Nissan',
               'Opel', 'Pagani', 'Peugeot', 'Plymouth', 'Pontiac', 'Porsche', 'Proton', 'Ram', 'Renault',
               'Rolls-Royce', 'Rover', 'Saab', 'Saturn', 'Scion', 'SEAT', 'Škoda', 'Smart', 'SsangYong',
-              'Subaru', 'Suzuki', 'Tata', 'Tesla', 'Toyota', 'Vauxhall', 'Volkswagen', 'Volvo'
+              'Subaru', 'Suzuki', 'Tata', 'Tesla', 'Toyota', 'Vauxhall', 'Volkswagen', 'Volvo','Other'
               ].map((make) => (
               <option key={make} value={make}>
-              {make}
+              {make!='Other' ? make : 'Other Make'}
               </option>
               ))}
               </CFormSelect>
             </CCol>
+
+            {isOther && (
+              <CCol md={4}>
+                <CFormInput
+                
+                  label="Other"
+                  type="text"
+                  name="other_vehicle_make"
+                  value={data.other_vehicle_make || ""}
+                  onChange={(e) => setData("other_vehicle_make", e.target.value)}
+                  required={isOther}
+                  placeholder="Enter vehicle make"
+                  invalid={!!errors.other_vehicle_make}
+                  feedbackInvalid={errors.other_vehicle_make}
+                />
+              </CCol>
+            )}
 
             <CCol md={4}>
               <CFormInput

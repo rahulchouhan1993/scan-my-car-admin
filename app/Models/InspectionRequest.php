@@ -16,6 +16,7 @@ class InspectionRequest extends Model
         'address_line_2',
         'car_parked',
         'vehicle_make',
+        'other_vehicle_make',
         'vehicle_model',
         'vehicle_year',
         'fuel_type',

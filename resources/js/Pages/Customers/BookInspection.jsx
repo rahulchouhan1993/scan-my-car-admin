@@ -10,7 +10,7 @@ const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClas
   const [expanded, setExpanded] = useState(false); 
   const innerRef = useRef(null);
   const [height, setHeight] = useState(0);
-
+  
   useEffect(() => {
     if (expanded && innerRef.current) {
       setHeight(innerRef.current.scrollHeight);
@@ -95,7 +95,8 @@ const BookInspection = () => {
     address_line_1: props?.address_line_1 || '',
     address_line_2: props?.address_line_2 || '',
     car_parked: props?.car_parked || '',
-    pin_code: props?.pin_code || '',
+    other_vehicle_make: props?.other_vehicle_make || '',
+    // pin_code: props?.pin_code || '',
     city: props?.city || '',
   });
 
@@ -202,6 +203,16 @@ const BookInspection = () => {
     "Full deep Body, Interior & Exterior Documentation with 20+ photos",
     "Technician Final Summary + WhatsApp Report + Email",
   ];
+
+  const [isOther, setIsOther] = useState(data.vehicle_make === "Other");
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setData("vehicle_make", value);
+    setIsOther(value === "Other");
+    if (value !== "Other") {
+      setData("other_vehicle_make", ""); // reset when not "Other"
+    }
+  };
 
   return (
     <>
@@ -356,6 +367,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>
                   <input
+                    required
                     type="text"
                     name="full_name"
                     placeholder="Full Name"
@@ -369,6 +381,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label>
                   <input
+                    required
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -382,6 +395,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone (With Country Code)</label>
                   <input
+                    required
                     type="tel"
                     placeholder="+971 501231234"
                     name="contact_no"
@@ -395,6 +409,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 1</label>
                   <input
+                    required
                     type="text"
                     placeholder="Address Line 1"
                     name="address_line_1"
@@ -408,6 +423,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 2</label>
                   <input
+                    required
                     type="text"
                     placeholder="Address Line 2"
                     name="address_line_2"
@@ -418,7 +434,7 @@ const BookInspection = () => {
                   {errors.address_line_2 && <div className="text-red-500 text-[12px]">{errors.address_line_2}</div>}
                 </div>
 
-                <div>
+                {/* <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Pin Code</label>
                   <input
                     type="text"
@@ -429,7 +445,7 @@ const BookInspection = () => {
                     onChange={(e) => setData('pin_code', e.target.value)}
                   />
                   {errors.pin_code && <div className="text-red-500 text-[12px]">{errors.pin_code}</div>}
-                </div>
+                </div> */}
 
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>City</label>
@@ -457,7 +473,7 @@ const BookInspection = () => {
                   <select
                     required
                     value={data.vehicle_make}
-                    onChange={(e) => setData("vehicle_make", e.target.value)}
+                    onChange={handleChange}
                     name="vehicle_make"
                     className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
@@ -536,13 +552,37 @@ const BookInspection = () => {
                     <option value="Vauxhall">Vauxhall</option>
                     <option value="Volkswagen">Volkswagen</option>
                     <option value="Volvo">Volvo</option>
+                    <option value="Other">Other Make</option>
                   </select>
                   {errors.vehicle_make && <div className="text-red-500 text-[12px]">{errors.vehicle_make}</div>}
                 </div>
 
+                {isOther && (
+                    <div>
+                      <label className="flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]">
+                        Please specify
+                      </label>
+                      <input
+                        type="text"
+                        name="other_vehicle_make"
+                        value={data.other_vehicle_make || ""}
+                        onChange={(e) => setData("other_vehicle_make", e.target.value)}
+                        required={isOther}
+                        placeholder="Enter vehicle make"
+                        className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                      />
+                      {errors.other_vehicle_make && (
+                        <div className="text-red-500 text-[12px]">
+                          {errors.other_vehicle_make}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Model</label>
                   <input
+                    required
                     type="text"
                     placeholder="Vehicle Model"
                     name="vehicle_model"
@@ -556,6 +596,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Year</label>
                   <input
+                    required
                     type="text"
                     placeholder="Vehicle Year"
                     name="vehicle_year"
@@ -621,6 +662,7 @@ const BookInspection = () => {
                 <div>
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Mileage</label>
                   <input
+                    required
                     type="text"
                     name="mileage"
                     placeholder="Mileage"
@@ -673,6 +715,7 @@ const BookInspection = () => {
                 <div className="md:col-span-2">
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Additional Notes</label>
                   <textarea
+                    required
                     onChange={(e) => setData('additional_notes', e.target.value)}
                     name="additional_notes"
                     placeholder="Additional Notes"

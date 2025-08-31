@@ -176,7 +176,7 @@ const PricingSection = () => {
                 </div>
 
                 <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full">
-                  <Link href={`/book-inspection?type=${index}`}
+                  <Link href={`/book-inspection?type=${index+1}`}
                     className={`creatodisplayM text-[20px] inline-flex items-center justify-center w-full px-[10px] py-[10px] md:px-[15px] md:py-[10px] xl:py-[14px] text-[15px] md:text-[15px] xl:text-[20px] rounded-full transition-all ${plan.isPrimary
                         ? "bg-[#D72638] text-white hover:bg-red-700"
                         : "border border-white hover:bg-white hover:text-[#0b1a2a]"

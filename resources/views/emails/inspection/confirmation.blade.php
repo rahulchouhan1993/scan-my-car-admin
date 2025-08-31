@@ -67,7 +67,7 @@
               <tr>
                 <td align="left" style="padding: 0 50px;">
                   <h2 style="font-size: 26px; line-height: 34px; font-weight: bold; color: #333333;">
-                    Your inspection request has been submitted.</h2>
+                    We’ve received your inspection request and appreciate your trust in CertifyCars.</h2>
                 </td>
               </tr>
 
@@ -77,12 +77,19 @@
               <!-- Introduction -->
               <tr>
                 <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
-                  One of our team mebers will review your request and get back to you shortly.
+                  Our team is currently reviewing your submission to ensure a prompt and accurate response. You will hear from us very soon.
                 </td>
               </tr>
 
               <!-- Spacer -->
               <tr><td style="padding: 10px 50px;"></td></tr>
+
+              <tr>
+                <td align="left" style="padding: 0 50px; font-size: 16px; line-height: 24px; color: #333333;">
+                  Team,<br>
+                  CertifyCars.ae
+                </td>
+              </tr>
 
               <!-- Call to Action -->
               {{-- <tr>
