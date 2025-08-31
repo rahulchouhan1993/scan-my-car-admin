@@ -51,7 +51,7 @@ export default function BoxSlider() {
         {images.map((img, index) => (
           <SwiperSlide key={index} style={{ width: "auto" }}>
             <img
-              className="rounded-[10px] md:rounded-[20px]"
+              className="rounded-[10px] md:rounded-[20px] max-h-[210px] min-h-[210px] md:max-h-[310px] md:min-h-[310px] object-cover"
               src={img}
               alt=""
             />
@@ -76,7 +76,7 @@ export default function BoxSlider() {
         {images.map((img, index) => (
           <SwiperSlide key={index} style={{ width: "auto" }}>
             <img
-              className="rounded-[10px] md:rounded-[20px]"
+              className="rounded-[10px] md:rounded-[20px] max-h-[210px] min-h-[210px] md:max-h-[310px] md:min-h-[310px] object-cover"
               src={img}
               alt=""
             />

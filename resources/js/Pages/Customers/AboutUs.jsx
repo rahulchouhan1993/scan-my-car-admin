@@ -29,7 +29,7 @@ const teamMembers = [
 const AboutUs = () => {
   return (
     <>
-      <section className="relative  flex items-center w-full min-h-[600px] md:min-h-[740px] lg:min-h-[840px] overflow-hidden">
+      <section className="relative  flex items-center w-full min-h-[500px] lg:min-h-[600px] overflow-hidden">
         {/* Image */}
         <div className="absolute inset-0 top-[0] bottom-[0] h-full">
           <img src={aboutbanner} alt="Vehicle Inspection" className="w-full h-full object-cover" />
@@ -46,10 +46,10 @@ const AboutUs = () => {
         {/* Content */}
         <div className="absolute z-[2] inset-0 flex items-center px-[0px] md:px-12 lg:px-20">
           <div className="text-white container">
-            <h1 className="ppfont  text-white text-[35px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[35px] md:leading-[55px] lg:leading-[65px] xl:leading-[75px] mb-[15px]">
+            <h1 className="ppfont  text-white pt-[80px] md:pt-[50px] mb-[30px] lg:pt-[80px] text-[25px] md:text-[55px] lg:text-[65px] xl:text-[75px] leading-[30px] md:leading-[55px] lg:leading-[65px] xl:leading-[65px] mb-[15px]">
               Inspections That <br /> Speak the Truth.
             </h1>
-            <p className="max-w-[700px] creatodisplayM text-white text-[18px] md:text-[20px] lg:text-[24px] leading-[20px] md:leading-[24px] lg:leading-[34px] mb-[30px]">
+            <p className="max-w-[700px] creatodisplayM text-white text-[16px] md:text-[20px] lg:text-[24px] leading-[18px] md:leading-[24px] lg:leading-[26px] mb-[30px]">
               In a world where second-hand vehicles can hide first-class problems, we set out to create a service that puts truth back on the table. Founded by a team of auto experts, tech lovers, and everyday car buyers like you, our mission is simple: make vehicle inspections clear, convenient, and trustworthy.
             </p>
             <Link href="/book-inspection" className="min-w-[220px] btn inline-flex items-center justify-center creatodisplayB bg-white text-black text-[16px] text-center px-[30px] py-[15px]  md:px-[40px] md:py-[13px] lg:px-[30px] lg:py-[17px] rounded-full hover:bg-gray-200 transition">
@@ -94,7 +94,7 @@ const AboutUs = () => {
             </div>
 
             <div class="w-full md-w-[50%]">
-              <p class="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] text-[#192735ad] group-hover:text-[#fff]">We don’t just assess vehicles — we reveal their journeys, their condition, and their truth. With every inspection we do, there’s one common outcome: clients walking away smarter, more confident, and in control of their next move.</p>
+              <p class="creatodisplayM text-[16px] md:text-[18px] lg:text-[20px] lg:leading-[24px] text-[#192735ad] group-hover:text-[#fff]">We don’t just assess vehicles — we reveal their journeys, their condition, and their truth. With every inspection we do, there’s one common outcome: clients walking away smarter, more confident, and in control of their next move.        </p>
             </div>
           </div>
         </div>
