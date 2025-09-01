@@ -23,6 +23,9 @@ const images = [
   storyslider04,
   storyslider05,
   storyslider06,
+];
+
+const images1 = [
   storyslider07,
   storyslider08,
   storyslider09,
@@ -73,7 +76,7 @@ export default function BoxSlider() {
           disableOnInteraction: false,
         }}
       >
-        {images.map((img, index) => (
+        {images1.map((img, index) => (
           <SwiperSlide key={index} style={{ width: "auto" }}>
             <img
               className="rounded-[10px] md:rounded-[20px] max-h-[210px] min-h-[210px] md:max-h-[310px] md:min-h-[310px] object-cover"
