@@ -31,6 +31,7 @@ const EditRequest = () => {
     transmission: props?.inspectionsDetail?.transmission || '',
     mileage: props?.inspectionsDetail?.mileage || '',
     preferred_date: props?.inspectionsDetail?.preferred_date || '',
+    visiblity_till: props?.inspectionsDetail?.visiblity_till || '',
     preferred_time_slot: props?.inspectionsDetail?.preferred_time_slot || '',
     additional_notes: props?.inspectionsDetail?.additional_notes || '',
     contact_no: props?.inspectionsDetail?.contact_no || '',
@@ -359,10 +360,9 @@ const EditRequest = () => {
                   feedbackInvalid={errors.additional_notes}
                 />
               </CCol>
-
-              <hr />
+<hr />
                 {Number(data.status) === 5 && (
-                  <CCol md={4}>
+                  <CCol md={3}>
                     <CFormSelect
                       name="dealer_id"
                       label="Assign Dealer"
@@ -384,9 +384,25 @@ const EditRequest = () => {
                   </CCol>
                 )}
 
-               
+                
+                {Number(data.status) === 5 && (
+                  <CCol md={3}>
+                    <CFormInput
+                      type="date"
+                      name="visiblity_till"
+                      label="Visible Till"
+                      value={data.visiblity_till}
+                      min={new Date().toISOString().split("T")[0]}
+                      onChange={(e) => setData('visiblity_till', e.target.value)}
+                      invalid={!!errors.visiblity_till}
+                      feedbackInvalid={errors.visiblity_till}
+                    />
+                  </CCol>
+                )}
 
-              <CCol md={4}>
+               
+              
+              <CCol md={3}>
                 <CFormSelect
                   name="inspector_id"
                   label="Assigned Inspector"
@@ -412,7 +428,7 @@ const EditRequest = () => {
                 </CFormSelect>
               </CCol>
 
-              <CCol md={4}>
+              <CCol md={3}>
                 <CFormSelect
                   name="status"
                   label="Status"

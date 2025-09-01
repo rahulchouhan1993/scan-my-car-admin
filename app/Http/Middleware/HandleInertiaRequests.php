@@ -45,7 +45,19 @@ class HandleInertiaRequests extends Middleware
             ],
             'notifications' => function () {
                 if (Auth::check()) {
-                    return ContactUs::where('seen_status', 0)->count();
+                    if(Auth::user()->role=='admin') {
+                        return ContactUs::where('seen_status', 'Open')->count();
+                    }elseif(Auth::user()->role=='inspector') {
+                        return ContactUs::where(function ($q) {
+                                $q->where('seen_status', 'Not Seen')
+                                ->orWhere('seen_status', 'Assigned')
+                                ->orWhere('seen_status', 'Follow Up');
+                            })
+                            ->where('assign', Auth::user()->id)
+                            ->count();
+                    }else{
+                        return [];
+                    }
                 }
                 return [];
             },

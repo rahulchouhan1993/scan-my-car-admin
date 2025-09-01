@@ -6,6 +6,7 @@ use App\Models\ContactUs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\UserLoginDetailsMail;
+use App\Mail\ContactInquiry;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Mail;
@@ -44,7 +45,7 @@ class CustomersController extends Controller
 
             // Step 2: Save to database
             $contact = ContactUs::create($validator->validated());
-
+            Mail::to($contact->email)->send(new ContactInquiry($contact));
             return back()->with('success', 'Contact request submitted successfully.');
         }
         $pageTitle = 'Contact Us | CertifyCars';

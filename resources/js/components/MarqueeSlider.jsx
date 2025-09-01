@@ -9,6 +9,12 @@ import storyslider03 from "../assets/images/storyslider03.jpg";
 import storyslider04 from "../assets/images/storyslider04.jpg";
 import storyslider05 from "../assets/images/storyslider05.jpg";
 import storyslider06 from "../assets/images/storyslider06.jpg";
+import storyslider07 from "../assets/images/storyslider07.jpg";
+import storyslider08 from "../assets/images/storyslider08.jpg";
+import storyslider09 from "../assets/images/storyslider09.jpg";
+import storyslider10 from "../assets/images/storyslider10.jpg";
+import storyslider11 from "../assets/images/storyslider11.jpg";
+import storyslider12 from "../assets/images/storyslider12.jpg";
 
 const images = [
   storyslider01,
@@ -17,6 +23,12 @@ const images = [
   storyslider04,
   storyslider05,
   storyslider06,
+  storyslider07,
+  storyslider08,
+  storyslider09,
+  storyslider10,
+  storyslider11,
+  storyslider12,
 ];
 
 export default function BoxSlider() {

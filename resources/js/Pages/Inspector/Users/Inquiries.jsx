@@ -87,25 +87,9 @@ const Inquiries = (props) => {
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu>
-                          <CDropdownItem href={route('admin.contact-update',{id:inquiry.id})}>Assign</CDropdownItem>
-                          {/* <CDropdownItem href={route('admin.inquirystatus', { id: inquiry.id })}>
-                            {inquiry.seen_status ? (
-                                "Mark As Unread"
-                            ) : (
-                               " Mark As Read"
-                            )}
-                            </CDropdownItem> */}
-                          <CDropdownItem
-                            as="button"
-                            onClick={(e) => {
-                              e.preventDefault()
-                              if (confirm('Are you sure you want to delete this record?')) {
-                                window.location.href = '/admin/delete-inquiry/'+inquiry.id
-                              }
-                            }}
-                          >
-                            Delete
-                          </CDropdownItem>
+                          <CDropdownItem href={route('inspector.contact-update',{id:inquiry.id})}>Update Status</CDropdownItem>
+                          
+                         
                         </CDropdownMenu>
                       </CDropdown>
                     </CTableDataCell>

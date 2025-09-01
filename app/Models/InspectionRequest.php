@@ -23,6 +23,7 @@ class InspectionRequest extends Model
         'transmission',
         'mileage',
         'preferred_date',
+        'visiblity_till',
         'preferred_time_slot',
         'additional_notes',
         'status',

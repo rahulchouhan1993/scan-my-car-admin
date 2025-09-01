@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\InspectionLog;
+use App\Models\ContactUs;
 use App\Models\InspectionRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -814,5 +815,27 @@ class InspectorController extends Controller
             return redirect()->route('inspector.service-request')->with('success','Inspection Saved.');
 
         }
+
+    }
+
+    public function inquiries(){
+        $allInquiries = ContactUs::where('assign',auth()->user()->id)->orderBy('id','DESC')->paginate(10);
+        $pageTitle = 'Inspector | Inquiries';
+        return inertia('Inspector/Users/Inquiries',compact('allInquiries', 'pageTitle'));
+    }
+
+    public function updateContact($id, Request $request){
+        $pageTitle = 'Inspector | Contact Update';
+        $contactDetails = ContactUs::find($id);
+
+        if($request->isMethod('post')){
+            $contactDetails->service_type = $request->service_type;
+            $contactDetails->seen_status = $request->seen_status ?? 1;
+            $contactDetails->notes = $request->notes;
+            $contactDetails->save();
+            return redirect()->back()->with('success', 'Information Updated Successfully.');
+        }
+        $userOption = User::where('role','inspector')->get();
+        return inertia('Inspector/Users/ContactUpdate',compact('pageTitle','contactDetails','userOption','id'));
     }
 }

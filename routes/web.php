@@ -81,6 +81,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/inquiries', [UsersController::class, 'inquiries'])->name('inquiries');
         Route::get('/inquiry-status/{id}', [UsersController::class, 'inquiryStatus'])->name('inquirystatus');
         Route::get('/delete-inquiry/{id}', [UsersController::class, 'deleteInquiry'])->name('delete.inquiry');
+        Route::match(['post','get'],'/update-contact/{id}', [UsersController::class, 'updateContact'])->name('contact-update');
 
         //service request
         Route::get('/service-request', [UsersController::class, 'serviceRequest'])->name('service-request');
@@ -115,6 +116,10 @@ Route::prefix('inspector')->name('inspector.')->group(function () {
         Route::get('/logs/{id}', [InspectorController::class, 'logs'])->name('inspections.logs');
         Route::get('/start-inspection/{id}', [InspectorController::class, 'startInspection'])->name('start-inspection');
         Route::post('/submit-test/{id}', [InspectorController::class, 'submitTest'])->name('submit-test');
+
+        // Inquiries
+        Route::get('/inquiries', [InspectorController::class, 'inquiries'])->name('inquiries');
+        Route::match(['post','get'],'/update-contact/{id}', [InspectorController::class, 'updateContact'])->name('contact-update');
         
     });
 });

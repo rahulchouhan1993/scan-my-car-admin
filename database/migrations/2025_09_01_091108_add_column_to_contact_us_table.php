@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('inspection_requests', function (Blueprint $table) {
-            $table->string('other_vehicle_make')->nullable()->after('vehicle_make'); 
-            $table->date('visiblity_till')->nullable()->after('completed_date'); 
+        Schema::table('contact_us', function (Blueprint $table) {
+            $table->integer('assign')->nullable()->after('description');
+            $table->longText('notes')->nullable()->after('assign');
+            $table->string('seen_status', 25)->default('Open')->change();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('inspection_request', function (Blueprint $table) {
+        Schema::table('contact_us', function (Blueprint $table) {
             //
         });
     }

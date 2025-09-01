@@ -31,8 +31,22 @@ export const AppSidebarNav = ({ items }) => {
     </>
   )
 
-  const isAvailable = (available) =>
-    available === 'both' || available === auth?.user?.role
+  const isAvailable = (available) =>{
+    const role = auth?.user?.role?.toLowerCase?.();
+    if (!role || !available) return false;
+
+    // allow: "both", "admin", "admin,inspector", ["admin","dealer"], etc.
+    if (available === 'both') return true;
+
+    const toList = (val) =>
+      Array.isArray(val)
+        ? val
+        : String(val).split(','); // comma-separated string -> array
+
+    const roles = toList(available).map((r) => r.trim().toLowerCase());
+    return roles.includes(role);
+  }
+    
 
   const navItem = (item, index, indent = false) => {
     const { component, name, badge, icon, ...rest } = item

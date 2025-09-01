@@ -39,12 +39,10 @@ const ServiceRequest = (props) => {
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                     <CTableHeaderCell scope="col">Package</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Email</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Contact No.</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Date & Time</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Status</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Request No</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Vehicle Details</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Accessible Till</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Visibility Status</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -52,68 +50,34 @@ const ServiceRequest = (props) => {
                   {allInspections?.data?.map((inspection, index) => (
                   <CTableRow key={inspection.id || index}>
                     <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+                    
+                    <CTableDataCell>{inspection.request_no}</CTableDataCell>
+                    <CTableDataCell>{inspection.vehicle_make} | {inspection.vehicle_model} | {inspection.vehicle_year}</CTableDataCell>
+                    <CTableDataCell>{inspection.visiblity_till} </CTableDataCell>
                     <CTableDataCell>
-                      
-                      {inspection.package_id === 1 ? (
-                        "Regular"
-                      ) : inspection.package_id === 2 ? (
-                        "Comprehensive"
-                      ) : inspection.package_id === 3 ? (
-                        "Ultra"
+                      {inspection.visiblity_till && new Date(inspection.visiblity_till).setHours(0,0,0,0) < new Date().setHours(0,0,0,0) ? (
+                        <CButton color="danger" size="sm">Expired</CButton>
                       ) : (
-                        "Unknown"
+                        <CButton color="warning" size="sm">Visible</CButton>
                       )}
                     </CTableDataCell>
-                    <CTableDataCell>{inspection.full_name}</CTableDataCell>
-                    <CTableDataCell>{inspection.email}</CTableDataCell>
-                    <CTableDataCell>{inspection.contact_no}</CTableDataCell>
-                    {/* <CTableDataCell>{inspection.vehicle_make} | {inspection.vehicle_model} | {inspection.vehicle_year}</CTableDataCell> */}
-                    <CTableDataCell>{inspection.preferred_date} {inspection.preferred_time_slot}</CTableDataCell>
                     <CTableDataCell>
-                      {inspection.status === 0 && (
-                        <CButton color="warning" size="sm">
-                          Unassigned
-                        </CButton>
+                      {inspection.visiblity_till && new Date(inspection.visiblity_till).setHours(0,0,0,0) < new Date().setHours(0,0,0,0) ? (
+                        <>N/A</>
+                      ) : (
+                        <CDropdown variant="btn-group">
+                          <CDropdownToggle color="secondary" size="sm">
+                            Actions
+                          </CDropdownToggle>
+                          <CDropdownMenu>
+                            
+                            {(inspection.status === 4 || inspection.status === 5) && (
+                            <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
+                            )}
+                          </CDropdownMenu>
+                        </CDropdown>
                       )}
-                      {inspection.status === 1 && (
-                        <CButton color="primary" size="sm">
-                          Assigned
-                        </CButton>
-                      )}
-                      {inspection.status === 2 && (
-                        <CButton color="info" size="sm">
-                          In Progress
-                        </CButton>
-                      )}
-                      {inspection.status === 3 && (
-                        <CButton color="danger" size="sm">
-                          Cancelled
-                        </CButton>
-                      )}
-                      {inspection.status === 4 && (
-                        <CButton color="secondary" size="sm">
-                          Revision Period
-                        </CButton>
-                      )}
-                      {inspection.status === 5 && (
-                        <CButton color="success" size="sm">
-                          Completed
-                        </CButton>
-                      )}
-                    </CTableDataCell>
-                    {/* <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell> */}
-                    <CTableDataCell>
-                      <CDropdown variant="btn-group">
-                        <CDropdownToggle color="secondary" size="sm">
-                          Actions
-                        </CDropdownToggle>
-                        <CDropdownMenu>
-                          
-                           {(inspection.status === 4 || inspection.status === 5) && (
-                           <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
-                           )}
-                        </CDropdownMenu>
-                      </CDropdown>
+                      
                     </CTableDataCell>
                   </CTableRow>
                 ))}

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Mail\UserLoginDetailsMail;
+use App\Mail\AssignedEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
@@ -223,11 +224,13 @@ class UsersController extends Controller
 
     public function editRequest($id, Request $request){
         $inspectionsDetail = InspectionRequest::find($id);
+        $oldData = $inspectionsDetail;
         $alInspectors = User::where('role','inspector')->where('status',1)->get();
         $alDealers = User::where('role','dealer')->where('status',1)->get();
         if($request->isMethod('post')){
             $preferredDate = $request->preferred_date ? Carbon::parse($request->preferred_date)->format('Y-m-d') : null;
             $assignDate = $request->assign_date ? Carbon::parse($request->assign_date)->format('Y-m-d') : null;
+            $visibleTill = $request->visiblity_till ? Carbon::parse($request->visiblity_till)->format('Y-m-d') : null;
             $inspectionsDetail->inspector_id        = $request->inspector_id;
             $inspectionsDetail->dealer_id          = $request->dealer_id ?? NULL;
             $inspectionsDetail->full_name           = $request->full_name;
@@ -246,6 +249,7 @@ class UsersController extends Controller
             $inspectionsDetail->transmission        = $request->transmission;
             $inspectionsDetail->mileage             = $request->mileage;
             $inspectionsDetail->preferred_date      = $preferredDate;
+            $inspectionsDetail->visiblity_till      = $visibleTill ?? NULL;
             $inspectionsDetail->preferred_time_slot = $request->preferred_time_slot;
             $inspectionsDetail->additional_notes    = $request->additional_notes;
             $inspectionsDetail->status              = $request->status ?? 0;
@@ -288,6 +292,11 @@ class UsersController extends Controller
                     ]);
                 }
             }
+            
+            if($request->change_identifier=='status_and_inspector_changed' || $request->change_identifier=='inspector_changed'){
+                $userDetail = User::find($request->inspector_id);
+                Mail::to($inspectionsDetail->email)->send(new AssignedEmail($inspectionsDetail,$userDetail));
+            }
 
             return redirect()->back()->with('success', 'Inspection details updated successfully.');
         }
@@ -301,9 +310,29 @@ class UsersController extends Controller
         return inertia('Admin/Users/Report',compact('pageTitle','inspectionsDetail'));
     }
 
-    public function logs($id,){
+    public function logs($id){
         $inspectinLogs = InspectionLog::where('inspection_request_id', $id)->orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Admin | Logs';
         return inertia('Admin/Users/Logs',compact('pageTitle','inspectinLogs'));
+    }
+
+    public function updateContact($id, Request $request){
+        $pageTitle = 'Admin | Contact Update';
+        $contactDetails = ContactUs::find($id);
+
+        if($request->isMethod('post')){
+            $contactDetails->name = $request->name;
+            $contactDetails->email = $request->email;
+            $contactDetails->phone_no = $request->phone_no;
+            $contactDetails->service_type = $request->service_type;
+            $contactDetails->description = $request->description;
+            $contactDetails->assign = $request->assign ?? NULL;
+            $contactDetails->seen_status = $request->seen_status ?? 1;
+            $contactDetails->notes = $request->notes;
+            $contactDetails->save();
+            return redirect()->back()->with('success', 'Information Updated Successfully.');
+        }
+        $userOption = User::where('role','inspector')->get();
+        return inertia('Admin/Users/ContactUpdate',compact('pageTitle','contactDetails','userOption','id'));
     }
 }
