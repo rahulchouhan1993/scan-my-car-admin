@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InspectionRequestSubmitted;
 use App\Mail\InspectionRequestConfirmation;
+use Mpdf\Mpdf;
 
 class InspectionsController extends Controller
 {
@@ -128,5 +129,22 @@ class InspectionsController extends Controller
         ->where('completed_date', '<=', Carbon::now()->subMinutes(30))
         ->update(['status' => 5]);
         die;
+    }
+
+    public function previewPdf(){
+        $mpdf = new Mpdf();
+
+        $html = '
+            <h1 style="color:#2e86de;">Demo PDF Report</h1>
+            <p>This is a <strong>dummy PDF</strong> generated using <em>mPDF</em> in Laravel.</p>
+            <ul>
+                <li>Point One</li>
+                <li>Point Two</li>
+                <li>Point Three</li>
+            </ul>
+        ';
+
+        $mpdf->WriteHTML($html);
+        return response($mpdf->Output('demo.pdf', 'I'))->header('Content-Type', 'application/pdf');
     }
 }

@@ -15,15 +15,15 @@ import React, { useEffect, useRef, useState } from "react";
 
 const COLOR_OPTIONS = [
   { label: "Original Paint", color: "#FFFFFF" },   // white
-  { label: "Portion Repaint", color: "#FFD700" },  // yellow
-  { label: "Total Repainted", color: "#FF0000" },  // red
-  { label: "Multi Dents", color: "#C0C0C0" },      // silver
+  { label: "Portion Repaint", color: "#FF0000" },  // yellow
+  // { label: "Total Repainted", color: "#FF0000" },  // red
+  // { label: "Multi Dents", color: "#C0C0C0" },      // silver
   { label: "Multi Scratches", color: "#00FF00" },  // green
   { label: "Panel Replaced", color: "#0000FF" },   // blue
-  { label: "Damaged", color: "#FFA500" },          // orange
+  // { label: "Damaged", color: "#FFA500" },          // orange
   { label: "Faded", color: "#00FFFF" },            // cyan
   { label: "Not Available", color: "#ADD8E6" },    // light blue
-  { label: "Repainted", color: "#800000" },        // maroon
+  // { label: "Repainted", color: "#800000" },        // maroon
   { label: "Foiled", color: "#000000" },           // black
 ];
 
@@ -389,7 +389,7 @@ function CarInspectionImage({
               ))}
 
               <div style={{ gridColumn: "1 / -1", display: "flex", gap: 8, marginTop: 8 }}>
-                <button
+                {/* <button
                   onClick={() => {
                     // clear chosen part
                     clearPartColor(selectedPart);
@@ -398,9 +398,9 @@ function CarInspectionImage({
                   style={{ padding: "8px 12px" }}
                 >
                   Clear / Reset this part
-                </button>
+                </button> */}
 
-                <button onClick={() => setSelectedPart(null)} style={{ padding: "8px 12px" }}>
+                <button class="btn btn-sm btn-primary" onClick={() => setSelectedPart(null)} style={{ padding: "8px 12px" }}>
                   Cancel
                 </button>
               </div>

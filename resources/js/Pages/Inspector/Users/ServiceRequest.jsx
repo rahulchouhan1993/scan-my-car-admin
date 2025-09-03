@@ -100,6 +100,11 @@ const ServiceRequest = (props) => {
                           Completed
                         </CButton>
                       )}
+                      {inspection.status === 6 && (
+                        <CButton color="dark" size="sm">
+                          Sold
+                        </CButton>
+                      )}
                     </CTableDataCell>
                     {/* <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell> */}
                     <CTableDataCell>
@@ -107,18 +112,20 @@ const ServiceRequest = (props) => {
                         <CDropdownToggle color="secondary" size="sm">
                           Actions
                         </CDropdownToggle>
-                        <CDropdownMenu>
-                           <CDropdownItem href={route('inspector.inspections.add',{id:inspection.id})}>View Details</CDropdownItem>
-                            {(inspection.status === 1 || inspection.status === 2 || inspection.status === 4) && (
-                              <CDropdownItem href={route('inspector.start-inspection', { id: inspection.id })}>
-                                {inspection.status === 4 ? "Edit Inspection" : "Start Inspection"}
-                              </CDropdownItem>
+                        {inspection.status != 6 && (
+                          <CDropdownMenu>
+                            <CDropdownItem href={route('inspector.inspections.add',{id:inspection.id})}>View Details</CDropdownItem>
+                              {(inspection.status === 1 || inspection.status === 2 || inspection.status === 4) && (
+                                <CDropdownItem href={route('inspector.start-inspection', { id: inspection.id })}>
+                                  {inspection.status === 4 ? "Edit Inspection" : "Start Inspection"}
+                                </CDropdownItem>
+                              )}
+                            {(inspection.status === 4 || inspection.status === 5) && (
+                            <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
                             )}
-                           {(inspection.status === 4 || inspection.status === 5) && (
-                           <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
-                           )}
-                           {/* <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
-                        </CDropdownMenu>
+                            {/* <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
+                          </CDropdownMenu>
+                        )}
                       </CDropdown>
                     </CTableDataCell>
                   </CTableRow>

@@ -27,6 +27,7 @@ import DefaultLayout from '../../../layout/DefaultLayout'
 
 const ServiceRequest = (props) => {
   const { allInspections } = usePage().props;
+  console.log(allInspections)
   return (
     <CRow>
       <CCol xs={12}>
@@ -44,6 +45,8 @@ const ServiceRequest = (props) => {
                     <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Contact No.</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Date & Time</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Inspector</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Dealer</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Created</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Action</CTableHeaderCell>
@@ -69,6 +72,8 @@ const ServiceRequest = (props) => {
                     <CTableDataCell>{inspection.contact_no}</CTableDataCell>
                    
                     <CTableDataCell>{inspection.preferred_date} {inspection.preferred_time_slot}</CTableDataCell>
+                    <CTableDataCell>{inspection?.inspector?.name ?? 'N/A'} </CTableDataCell>
+                    <CTableDataCell>{inspection?.dealer?.name ?? 'N/A'} </CTableDataCell>
                     <CTableDataCell>
                       {inspection.status === 0 && (
                         <CButton color="warning" size="sm">
@@ -100,6 +105,11 @@ const ServiceRequest = (props) => {
                           Completed
                         </CButton>
                       )}
+                      {inspection.status === 6 && (
+                        <CButton color="dark" size="sm">
+                          Sold
+                        </CButton>
+                      )}
                     </CTableDataCell>
                     <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell>
                     <CTableDataCell>
@@ -112,6 +122,35 @@ const ServiceRequest = (props) => {
                            {(inspection.status === 4 || inspection.status === 5) && (
                             <CDropdownItem target="_blank'" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
                            )}
+
+                           {inspection.status === 5 && (
+
+                              <CDropdownItem
+                                  as="button"
+                                  onClick={(e) => {
+                                    e.preventDefault()
+                                    if (confirm('Are you sure you want mark this as sold?')) {
+                                      window.location.href = '/admin/sold-status/'+inspection.id
+                                    }
+                                  }}
+                                >
+                                  Mark As Sold
+                              </CDropdownItem>
+                            )}
+
+                            {inspection.status === 6 && (
+                              <CDropdownItem
+                                  as="button"
+                                  onClick={(e) => {
+                                    e.preventDefault()
+                                    if (confirm('Are you sure you want mark this as unsold?')) {
+                                      window.location.href = '/admin/sold-status/'+inspection.id
+                                    }
+                                  }}
+                                >
+                                  Mark Unsold
+                              </CDropdownItem>
+                            )}
                            {/* <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
                         </CDropdownMenu>
                       </CDropdown>

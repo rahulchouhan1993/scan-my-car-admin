@@ -213,7 +213,7 @@ class InspectorController extends Controller
         $roadTestDetail = InspectionRoadTestDetail::where('request_id', $id)->first();
 
         if($request->isMethod('post')){
-            if ($inspectionsDetail && $inspectionsDetail->completed_date) {
+            if ($inspectionsDetail && $inspectionsDetail->completed_date && $inspectionsDetail->status==5 ) {
                 $completedAt = Carbon::parse($inspectionsDetail->completed_date);
                 $now = Carbon::now();
 
@@ -223,6 +223,16 @@ class InspectorController extends Controller
                     return redirect()->route('inspector.service-request')->with('error','You can no longer edit the details now.');
                 } 
             }
+
+            $documentPaths = json_decode($vehicleDetail->documents ?? '[]', true);
+
+            if ($request->hasFile('vehicle_detail.documents')) {
+                foreach ($request->file('vehicle_detail.documents') as $file) {
+                    $path = $file->store('vehicle_documents', 'public'); 
+                    $documentPaths[] = '/storage/' . $path; 
+                }
+            }
+
             $inspectionsDetail->update([
                 'other_vehicle_make' => $request->input('other_vehicle_make'),
                 'vehicle_make' => $request->input('vehicle_make'),
@@ -232,6 +242,7 @@ class InspectorController extends Controller
                 'transmission' => $request->input('transmission'),
                 'car_parked' => $request->input('car_parked'),
                 'mileage' => $request->input('mileage'),
+                'documents' =>json_encode($documentPaths)
             ]);
 
             $imagePaths = json_decode($vehicleDetail->images ?? '[]', true);

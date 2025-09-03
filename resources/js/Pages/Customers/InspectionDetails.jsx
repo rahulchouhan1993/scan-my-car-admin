@@ -14,51 +14,60 @@ const InspectionDetails = () => {
   const items = [
     { color: "bg-white border border-gray-400", label: "Original Paint" },
     { color: "bg-yellow-400", label: "Portion Repaint" },
-    { color: "bg-red-600", label: "Total Repainted" },
-    { color: "bg-gray-400", label: "Multi Dents" },
+    // { color: "bg-red-600", label: "Total Repainted" },
+    // { color: "bg-gray-400", label: "Multi Dents" },
     { color: "bg-green-500", label: "Multi Scratches" },
     { color: "bg-blue-600", label: "Panel Replaced" },
-    { color: "bg-orange-500", label: "Damaged" },
+    // { color: "bg-orange-500", label: "Damaged" },
     { color: "bg-cyan-400", label: "Faded" },
     { color: "bg-sky-200", label: "Not Available" },
-    { color: "bg-red-500", label: "Repainted" },
+    // { color: "bg-red-500", label: "Repainted" },
     { color: "bg-black", label: "Foiled" },
   ];
   
   const [openIndex, setOpenIndex] = useState(null);
   const contentRefs = useRef([]);
   const accordionData = [
-    {
+      {
       title: "Body Details",
       items: [
-        { label: "Front bumper fit & alignment", value: props.inspectionsDetail.body_detail.front_bumper==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.front_bumper==1 ? '#000' : '#000' },
-        { label: "Rear bumper fit & alignment", value: props.inspectionsDetail.body_detail.rear_bumper==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.rear_bumper==1 ? '#000' : '#000' },
-        { label: "Bonnet fit & latch", value: props.inspectionsDetail.body_detail.bonnet==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.bonnet==1 ? '#000' : '#000' },
-        { label: "Boot lid fit & latch", value: props.inspectionsDetail.body_detail.boot_lid==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.boot_lid==1 ? '#000' : '#000' },
-        { label: "Left front wing fit", value: props.inspectionsDetail.body_detail.left_front_wing==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_front_wing==1 ? '#000' : '#000' },
-        { label: "Right front wing fit", value: props.inspectionsDetail.body_detail.right_front_wing==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_front_wing==1 ? '#000' : '#000' },
-        { label: "Left front door fit", value: props.inspectionsDetail.body_detail.left_front_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_front_door_fit==1 ? '#000' : '#000' },
-        { label: "Right front door fit", value: props.inspectionsDetail.body_detail.right_front_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_front_door_fit==1 ? '#000' : '#000' },
-        { label: "Left rear door fit", value: props.inspectionsDetail.body_detail.left_rear_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_rear_door_fit==1 ? '#000' : '#000' },
-        { label: "Right rear door fit", value: props.inspectionsDetail.body_detail.right_rear_door_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_rear_door_fit==1 ? '#000' : '#000' },
-        { label: "Left rear quarter panel fit", value: props.inspectionsDetail.body_detail.left_rear_quarter_panel_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.left_rear_quarter_panel_fit==1 ? '#000' : '#000' },
-        { label: "Right rear quarter panel fit", value: props.inspectionsDetail.body_detail.right_rear_quarter_panel_fit==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.right_rear_quarter_panel_fit==1 ? '#000' : '#000' },
-        { label: "Roof panel alignment", value: props.inspectionsDetail.body_detail.roof_panel_alignment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.roof_panel_alignment==1 ? '#000' : '#000' },
-        { label: "Fender mounting & condition", value: props.inspectionsDetail.body_detail.fender_mounting_condition==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.fender_mounting_condition==1 ? '#000' : '#000' },
-        { label: "Panel gap uniformity", value: props.inspectionsDetail.body_detail.panel_gap_uniformity==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.panel_gap_uniformity==1 ? '#000' : '#000' },
-        { label: "External trim condition", value: props.inspectionsDetail.body_detail.external_trim_condition==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.external_trim_condition==1 ? '#000' : '#000' },
-        { label: "Molding & clips present", value: props.inspectionsDetail.body_detail.molding_clips_present==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.molding_clips_present==1 ? '#000' : '#000' },
-        { label: "Door seals fitment", value: props.inspectionsDetail.body_detail.door_seals_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.door_seals_fitment==1 ? '#000' : '#000' },
-        { label: "Boot seal fitment", value: props.inspectionsDetail.body_detail.boot_seal_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.boot_seal_fitment==1 ? '#000' : '#000' },
-        { label: "Fuel filler door operation", value: props.inspectionsDetail.body_detail.fuel_filler_door_operation==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.fuel_filler_door_operation==1 ? '#000' : '#000' },
-        { label: "Body fasteners intact", value: props.inspectionsDetail.body_detail.body_fasteners_intact==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.body_fasteners_intact==1 ? '#000' : '#000' },
-        { label: "Tow eye/point present & secure", value: props.inspectionsDetail.body_detail.tow_eye_point_secure==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.tow_eye_point_secure==1 ? '#000' : '#000' },
-        { label: "Bumper reinforcement visible", value: props.inspectionsDetail.body_detail.bumper_reinforcement_visible==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.bumper_reinforcement_visible==1 ? '#000' : '#000' },
-        { label: "Undercarriage guards", value: props.inspectionsDetail.body_detail.undercarriage_guards==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.undercarriage_guards==1 ? '#000' : '#000' },
-        { label: "Panel repair signs", value: props.inspectionsDetail.body_detail.panel_repair_signs==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.panel_repair_signs==1 ? '#000' : '#000' },
-        { label: "Exterior accessory fitment", value: props.inspectionsDetail.body_detail.exterior_accessory_fitment==1 ? 'Need Repair' : 'Good Condition', color: props.inspectionsDetail.body_detail.exterior_accessory_fitment==1 ? '#000' : '#000' },
-      ],
+        { label: "Front bumper fit & alignment", key: "front_bumper" },
+        { label: "Rear bumper fit & alignment", key: "rear_bumper" },
+        { label: "Bonnet fit & latch", key: "bonnet" },
+        { label: "Boot lid fit & latch", key: "boot_lid" },
+        { label: "Left front wing fit", key: "left_front_wing" },
+        { label: "Right front wing fit", key: "right_front_wing" },
+        { label: "Left front door fit", key: "left_front_door_fit" },
+        { label: "Right front door fit", key: "right_front_door_fit" },
+        { label: "Left rear door fit", key: "left_rear_door_fit" },
+        { label: "Right rear door fit", key: "right_rear_door_fit" },
+        { label: "Left rear quarter panel fit", key: "left_rear_quarter_panel_fit" },
+        { label: "Right rear quarter panel fit", key: "right_rear_quarter_panel_fit" },
+        { label: "Roof panel alignment", key: "roof_panel_alignment" },
+        { label: "Fender mounting & condition", key: "fender_mounting_condition" },
+        { label: "Panel gap uniformity", key: "panel_gap_uniformity" },
+        { label: "External trim condition", key: "external_trim_condition" },
+        { label: "Molding & clips present", key: "molding_clips_present" },
+        { label: "Door seals fitment", key: "door_seals_fitment" },
+        { label: "Boot seal fitment", key: "boot_seal_fitment" },
+        { label: "Fuel filler door operation", key: "fuel_filler_door_operation" },
+        { label: "Body fasteners intact", key: "body_fasteners_intact" },
+        { label: "Tow eye/point present & secure", key: "tow_eye_point_secure" },
+        { label: "Bumper reinforcement visible", key: "bumper_reinforcement_visible" },
+        { label: "Undercarriage guards", key: "undercarriage_guards" },
+        { label: "Panel repair signs", key: "panel_repair_signs" },
+        { label: "Exterior accessory fitment", key: "exterior_accessory_fitment" },
+      ]
+        // ✅ filter only where value == 1
+        .filter(item => props.inspectionsDetail.body_detail[item.key] === 1)
+        // ✅ map to final structure
+        .map(item => ({
+          label: item.label,
+          value: "Need Repair",
+          color: "#000"
+        }))
     },
+
     {
       title: "Glass & Mirrors",
       items: [
@@ -759,7 +768,7 @@ const InspectionDetails = () => {
         {/* Heading */}
         <div className="relative container z-[1] mb-12 !pt-[160px] md:!pt-[250px] ">
           <h2 className="ppfont text-[30px] md:text-[60px] lg:text-[70px] leading-tight  text-white">Inspection Report</h2>
-          <p className="creatodisplayM text-[18px] md:text-[22px] lg:text-[24px] text-white">Follow few simple steps to book an inspection </p>
+          <p className="creatodisplayM text-[18px] md:text-[22px] lg:text-[24px] text-white">Detailed analysis to help you take the right next steps.</p>
         </div>
       </div>
 
@@ -837,7 +846,7 @@ const InspectionDetails = () => {
                           className="flex justify-between gap-[15px] py-[6px]"
                         >
                           <span className="max-w-[70%] flex items-start flex-wrap creatodisplayM text-[14px]   text-[#192735c7] font-bold">{item.label}</span>
-                          <span className="creatodisplayM w-[30%] flex items-start justify-end  text-[12px] text-end " style={{ color: item.color }}>
+                          <span className="creatodisplayM w-[30%] flex items-start justify-end  text-[12px] text-end " style={{ color: "black" }}>
                             {item.value}
                           </span>
                         </div>
@@ -895,7 +904,7 @@ const InspectionDetails = () => {
                     <span className="creatodisplayM md:text-[13px] lg:text-[15px] text-[16px] text-[#192735b5]">
                       {spec.label}:
                     </span>{" "}
-                    <span className="ppfont text-[13px] md:text-[18px] lg:text-[22px] leading-[22px] text-[#192735]">
+                    <span className="ppfont text-[13px] md:text-[18px]  text-[#192735]">
                       {spec.value}
                     </span>
                   </div>

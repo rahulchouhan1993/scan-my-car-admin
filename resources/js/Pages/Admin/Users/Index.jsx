@@ -86,7 +86,13 @@ const Index = (props) => {
                           ) : (
                              <CDropdownItem href={route('admin.inspector.add',{id:user.id})}>Edit</CDropdownItem>
                           )}
-                          <CDropdownItem href={route('admin.users.status',{id:user.id})}>Update Status</CDropdownItem>
+                          <CDropdownItem href={route('admin.users.status',{id:user.id})}>
+                             {user.status ? (
+                              "Make Inactive"
+                            ) : (
+                              "Make Active"
+                            )}
+                          </CDropdownItem>
                           <CDropdownItem
                             as="button"
                             onClick={(e) => {

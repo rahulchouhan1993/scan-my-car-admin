@@ -24,6 +24,7 @@ Route::post('/request-inspection', [InspectionsController::class, 'requestInspec
 Route::get('/inspection-details/{id}', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
 Route::get('/thank-you', [InspectionsController::class, 'thankYou'])->name('thank-you');
 Route::get('/mark-as-completed', [InspectionsController::class, 'markComplete'])->name('markComplete');
+Route::get('/preview-report', [InspectionsController::class, 'previewPdf'])->name('preview-report');
 
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
@@ -88,6 +89,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::match(['post','get'],'/edit-request/{id}', [UsersController::class, 'editRequest'])->name('inspections.add');
         Route::get('/report/{id}', [UsersController::class, 'report'])->name('inspections.report');
         Route::get('/logs/{id}', [UsersController::class, 'logs'])->name('inspections.logs');
+        Route::get('/sold-status/{id}', [UsersController::class, 'markSold'])->name('inspections.marksold');
     });
 });
 

@@ -190,6 +190,15 @@ class UsersController extends Controller
 
         return Redirect::back()->with('success', 'User deleted successfully.');
     }
+
+    public function markSold($id)
+    {
+        $detail = InspectionRequest::find($id);
+        $detail->status = ($detail->status==5) ? 6 : 5;
+        $detail->save();
+
+        return Redirect::back()->with('success', 'Status Updated.');
+    }
     
     public function inquiries(){
         $allInquiries = ContactUs::orderBy('id','DESC')->paginate(10);
@@ -217,7 +226,7 @@ class UsersController extends Controller
     }
 
     public function serviceRequest(){
-        $allInspections = InspectionRequest::orderBy('id','DESC')->paginate(10);
+        $allInspections = InspectionRequest::with(['dealer', 'inspector'])->orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Admin | Service Request';
         return inertia('Admin/Users/ServiceRequest',compact('pageTitle','allInspections'));
     }

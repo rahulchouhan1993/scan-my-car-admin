@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('inspection_requests', function (Blueprint $table) {
             $table->string('other_vehicle_make')->nullable()->after('vehicle_make'); 
             $table->date('visiblity_till')->nullable()->after('completed_date'); 
+            $table->json('documents')->nullable()->after('dealer_id'); 
         });
     }
 

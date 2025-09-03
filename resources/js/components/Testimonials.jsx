@@ -25,7 +25,7 @@ export default function TestimonialSlider() {
     },
     {
       quote:
-        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That AED 999 inspection saved me from a AED 60,000 mistake.",
+        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. Regular inspection saved me AED 18,000.",
       name: "— Omar Al-Khalil, Dubai",
     },
     {

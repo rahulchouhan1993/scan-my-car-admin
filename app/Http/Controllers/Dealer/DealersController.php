@@ -90,7 +90,7 @@ class DealersController extends Controller
     }
 
     public function serviceRequest(){
-        $allInspections = InspectionRequest::where('dealer_id',Auth()->user()->id)->orderBy('id','DESC')->paginate(10);
+        $allInspections = InspectionRequest::where('status',5)->where('dealer_id',Auth()->user()->id)->orderBy('id','DESC')->paginate(10);
         $pageTitle = 'Dealer | Service Request';
         return inertia('Dealer/Users/ServiceRequest',compact('pageTitle','allInspections'));
     }

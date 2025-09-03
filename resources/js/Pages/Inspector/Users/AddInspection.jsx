@@ -42,6 +42,7 @@ const AddInspection = () => {
     inspector_id: String(props?.inspectionsDetail?.inspector_id ?? ''),
     status: String(props?.inspectionsDetail?.status ?? ''),
     svg_code: '',
+    documents: props?.inspectionsDetail?.documents || [],
     vehicle_detail: {
       ...props?.inspectionsDetail?.vehicle_detail
     },
@@ -110,6 +111,16 @@ const AddInspection = () => {
       images = JSON.parse(images); // convert JSON string to array
     } catch {
       images = [];
+    }
+  }
+
+  let documents = data.documents;
+
+  if (typeof documents === "string") {
+    try {
+      documents = JSON.parse(documents); // convert JSON string to array
+    } catch {
+      documents = [];
     }
   }
   const handleSubmit = (e) => {
@@ -491,9 +502,12 @@ const AddInspection = () => {
                 onChange={(e) => setData('vehicle_detail[drive_type]', e.target.value)}
                 >
                 <option value="">-- Select --</option>
-                <option value="2WD">2WD</option>
-                <option value="4WD">4WD</option>
+                <option value="FWD">FWD</option>
+                <option value="RWD">RWD</option>
                 <option value="AWD">AWD</option>
+                <option value="4WD">4WD</option>
+                <option value="4x4">4x4</option>
+                <option value="2WD">2WD</option>
                 </CFormSelect>
             </CCol>
 
@@ -508,8 +522,22 @@ const AddInspection = () => {
                 >
                 <option value="">-- Select --</option>
                 <option value="Sedan">Sedan</option>
+                <option value="Saloon">Saloon</option>
                 <option value="SUV">SUV</option>
-                <option value="Truck">Truck</option>
+                <option value="Crossover">Crossover</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Convertible">Convertible</option>
+                <option value="Cabriolet">Cabriolet</option>
+                <option value="Wagon">Wagon</option>
+                <option value="Estate">Estate</option>
+                <option value="Pickup">Pickup</option>
+                <option value="Van">Van</option>
+                <option value="Minivan">Minivan</option>
+                <option value="MPV">MPV</option>
+                <option value="Roadster">Roadster</option>
+                <option value="Limousine">Limousine</option>
+                <option value="Sports Car">Sports Car</option>
               </CFormSelect>
             </CCol>
           
@@ -763,6 +791,635 @@ const AddInspection = () => {
               <CCol md={4}>
                 <CFormSwitch name="body_condition[exterior_accessory_fitment]" checked={data.body_condition.exterior_accessory_fitment} value={data.body_condition.exterior_accessory_fitment} onChange={(e) => setData('body_condition.exterior_accessory_fitment', e.target.checked)} label="Exterior accessory fitment" id="check_21"/>
               </CCol>
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Engine Bay</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+
+              <CCol md={4}>
+                <Select2Multi
+                  
+                  required
+                  name="engine_detail[engine_start_behavior_cold]"
+                  label="Engine start behavior (cold)"
+                  value={data.engine_detail.engine_start_behavior_cold}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                  
+                  required
+                  name="engine_detail[engine_start_behavior_warm]"
+                  label="Engine start behavior (warm)"
+                  value={data.engine_detail.engine_start_behavior_warm}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[idle_stability]"
+                  label="Idle stability"
+                  value={data.engine_detail.idle_stability}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[throttle_response]"
+                  label="Throttle response"
+                  value={data.engine_detail.throttle_response}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[abnormal_engine_noises]"
+                  label="Abnormal engine noises (tick/knock)"
+                  value={data.engine_detail.abnormal_engine_noises}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[engine_oil_level_check]"
+                  label="Engine oil level check"
+                  value={data.engine_detail.engine_oil_level_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[engine_oil_appearance]"
+                  label="Engine oil appearance"
+                  value={data.engine_detail.engine_oil_appearance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                 <Select2Multi
+                 
+                required
+                  name="engine_detail[visible_oil_leaks]"
+                  label="Visible oil leaks around head/covers"
+                  value={data.engine_detail.visible_oil_leaks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[oil_filter_housing_condition]"
+                  label="Oil filter housing condition"
+                  value={data.engine_detail.oil_filter_housing_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[coolant_level_check]"
+                  label="Coolant level check"
+                  value={data.engine_detail.coolant_level_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[coolant_color]"
+                  label="Coolant color & contamination"
+                  value={data.engine_detail.coolant_color}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[coolant_leaks]"
+                  label="Coolant leaks visible (hoses/rad)"
+                  value={data.engine_detail.coolant_leaks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[signs_of_coolant_in_oil]"
+                  label="Signs of coolant in oil (milky)"
+                  value={data.engine_detail.signs_of_coolant_in_oil}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[hose_condition]"
+                  label="Hose condition & clamps"
+                  value={data.engine_detail.hose_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[drive_belt_condition]"
+                  label="Drive belt tension & wear"
+                  value={data.engine_detail.drive_belt_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                
+                <Select2Multi
+                
+                required
+                  name="engine_detail[timing_belt_condition]"
+                  label="Timing belt/chain visible condition"
+                  value={data.engine_detail.timing_belt_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[turbo_boost_check]"
+                  label="Turbocharger boost check"
+                  value={data.engine_detail.turbo_boost_check}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[air_intake_condition]"
+                  label="Air intake ducting condition"
+                  value={data.engine_detail.air_intake_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[air_filter_element]"
+                  label="Air filter element"
+                  value={data.engine_detail.air_filter_element}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[starter_motor_cranking]"
+                  label="Starter motor cranking quality"
+                  value={data.engine_detail.starter_motor_cranking}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="engine_detail[fuse_box_access]"
+                  label="Fuse box access"
+                  value={data.engine_detail.fuse_box_access}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Bad", label: "Bad" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  
+                  type="text"
+                  name="engine_detail[any_noice]"
+                  label="Any Noice"
+                  value={data.engine_detail.any_noice}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.any_noice}
+                  feedbackInvalid={errors.any_noice}
+                />
+                
+              </CCol>
+
+              <CCol md={4}>
+                <CFormInput
+                  
+                  type="text"
+                  name="engine_detail[comments_engine]"
+                  label="Comments"
+                  value={data.engine_detail.comments_engine}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comments_engine}
+                  feedbackInvalid={errors.comments_engine}
+                />
+              </CCol>
+
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Transmission & Drivetrain</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[transmission_fluid_level_auto]"
+                label="Transmission fluid level (auto)"
+                value={data.transmission_detail.transmission_fluid_level_auto}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  // { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[manual_gearbox_oil_check]"
+                label="Manual gearbox oil check (if access)"
+                value={data.transmission_detail?.manual_gearbox_oil_check}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  
+                  { value: "Normal", label: "Normal" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[transmission_mount_integrity]"
+                label="Transmission mount integrity"
+                value={data.transmission_detail?.transmission_mount_integrity}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+          
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[clutch_bite_slippage]"
+                label="Clutch bite & slippage (manual)"
+                value={data.transmission_detail?.clutch_bite_slippage}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[automatic_shift_quality]"
+                label="Automatic shift quality & hesitation"
+                value={data.transmission_detail?.automatic_shift_quality}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  // { value: "Excellent", label: "Excellent" },
+                  { value: "Gear Shifting Not Smooth", label: "Gear Shifting Not Smooth" },
+                  { value: "Hard To Change Gear", label: "Hard To Change Gear" },
+                  { value: "Jurky Gear", label: "Jurky Gear" },
+                  { value: "Delay In Shifting", label: "Delay In Shifting" },
+                  { value: "Juddring", label: "Juddring" },
+                  { value: "Gear Shocking", label: "Gear Shocking" },
+                  { value: "Gear Slipping", label: "Gear Slipping" },
+                  { value: "Gear Vibration", label: "Gear Vibration" },
+                  { value: "Gear Not Engaging", label: "Gear Not Engaging" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Good Condition", label: "Good Condition" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[transfer_case_engagement]"
+                label="Transfer case engagement (4x4)"
+                value={data.transmission_detail?.transfer_case_engagement}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Not Engaging", label: "Not Engaging" },
+                  { value: "Transfer Case Fold", label: "Transfer Case Fold" },
+                  { value: "4WD Not Engaging", label: "4WD Not Engaging" },
+                  { value: "Delay In 4*4", label: "Delay In 4*4" },
+                  { value: "Low-Hi Not Shifting", label: "Low-Hi Not Shifting" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Good Condition", label: "Good Condition" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[drive_shaft_visual_inspection]"
+                label="Drive shaft visual inspection"
+                value={data.transmission_detail?.drive_shaft_visual_inspection}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[cv_joint_boot_integrity]"
+                label="CV joint boot integrity (all shafts)"
+                value={data.transmission_detail?.cv_joint_boot_integrity}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[u_joints_coupling_check]"
+                label="U-joints or coupling check"
+                value={data.transmission_detail?.u_joints_coupling_check}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[differential_oil_condition]"
+                label="Differential oil condition (front/rear)"
+                value={data.transmission_detail?.differential_oil_condition}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Normal", label: "Normal" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+                required
+                name="transmission_detail[differential_housing_leaks]"
+                label="Differential housing leaks"
+                value={data.transmission_detail?.differential_housing_leaks}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Dry", label: "Dry" },
+                  { value: "Need Maintainance", label: "Need Maintainance" }
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <CFormInput
+                type="text"
+                name="transmission_detail[gearbox_unusual_noise]"
+                label="Gearbox unusual noise under load"
+                value={data.transmission_detail?.gearbox_unusual_noise}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                invalid={!!errors.transmission_detail?.gearbox_unusual_noise}
+                feedbackInvalid={errors.transmission_detail?.gearbox_unusual_noise}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <CFormInput
+                
+                type="text"
+                name="transmission_detail[comments_transmission]"
+                label="Comments"
+                value={data.transmission_detail?.comments_transmission}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                invalid={!!errors.transmission_detail?.comments_transmission}
+                feedbackInvalid={errors.transmission_detail?.comments_transmission}
+              />
+            </CCol>
+
+
+
+              
             </CRow>
             
           </CCardBody>
@@ -1055,404 +1712,6 @@ const AddInspection = () => {
 
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Engine Bay</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-
-              <CCol md={4}>
-                <Select2Multi
-                  multiple
-                  required
-                  name="engine_detail[engine_start_behavior_cold]"
-                  label="Engine start behavior (cold)"
-                  value={data.engine_detail.engine_start_behavior_cold}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                  multiple
-                  required
-                  name="engine_detail[engine_start_behavior_warm]"
-                  label="Engine start behavior (warm)"
-                  value={data.engine_detail.engine_start_behavior_warm}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[idle_stability]"
-                  label="Idle stability"
-                  value={data.engine_detail.idle_stability}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[throttle_response]"
-                  label="Throttle response"
-                  value={data.engine_detail.throttle_response}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[abnormal_engine_noises]"
-                  label="Abnormal engine noises (tick/knock)"
-                  value={data.engine_detail.abnormal_engine_noises}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[engine_oil_level_check]"
-                  label="Engine oil level check"
-                  value={data.engine_detail.engine_oil_level_check}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[engine_oil_appearance]"
-                  label="Engine oil appearance"
-                  value={data.engine_detail.engine_oil_appearance}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                 <Select2Multi
-                 multiple
-                required
-                  name="engine_detail[visible_oil_leaks]"
-                  label="Visible oil leaks around head/covers"
-                  value={data.engine_detail.visible_oil_leaks}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[oil_filter_housing_condition]"
-                  label="Oil filter housing condition"
-                  value={data.engine_detail.oil_filter_housing_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[coolant_level_check]"
-                  label="Coolant level check"
-                  value={data.engine_detail.coolant_level_check}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[coolant_color]"
-                  label="Coolant color & contamination"
-                  value={data.engine_detail.coolant_color}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[coolant_leaks]"
-                  label="Coolant leaks visible (hoses/rad)"
-                  value={data.engine_detail.coolant_leaks}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[signs_of_coolant_in_oil]"
-                  label="Signs of coolant in oil (milky)"
-                  value={data.engine_detail.signs_of_coolant_in_oil}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[hose_condition]"
-                  label="Hose condition & clamps"
-                  value={data.engine_detail.hose_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[drive_belt_condition]"
-                  label="Drive belt tension & wear"
-                  value={data.engine_detail.drive_belt_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[timing_belt_condition]"
-                  label="Timing belt/chain visible condition"
-                  value={data.engine_detail.timing_belt_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[turbo_boost_check]"
-                  label="Turbocharger boost check"
-                  value={data.engine_detail.turbo_boost_check}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[air_intake_condition]"
-                  label="Air intake ducting condition"
-                  value={data.engine_detail.air_intake_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[air_filter_element]"
-                  label="Air filter element"
-                  value={data.engine_detail.air_filter_element}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[starter_motor_cranking]"
-                  label="Starter motor cranking quality"
-                  value={data.engine_detail.starter_motor_cranking}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="engine_detail[fuse_box_access]"
-                  label="Fuse box access"
-                  value={data.engine_detail.fuse_box_access}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" },
-                    { value: "Bad", label: "Bad" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <CFormInput
-                  
-                  type="text"
-                  name="engine_detail[any_noice]"
-                  label="Any Noice"
-                  value={data.engine_detail.any_noice}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.any_noice}
-                  feedbackInvalid={errors.any_noice}
-                />
-                
-              </CCol>
-
-              <CCol md={4}>
-                <CFormInput
-                  
-                  type="text"
-                  name="engine_detail[comments_engine]"
-                  label="Comments"
-                  value={data.engine_detail.comments_engine}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.comments_engine}
-                  feedbackInvalid={errors.comments_engine}
-                />
-              </CCol>
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-        <CCard className="mb-4">
-          <CCardHeader>
             <strong>Cluster & Lamps</strong>
           </CCardHeader>
           <CCardBody>
@@ -1617,237 +1876,6 @@ const AddInspection = () => {
 
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Transmission & Drivetrain</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[transmission_fluid_level_auto]"
-                label="Transmission fluid level (auto)"
-                value={data.transmission_detail.transmission_fluid_level_auto}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[manual_gearbox_oil_check]"
-                label="Manual gearbox oil check (if access)"
-                value={data.transmission_detail?.manual_gearbox_oil_check}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[transmission_mount_integrity]"
-                label="Transmission mount integrity"
-                value={data.transmission_detail?.transmission_mount_integrity}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-          
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[clutch_bite_slippage]"
-                label="Clutch bite & slippage (manual)"
-                value={data.transmission_detail?.clutch_bite_slippage}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[automatic_shift_quality]"
-                label="Automatic shift quality & hesitation"
-                value={data.transmission_detail?.automatic_shift_quality}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Gear Shifting Not Smooth", label: "Gear Shifting Not Smooth" },
-                  { value: "Hard To Change Gear", label: "Hard To Change Gear" },
-                  { value: "Jurky Gear", label: "Jurky Gear" },
-                  { value: "Delay In Shifting", label: "Delay In Shifting" },
-                  { value: "Juddring", label: "Juddring" },
-                  { value: "Gear Shocking", label: "Gear Shocking" },
-                  { value: "Gear Slipping", label: "Gear Slipping" },
-                  { value: "Gear Vibration", label: "Gear Vibration" },
-                  { value: "Gear Not Engaging", label: "Gear Not Engaging" },
-                  { value: "Normal", label: "Normal" },
-                  { value: "Good", label: "Good" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[transfer_case_engagement]"
-                label="Transfer case engagement (4x4)"
-                value={data.transmission_detail?.transfer_case_engagement}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Not Engaging", label: "Not Engaging" },
-                  { value: "Transfer Case Fold", label: "Transfer Case Fold" },
-                  { value: "4WD Not Engaging", label: "4WD Not Engaging" },
-                  { value: "Delay In 4*4", label: "Delay In 4*4" },
-                  { value: "Low-Hi Not Shifting", label: "Low-Hi Not Shifting" },
-                  { value: "Normal", label: "Normal" },
-                  { value: "Good", label: "Good" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[drive_shaft_visual_inspection]"
-                label="Drive shaft visual inspection"
-                value={data.transmission_detail?.drive_shaft_visual_inspection}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[cv_joint_boot_integrity]"
-                label="CV joint boot integrity (all shafts)"
-                value={data.transmission_detail?.cv_joint_boot_integrity}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[u_joints_coupling_check]"
-                label="U-joints or coupling check"
-                value={data.transmission_detail?.u_joints_coupling_check}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[differential_oil_condition]"
-                label="Differential oil condition (front/rear)"
-                value={data.transmission_detail?.differential_oil_condition}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-                required
-                name="transmission_detail[differential_housing_leaks]"
-                label="Differential housing leaks"
-                value={data.transmission_detail?.differential_housing_leaks}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Dry", label: "Dry" },
-                  { value: "Need Maintainance", label: "Need Maintainance" }
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <CFormInput
-                type="text"
-                name="transmission_detail[gearbox_unusual_noise]"
-                label="Gearbox unusual noise under load"
-                value={data.transmission_detail?.gearbox_unusual_noise}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                invalid={!!errors.transmission_detail?.gearbox_unusual_noise}
-                feedbackInvalid={errors.transmission_detail?.gearbox_unusual_noise}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <CFormInput
-                
-                type="text"
-                name="transmission_detail[comments_transmission]"
-                label="Comments"
-                value={data.transmission_detail?.comments_transmission}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                invalid={!!errors.transmission_detail?.comments_transmission}
-                feedbackInvalid={errors.transmission_detail?.comments_transmission}
-              />
-            </CCol>
-
-
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-        <CCard className="mb-4">
-          <CCardHeader>
             <strong>Suspension & Steering</strong>
           </CCardHeader>
           <CCardBody>
@@ -1861,7 +1889,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" },
@@ -1879,7 +1907,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" },
@@ -1897,7 +1925,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -1914,7 +1942,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -1931,7 +1959,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -1948,7 +1976,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -1965,7 +1993,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" },
@@ -1983,7 +2011,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2000,7 +2028,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2017,7 +2045,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2034,7 +2062,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" },
@@ -2052,7 +2080,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2069,7 +2097,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" },
@@ -2087,7 +2115,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2109,7 +2137,7 @@ const AddInspection = () => {
                     { value: "Clunking", label: "Clunking" },
                     { value: "Grinding", label: "Grinding" },
                     { value: "Normal", label: "Normal" },
-                    { value: "Good", label: "Good" }
+                    { value: "Good Condition", label: "Good Condition" }
                   ]}
                 />
               </CCol>
@@ -2122,8 +2150,8 @@ const AddInspection = () => {
                   value={data.suspension_detail?.power_steering_fluid_level_color}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+            
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2140,7 +2168,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2157,7 +2185,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" },
@@ -2175,7 +2203,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2192,7 +2220,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Need To Change", label: "Need To Change" }
@@ -2235,7 +2263,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
                     { value: "Need To Change", label: "Need To Change" },
@@ -2252,7 +2280,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
                     { value: "Need To Change", label: "Need To Change" },
@@ -2269,7 +2297,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
                     { value: "Need To Change", label: "Need To Change" },
@@ -2286,7 +2314,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
                     { value: "Need To Change", label: "Need To Change" },
@@ -2303,7 +2331,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
                     { value: "Need To Change", label: "Need To Change" },
@@ -2320,7 +2348,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
                     { value: "Need To Change", label: "Need To Change" },
@@ -2337,7 +2365,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
                     { value: "Need Attention", label: "Need Attention" },
@@ -2354,7 +2382,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
                     { value: "Need Attention", label: "Need Attention" },
@@ -2371,7 +2399,7 @@ const AddInspection = () => {
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
                     { value: "Need Attention", label: "Need Attention" },
@@ -2387,8 +2415,9 @@ const AddInspection = () => {
                   value={data.brakes_detail.brake_fluid_contamination_test_note}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
                     { value: "Bad", label: "Bad" }
                   ]}
@@ -2408,6 +2437,676 @@ const AddInspection = () => {
                   feedbackInvalid={errors.comments_brakes}
                 />
               </CCol>
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Interior General</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+              <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[dashboard_fit_finish]"
+                label="Dashboard fit & finish"
+                value={data.interior_detail.dashboard_fit_finish}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[instrument_cluster_illumination]"
+                label="Instrument cluster illumination"
+                value={data.interior_detail.instrument_cluster_illumination}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[odometer_function]"
+                label="Odometer function"
+                value={data.interior_detail.odometer_function}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[interior_lighting]"
+                label="Interior lighting (dome/map)"
+                value={data.interior_detail.interior_lighting}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[glove_box_latching]"
+                label="Glove box latching"
+                value={data.interior_detail.glove_box_latching}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[carpet_wear_retention]"
+                label="Carpet wear & retention"
+                value={data.interior_detail.carpet_wear_retention}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[interior_contamination_odour]"
+                label="Interior contamination/odour check"
+                value={data.interior_detail.interior_contamination_odour}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={4}>
+              <Select2Multi
+              required
+                name="interior_detail[trunk_boot_interior_condition]"
+                label="Trunk/boot interior condition"
+                value={data.interior_detail.trunk_boot_interior_condition}
+                onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Bad", label: "Bad" },
+                  { value: "Need Attention", label: "Need Attention" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+            </CCol>
+
+            <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="interior_detail[comment]"
+                  label="Comments"
+                  value={data.interior_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Seats & Restraints</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[driver_seat_adjust_locks]"
+                  label="Driver seat adjust & locks"
+                  value={data.seat_detail.driver_seat_adjust_locks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Working Properly", label: "Working Properly" },
+                    { value: "Need Programing", label: "Need Programing" },
+                    { value: "Not Working", label: "Not Working" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[passenger_seat_adjust_locks]"
+                  label="Passenger seat adjust & locks"
+                  value={data.seat_detail.passenger_seat_adjust_locks}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Working Properly", label: "Working Properly" },
+                    { value: "Need Programing", label: "Need Programing" },
+                    { value: "Not Working", label: "Not Working" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  ]}
+              />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[seat_sliding_rails]"
+                  label="Seat sliding rails lubrication & function"
+                  value={data.seat_detail.seat_sliding_rails}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Working Properly", label: "Working Properly" },
+                    { value: "Need Programing", label: "Need Programing" },
+                    { value: "Not Working", label: "Not Working" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  ]}
+              />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[seat_type]"
+                  label="Seat Type"
+                  value={data.seat_detail.seat_type}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "GiLeatherArmor", label: "GiLeatherArmor" },
+                    { value: "Fabric", label: "Fabric" },
+                    { value: "Vinyl", label: "Vinyl" },
+                    { value: "Cloth", label: "Cloth" },
+                    { value: "Leather", label: "Leather" },
+                    { value: "Synthetic Leather", label: "Synthetic Leather" },
+                    { value: "Alcantara", label: "Alcantara" },
+                    { value: "Other", label: "Other" },
+                  ]}
+              />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[seat_cushion_wear]"
+                  label="Seat cushion wear"
+                  value={data.seat_detail.seat_cushion_wear}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good Condition", label: "Good Condition" },
+                    { value: "Normal", label: "Normal" },
+                    { value: "Worn Out", label: "Worn Out" },
+                    { value: "Torn", label: "Torn" },
+                    { value: "Stained", label: "Stained" },
+                    { value: "Sagging", label: "Sagging" },
+                    { value: "Stiching Lose", label: "Stiching Lose" },
+                    { value: "Need Maintainance", label: "Need Maintainance" },
+                  
+                  ]}
+              />
+              </CCol>
+              
+    
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="seat_detail[seat_upholstery_integrity]"
+                  label="Seat upholstery integrity (front/rear)"
+                  value={data.seat_detail.seat_upholstery_integrity}
+                 onChange={(e) => setData(e.target.name, e.target.value)}
+                options={[
+                  { value: "Excellent", label: "Excellent" },
+                  { value: "Good Condition", label: "Good Condition" },
+                  { value: "Normal", label: "Normal" },
+                  { value: "Weak", label: "Weak" },
+                  { value: "Not Working", label: "Not Working" },
+                  { value: "Need Maintainance", label: "Need Maintainance" },
+                ]}
+              />
+              </CCol>
+
+               <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="seat_detail[comment]"
+                  label="Comments"
+                  value={data.seat_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>HVAC & Infotainment</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+              <CCol md={4}>
+                <Select2Multi
+                  multiple
+                  required
+                  name="hvac_detail[air_condition]"
+                  label="Air Condition"
+                  value={data.hvac_detail.air_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "AC Not Cooling", label: "AC Not Cooling" },
+                      { value: "Weak Airflow From Vents", label: "Weak Airflow From Vents" },
+                      { value: "Blower Fan Not Working", label: "Blower Fan Not Working" },
+                      { value: "AC Making Noise", label: "AC Making Noise" },
+                      { value: "AC Smell / Moldy Odor", label: "AC Smell / Moldy Odor" },
+                      { value: "Temperature Control Not Working", label: "Temperature Control Not Working" },
+                      { value: "AC Switches / Buttons Faulty", label: "AC Switches / Buttons Faulty" },
+                      { value: "Rear AC Not Working", label: "Rear AC Not Working" },
+                      { value: "AC Compressor Not Working", label: "AC Compressor Not Working" },
+                      { value: " Compressor Noisy / Rattling", label: " Compressor Noisy / Rattling" },
+                      { value: "Compressor Seized", label: "Compressor Seized" },
+                      { value: "Compressor Clutch Not Engaging", label: "Compressor Clutch Not Engaging" },
+                      { value: "Low Compressor Efficiency", label: "Low Compressor Efficiency" },
+                      { value: "Refrigerant Leak", label: "Refrigerant Leak" },
+                      { value: "Cabin Filter Dirty / Clogged", label: "Cabin Filter Dirty / Clogged" },
+                      { value: "AC Filter Needs Replacement", label: "AC Filter Needs Replacement" },
+                      { value: "Filter Reducing Airflow", label: "Filter Reducing Airflow" },
+                      { value: "Filter Missing / Not Installed", label: "Filter Missing / Not Installed" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                      
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                  multiple
+                  required
+                  name="hvac_detail[infotainment_condition]"
+                  label="Infotainment Problems"
+                  value={data.hvac_detail.infotainment_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Touchscreen Not Working", label: "Touchscreen Not Working" },
+                      { value: "Navigation Malfunction", label: "Navigation Malfunction" },
+                      { value: "Bluetooth / Connectivity Issues", label: "Bluetooth / Connectivity Issues" },
+                      { value: "Screen Flickering", label: "Screen Flickering" },
+                      { value: "System Freezing", label: "System Freezing" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                      
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                multiple
+                required
+                  name="hvac_detail[radio_condition]"
+                  label="Radio Condition"
+                  value={data.hvac_detail.radio_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "No Sound / Low Volume", label: "No Sound / Low Volume" },
+                      { value: "Station Tuning Issue", label: "Station Tuning Issue" },
+                      { value: "Intermittent Reception", label: "Intermittent Reception" },
+                      { value: "Radio Not Powering On", label: "Radio Not Powering On" },
+                      { value: "Speaker Not Working", label: "Speaker Not Working" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
+              </CCol>
+
+               <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="hvac_detail[comment]"
+                  label="Comments"
+                  value={data.hvac_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Cooling & Fuel System</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+              <CCol md={4}>
+                <Select2Multi
+                multiple
+                required
+                  name="cooling_detail[radiator_core_condition]"
+                  label="Radiator core condition"
+                  value={data.cooling_detail.radiator_core_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Excellent", label: "Excellent" },
+                    { value: "Radiator Leak", label: "Radiator Leak" },
+                    { value: "Coolant Low / Empty", label: "Coolant Low / Empty" },
+                    { value: "Overheating Engine", label: "Overheating Engine" },
+                    { value: "Radiator Fan Not Working", label: "Radiator Fan Not Working" },
+                    { value: "Coolant Hose Leak / Cracked", label: "Coolant Hose Leak / Cracked" },
+                    { value: "Thermostat Malfunction", label: "Thermostat Malfunction" },
+                    { value: "Water Pump Faulty / Noisy", label: "Water Pump Faulty / Noisy" },
+                    { value: "Radiator Clogged / Blocked", label: "Radiator Clogged / Blocked" },
+                    { value: "Coolant Reservoir Damaged / Leaking", label: "Coolant Reservoir Damaged / Leaking" },
+                    { value: "Heater Not Working (due to coolant issue)", label: "Heater Not Working (due to coolant issue)" },
+                    { value: " Radiator Cap Faulty / Leaking", label: " Radiator Cap Faulty / Leaking" },
+                    { value: "Air Trapped In Cooling System", label: "Air Trapped In Cooling System" },
+                  ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="cooling_detail[radiator_fan_operation]"
+                  label="Radiator fan operation (low/high speed)"
+                  value={data.cooling_detail.radiator_fan_operation}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working Properly", label: "Working Properly" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Noicy", label: "Noicy" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="cooling_detail[cycling_observation]"
+                  label="Cycling observation"
+                  value={data.cooling_detail.cycling_observation}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="cooling_detail[overflow_expansion_tank_condition]"
+                  label="Overflow/expansion tank condition"
+                  value={data.cooling_detail.overflow_expansion_tank_condition}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="cooling_detail[heater_core_performance]"
+                  label="Heater core performance (cab heat)"
+                  value={data.cooling_detail.heater_core_performance}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working Properly", label: "Working Properly" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Noicy", label: "Noicy" },
+                      { value: "Need Maintainance", label: "Need Maintainance" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                
+                required
+                  name="cooling_detail[fuel_tank_inspection]"
+                  label="Fuel tank inspection (visual)"
+                  value={data.cooling_detail.fuel_tank_inspection}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Need Attention", label: "Need Attention" },
+                      { value: "Leaking", label: "Leaking" },
+                      { value: "Damaged", label: "Damaged" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="cooling_detail[comment]"
+                  label="Comments"
+                  value={data.cooling_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
+
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Electrical Systems & Lighting</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[starter_engagement_reliability]"
+                  label="Starter engagement reliability"
+                  value={data.electrical_detail.starter_engagement_reliability}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Works Perfectly", label: "Works Perfectly" },
+                      { value: "Slow Engagement", label: " Slow Engagement" },
+                      { value: "Clicking Sound", label: "Clicking Sound" },
+                      { value: "Fails To Start", label: "Fails To Start" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[front_indicators_function]"
+                  label="Front indicators function"
+                  value={data.electrical_detail.front_indicators_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Flickering", label: "Flickering" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[rear_indicators_function]"
+                  label="Rear indicators function"
+                  value={data.electrical_detail.rear_indicators_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Excellent", label: "Excellent" },
+                      { value: "Good Condition", label: "Good Condition" },
+                      { value: "Normal", label: "Normal" },
+                      { value: "Bad", label: "Bad" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[reverse_light_function]"
+                  label="Reverse light function"
+                  value={data.electrical_detail.reverse_light_function}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Flickering", label: "Flickering" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[fog_lights_front_rear]"
+                  label="Fog lights front/rear"
+                  value={data.electrical_detail.fog_lights_front_rear}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Flickering", label: "Flickering" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[interior_control_switches_backlight]"
+                  label="Interior control switches backlight"
+                  value={data.electrical_detail.interior_control_switches_backlight}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                 options={[
+                      { value: "Working", label: "Working" },
+                      { value: "Dim / Intermittent", label: "Dim / Intermittent" },
+                      { value: "Not Working", label: "Not Working" },
+                    ]}
+                  />
+              </CCol>
+
+              <CCol md={4}>
+                <Select2Multi
+                required
+                  name="electrical_detail[parking_sensor_functionality]"
+                  label="Parking sensor functionality"
+                  value={data.electrical_detail.parking_sensor_functionality}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  options={[
+                    { value: "Fully Functional", label: "Fully Functional" },
+                    { value: "Intermittent", label: "Intermittent" },
+                    { value: "Not wWrking", label: "Not Working" }
+                  ]}
+                />
+              </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="electrical_detail[comment]"
+                  label="Comments"
+                  value={data.electrical_detail.comment}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.comment}
+                  feedbackInvalid={errors.comment}
+                />
+              </CCol>
+
               
             </CRow>
             
@@ -2623,676 +3322,6 @@ const AddInspection = () => {
 
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Interior General</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-              <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[dashboard_fit_finish]"
-                label="Dashboard fit & finish"
-                value={data.interior_detail.dashboard_fit_finish}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[instrument_cluster_illumination]"
-                label="Instrument cluster illumination"
-                value={data.interior_detail.instrument_cluster_illumination}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[odometer_function]"
-                label="Odometer function"
-                value={data.interior_detail.odometer_function}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[interior_lighting]"
-                label="Interior lighting (dome/map)"
-                value={data.interior_detail.interior_lighting}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[glove_box_latching]"
-                label="Glove box latching"
-                value={data.interior_detail.glove_box_latching}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[carpet_wear_retention]"
-                label="Carpet wear & retention"
-                value={data.interior_detail.carpet_wear_retention}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[interior_contamination_odour]"
-                label="Interior contamination/odour check"
-                value={data.interior_detail.interior_contamination_odour}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={4}>
-              <Select2Multi
-              required
-                name="interior_detail[trunk_boot_interior_condition]"
-                label="Trunk/boot interior condition"
-                value={data.interior_detail.trunk_boot_interior_condition}
-                onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Bad", label: "Bad" },
-                  { value: "Need Attention", label: "Need Attention" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-            </CCol>
-
-            <CCol md={12}>
-                <CFormInput
-                  type="text"
-                  name="interior_detail[comment]"
-                  label="Comments"
-                  value={data.interior_detail.comment}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.comment}
-                  feedbackInvalid={errors.comment}
-                />
-              </CCol>
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Seats & Restraints</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="seat_detail[driver_seat_adjust_locks]"
-                  label="Driver seat adjust & locks"
-                  value={data.seat_detail.driver_seat_adjust_locks}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Working Properly", label: "Working Properly" },
-                    { value: "Need Programing", label: "Need Programing" },
-                    { value: "Not Working", label: "Not Working" },
-                    { value: "Need Maintainance", label: "Need Maintainance" },
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="seat_detail[passenger_seat_adjust_locks]"
-                  label="Passenger seat adjust & locks"
-                  value={data.seat_detail.passenger_seat_adjust_locks}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Working Properly", label: "Working Properly" },
-                    { value: "Need Programing", label: "Need Programing" },
-                    { value: "Not Working", label: "Not Working" },
-                    { value: "Need Maintainance", label: "Need Maintainance" },
-                  ]}
-              />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="seat_detail[seat_sliding_rails]"
-                  label="Seat sliding rails lubrication & function"
-                  value={data.seat_detail.seat_sliding_rails}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Working Properly", label: "Working Properly" },
-                    { value: "Need Programing", label: "Need Programing" },
-                    { value: "Not Working", label: "Not Working" },
-                    { value: "Need Maintainance", label: "Need Maintainance" },
-                  ]}
-              />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="seat_detail[seat_type]"
-                  label="Seat Type"
-                  value={data.seat_detail.seat_type}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "GiLeatherArmor", label: "GiLeatherArmor" },
-                    { value: "Fabric", label: "Fabric" },
-                    { value: "Vinyl", label: "Vinyl" },
-                    { value: "Cloth", label: "Cloth" },
-                    { value: "Leather", label: "Leather" },
-                    { value: "Synthetic Leather", label: "Synthetic Leather" },
-                    { value: "Alcantara", label: "Alcantara" },
-                    { value: "Other", label: "Other" },
-                  ]}
-              />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="seat_detail[seat_cushion_wear]"
-                  label="Seat cushion wear"
-                  value={data.seat_detail.seat_cushion_wear}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
-                    { value: "Normal", label: "Normal" },
-                    { value: "Worn Out", label: "Worn Out" },
-                    { value: "Torn", label: "Torn" },
-                    { value: "Stained", label: "Stained" },
-                    { value: "Sagging", label: "Sagging" },
-                    { value: "Stiching Lose", label: "Stiching Lose" },
-                    { value: "Need Maintainance", label: "Need Maintainance" },
-                  
-                  ]}
-              />
-              </CCol>
-              
-    
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="seat_detail[seat_upholstery_integrity]"
-                  label="Seat upholstery integrity (front/rear)"
-                  value={data.seat_detail.seat_upholstery_integrity}
-                 onChange={(e) => setData(e.target.name, e.target.value)}
-                options={[
-                  { value: "Excellent", label: "Excellent" },
-                  { value: "Good", label: "Good" },
-                  { value: "Normal", label: "Normal" },
-                  { value: "Weak", label: "Weak" },
-                  { value: "Not Working", label: "Not Working" },
-                  { value: "Need Maintainance", label: "Need Maintainance" },
-                ]}
-              />
-              </CCol>
-
-               <CCol md={12}>
-                <CFormInput
-                  type="text"
-                  name="seat_detail[comment]"
-                  label="Comments"
-                  value={data.seat_detail.comment}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.comment}
-                  feedbackInvalid={errors.comment}
-                />
-              </CCol>
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>HVAC & Infotainment</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-              <CCol md={4}>
-                <Select2Multi
-                  multiple
-                  required
-                  name="hvac_detail[air_condition]"
-                  label="Air Condition"
-                  value={data.hvac_detail.air_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "AC Not Cooling", label: "AC Not Cooling" },
-                      { value: "Weak Airflow From Vents", label: "Weak Airflow From Vents" },
-                      { value: "Blower Fan Not Working", label: "Blower Fan Not Working" },
-                      { value: "AC Making Noise", label: "AC Making Noise" },
-                      { value: "AC Smell / Moldy Odor", label: "AC Smell / Moldy Odor" },
-                      { value: "Temperature Control Not Working", label: "Temperature Control Not Working" },
-                      { value: "AC Switches / Buttons Faulty", label: "AC Switches / Buttons Faulty" },
-                      { value: "Rear AC Not Working", label: "Rear AC Not Working" },
-                      { value: "AC Compressor Not Working", label: "AC Compressor Not Working" },
-                      { value: " Compressor Noisy / Rattling", label: " Compressor Noisy / Rattling" },
-                      { value: "Compressor Seized", label: "Compressor Seized" },
-                      { value: "Compressor Clutch Not Engaging", label: "Compressor Clutch Not Engaging" },
-                      { value: "Low Compressor Efficiency", label: "Low Compressor Efficiency" },
-                      { value: "Refrigerant Leak", label: "Refrigerant Leak" },
-                      { value: "Cabin Filter Dirty / Clogged", label: "Cabin Filter Dirty / Clogged" },
-                      { value: "AC Filter Needs Replacement", label: "AC Filter Needs Replacement" },
-                      { value: "Filter Reducing Airflow", label: "Filter Reducing Airflow" },
-                      { value: "Filter Missing / Not Installed", label: "Filter Missing / Not Installed" },
-                      { value: "Need Maintainance", label: "Need Maintainance" },
-                      
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                  multiple
-                  required
-                  name="hvac_detail[infotainment_condition]"
-                  label="Infotainment Problems"
-                  value={data.hvac_detail.infotainment_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "Touchscreen Not Working", label: "Touchscreen Not Working" },
-                      { value: "Navigation Malfunction", label: "Navigation Malfunction" },
-                      { value: "Bluetooth / Connectivity Issues", label: "Bluetooth / Connectivity Issues" },
-                      { value: "Screen Flickering", label: "Screen Flickering" },
-                      { value: "System Freezing", label: "System Freezing" },
-                      { value: "Need Maintainance", label: "Need Maintainance" },
-                      
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="hvac_detail[radio_condition]"
-                  label="Radio Condition"
-                  value={data.hvac_detail.radio_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "No Sound / Low Volume", label: "No Sound / Low Volume" },
-                      { value: "Station Tuning Issue", label: "Station Tuning Issue" },
-                      { value: "Intermittent Reception", label: "Intermittent Reception" },
-                      { value: "Radio Not Powering On", label: "Radio Not Powering On" },
-                      { value: "Speaker Not Working", label: "Speaker Not Working" },
-                      { value: "Need Maintainance", label: "Need Maintainance" },
-                    ]}
-                  />
-              </CCol>
-
-               <CCol md={12}>
-                <CFormInput
-                  type="text"
-                  name="hvac_detail[comment]"
-                  label="Comments"
-                  value={data.hvac_detail.comment}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.comment}
-                  feedbackInvalid={errors.comment}
-                />
-              </CCol>
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Cooling & Fuel System</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="cooling_detail[radiator_core_condition]"
-                  label="Radiator core condition"
-                  value={data.cooling_detail.radiator_core_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Excellent", label: "Excellent" },
-                    { value: "Radiator Leak", label: "Radiator Leak" },
-                    { value: "Coolant Low / Empty", label: "Coolant Low / Empty" },
-                    { value: "Overheating Engine", label: "Overheating Engine" },
-                    { value: "Radiator Fan Not Working", label: "Radiator Fan Not Working" },
-                    { value: "Coolant Hose Leak / Cracked", label: "Coolant Hose Leak / Cracked" },
-                    { value: "Thermostat Malfunction", label: "Thermostat Malfunction" },
-                    { value: "Water Pump Faulty / Noisy", label: "Water Pump Faulty / Noisy" },
-                    { value: "Radiator Clogged / Blocked", label: "Radiator Clogged / Blocked" },
-                    { value: "Coolant Reservoir Damaged / Leaking", label: "Coolant Reservoir Damaged / Leaking" },
-                    { value: "Heater Not Working (due to coolant issue)", label: "Heater Not Working (due to coolant issue)" },
-                    { value: " Radiator Cap Faulty / Leaking", label: " Radiator Cap Faulty / Leaking" },
-                    { value: "Air Trapped In Cooling System", label: "Air Trapped In Cooling System" },
-                  ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="cooling_detail[radiator_fan_operation]"
-                  label="Radiator fan operation (low/high speed)"
-                  value={data.cooling_detail.radiator_fan_operation}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Working Properly", label: "Working Properly" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "Noicy", label: "Noicy" },
-                      { value: "Need Maintainance", label: "Need Maintainance" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="cooling_detail[cycling_observation]"
-                  label="Cycling observation"
-                  value={data.cooling_detail.cycling_observation}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "Need Maintainance", label: "Need Maintainance" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="cooling_detail[overflow_expansion_tank_condition]"
-                  label="Overflow/expansion tank condition"
-                  value={data.cooling_detail.overflow_expansion_tank_condition}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "Bad", label: "Bad" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="cooling_detail[heater_core_performance]"
-                  label="Heater core performance (cab heat)"
-                  value={data.cooling_detail.heater_core_performance}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Working Properly", label: "Working Properly" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "Noicy", label: "Noicy" },
-                      { value: "Need Maintainance", label: "Need Maintainance" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                multiple
-                required
-                  name="cooling_detail[fuel_tank_inspection]"
-                  label="Fuel tank inspection (visual)"
-                  value={data.cooling_detail.fuel_tank_inspection}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Need Attention", label: "Need Attention" },
-                      { value: "Leaking", label: "Leaking" },
-                      { value: "Damaged", label: "Damaged" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={12}>
-                <CFormInput
-                  type="text"
-                  name="cooling_detail[comment]"
-                  label="Comments"
-                  value={data.cooling_detail.comment}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.comment}
-                  feedbackInvalid={errors.comment}
-                />
-              </CCol>
-
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Electrical Systems & Lighting</strong>
-          </CCardHeader>
-          <CCardBody>
-            <CRow className='g-3'>
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[starter_engagement_reliability]"
-                  label="Starter engagement reliability"
-                  value={data.electrical_detail.starter_engagement_reliability}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Works Perfectly", label: "Works Perfectly" },
-                      { value: "Slow Engagement", label: " Slow Engagement" },
-                      { value: "Clicking Sound", label: "Clicking Sound" },
-                      { value: "Fails To Start", label: "Fails To Start" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[front_indicators_function]"
-                  label="Front indicators function"
-                  value={data.electrical_detail.front_indicators_function}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Working", label: "Working" },
-                      { value: "Flickering", label: "Flickering" },
-                      { value: "Not Working", label: "Not Working" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[rear_indicators_function]"
-                  label="Rear indicators function"
-                  value={data.electrical_detail.rear_indicators_function}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
-                      { value: "Normal", label: "Normal" },
-                      { value: "Bad", label: "Bad" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[reverse_light_function]"
-                  label="Reverse light function"
-                  value={data.electrical_detail.reverse_light_function}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Working", label: "Working" },
-                      { value: "Flickering", label: "Flickering" },
-                      { value: "Not Working", label: "Not Working" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[fog_lights_front_rear]"
-                  label="Fog lights front/rear"
-                  value={data.electrical_detail.fog_lights_front_rear}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Working", label: "Working" },
-                      { value: "Flickering", label: "Flickering" },
-                      { value: "Not Working", label: "Not Working" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[interior_control_switches_backlight]"
-                  label="Interior control switches backlight"
-                  value={data.electrical_detail.interior_control_switches_backlight}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                 options={[
-                      { value: "Working", label: "Working" },
-                      { value: "Dim / Intermittent", label: "Dim / Intermittent" },
-                      { value: "Not Working", label: "Not Working" },
-                    ]}
-                  />
-              </CCol>
-
-              <CCol md={4}>
-                <Select2Multi
-                required
-                  name="electrical_detail[parking_sensor_functionality]"
-                  label="Parking sensor functionality"
-                  value={data.electrical_detail.parking_sensor_functionality}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  options={[
-                    { value: "Fully Functional", label: "Fully Functional" },
-                    { value: "Intermittent", label: "Intermittent" },
-                    { value: "Not wWrking", label: "Not Working" }
-                  ]}
-                />
-              </CCol>
-
-              <CCol md={12}>
-                <CFormInput
-                  type="text"
-                  name="electrical_detail[comment]"
-                  label="Comments"
-                  value={data.electrical_detail.comment}
-                  onChange={(e) => setData(e.target.name, e.target.value)}
-                  invalid={!!errors.comment}
-                  feedbackInvalid={errors.comment}
-                />
-              </CCol>
-
-              
-            </CRow>
-            
-          </CCardBody>
-        </CCard>
-
-
-        <CCard className="mb-4">
-          <CCardHeader>
             <strong>Road Test & Performance</strong>
           </CCardHeader>
           <CCardBody>
@@ -3401,7 +3430,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.highway_stability}
                  options={[
                       { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
+                      { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
                     ]} />
@@ -3418,7 +3447,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.steering_feedback}
                  options={[
                       { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
+                      { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
                     ]} />
@@ -3435,7 +3464,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.abs_intervention}
                  options={[
                       { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
+                      { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
                     ]} />
@@ -3452,7 +3481,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.braking_performance}
                  options={[
                       { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
+                      { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
                     ]} />
@@ -3469,7 +3498,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.transmission_harshness}
                  options={[
                       { value: "Excellent", label: "Excellent" },
-                      { value: "Good", label: "Good" },
+                      { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
                     ]} />
@@ -3486,7 +3515,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.clutch_engagement}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
                   ]} />
@@ -3503,7 +3532,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.noise_levels}
                   options={[
                     { value: "Excellent", label: "Excellent" },
-                    { value: "Good", label: "Good" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
                   ]} />
@@ -3614,6 +3643,126 @@ const AddInspection = () => {
             
           </CCardBody>
         </CCard>
+
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Vehicle Files (Images / PDFs)</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className="g-3">
+              <CCol md={4}>
+                <CFormInput
+                  type="file"
+                  multiple
+                  accept="image/png, image/jpeg, image/jpg, application/pdf"
+                  name="documents"
+                  label="Upload Files"
+                  onChange={(e) => {
+                    const newFiles = Array.from(e.target.files);
+
+                    setData("documents", [
+                      ...(Array.isArray(data.documents)
+                        ? data.documents
+                        : typeof data.documents === "string"
+                        ? JSON.parse(data.documents)
+                        : []),
+                      ...newFiles,
+                    ]);
+                  }}
+                  invalid={!!errors.documents}
+                  feedbackInvalid={errors.documents}
+                />
+              </CCol>
+
+              {/* Preview Section */}
+              <div className="mt-3 d-flex flex-wrap gap-2">
+                {Array.isArray(documents) &&
+                  documents.map((file, index) => {
+                    let fileUrl;
+                    let isPdf = false;
+
+                    // Case 1: DB string path
+                    if (typeof file === "string") {
+                      fileUrl = file.replace(/\\\//g, "/");
+                      isPdf = fileUrl.toLowerCase().endsWith(".pdf");
+                    }
+                    // Case 2: New uploads (File objects)
+                    else if (file instanceof File) {
+                      fileUrl = URL.createObjectURL(file);
+                      isPdf = file.type === "application/pdf";
+                    }
+
+                    return (
+                      <div
+                        key={index}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          position: "relative",
+                          border: "1px solid #ddd",
+                          borderRadius: "6px",
+                          overflow: "hidden",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          background: "#f9f9f9",
+                        }}
+                      >
+                        {isPdf ? (
+                          <a
+                            href={fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              textDecoration: "none",
+                              color: "red",
+                              fontSize: "12px",
+                              textAlign: "center",
+                            }}
+                          >
+                            📄 PDF
+                          </a>
+                        ) : (
+                          <img
+                            src={fileUrl}
+                            alt={`preview-${index}`}
+                            className="img-fluid"
+                            style={{ maxHeight: "100%", maxWidth: "100%" }}
+                          />
+                        )}
+
+                        {/* Remove Button */}
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setData(
+                              "documents",
+                              documents.filter((_, i) => i !== index)
+                            )
+                          }
+                          style={{
+                            position: "absolute",
+                            top: "2px",
+                            right: "2px",
+                            background: "red",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "50%",
+                            width: "20px",
+                            height: "20px",
+                            cursor: "pointer",
+                          }}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    );
+                  })}
+              </div>
+            </CRow>
+          </CCardBody>
+        </CCard>
+
 
         
         <CarInspectionImage inspectionId={props.inspectionsDetail.id} initialMapping={savedMappingFromServer} onSvgChange={handleSvgChange} svgImage={data.vehicle_detail.svg_image} /> 

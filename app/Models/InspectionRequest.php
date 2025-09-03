@@ -8,7 +8,8 @@ class InspectionRequest extends Model
 {
     protected $fillable = [
         'inspector_id',
-         'dealer_id',
+        'dealer_id',
+        'documents',
         'full_name',
         'contact_no',
         'email',
@@ -113,5 +114,16 @@ class InspectionRequest extends Model
     public function performanceRoadTestDetails()
     {
         return $this->hasOne(InspectionRoadTestDetail::class, 'request_id');
+    }
+
+     public function dealer()
+    {
+        return $this->belongsTo(User::class, 'dealer_id');
+    }
+
+    // Relation with inspector
+    public function inspector()
+    {
+        return $this->belongsTo(User::class, 'inspector_id');
     }
 }

@@ -65,8 +65,8 @@ class HandleInertiaRequests extends Middleware
                 if (Auth::check()) {
                     if(Auth::user()->role=='admin') {
                         return [
-                            'totalUsers' => User::where('role','=', 'dealer')->count(),
-                            'totalInspector' => User::where('role','=', 'inspector')->count(),
+                            'totalUsers' => User::where('role','=', 'dealer')->where('status',1)->count(),
+                            'totalInspector' => User::where('role','=', 'inspector')->where('status',1)->count(),
                             'totalInProcessRequest' => InspectionRequest::where('status', 2)->count(),
                             'totalCompletedRequest' => InspectionRequest::where('status', 5)->count(),
                             'totalServiceRequests' => InspectionRequest::where('status', 0)->count(),

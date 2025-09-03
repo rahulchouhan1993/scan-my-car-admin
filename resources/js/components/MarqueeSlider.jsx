@@ -85,6 +85,7 @@ export default function BoxSlider() {
             />
           </SwiperSlide>
         ))}
+        
       </Swiper>
     </div>
   );
