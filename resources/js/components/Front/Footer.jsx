@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <>
     <div className='whatsapp'>
-      <a target="_blank" href="https://api.whatsapp.com/send?phone=971585581172&text=Welcome to CertifyCars.ae! 🚗
+      <a target="_blank" href="https://api.whatsapp.com/send?phone=971585898328&text=Welcome to CertifyCars.ae! 🚗
       How can we assist you today?">
        <img src={whatsapp} alt="img" />
       </a>
