@@ -77,6 +77,8 @@ const Select2Multi = ({
         options={options}
         value={formattedValue}
         onChange={handleChange}
+        isSearchable={false}
+
         placeholder="-- Select --"
         closeMenuOnSelect={!multiple}
         hideSelectedOptions={false}

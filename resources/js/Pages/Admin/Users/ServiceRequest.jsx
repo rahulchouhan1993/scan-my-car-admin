@@ -36,7 +36,7 @@ const ServiceRequest = (props) => {
             <strong>Service Request</strong>
           </CCardHeader>
           <CCardBody>
-              <CTable responsive>
+              <CTable responsive >
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>

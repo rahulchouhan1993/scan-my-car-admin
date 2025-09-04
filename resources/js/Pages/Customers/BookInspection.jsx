@@ -715,7 +715,7 @@ const BookInspection = () => {
                 <div className="md:col-span-2">
                   <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Additional Notes</label>
                   <textarea
-                    required
+                    
                     onChange={(e) => setData('additional_notes', e.target.value)}
                     name="additional_notes"
                     placeholder="Additional Notes"

@@ -10,13 +10,14 @@ import {
   CFormSwitch,
   CButton
 } from '@coreui/react'
-import { useState } from 'react'
-import { useForm, usePage } from '@inertiajs/react'
+import { useState,useEffect, useRef } from 'react'
+import { useForm, usePage,router } from '@inertiajs/react'
 import DefaultLayout from '../../../layout/DefaultLayout'
 import { route } from 'ziggy-js'
 import CarInspectionImage from '../../../components/CarInspectionImage'
 import Select2Multi from '../../../components/Select2Multi'
 const AddInspection = () => {
+  const saveTimeout = useRef(null)
   const { props } = usePage();
   const savedMappingFromServer = {};  
   const { data, setData, post, processing, errors } = useForm({
@@ -43,6 +44,7 @@ const AddInspection = () => {
     status: String(props?.inspectionsDetail?.status ?? ''),
     svg_code: '',
     documents: props?.inspectionsDetail?.documents || [],
+    over_comments: props?.inspectionsDetail?.over_comments || '',
     vehicle_detail: {
       ...props?.inspectionsDetail?.vehicle_detail
     },
@@ -108,7 +110,7 @@ const AddInspection = () => {
 
   if (typeof images === "string") {
     try {
-      images = JSON.parse(images); // convert JSON string to array
+      images = JSON.parse(images) || []; // convert JSON string to array
     } catch {
       images = [];
     }
@@ -118,7 +120,7 @@ const AddInspection = () => {
 
   if (typeof documents === "string") {
     try {
-      documents = JSON.parse(documents); // convert JSON string to array
+      documents = JSON.parse(documents) || []; // convert JSON string to array
     } catch {
       documents = [];
     }
@@ -129,7 +131,7 @@ const AddInspection = () => {
     if (!confirmed) {
       return; // stop if user cancels
     }
-    post(route(`inspector.submit-test`, { id: props.inspectionsDetail.id}))
+    post(route(`inspector.submit-test`, { id: props.inspectionsDetail.id, savetype: 'normal'}))
   }
 
   const handleSvgChange = ({ svg, mapping }) => {
@@ -145,6 +147,71 @@ const AddInspection = () => {
       setData("other_vehicle_make", ""); // reset when not "Other"
     }
   };
+
+  useEffect(() => {
+  if (!props?.inspectionsDetail?.id) return
+
+  if (saveTimeout.current) {
+    clearTimeout(saveTimeout.current)
+  }
+
+  saveTimeout.current = setTimeout(() => {
+    post(
+      route("inspector.submit-test", { id: props.inspectionsDetail.id, savetype: 'autosave' }),
+      {
+        preserveScroll: true,  // ✅ this works now
+        preserveState: true,
+        replace: true,
+        onSuccess: () => {
+          // no-op
+        }
+      }
+    )
+  }, 5000) // debounce 2s
+
+  return () => clearTimeout(saveTimeout.current)
+}, [JSON.stringify(data)])
+
+  const removeFile = (index, typefile) => {
+    let fileToDelete = null
+    if (typefile === 'documents') {
+      // ensure docs is an array
+      let documents = data.documents
+      if (!Array.isArray(documents)) {
+        try { documents = JSON.parse(documents) || [] } catch { documents = [] }
+      }
+
+      fileToDelete = documents[index]
+      const updatedDocs = documents.filter((_, i) => i !== index)
+      setData('documents', updatedDocs)
+    } else { // 'images'
+      let images = data?.vehicle_detail?.images
+      if (!Array.isArray(images)) {
+        try { images = JSON.parse(images) || [] } catch { images = [] }
+      }
+
+      fileToDelete = images[index]
+      const updatedImages = images.filter((_, i) => i !== index)
+      setData('vehicle_detail', {
+        ...data.vehicle_detail,
+        images: updatedImages,
+      })
+    }
+
+    router.delete(
+      route('inspector.delete-file', {
+        id: props.inspectionsDetail.id,
+        typefile,
+        index,
+      }),
+      {
+        preserveScroll: true,
+        preserveState: true,
+        replace: true,
+      }
+    )
+  }
+
 
   return (
   <CRow>
@@ -796,6 +863,8 @@ const AddInspection = () => {
           </CCardBody>
         </CCard>
 
+         <CarInspectionImage inspectionId={props.inspectionsDetail.id} initialMapping={savedMappingFromServer} onSvgChange={handleSvgChange} svgImage={data.vehicle_detail.svg_image} />
+
         <CCard className="mb-4">
           <CCardHeader>
             <strong>Engine Bay</strong>
@@ -812,7 +881,6 @@ const AddInspection = () => {
                   value={data.engine_detail.engine_start_behavior_cold}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -829,7 +897,6 @@ const AddInspection = () => {
                   value={data.engine_detail.engine_start_behavior_warm}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -846,7 +913,6 @@ const AddInspection = () => {
                   value={data.engine_detail.idle_stability}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -863,7 +929,6 @@ const AddInspection = () => {
                   value={data.engine_detail.throttle_response}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -880,7 +945,6 @@ const AddInspection = () => {
                   value={data.engine_detail.abnormal_engine_noises}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -964,7 +1028,6 @@ const AddInspection = () => {
                   value={data.engine_detail.coolant_level_check}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -981,7 +1044,6 @@ const AddInspection = () => {
                   value={data.engine_detail.coolant_color}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -998,7 +1060,6 @@ const AddInspection = () => {
                   value={data.engine_detail.coolant_leaks}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1032,7 +1093,6 @@ const AddInspection = () => {
                   value={data.engine_detail.hose_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1049,7 +1109,6 @@ const AddInspection = () => {
                   value={data.engine_detail.drive_belt_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1067,7 +1126,6 @@ const AddInspection = () => {
                   value={data.engine_detail.timing_belt_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1084,7 +1142,6 @@ const AddInspection = () => {
                   value={data.engine_detail.turbo_boost_check}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1101,7 +1158,6 @@ const AddInspection = () => {
                   value={data.engine_detail.air_intake_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1118,7 +1174,6 @@ const AddInspection = () => {
                   value={data.engine_detail.air_filter_element}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1135,7 +1190,6 @@ const AddInspection = () => {
                   value={data.engine_detail.starter_motor_cranking}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1152,7 +1206,6 @@ const AddInspection = () => {
                   value={data.engine_detail.fuse_box_access}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Normal", label: "Normal" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Bad", label: "Bad" }
@@ -1208,7 +1261,6 @@ const AddInspection = () => {
                 value={data.transmission_detail.transmission_fluid_level_auto}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  // { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Normal", label: "Normal" },
                   { value: "Dry", label: "Dry" },
@@ -1241,7 +1293,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.transmission_mount_integrity}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Dry", label: "Dry" },
                   { value: "Need Maintainance", label: "Need Maintainance" }
@@ -1259,7 +1310,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.clutch_bite_slippage}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Dry", label: "Dry" },
                   { value: "Need Maintainance", label: "Need Maintainance" }
@@ -1275,7 +1325,7 @@ const AddInspection = () => {
                 value={data.transmission_detail?.automatic_shift_quality}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  // { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Gear Shifting Not Smooth", label: "Gear Shifting Not Smooth" },
                   { value: "Hard To Change Gear", label: "Hard To Change Gear" },
                   { value: "Jurky Gear", label: "Jurky Gear" },
@@ -1299,8 +1349,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.transfer_case_engagement}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Not Engaging", label: "Not Engaging" },
                   { value: "Transfer Case Fold", label: "Transfer Case Fold" },
                   { value: "4WD Not Engaging", label: "4WD Not Engaging" },
@@ -1320,7 +1368,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.drive_shaft_visual_inspection}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Dry", label: "Dry" },
                   { value: "Need Maintainance", label: "Need Maintainance" }
@@ -1336,7 +1383,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.cv_joint_boot_integrity}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Dry", label: "Dry" },
                   { value: "Need Maintainance", label: "Need Maintainance" }
@@ -1352,7 +1398,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.u_joints_coupling_check}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Dry", label: "Dry" },
                   { value: "Need Maintainance", label: "Need Maintainance" }
@@ -1384,7 +1429,6 @@ const AddInspection = () => {
                 value={data.transmission_detail?.differential_housing_leaks}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Dry", label: "Dry" },
                   { value: "Need Maintainance", label: "Need Maintainance" }
@@ -1440,7 +1484,7 @@ const AddInspection = () => {
                   value={data.glass_detail.windshield_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "No damage / Excellent condition", label: "No damage / Excellent condition" },
+                    { value: "No damage / Good condition", label: "No damage / Good condition" },
                     { value: "Minor scratches", label: "Minor scratches" },
                     { value: "Chips present", label: "Chips present" },
                     { value: "Cracks present", label: "Cracks present" },
@@ -1505,7 +1549,7 @@ const AddInspection = () => {
 
                 <CCol md={4}>
                   <Select2Multi
-                    multiple
+                    
                     required
                     name="glass_detail[side_window_operation_lf]"
                     label="Side Window Operation (LF)"
@@ -1522,7 +1566,7 @@ const AddInspection = () => {
 
                 <CCol md={4}>
                   <Select2Multi
-                    multiple
+                    
                     required
                     name="glass_detail[side_window_operation_rf]"
                     label="Side Window Operation (RF)"
@@ -1539,7 +1583,7 @@ const AddInspection = () => {
 
                 <CCol md={4}>
                   <Select2Multi
-                    multiple  
+                      
                     required
                     name="glass_detail[side_window_operation_lr]"
                     label="Side Window Operation (LR)"
@@ -1556,7 +1600,7 @@ const AddInspection = () => {
 
                 <CCol md={4}>
                   <Select2Multi
-                    multiple
+                    
                     required
                     name="glass_detail[side_window_operation_rr]"
                     label="Side Window Operation (RR)"
@@ -1580,7 +1624,7 @@ const AddInspection = () => {
                     value={data.glass_detail.rear_window_condition}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                     options={[
-                      { value: "No damage / Excellent condition", label: "No damage / Excellent condition" },
+                      { value: "No damage / Good condition", label: "No damage / Good condition" },
                       { value: "Minor scratches", label: "Minor scratches" },
                       { value: "Chips present", label: "Chips present" },
                       { value: "Cracks present", label: "Cracks present" },
@@ -1633,7 +1677,7 @@ const AddInspection = () => {
                     value={data.glass_detail.sunroof_glass_condition}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                     options={[
-                      { value: "Excellent / No damage", label: "Excellent / No damage" },
+                      { value: "Good Condition / No Damage", label: "Good Condition / No Damage" },
                       { value: "Minor scratches", label: "Minor scratches" },
                       { value: "Chips present", label: "Chips present" },
                       { value: "Cracks present", label: "Cracks present" },
@@ -1888,7 +1932,6 @@ const AddInspection = () => {
                   value={data.suspension_detail.front_strut_mount_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -1906,7 +1949,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.rear_strut_mount_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -1924,7 +1967,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.front_shock_absorber_function}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -1941,7 +1984,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.rear_shock_absorber_function}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -1958,7 +2001,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.front_spring_integrity}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -1975,7 +2018,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.rear_spring_integrity}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -1992,7 +2035,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.control_arm_bush_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2010,7 +2053,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.lower_ball_joint_play}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2027,7 +2070,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.upper_ball_joint_play}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2044,7 +2087,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.anti_roll_bar_links_bushes}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2061,7 +2104,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.steering_rack_seal_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2079,7 +2122,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.steering_rack_play_check}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2096,7 +2139,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.rack_end_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2114,7 +2157,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.tie_rod_end_play}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2167,7 +2210,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.power_steering_pump_noise}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2184,7 +2227,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.subframe_mount_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2202,7 +2245,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.chassis_mounts_security}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2219,7 +2262,7 @@ const AddInspection = () => {
                   value={data.suspension_detail?.steering_wheel_free_play}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Average", label: "Average" },
@@ -2262,7 +2305,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.master_cylinder_seal_condition}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
@@ -2279,7 +2322,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.brake_booster_operation}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
@@ -2296,7 +2339,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.front_disc_condition_runout}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
@@ -2313,7 +2356,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.rear_disc_drum_condition}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
@@ -2330,7 +2373,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.front_pad}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
@@ -2347,7 +2390,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.rear_pad}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Weak", label: "Weak" },
@@ -2364,7 +2407,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.handbrake_adjustment_holding}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
@@ -2381,7 +2424,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.abs_function_wheel_speed_check}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
@@ -2398,7 +2441,7 @@ const AddInspection = () => {
                   value={data.brakes_detail.brake_pedal_travel_firmness}
                     onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
@@ -2458,7 +2501,7 @@ const AddInspection = () => {
                 value={data.interior_detail.dashboard_fit_finish}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2475,7 +2518,7 @@ const AddInspection = () => {
                 value={data.interior_detail.instrument_cluster_illumination}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2492,7 +2535,7 @@ const AddInspection = () => {
                 value={data.interior_detail.odometer_function}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2509,7 +2552,7 @@ const AddInspection = () => {
                 value={data.interior_detail.interior_lighting}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2526,7 +2569,7 @@ const AddInspection = () => {
                 value={data.interior_detail.glove_box_latching}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2543,7 +2586,7 @@ const AddInspection = () => {
                 value={data.interior_detail.carpet_wear_retention}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2560,7 +2603,7 @@ const AddInspection = () => {
                 value={data.interior_detail.interior_contamination_odour}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2577,7 +2620,7 @@ const AddInspection = () => {
                 value={data.interior_detail.trunk_boot_interior_condition}
                 onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Bad", label: "Bad" },
                   { value: "Need Attention", label: "Need Attention" },
@@ -2688,7 +2731,7 @@ const AddInspection = () => {
                   onChange={(e) => setData(e.target.name, e.target.value)}
                  
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Worn Out", label: "Worn Out" },
@@ -2711,7 +2754,7 @@ const AddInspection = () => {
                   value={data.seat_detail.seat_upholstery_integrity}
                  onChange={(e) => setData(e.target.name, e.target.value)}
                 options={[
-                  { value: "Excellent", label: "Excellent" },
+                  
                   { value: "Good Condition", label: "Good Condition" },
                   { value: "Normal", label: "Normal" },
                   { value: "Weak", label: "Weak" },
@@ -2755,7 +2798,7 @@ const AddInspection = () => {
                   value={data.hvac_detail.air_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "AC Not Cooling", label: "AC Not Cooling" },
@@ -2791,7 +2834,7 @@ const AddInspection = () => {
                   value={data.hvac_detail.infotainment_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Touchscreen Not Working", label: "Touchscreen Not Working" },
@@ -2814,7 +2857,7 @@ const AddInspection = () => {
                   value={data.hvac_detail.radio_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "No Sound / Low Volume", label: "No Sound / Low Volume" },
@@ -2861,7 +2904,7 @@ const AddInspection = () => {
                   value={data.cooling_detail.radiator_core_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    { value: "Good Condition", label: "Good Condition" },
                     { value: "Radiator Leak", label: "Radiator Leak" },
                     { value: "Coolant Low / Empty", label: "Coolant Low / Empty" },
                     { value: "Overheating Engine", label: "Overheating Engine" },
@@ -2903,7 +2946,7 @@ const AddInspection = () => {
                   value={data.cooling_detail.cycling_observation}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Need Maintainance", label: "Need Maintainance" },
@@ -2919,7 +2962,7 @@ const AddInspection = () => {
                   value={data.cooling_detail.overflow_expansion_tank_condition}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -2953,7 +2996,7 @@ const AddInspection = () => {
                   value={data.cooling_detail.fuel_tank_inspection}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                     
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Need Attention", label: "Need Attention" },
                       { value: "Leaking", label: "Leaking" },
@@ -3027,7 +3070,7 @@ const AddInspection = () => {
                   value={data.electrical_detail.rear_indicators_function}
                   onChange={(e) => setData(e.target.name, e.target.value)}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+    
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -3412,7 +3455,7 @@ const AddInspection = () => {
                   invalid={!!errors.mid_range_power}
                   feedbackInvalid={errors.mid_range_power}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Smooth And Responsive", label: "Smooth And Responsive" },
                       { value: "Hesitant", label: "Hesitant" },
                       { value: "Weak / Laggy", label: "Weak / Laggy" },
@@ -3429,7 +3472,7 @@ const AddInspection = () => {
                   invalid={!!errors.highway_stability}
                   feedbackInvalid={errors.highway_stability}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -3446,7 +3489,7 @@ const AddInspection = () => {
                   invalid={!!errors.steering_feedback}
                   feedbackInvalid={errors.steering_feedback}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -3463,7 +3506,7 @@ const AddInspection = () => {
                   invalid={!!errors.abs_intervention}
                   feedbackInvalid={errors.abs_intervention}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -3480,7 +3523,7 @@ const AddInspection = () => {
                   invalid={!!errors.braking_performance}
                   feedbackInvalid={errors.braking_performance}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -3497,7 +3540,7 @@ const AddInspection = () => {
                   invalid={!!errors.transmission_harshness}
                   feedbackInvalid={errors.transmission_harshness}
                  options={[
-                      { value: "Excellent", label: "Excellent" },
+                      
                       { value: "Good Condition", label: "Good Condition" },
                       { value: "Normal", label: "Normal" },
                       { value: "Bad", label: "Bad" },
@@ -3514,7 +3557,7 @@ const AddInspection = () => {
                   invalid={!!errors.clutch_engagement}
                   feedbackInvalid={errors.clutch_engagement}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
@@ -3531,7 +3574,7 @@ const AddInspection = () => {
                   invalid={!!errors.noise_levels}
                   feedbackInvalid={errors.noise_levels}
                   options={[
-                    { value: "Excellent", label: "Excellent" },
+                    
                     { value: "Good Condition", label: "Good Condition" },
                     { value: "Normal", label: "Normal" },
                     { value: "Bad", label: "Bad" },
@@ -3613,12 +3656,7 @@ const AddInspection = () => {
                       />
                       <button
                         type="button"
-                        onClick={() =>
-                          setData(
-                            "vehicle_detail.images",
-                            images.filter((_, i) => i !== index)
-                          )
-                        }
+                        onClick={() => removeFile(index,'images')}
                         style={{
                           position: "absolute",
                           top: 0,
@@ -3651,6 +3689,7 @@ const AddInspection = () => {
           <CCardBody>
             <CRow className="g-3">
               <CCol md={4}>
+
                 <CFormInput
                   type="file"
                   multiple
@@ -3658,17 +3697,17 @@ const AddInspection = () => {
                   name="documents"
                   label="Upload Files"
                   onChange={(e) => {
-                    const newFiles = Array.from(e.target.files);
+                  const newFiles = Array.from(e.target.files);
 
-                    setData("documents", [
-                      ...(Array.isArray(data.documents)
-                        ? data.documents
-                        : typeof data.documents === "string"
-                        ? JSON.parse(data.documents)
-                        : []),
-                      ...newFiles,
-                    ]);
-                  }}
+                  setData("documents", [
+                    ...(Array.isArray(data.documents)
+                      ? data.documents
+                      : typeof data.documents === "string"
+                      ? JSON.parse(data.documents)
+                      : []),
+                    ...newFiles,
+                  ]);
+                }}
                   invalid={!!errors.documents}
                   feedbackInvalid={errors.documents}
                 />
@@ -3734,12 +3773,7 @@ const AddInspection = () => {
                         {/* Remove Button */}
                         <button
                           type="button"
-                          onClick={() =>
-                            setData(
-                              "documents",
-                              documents.filter((_, i) => i !== index)
-                            )
-                          }
+                           onClick={() => removeFile(index,'documents')}
                           style={{
                             position: "absolute",
                             top: "2px",
@@ -3759,13 +3793,25 @@ const AddInspection = () => {
                     );
                   })}
               </div>
+
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="over_comments"
+                  label="Comments"
+                  value={data.over_comments}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.over_comments}
+                  feedbackInvalid={errors.over_comments}
+                />
+              </CCol>
             </CRow>
           </CCardBody>
         </CCard>
 
 
         
-        <CarInspectionImage inspectionId={props.inspectionsDetail.id} initialMapping={savedMappingFromServer} onSvgChange={handleSvgChange} svgImage={data.vehicle_detail.svg_image} /> 
+        
 
         <CCol xs={12}>
             <CButton type="submit" color="primary" className="px-4" disabled={processing}>

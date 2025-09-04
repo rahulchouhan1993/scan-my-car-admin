@@ -33,6 +33,7 @@ class InspectionRequest extends Model
         'package_id',
         'request_no',
         'pin_code',
+        'over_comments',
         'city'
     ];
 

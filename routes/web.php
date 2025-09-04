@@ -15,6 +15,7 @@ use App\Http\Controllers\Dealer\DealersController;
 // =========================
 
 Route::get('/', [CustomersController::class, 'home'])->name('home');
+Route::get('/', [CustomersController::class, 'home'])->name('login');
 Route::get('/about-us', [CustomersController::class, 'aboutUs'])->name('about');
 Route::get('/terms-and-conditions', [CustomersController::class, 'termsAndConditions'])->name('terms');
 Route::match(['post','get'],'/contact-us', [CustomersController::class, 'contactUs'])->name('contactus');
@@ -25,7 +26,7 @@ Route::get('/inspection-details/{id}', [InspectionsController::class, 'inspectio
 Route::get('/thank-you', [InspectionsController::class, 'thankYou'])->name('thank-you');
 Route::get('/mark-as-completed', [InspectionsController::class, 'markComplete'])->name('markComplete');
 Route::get('/preview-report', [InspectionsController::class, 'previewPdf'])->name('preview-report');
-
+Route::get('/downlaod-attachments/{id}', [InspectionsController::class, 'downloadAttachments'])->name('download-attachments');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');
@@ -117,7 +118,8 @@ Route::prefix('inspector')->name('inspector.')->group(function () {
         Route::get('/report/{id}', [InspectorController::class, 'report'])->name('inspections.report');
         Route::get('/logs/{id}', [InspectorController::class, 'logs'])->name('inspections.logs');
         Route::get('/start-inspection/{id}', [InspectorController::class, 'startInspection'])->name('start-inspection');
-        Route::post('/submit-test/{id}', [InspectorController::class, 'submitTest'])->name('submit-test');
+        Route::post('/submit-test/{id}/{savetype}', [InspectorController::class, 'submitTest'])->name('submit-test');
+        Route::delete('/delete-file/{id}/{typefile},{index}', [InspectorController::class, 'deleteFile'])->name('delete-file');
 
         // Inquiries
         Route::get('/inquiries', [InspectorController::class, 'inquiries'])->name('inquiries');

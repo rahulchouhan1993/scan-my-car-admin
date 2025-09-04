@@ -755,6 +755,32 @@ const InspectionDetails = () => {
       images = [];
     }
   }
+
+  const downloadAll = async () => {
+    try {
+      const response = await fetch(
+        route("download-attachments", props.inspectionsDetail.id)
+      );
+      const files = await response.json();
+
+      if (!files.length) {
+        alert("No files available to download.");
+        return;
+      }
+
+      files.forEach((fileUrl, i) => {
+        const link = document.createElement("a");
+        link.href = fileUrl;
+        link.setAttribute("download", fileUrl.split("/").pop()); // force download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    } catch (error) {
+      console.error("Error downloading files:", error);
+    }
+  };
+
   return (
     <>
 
@@ -866,10 +892,31 @@ const InspectionDetails = () => {
             <h1 className="ppfont text-[20px] md:text-[24px] lg:text-[28px] text-[#192735]">
               {props.inspectionsDetail.vehicle_make} {props.inspectionsDetail.vehicle_model} 
             </h1>
-            {/* <p className="creatodisplayM text-[#192735c9] text-[16px] md:text-[18px] lg:text-[20px]">
-              The battery needs to be replaced. The tires need to be replaced ASAP.
-              2019
-            </p> */}
+            
+           <a
+           href="#"
+                onClick={downloadAll}
+              className="download-all-attachment"
+            >
+              Download All Reports <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" width="20px" height="20px" viewBox="0 -4 32 32" version="1.1">
+    
+                      <title>cloud-download</title>
+                      <desc>Created with Sketch Beta.</desc>
+                      <defs>
+
+                  </defs>
+                      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                          <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-412.000000, -1139.000000)" fill="#000000">
+                              <path d="M437,1161 L420,1161 C420,1161 413.962,1160.38 414,1155 C414.021,1151.96 416.688,1149.18 420,1149 C420,1144.86 422.65,1141 427,1141 C430.433,1141 432.723,1143.1 433.538,1146.01 C438.493,1145.8 441.844,1149.72 442,1153 C442.135,1155.83 439.68,1159.48 437,1161 L437,1161 Z M435.067,1144.03 C433.599,1141.05 430.543,1139 427,1139 C422.251,1139 418.37,1142.68 418.033,1147.34 C414.542,1148.34 412,1151.39 412,1155 C412,1159.26 415.54,1162.73 420,1162.98 L437,1163 C440.437,1161.51 444,1157.35 444,1153.5 C444,1148.44 440.049,1144.32 435.067,1144.03 L435.067,1144.03 Z M433.295,1151.39 L429,1155.66 L429,1146.01 C429,1145.46 428.553,1145.01 428,1145.01 C427.448,1145.01 427,1145.46 427,1146.01 L427,1155.63 L422.736,1151.39 C422.344,1151 421.707,1151 421.313,1151.39 C420.921,1151.78 420.921,1152.41 421.313,1152.81 L427.254,1158.72 C427.464,1158.93 427.741,1159.02 428.016,1159 C428.29,1159.02 428.568,1158.93 428.777,1158.72 L434.718,1152.81 C435.11,1152.41 435.11,1151.78 434.718,1151.39 C434.325,1151 433.688,1151 433.295,1151.39 L433.295,1151.39 Z" id="cloud-download" sketch:type="MSShapeGroup">
+
+                  </path>
+                          </g>
+                      </g>
+                  </svg>
+            </a>
+            <p className="creatodisplayM text-[#192735c9] text-[16px] ">
+              {props.inspectionsDetail.over_comments}
+            </p>
           </div>
               <div className="w-full">
                 <Swiper

@@ -64,7 +64,7 @@ class InspectionsController extends Controller
                 'mileage'             => $request->mileage,
                 'preferred_date'      => $preferredDate,
                 'preferred_time_slot' => $request->preferred_time_slot,
-                'additional_notes'    => $request->additional_notes,
+                'additional_notes'    => $request->additional_notes ?? NULL,
                 'status'              => $request->status ?? 0,
                 'assign_date'         => $assignDate,
                 'pin_code'            => $request->pin_code ?? NULL,
@@ -146,5 +146,19 @@ class InspectionsController extends Controller
 
         $mpdf->WriteHTML($html);
         return response($mpdf->Output('demo.pdf', 'I'))->header('Content-Type', 'application/pdf');
+    }
+
+    public function downloadAttachments($id){
+        $inspection = InspectionRequest::find($id);
+
+        $files = [];
+
+        // Collect document files
+        if (!empty($inspection->documents)) {
+            $docs = json_decode($inspection->documents, true) ?? [];
+            $files = array_merge($files, $docs);
+        }
+
+        return response()->json($files);
     }
 }

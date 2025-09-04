@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('other_vehicle_make')->nullable()->after('vehicle_make'); 
             $table->date('visiblity_till')->nullable()->after('completed_date'); 
             $table->json('documents')->nullable()->after('dealer_id'); 
+            $table->mediumText('over_comments')->nullable()->after('visiblity_till'); 
         });
     }
 

@@ -28,6 +28,7 @@ use App\Models\InspectionSuspensionDetail;
 use App\Models\InspectionTransmissionDetail;
 use App\Models\InspectionTyreDetail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class InspectorController extends Controller
 {
@@ -194,7 +195,7 @@ class InspectorController extends Controller
         echo 1; die;
     }
 
-    public function submitTest($id, Request $request){
+    public function submitTest($id,$savetype, Request $request){
         $inspectionsDetail = InspectionRequest::find($id);
         $vehicleDetail = InspectionVehicleDetail::where('request_id', $id)->first();
         $bodyDetail = InspectionBodyDetail::where('request_id', $id)->first();
@@ -223,13 +224,14 @@ class InspectorController extends Controller
                     return redirect()->route('inspector.service-request')->with('error','You can no longer edit the details now.');
                 } 
             }
-
-            $documentPaths = json_decode($vehicleDetail->documents ?? '[]', true);
-
-            if ($request->hasFile('vehicle_detail.documents')) {
-                foreach ($request->file('vehicle_detail.documents') as $file) {
-                    $path = $file->store('vehicle_documents', 'public'); 
-                    $documentPaths[] = '/storage/' . $path; 
+            
+            $documentPaths = json_decode($inspectionsDetail->documents ?? '[]', true);
+            if($savetype=='normal'){
+                if ($request->hasFile('documents')) {
+                    foreach ($request->file('documents') as $file) {
+                        $path = $file->store('vehicle_documents', 'public'); 
+                        $documentPaths[] = '/storage/' . $path; 
+                    }
                 }
             }
 
@@ -242,15 +244,18 @@ class InspectorController extends Controller
                 'transmission' => $request->input('transmission'),
                 'car_parked' => $request->input('car_parked'),
                 'mileage' => $request->input('mileage'),
+                 'over_comments' => $request->input('over_comments') ?? NULL,
                 'documents' =>json_encode($documentPaths)
             ]);
 
             $imagePaths = json_decode($vehicleDetail->images ?? '[]', true);
 
-            if ($request->hasFile('vehicle_detail.images')) {
-                foreach ($request->file('vehicle_detail.images') as $file) {
-                    $path = $file->store('vehicle_images', 'public'); 
-                    $imagePaths[] = '/storage/' . $path; 
+            if($savetype=='normal'){
+                if ($request->hasFile('vehicle_detail.images')) {
+                    foreach ($request->file('vehicle_detail.images') as $file) {
+                        $path = $file->store('vehicle_images', 'public'); 
+                        $imagePaths[] = '/storage/' . $path; 
+                    }
                 }
             }
 
@@ -819,12 +824,14 @@ class InspectorController extends Controller
                 ]);
             }
 
-           $inspectionsDetail->update([
-                'completed_date' => Carbon::now(), // saves current date & time
-                'status' => 4,
-            ]);
-            return redirect()->route('inspector.service-request')->with('success','Inspection Saved.');
-
+            if($savetype=='normal'){
+                $inspectionsDetail->update([
+                    'completed_date' => Carbon::now(), // saves current date & time
+                    'status' => 4,
+                ]);
+                return redirect()->route('inspector.service-request')->with('success','Inspection Saved.');
+            }
+        
         }
 
     }
@@ -848,5 +855,42 @@ class InspectorController extends Controller
         }
         $userOption = User::where('role','inspector')->get();
         return inertia('Inspector/Users/ContactUpdate',compact('pageTitle','contactDetails','userOption','id'));
+    }
+
+    public function deleteFile($id,$typefile,$index){
+        $typefile = $typefile;
+        $index = (int) $index;
+       
+        if ($typefile === 'documents') {
+            $inspection = InspectionRequest::findOrFail($id);
+            $documents = json_decode($inspection->documents, true) ?? [];
+            if (isset($documents[$index])) {
+                $fileToDelete = $documents[$index];
+                unset($documents[$index]);
+                $inspection->documents = array_values($documents);
+                $inspection->save();
+
+                $path = str_replace('/storage/vehicle_documents/', '', $fileToDelete);
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
+        } else {
+            $inspectionDetail = InspectionVehicleDetail::where('request_id', $id)->firstOrFail();
+            $images = json_decode($inspectionDetail->images, true) ?? [];
+            if (isset($images[$index])) {
+                $fileToDelete = $images[$index];
+                unset($images[$index]);
+                $inspectionDetail->images = array_values($images);
+                $inspectionDetail->save();
+
+                $path = str_replace('/storage/vehicle_images/', '', $fileToDelete);
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
+        }
+
+        return back()->with('success', 'File deleted');
     }
 }
