@@ -56,7 +56,7 @@ const Register = () => {
         <div className="container relative z-1 flex flex-col lg:flex-row w-full max-w-6xl shadow-lg rounded-lg overflow-hidden">
           
           {/* Left Side - Form */}
-          <div className="w-full lg:w-1/2 bg-[#192735] p-[25px] rounded-[15px] md:rounded-[30px]">
+          <div className="w-full lg:w-1/2 bg-[#192735] p-[15px] md:p-[25px] rounded-[15px] md:rounded-[30px]">
             <div className='border-b-[1px] border-b-[#ffffff29] pb-[30px] mb-[40px]'>
               <h1 className="ppfont text-[25px] md:text-[36px] text-[#fff] mb-[2px]">Welcome to certifycar</h1>
               <p className="creatodisplayM text-[20px] text-[#ffffff87]">
@@ -65,24 +65,24 @@ const Register = () => {
               </p>
             </div>
 
-            <form className="space-y-5 registerForm" onSubmit={handleSubmit}>
+            <form className="space-y-3 md:space-y-5 registerForm" onSubmit={handleSubmit}>
             <div className='relative'> 
-              <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Full Name</label>
+              <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.name}
                 onChange={(e) => setData('name', e.target.value)}
               />
                {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
                </div>
                <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Company Name</label>
+                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Company Name</label>
               <input
                 type="text"
                 placeholder="Company Name"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.company_name}
                 onChange={(e) => setData('company_name', e.target.value)}
               />
@@ -90,44 +90,44 @@ const Register = () => {
                </div>
 
                <div className='relative'> 
-                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Email</label>
+                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Email</label>
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.email}
                 onChange={(e) => setData('email', e.target.value)}
               />
               {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
               </div>
               <div className='relative'> 
-                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Phone Number</label>
+                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Phone Number</label>
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.phone_no}
                 onChange={(e) => setData('phone_no', e.target.value)}
               />
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               {/* <div className='relative'> 
-                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Buying Limit</label>
+                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Buying Limit</label>
                <input
                 type="number"
                 placeholder="Buying Limit"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.buying_limit}
                 onChange={(e) => setData('buying_limit', e.target.value)}
               />
               {errors.buying_limit && <div className="text-red-500 text-sm">{errors.buying_limit}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Car Model</label>
+                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Car Model</label>
               <input
                 type="text"
                 placeholder="Car Model"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.car_model}
                 onChange={(e) => setData('car_model', e.target.value)}
               />
@@ -135,22 +135,22 @@ const Register = () => {
               </div>
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Model Year </label>
+                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Model Year </label>
               <input
                 type="number"
                 placeholder="Model Year"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.model_year}
                 onChange={(e) => setData('model_year', e.target.value)}
               />
               {errors.model_year && <div className="text-red-500 text-sm">{errors.model_year}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Milage</label>
+                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Milage</label>
               <input
                 type="number"
                 placeholder="Milage"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.milage}
                 onChange={(e) => setData('milage', e.target.value)}
               />
@@ -158,40 +158,40 @@ const Register = () => {
               </div>
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Account Manager</label>
+                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Account Manager</label>
               <input
                 type="text"
                 placeholder="Account Manager"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.account_manager}
                 onChange={(e) => setData('account_manager', e.target.value)}
               />
               {errors.account_manager && <div className="text-red-500 text-sm">{errors.account_manager}</div>}
               </div> */}
               <div className='relative'> 
-                 <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Password</label>
+                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Password</label>
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.password}
                 onChange={(e) => setData('password', e.target.value)}
               />
               {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Confirm Password</label>
+                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Confirm Password</label>
               <input
                 type="password"
                 placeholder="Confirm Password"
-                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[20px] rounded-full px-[25px] py-[18px] focus:outline-none focus:border-red-500"
+                className="w-full bg-transparent border border-[#ffffff29] creatodisplayM text-[#ffffff99] text-[14px] md:text-[16px] lg:text-[18px] rounded-full px-[18px] py-[10px] md:px-[22px] md:py-[13px] focus:outline-none focus:border-red-500"
                 value={data.password_confirmation}
                 onChange={(e) => setData('password_confirmation', e.target.value)}
               />
               {errors.password_confirmation && <div className="text-red-500 text-sm">{errors.password_confirmation}</div>}
               </div>
 
-              <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[247px] bg-[#F61221] text-[20px] text-white rounded-full py-[17px] hover:opacity-90 transition">Register</button>
+              <button type="submit" className="redbtn creatodisplayB flex-inline cursor-pointer  w-[200px] md:w-[247px] bg-[#F61221] text-[16px] md:text-[20px] text-white rounded-full py-[11px] md:py-[16px] lg:py-[17px] hover:opacity-90 transition">Register</button>
             </form>
           </div>
 

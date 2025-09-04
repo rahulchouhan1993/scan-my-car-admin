@@ -361,17 +361,17 @@ const BookInspection = () => {
             >
               <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Enter your details</h2>
 
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-[20px] inspectionForm" onSubmit={handleSubmit}>
+              <form className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] inspectionForm" onSubmit={handleSubmit}>
                 <input type="hidden" id="packageId" name="package_name" value={packageId} />
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>
                   <input
                     required
                     type="text"
                     name="full_name"
                     placeholder="Full Name"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.full_name}
                     onChange={(e) => setData('full_name', e.target.value)}
                   />
@@ -379,13 +379,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label>
                   <input
                     required
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.email}
                     onChange={(e) => setData('email', e.target.value)}
                   />
@@ -393,13 +393,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone (With Country Code)</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone (With Country Code)</label>
                   <input
                     required
                     type="tel"
                     placeholder="+971 501231234"
                     name="contact_no"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.contact_no}
                     onChange={(e) => setData('contact_no', e.target.value)}
                   />
@@ -407,13 +407,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 1</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 1</label>
                   <input
                     required
                     type="text"
                     placeholder="Address Line 1"
                     name="address_line_1"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.address_line_1}
                     onChange={(e) => setData('address_line_1', e.target.value)}
                   />
@@ -421,13 +421,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 2</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 2</label>
                   <input
                     required
                     type="text"
                     placeholder="Address Line 2"
                     name="address_line_2"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.address_line_2}
                     onChange={(e) => setData('address_line_2', e.target.value)}
                   />
@@ -435,12 +435,12 @@ const BookInspection = () => {
                 </div>
 
                 {/* <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Pin Code</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Pin Code</label>
                   <input
                     type="text"
                     placeholder="Pin Code"
                     name="pin_code"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.pin_code}
                     onChange={(e) => setData('pin_code', e.target.value)}
                   />
@@ -448,13 +448,13 @@ const BookInspection = () => {
                 </div> */}
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>City</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>City</label>
                   <select
                     required
                     value={data.city}
                     onChange={(e) => setData("city", e.target.value)}
                     name="city"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select City --</option>
                     <option value="Abudhabi" disabled>Abudhabi (Not Servicable)</option>
@@ -469,13 +469,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Make</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Make</label>
                   <select
                     required
                     value={data.vehicle_make}
                     onChange={handleChange}
                     name="vehicle_make"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Vehicle Make --</option>
                     <option value="Acura">Acura</option>
@@ -559,7 +559,7 @@ const BookInspection = () => {
 
                 {isOther && (
                     <div>
-                      <label className="flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]">
+                      <label className="flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]">
                         Please specify
                       </label>
                       <input
@@ -569,7 +569,7 @@ const BookInspection = () => {
                         onChange={(e) => setData("other_vehicle_make", e.target.value)}
                         required={isOther}
                         placeholder="Enter vehicle make"
-                        className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                        className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                       />
                       {errors.other_vehicle_make && (
                         <div className="text-red-500 text-[12px]">
@@ -580,13 +580,13 @@ const BookInspection = () => {
                   )}
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Model</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Model</label>
                   <input
                     required
                     type="text"
                     placeholder="Vehicle Model"
                     name="vehicle_model"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.vehicle_model}
                     onChange={(e) => setData('vehicle_model', e.target.value)}
                   />
@@ -594,13 +594,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Year</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Year</label>
                   <input
                     required
                     type="text"
                     placeholder="Vehicle Year"
                     name="vehicle_year"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.vehicle_year}
                     onChange={(e) => setData('vehicle_year', e.target.value)}
                   />
@@ -608,13 +608,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Fuel Type</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Fuel Type</label>
                   <select
                     required
                     value={data.fuel_type}
                     onChange={(e) => setData("fuel_type", e.target.value)}
                     name="fuel_type"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Fuel Type --</option>
                     <option value="Petrol">Petrol</option>
@@ -626,13 +626,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Transmission</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Transmission</label>
                   <select
                     required
                     value={data.transmission}
                     onChange={(e) => setData("transmission", e.target.value)}
                     name="transmission"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Transmission --</option>
                     <option value="Manual">Manual</option>
@@ -642,13 +642,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Car Parked</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Car Parked</label>
                   <select
                     required
                     value={data.car_parked}
                     onChange={(e) => setData("car_parked", e.target.value)}
                     name="car_parked"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Where is the car parked? --</option>
                     <option value="Outdoor">Outdoor</option>
@@ -660,13 +660,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Mileage</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Mileage</label>
                   <input
                     required
                     type="text"
                     name="mileage"
                     placeholder="Mileage"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.mileage}
                     onChange={(e) => setData('mileage', e.target.value)}
                   />
@@ -674,13 +674,13 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Date</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Date</label>
                   <input
                     required
                     type="date"
                     name="preferred_date"
                     placeholder="Preferred Date"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.preferred_date}
                     min={new Date().toISOString().split("T")[0]}
                     onChange={(e) => setData('preferred_date', e.target.value)}
@@ -689,14 +689,14 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Time Slot</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Time Slot</label>
 
                   <select
                     required
                     value={data.preferred_time_slot}
                     onChange={(e) => setData("preferred_time_slot", e.target.value)}
                     name="preferred_time_slot"
-                    className="border border-[#192735] rounded-full px-[20px] py-[12px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" hidden>-- Select --</option>
                     <option value="9:00 AM – 12:00 PM">9:00 AM – 12:00 PM</option>
@@ -713,14 +713,14 @@ const BookInspection = () => {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className='flex creatodisplayM text-[16px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Additional Notes</label>
+                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Additional Notes</label>
                   <textarea
                     
                     onChange={(e) => setData('additional_notes', e.target.value)}
                     name="additional_notes"
                     placeholder="Additional Notes"
                     value={data.additional_notes}
-                    className="h-[58px] md:h-[55px] lg:h-[67px] border border-[#192735] rounded-[60px] px-[25px] py-[15px] lg:px-[30px] lg:py-[18px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="h-[58px] md:h-[55px] lg:h-[67px] border border-[#192735] rounded-[10px] px-[14px] py-[14px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   />
                   {errors.additional_notes && <div className="text-red-500 text-[12px]">{errors.additional_notes}</div>}
                 </div>
@@ -729,7 +729,7 @@ const BookInspection = () => {
                   <button
                     type="submit"
                     disabled={processing}
-                    className="redbtn cursor-pointer min-w-[245px] px-[10px] py-[10px] md:py-[20px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                    className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                   >
                     {processing ? "Submitting..." : "Submit"}
                   </button>
