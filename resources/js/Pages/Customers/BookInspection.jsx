@@ -98,6 +98,7 @@ const BookInspection = () => {
     other_vehicle_make: props?.other_vehicle_make || '',
     // pin_code: props?.pin_code || '',
     city: props?.city || '',
+    package_name: packageId,
   });
 
   const handleSubmit = (e) => {
@@ -111,11 +112,13 @@ const BookInspection = () => {
   function handleContinue(packageid) {
     setpackage(packageid);
     setActiveStep(2);
+    setData("package_name", packageid);
   }
 
   function setActiveStepFun(step) {
     if(packageId){
        setActiveStep(step);
+       setData("package_name", step);
     }else{
       alert('Please choose the package');
     }
@@ -362,7 +365,7 @@ const BookInspection = () => {
               <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Enter your details</h2>
 
               <form className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] inspectionForm" onSubmit={handleSubmit}>
-                <input type="hidden" id="packageId" name="package_name" value={packageId} />
+                <input type="hidden" id="packageId" name="package_name" value={data.package_name} />
 
                 <div>
                   <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>

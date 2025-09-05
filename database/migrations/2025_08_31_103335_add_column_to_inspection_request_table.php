@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('visiblity_till')->nullable()->after('completed_date'); 
             $table->json('documents')->nullable()->after('dealer_id'); 
             $table->mediumText('over_comments')->nullable()->after('visiblity_till'); 
+            $table->mediumText('accident')->nullable()->after('over_comments'); 
         });
     }
 

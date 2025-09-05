@@ -45,6 +45,7 @@ const AddInspection = () => {
     svg_code: '',
     documents: props?.inspectionsDetail?.documents || [],
     over_comments: props?.inspectionsDetail?.over_comments || '',
+    accident: props?.inspectionsDetail?.accident || '',
     vehicle_detail: {
       ...props?.inspectionsDetail?.vehicle_detail
     },
@@ -1917,8 +1918,8 @@ const AddInspection = () => {
             
           </CCardBody>
         </CCard>
-
-        <CCard className="mb-4">
+        {(data.package_id==2 || data.package_id==3) && (
+          <CCard className="mb-4">
           <CCardHeader>
             <strong>Suspension & Steering</strong>
           </CCardHeader>
@@ -2289,6 +2290,8 @@ const AddInspection = () => {
             
           </CCardBody>
         </CCard>
+        ) }    
+        
 
         <CCard className="mb-4">
           <CCardHeader>
@@ -3805,6 +3808,20 @@ const AddInspection = () => {
                   feedbackInvalid={errors.over_comments}
                 />
               </CCol>
+                
+               {(data.package_id==2 || data.package_id==3) && (
+              <CCol md={12}>
+                <CFormInput
+                  type="text"
+                  name="accident"
+                  label="Accident, Flood, Etc"
+                  value={data.accident}
+                  onChange={(e) => setData(e.target.name, e.target.value)}
+                  invalid={!!errors.accident}
+                  feedbackInvalid={errors.accident}
+                />
+              </CCol>
+               )}
             </CRow>
           </CCardBody>
         </CCard>

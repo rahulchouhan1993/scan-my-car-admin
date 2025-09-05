@@ -244,7 +244,8 @@ class InspectorController extends Controller
                 'transmission' => $request->input('transmission'),
                 'car_parked' => $request->input('car_parked'),
                 'mileage' => $request->input('mileage'),
-                 'over_comments' => $request->input('over_comments') ?? NULL,
+                'over_comments' => $request->input('over_comments') ?? NULL,
+                'accident' => $request->input('accident') ?? NULL,
                 'documents' =>json_encode($documentPaths)
             ]);
 

@@ -34,6 +34,7 @@ class InspectionRequest extends Model
         'request_no',
         'pin_code',
         'over_comments',
+        'accident',
         'city'
     ];
 

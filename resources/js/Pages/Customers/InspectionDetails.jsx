@@ -806,82 +806,68 @@ const InspectionDetails = () => {
           {/* Responsive Grid */}
           <div className="flex flex-wrap md:flex-nowrap gap-6">
              {/* Accordion */} 
-             <div className="w-full md:w-[40%] order-1 md:order-2">
-              {accordionData.map((section, index) => (
-                <div
-                  key={index}
-                  className="bg-[#EDEEEF] rounded-[10px] md:rounded-[15px] lg:rounded-[20px] mb-3 overflow-hidden"
-                >
-                  <button
-                    onClick={() => toggleAccordion(index)}
-                    className="w-full flex justify-between items-center px-[10px] py-[10px] md:px-[20px] md:py-[15px] text-[#192735] ppfont text-[16px] "
-                  >
-                    {section.title}
-                    <span>
-                      {openIndex === index ? (
-                        // Up Arrow
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-5 h-5 text-gray-600"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 15l7-7 7 7"
-                          />
-                        </svg>
-                      ) : (
-                        // Down Arrow
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-5 h-5 text-gray-600"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
-                      )}
-                    </span>
-                  </button>
+            <div className="w-full md:w-[40%] order-1 md:order-2">
+              {accordionData.map((section, index) => {
+                // Skip this section
+                if (
+                  section.title === "Suspension & Steering" &&
+                  (props.inspectionsDetail.package_id !== 2 &&
+                    props.inspectionsDetail.package_id !== 3)
+                ) {
+                  return null;
+                }
 
-                  {/* Smooth Transition */}
+                return (
                   <div
-                    ref={(el) => (contentRefs.current[index] = el)}
-                    style={{
-                      maxHeight:
-                        openIndex === index
-                          ? `${contentRefs.current[index]?.scrollHeight}px`
-                          : "0px",
-                    }}
-                    className="transition-all duration-300 ease-in-out overflow-hidden"
+                    key={index}
+                    className="bg-[#EDEEEF] rounded-[10px] md:rounded-[15px] lg:rounded-[20px] mb-3 overflow-hidden"
                   >
-                    <div className="border-t border-[#dedede] px-[15px] md:px-[25px] py-[10px]">
-                      {section.items.map((item, idx) => (
-                        <div
-                          key={idx}
-                          className="flex justify-between gap-[15px] py-[6px]"
-                        >
-                          <span className="max-w-[70%] flex items-start flex-wrap creatodisplayM text-[14px]   text-[#192735c7] font-bold">{item.label}</span>
-                          <span className="creatodisplayM w-[30%] flex items-start justify-end  text-[12px] text-end " style={{ color: "black" }}>
-                            {item.value}
-                          </span>
-                        </div>
-                      ))}
+                    <button
+                      onClick={() => toggleAccordion(index)}
+                      className="w-full flex justify-between items-center px-[10px] py-[10px] md:px-[20px] md:py-[15px] text-[#192735] ppfont text-[16px]"
+                    >
+                      {section.title}
+                      <span>
+                        {openIndex === index ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        )}
+                      </span>
+                    </button>
+
+                    <div
+                      ref={(el) => (contentRefs.current[index] = el)}
+                      style={{
+                        maxHeight:
+                          openIndex === index
+                            ? `${contentRefs.current[index]?.scrollHeight}px`
+                            : "0px",
+                      }}
+                      className="transition-all duration-300 ease-in-out overflow-hidden"
+                    >
+                      <div className="border-t border-[#dedede] px-[15px] md:px-[25px] py-[10px]">
+                        {section.items.map((item, idx) => (
+                          <div key={idx} className="flex justify-between gap-[15px] py-[6px]">
+                            <span className="max-w-[70%] flex items-start flex-wrap creatodisplayM text-[14px] text-[#192735c7] font-bold">
+                              {item.label}
+                            </span>
+                            <span className="creatodisplayM w-[30%] flex items-start justify-end text-[12px] text-end" style={{ color: "black" }}>
+                              {item.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
+
 
             {/* Swiper Slider */}
             <div className="w-full md:w-[60%] order-2 md:order-1">

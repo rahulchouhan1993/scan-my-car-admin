@@ -42,7 +42,7 @@ function CarInspectionImage({
     const [selectedPart, setSelectedPart] = useState(null); // partId
     const [isSaving, setIsSaving] = useState(false);
     const listenersRef = useRef([]);
-    const svgMarkup = svgImage || `<svg width="531" height="708" viewBox="0 0 531 708" fill="none" xmlns="http://www.w3.org/2000/svg">
+    const svgMarkup = svgImage || `<svg viewBox="0 0 531 708" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_439_417)">
 <path d="M236.872 187.142L257.064 186.409L282.908 186.739L306.186 188.947L328.467 193.217L347.006 199.185L359.165 204.396L368.014 209.041L364.329 222.033L357.782 249.305L346.497 290.162L339.604 289.22L317.356 285.948L289.874 283.985L256.502 283.331L236.217 283.985L208.735 285.948L183.5 291.298L169.399 245.379L164.957 227.695L160.482 208.678L167.511 204.81L178.635 199.575L198.266 193.031L213.97 189.76L236.872 187.142Z" fill="#fff" stroke="black" stroke-width="1.30869" data-part="part_0" style="cursor: pointer; transition: fill 160ms;"></path>
 <path d="M528.709 210.699H530.018V240.144L524.783 457.386L524.129 458.695L519.548 458.041L502.535 452.806V433.176L505.807 222.477L506.461 217.897L528.709 210.699ZM526.746 213.316L508.424 219.205L507.77 219.86L505.807 338.95L504.498 423.36V451.497L522.165 456.732H522.82L524.783 382.137L528.709 219.205V213.316H526.746Z" fill="black" data-part="part_1" style="cursor: pointer; transition: fill 160ms;"></path>
@@ -291,6 +291,7 @@ function CarInspectionImage({
       {/* <h3 style={{ marginBottom: 8 }}>Car Inspection — click a part to assign condition</h3> */}
 
       <div
+      className="svg-body"
         ref={containerRef}
         style={{
           width: "100%",
