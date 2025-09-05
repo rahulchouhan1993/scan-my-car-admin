@@ -134,46 +134,59 @@ class InspectionsController extends Controller
     }
 
     public function previewPdf()
-    {
-        $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
-        $fontDirs = $defaultConfig['fontDir'];
-
-        $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
-        $fontData = $defaultFontConfig['fontdata'];
-
-        $mpdf = new \Mpdf\Mpdf([
-            'fontDir' => array_merge($fontDirs, [
-                storage_path('fonts'),
-            ]),
-            'fontdata' => $fontData + [
-                'rightgroteskwidemedium' => [
-                    'R' => 'RightGroteskWideMedium.ttf', // regular style
-                ],
+{
+    $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+    $fontDirs = $defaultConfig['fontDir'];
+    
+    $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+    $fontData = $defaultFontConfig['fontdata'];
+    
+    $mpdf = new \Mpdf\Mpdf([
+        'fontDir' => array_merge($fontDirs, [
+            public_path('fonts'), // <-- yehi sahi hai
+        ]),
+        'fontdata' => $fontData + [
+            'rightgroteskwidemedium' => [
+                'R' => 'RightGroteskWideMedium.ttf', // Regular
+                'B' => 'RightGroteskWideMedium.ttf', // Agar Bold bhi isi file se chahiye
             ],
-            'default_font' => 'rightgroteskwidemedium'
-        ]);
-        $id = 2;
-        $inspectionsDetail = InspectionRequest::with([
-            'bodyDetail',
-            'vehicleDetail',
-            'interiorDetails',
-            'glassDetails',
-            'engineDetails',
-            'clusterDetails',
-            'transmissionDetails',
-            'suspensionDetails',
-            'brakesDetails',
-            'tyresDetails',
-            'seatDetails',
-            'hvacDetails',
-            'coolingFuelDetails',
-            'electricalLightingDetails',
-            'performanceRoadTestDetails',
-        ])->findOrFail($id);
+            'creatodisplaymedium' => [
+                'R' => 'CreatoDisplayMedium.ttf',
+                'B' => 'CreatoDisplayBold.ttf',
+            ],
+        ],
+        'default_font' => 'rightgroteskwidemedium',
+        'margin_top'    => 50,
+        'margin_bottom' => 30,
+        'margin_left'   => 5,
+        'margin_right'  => 5,
+    ]);
+    
+
+    $id = 2;
+    $inspectionsDetail = InspectionRequest::with([
+        'bodyDetail',
+        'vehicleDetail',
+        'interiorDetails',
+        'glassDetails',
+        'engineDetails',
+        'clusterDetails',
+        'transmissionDetails',
+        'suspensionDetails',
+        'brakesDetails',
+        'tyresDetails',
+        'seatDetails',
+        'hvacDetails',
+        'coolingFuelDetails',
+        'electricalLightingDetails',
+        'performanceRoadTestDetails',
+    ])->findOrFail($id);
 
         $mpdf = new Mpdf([
-            'margin_top'    => 40,
-            'margin_bottom' => 30,
+            'margin_top'    => 35,
+            'margin_bottom' => 35,
+            'margin_left'   => 5,   
+            'margin_right'  => 5,   
         ]);
 
         // Watermark
@@ -182,15 +195,15 @@ class InspectionsController extends Controller
 
         // Header (applies to body pages)
         $header = '
-            <table width="100%" style="font-family: rightgroteskwidemedium; border-bottom:1px solid #ccc; font-family:sans-serif; font-size:10pt;">
-                <tr>
-                    <td width="20%" align="left">
-                        <img src="' . public_path('images/logo-black.png') . '" width="80" />
+            <table cellspacing="0" cellpadding="0" width="100%" style="font-family: rightgroteskwidemedium; border-bottom:1px solid #ccc; font-family:sans-serif; font-size:10pt;">
+                <tr bgcolor="#0D1B2A">
+                    <td width="20%" align="left" style="padding:10px 10px 10px 10px; border">
+                        <img src="' . public_path('images/logo-white.png') . '" width="160" />
                     </td>
-                    <td width="60%" align="center" style="font-family: rightgroteskwidemedium;font-size:14pt; font-weight:bold; color:#2e86de;">
+                    <td width="60%" align="center" style="font-family: rightgroteskwidemedium;font-size:14pt; font-weight:bold; color:#fff;">
                         Vehicle Inspection Report
                     </td>
-                    <td width="20%" align="right" style="font-family: rightgroteskwidemedium;font-size:9pt; line-height:1.4;">
+                    <td width="20%" align="right" style="font-family: rightgroteskwidemedium;font-size:11pt; line-height:18pt;padding:10px 10px 10px 10px;color:#fff;">
                         CertifyCars LLC<br/>
                         +971 50 123 4567<br/>
                         Dubai, UAE
@@ -201,15 +214,15 @@ class InspectionsController extends Controller
 
         // Footer
         $footer = '
-            <table width="100%" style="font-family: rightgroteskwidemedium;border-top:1px solid #ccc; font-family:sans-serif; font-size:9pt;">
+            <table cellspacing="0" cellpadding="0" width="100%" style="font-family: rightgroteskwidemedium;border-top:1px solid #ccc; font-family:sans-serif; font-size:9pt;">
                 <tr>
-                    <td width="33%" align="left">
+                    <td width="33%" align="left" style="padding:10px 10px 10px 10px; border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-right:1px solid #ccc; font-size:8pt">
                         support@certifycars.ae | +971 50 123 4567
                     </td>
-                    <td width="33%" align="center">
+                    <td width="33%" align="center" style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">
                         Page {PAGENO} of {nbpg}
                     </td>
-                    <td width="33%" align="right">
+                    <td width="33%" align="right" style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">
                         Generated on: ' . Carbon::now()->format('d-m-Y H:i') . '
                     </td>
                 </tr>
@@ -219,21 +232,27 @@ class InspectionsController extends Controller
         // --- COVER PAGE ---
         $vehicle = $inspectionsDetail->vehicleDetail;
         $cover = '
-            <div style="font-family: rightgroteskwidemedium;text-align:center; margin-top:100px;">
-                <img src="' . public_path('images/logo-black.png') . '" width="120" />
-                <h1 style="font-family: rightgroteskwidemedium;font-size:28pt; color:#2e86de; margin-top:30px;">Vehicle Inspection Report</h1>
+            <div style="font-family: rightgroteskwidemedium;text-align:center; padding-top:30px">
+                <img src="' . public_path('images/logo-black.png') . '" width="180" />
+                <h1 style="font-family: rightgroteskwidemedium;font-size:28pt; color:#192735; margin-top:10px;">Vehicle Inspection Report</h1>
                 <p style="font-family: rightgroteskwidemedium;font-size:12pt; color:#555;">Prepared by CertifyCars LLC</p>
             </div>
 
-            <div style="font-family: rightgroteskwidemedium;margin-top:50px; font-family:sans-serif; font-size:11pt;">
-                <table width="100%" border="1" cellspacing="0" cellpadding="8" style="font-family: rightgroteskwidemedium;border-collapse:collapse;">
-                    <tr><td width="40%"><b>Vehicle Make</b></td><td width="60%">' . ($vehicle->make ?? '-') . '</td></tr>
-                    <tr><td><b>Model</b></td><td>' . ($vehicle->model ?? '-') . '</td></tr>
-                    <tr><td><b>Year</b></td><td>' . ($vehicle->year ?? '-') . '</td></tr>
-                    <tr><td><b>VIN</b></td><td>' . ($vehicle->vin ?? '-') . '</td></tr>
-                    <tr><td><b>Registration No.</b></td><td>' . ($vehicle->registration_no ?? '-') . '</td></tr>
-                    <tr><td><b>Inspection Date</b></td><td>' . Carbon::parse($inspectionsDetail->created_at)->format('d-m-Y') . '</td></tr>
-                    <tr><td><b>Inspector</b></td><td>' . ($inspectionsDetail->inspector_name ?? 'N/A') . '</td></tr>
+            <div style="font-family: rightgroteskwidemedium; margin-top:10px; font-family:sans-serif; font-size:11pt;">
+                <table cellspacing="0" cellpadding="0" width="100%" border="0" cellspacing="0" cellpadding="8" style=" border-collapse:collapse; border:1px solid #ccc; font-family: rightgroteskwidemedium;border-collapse:collapse;">
+                    <tr><td width="40%" style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>Vehicle Make</b></td><td width="60%"  style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . ($vehicle->make ?? '-') . '</td></tr>
+
+                    <tr><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>Model</b></td><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . ($vehicle->model ?? '-') . '</td></tr>
+
+                    <tr><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>Year</b></td><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . ($vehicle->year ?? '-') . '</td></tr>
+
+                    <tr><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>VIN</b></td><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . ($vehicle->vin ?? '-') . '</td></tr>
+
+                    <tr><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>Registration No.</b></td><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . ($vehicle->registration_no ?? '-') . '</td></tr>
+
+                    <tr><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>Inspection Date</b></td><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . Carbon::parse($inspectionsDetail->created_at)->format('d-m-Y') . '</td></tr>
+
+                    <tr><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;"><b>Inspector</b></td><td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . ($inspectionsDetail->inspector_name ?? 'N/A') . '</td></tr>
                 </table>
             </div>
 
@@ -241,6 +260,8 @@ class InspectionsController extends Controller
                 <b>Disclaimer:</b> This inspection report reflects the condition of the vehicle at the time of inspection.
                 It does not guarantee future performance. CertifyCars LLC is not liable for any hidden defects not visible during inspection.
             </div>
+
+            
         ';
 
         $mpdf->WriteHTML($cover);
@@ -272,15 +293,21 @@ class InspectionsController extends Controller
             if (empty($section['items'])) continue; // skip empty sections
 
             $html .= '
-                <h3 style="font-family: rightgroteskwidemedium;background-color:#2e86de; color:#fff; padding:6px; font-family:sans-serif;">' . $section['title'] . '</h3>
-                <table width="100%" border="1" cellspacing="0" cellpadding="6" style="font-family: rightgroteskwidemedium;border-collapse:collapse; font-family:sans-serif; font-size:10pt; margin-bottom:15px;">
+            
+
+            <div style="padding-top:10px">
+                <h3 style="margin-top:10px; font-family: rightgroteskwidemedium; font-wight:400; background-color:#EDEEEF; color:#192735; padding:10px 10px 10px 10px; font-family:sans-serif; text-align:center; border-radius:10px">' . $section['title'] . '</h3>
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="6" style=" border:1px solid #ccc; font-family: rightgroteskwidemedium; border-collapse:collapse; font-family:sans-serif; font-size:10pt; margin-bottom:15px;">
                     <thead>
                         <tr style="font-family: rightgroteskwidemedium;background-color:#f9f9f9;">
-                            <th width="70%" align="left">Inspection Point</th>
-                            <th width="30%" align="center">Result</th>
+                            <th width="70%" align="left" style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">Inspection Point</th>
+                            <th width="30%" align="center" style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">Result</th>
                         </tr>
                     </thead>
-                    <tbody>';
+                    <tbody></div>
+                   
+                    ';
 
             foreach ($section['items'] as $item) {
                 $color = '#000';
@@ -290,12 +317,12 @@ class InspectionsController extends Controller
 
                 $html .= '
                     <tr>
-                        <td>' . $item['label'] . '</td>
-                        <td align="center" style="font-family: rightgroteskwidemedium;color:' . $color . ';">' . $item['value'] . '</td>
+                        <td style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc;">' . $item['label'] . '</td>
+                        <td align="center" style="padding:10px 10px 10px 10px; border-bottom:1px solid #ccc; border-right:1px solid #ccc; color:' . $color . ';">' . $item['value'] . '</td>
                     </tr>';
             }
 
-            $html .= '</tbody></table>';
+            $html .= '</tbody></table> ';
         }
 
         $mpdf->WriteHTML($html);
