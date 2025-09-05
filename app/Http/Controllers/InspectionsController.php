@@ -156,11 +156,14 @@ class InspectionsController extends Controller
                 ],
             ],
             'default_font' => 'rightgroteskwidemedium',
-            'margin_top'    => 20,
-            'margin_bottom' => 15,
-            'margin_left'   => 10,
-            'margin_right'  => 10,
+            'margin_top'    => 30,  // thoda zyada header space
+            'margin_bottom' => 30,  // footer ke liye space
+            'margin_left'   => 5,
+            'margin_right'  => 5,
         ]);
+        
+        // ✅ Footer ke liye auto page break enable karo
+        $mpdf->SetAutoPageBreak(true, 30);
 
         $id = 2;
         $inspectionsDetail = InspectionRequest::with([
@@ -188,18 +191,23 @@ class InspectionsController extends Controller
         // ✅ Headers: only first page has header
         $header = '
         <htmlpageheader name="firstpage">
-            <div style="width:100%; height:80px;
-                background: linear-gradient(90deg, #0D1B2A, #1B263B);
-                color:white; padding:15px 20px;
-                display:flex; align-items:center; justify-content:space-between; border-radius:0 0 10px 10px;">
-                <div><img src="' . public_path('images/logo-white.png') . '" width="150" /></div>
-                <div style="font-size:20pt; font-weight:bold;">Vehicle Inspection Report</div>
-                <div style="text-align:right; font-size:10pt; line-height:14pt;">
+        <div style="width:100%; height:80px;
+        background: linear-gradient(90deg, #0D1B2A, #1B263B);
+        color:white; padding:15px 2px; display:flex; align-items:center; justify-content:space-between; border-radius:10px 10px 10px 10px;">
+
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td style="width:25%; padding:10px 10px 10px 10px;"><img src="' . public_path('images/logo-white.png') . '" width="150" /></td>
+                <td style="width:50%; padding:10px 10px 10px 10px;font-size:14pt; font-weight:bold; color:#ffffff; text-align:center">Vehicle Inspection Report</td>
+                <td style="width:25%; padding:10px 10px 10px 10px;text-align:right; font-size:10pt; line-height:14pt; color:#ffffff;">
                     CertifyCars LLC<br>
                     +971 50 123 4567<br>
                     Dubai, UAE
-                </div>
-            </div>
+                </td>
+            </tr>
+        </table>
+        </div>
+           
         </htmlpageheader>
 
         <htmlpageheader name="otherpages"></htmlpageheader>
@@ -210,24 +218,27 @@ class InspectionsController extends Controller
 
         // ✅ Footer (all pages)
         $footer = '
-        <table width="100%" style="font-size:9pt; color:#555; border-top:1px solid #ccc; padding-top:5px;">
-            <tr>
-                <td width="33%" align="left">support@certifycars.ae | +971 50 123 4567</td>
-                <td width="33%" align="center">Page {PAGENO} of {nbpg}</td>
-                <td width="33%" align="right">Generated on: ' . Carbon::now()->format('d-m-Y H:i') . '</td>
-            </tr>
-        </table>';
+        <div style="width:100%; marign-top:50px;
+        background: linear-gradient(90deg, #0D1B2A, #1B263B);
+        color:white; padding:10px 10px; display:flex; align-items:center; justify-content:space-between; border-radius:10px 10px 10px 10px;">
+            <table width="100%" style="font-size:9pt; color:#ffffff;">
+                <tr>
+                    <td width="33%" valign="middle" align="left">support@certifycars.ae <br> +971 50 123 4567</td>
+                    <td width="33%" valign="middle" align="center">Page {PAGENO} of {nbpg}</td>
+                    <td width="33%" valign="middle" align="right">Generated on: ' . Carbon::now()->format('d-m-Y H:i') . '</td>
+                </tr>
+        </table></div>';
         $mpdf->SetHTMLFooter($footer);
 
         // --- COVER PAGE ---
         $vehicle = $inspectionsDetail->vehicleDetail;
         $cover = '
-            <div style="text-align:center; padding-top:140px;">
-                <h1 style="font-size:30pt; color:#0D1B2A; margin-bottom:10px;">Vehicle Inspection Report</h1>
+            <div style="text-align:center; padding-top:40px;">
+                <h1 style="font-size:24pt; color:#0D1B2A; margin-bottom:10px;">Vehicle Inspection Report</h1>
                 <p style="font-size:12pt; color:#555;">Prepared by CertifyCars LLC</p>
             </div>
 
-            <table width="100%" style="border-collapse:collapse; margin-top:40px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+            <table width="100%" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">
                 <tbody>
                     <tr style="background:#f9fafb;"><td style="padding:12px; font-weight:bold;">Vehicle Make</td><td style="padding:12px;">' . ($vehicle->make ?? '-') . '</td></tr>
                     <tr><td style="padding:12px; font-weight:bold;">Model</td><td style="padding:12px;">' . ($vehicle->model ?? '-') . '</td></tr>
@@ -245,8 +256,12 @@ class InspectionsController extends Controller
             </div>
         ';
 
+        // $mpdf->WriteHTML($cover);
+        // $mpdf->AddPage();
+
         $mpdf->WriteHTML($cover);
-        $mpdf->AddPage();
+        // ✅ Next pages without header gap
+        $mpdf->AddPage('', '', '', '', '', 5, 5, 4, 30, 10, 10);
 
         // --- BODY CONTENT ---
         $accordionData = [
@@ -278,8 +293,8 @@ class InspectionsController extends Controller
             <table width="100%" style="border-collapse:collapse; font-size:10pt; margin-bottom:20px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
                 <thead>
                     <tr style="background:#0D1B2A; color:white;">
-                        <th width="70%" align="left" style="padding:10px;">Inspection Point</th>
-                        <th width="30%" align="center" style="padding:10px;">Result</th>
+                        <th width="70%" align="left" style="padding:10px; color:#fffff;">Inspection Point</th>
+                        <th width="30%" align="center" style="padding:10px; color:#fffff;">Result</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -302,7 +317,40 @@ class InspectionsController extends Controller
 
             $html .= '</tbody></table>';
         }
+       
+        $html.="
+            <div>
+            <div style=position:relative; width:210mm; height:297mm; overflow:hidden;'>
 
+            <div style='
+              position:absolute; 
+              inset:0; 
+              background:url('assets/bg.jpg') no-repeat center center; 
+              background-size:cover;
+              z-index:0;'>
+            </div>
+        
+            <!-- Header -->
+            <div style='position:absolute; top:18mm; left:50%; transform:translateX(-50%); width:170mm; text-align:center; z-index:2;'>
+              <img src='assets/favicon.png' alt='Logo style='width:24mm; height:24mm; object-fit:contain; display:inline-block;' />
+              <div style='margin-top:6mm; font-size:22pt; font-weight:700; letter-spacing:.2px; line-height:1.25; text-shadow:0 1px 2px rgba(0,0,0,.18);'>
+                Your Document Title Goes Here
+              </div>
+            </div>
+        
+            <!-- Main Content -->
+            <div style='position:absolute; left:20mm; right:20mm; top:70mm; bottom:30mm; z-index:2;'>
+              <p style='font-size:12pt; line-height:1.4;'>This is very good</p>
+            </div>
+        
+            <!-- Footer -->
+            <div style='position:absolute; bottom:12mm; left:0; right:0; text-align:center; font-size:11pt; letter-spacing:.3px; z-index:2;'>
+              <a href='https://www.your-website.com' style='color:#111; text-decoration:none;'>www.your-website.com</a>
+            </div>
+        
+          </div>
+            </div>
+        ";
         $mpdf->WriteHTML($html);
 
         return response($mpdf->Output('inspection_report.pdf', 'I'))
