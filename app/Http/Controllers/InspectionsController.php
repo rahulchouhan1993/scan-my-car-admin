@@ -161,13 +161,10 @@ class InspectionsController extends Controller
             'margin_left'   => 5,
             'margin_right'  => 5,
         ]);
+          $coverPath = public_path('images/homebanner.jpg');
+          $sliderPath = public_path('images/slideimg01.jpg');
+         $logoPath = public_path('images/favicon.png');
 
-        // Absolute paths for images in public/images
-
-
-        $coverPath = public_path('images/homebanner.jpg');
-        $logoPath = public_path('images/favicon.png');
-        
         // ✅ Footer ke liye auto page break enable karo
         $mpdf->SetAutoPageBreak(true, 30);
 
@@ -190,7 +187,6 @@ class InspectionsController extends Controller
             'performanceRoadTestDetails',
         ])->findOrFail($id);
 
-
         // ✅ Watermark
         $mpdf->SetWatermarkText('Verified by certifycars.ae', 0.05);
         $mpdf->showWatermarkText = true;
@@ -198,9 +194,9 @@ class InspectionsController extends Controller
         // ✅ Headers: only first page has header
         $header = '
         <htmlpageheader name="firstpage">
-        <div style="width:100%; height:80px;
+        <div style="width:100%; 
         background: linear-gradient(90deg, #0D1B2A, #1B263B);
-        color:white; padding:15px 2px; display:flex; align-items:center; justify-content:space-between; border-radius:10px 10px 10px 10px;">
+        color:white; padding:5px 2px; display:flex; align-items:center; justify-content:space-between; border-radius:10px 10px 10px 10px;">
 
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr>
@@ -240,7 +236,7 @@ class InspectionsController extends Controller
         // --- COVER PAGE ---
         $vehicle = $inspectionsDetail->vehicleDetail;
         $cover = '
-            <div style="text-align:center; padding-top:40px;">
+            <div style="text-align:center; padding-top:20px;">
                 <h1 style="font-size:24pt; color:#0D1B2A; margin-bottom:10px;">Vehicle Inspection Report</h1>
                 <p style="font-size:12pt; color:#555;">Prepared by CertifyCars LLC</p>
             </div>
@@ -292,23 +288,6 @@ class InspectionsController extends Controller
         ];
 
         $html = '';
-
-        $html.="
-        <div style='position:relative; width:210mm; height:297mm; overflow:hidden;'>
-        <div style='text-align:center; padding-bottom:20px'>
-            <img src='$logoPath' alt='logo' style='position:absolute; max-width:20mm; height:auto; z-index:2; display:block;' />
-        </div>
-        <img src='file://$coverPath' alt='cover' style='width:210mm; height:297mm; object-fit:cover; display:block;' />
-        <div style='text-align:center; z-index:2; padding-top:60px '>
-          <div style='font-size:40pt; font-weight:700; line-height:0.95; color:#D72638;'>Vehicle Inspection Report</div>
-          <div style='margin-top:6mm; font-size:11pt; color:#444;'>https://certifycars.ae/</div>
-        </div>
-      </div>
-    
-        ";
-        $mpdf->WriteHTML($html);
-
-
         foreach ($accordionData as $section) {
             if (empty($section['items'])) continue;
 
@@ -318,7 +297,7 @@ class InspectionsController extends Controller
                 <thead>
                     <tr style="background:#0D1B2A; color:white;">
                         <th width="70%" align="left" style="padding:10px; color:#fffff;">Inspection Point</th>
-                        <th width="30%" align="center" style="padding:10px; color:#fffff;">Result</th>
+                        <th width="30%" align="right" style="padding:10px; color:#fffff;">Result</th>
                     </tr>
                 </thead>
                 <tbody>';
@@ -334,7 +313,7 @@ class InspectionsController extends Controller
                 $html .= '
                     <tr style="background:' . $bg . ';">
                         <td style="padding:10px; border-bottom:1px solid #eee;">' . $item['label'] . '</td>
-                        <td align="center" style="padding:10px; border-bottom:1px solid #eee; color:' . $color . ';">' . $item['value'] . '</td>
+                        <td  align="right" style="padding:10px; border-bottom:1px solid #eee; color:' . $color . ';">' . $item['value'] . '</td>
                     </tr>';
                 $rowIndex++;
             }
@@ -342,7 +321,33 @@ class InspectionsController extends Controller
             $html .= '</tbody></table>';
         }
        
-        
+        $html.="
+        <div style='position:relative; overflow:hidden;'>
+            <div style='text-align:center; padding-bottom:20px'>
+                <img src='$logoPath' alt='logo' style='position:absolute; max-width:20mm; height:auto; z-index:2; display:block;' />
+            </div>
+            <div style='display:block; text-align:center; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:450px'>
+                <img src='file://$coverPath' alt='cover' style='width:100%; height:450px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
+            </div>
+
+            <div style='text-align:center; z-index:2; padding-top:30px '>
+              <div style='font-size:30pt; font-weight:700; line-height:0.95; color:#D72638;'>Vehicle Inspection Report</div>
+              <div style='margin-top:3mm; font-size:11pt; color:#444;'>https://certifycars.ae/</div>
+            </div>
+         </div>
+
+         <div style='margin-top:50px'>
+         <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
+             <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
+             </div>
+
+
+             <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
+             <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px;display:block;' />
+             </div>
+         </div>
+        ";
+        $mpdf->WriteHTML($html);
 
         return response($mpdf->Output('inspection_report.pdf', 'I'))
             ->header('Content-Type', 'application/pdf');
