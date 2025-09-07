@@ -161,6 +161,12 @@ class InspectionsController extends Controller
             'margin_left'   => 5,
             'margin_right'  => 5,
         ]);
+
+        // Absolute paths for images in public/images
+
+
+        $coverPath = public_path('images/homebanner.jpg');
+        $logoPath = public_path('images/favicon.png');
         
         // ✅ Footer ke liye auto page break enable karo
         $mpdf->SetAutoPageBreak(true, 30);
@@ -183,6 +189,7 @@ class InspectionsController extends Controller
             'electricalLightingDetails',
             'performanceRoadTestDetails',
         ])->findOrFail($id);
+
 
         // ✅ Watermark
         $mpdf->SetWatermarkText('Verified by certifycars.ae', 0.05);
@@ -285,6 +292,23 @@ class InspectionsController extends Controller
         ];
 
         $html = '';
+
+        $html.="
+        <div style='position:relative; width:210mm; height:297mm; overflow:hidden;'>
+        <div style='text-align:center; padding-bottom:20px'>
+            <img src='$logoPath' alt='logo' style='position:absolute; max-width:20mm; height:auto; z-index:2; display:block;' />
+        </div>
+        <img src='file://$coverPath' alt='cover' style='width:210mm; height:297mm; object-fit:cover; display:block;' />
+        <div style='text-align:center; z-index:2; padding-top:60px '>
+          <div style='font-size:40pt; font-weight:700; line-height:0.95; color:#D72638;'>Vehicle Inspection Report</div>
+          <div style='margin-top:6mm; font-size:11pt; color:#444;'>https://certifycars.ae/</div>
+        </div>
+      </div>
+    
+        ";
+        $mpdf->WriteHTML($html);
+
+
         foreach ($accordionData as $section) {
             if (empty($section['items'])) continue;
 
@@ -318,40 +342,7 @@ class InspectionsController extends Controller
             $html .= '</tbody></table>';
         }
        
-        $html.="
-            <div>
-            <div style=position:relative; width:210mm; height:297mm; overflow:hidden;'>
-
-            <div style='
-              position:absolute; 
-              inset:0; 
-              background:url('assets/bg.jpg') no-repeat center center; 
-              background-size:cover;
-              z-index:0;'>
-            </div>
         
-            <!-- Header -->
-            <div style='position:absolute; top:18mm; left:50%; transform:translateX(-50%); width:170mm; text-align:center; z-index:2;'>
-              <img src='assets/favicon.png' alt='Logo style='width:24mm; height:24mm; object-fit:contain; display:inline-block;' />
-              <div style='margin-top:6mm; font-size:22pt; font-weight:700; letter-spacing:.2px; line-height:1.25; text-shadow:0 1px 2px rgba(0,0,0,.18);'>
-                Your Document Title Goes Here
-              </div>
-            </div>
-        
-            <!-- Main Content -->
-            <div style='position:absolute; left:20mm; right:20mm; top:70mm; bottom:30mm; z-index:2;'>
-              <p style='font-size:12pt; line-height:1.4;'>This is very good</p>
-            </div>
-        
-            <!-- Footer -->
-            <div style='position:absolute; bottom:12mm; left:0; right:0; text-align:center; font-size:11pt; letter-spacing:.3px; z-index:2;'>
-              <a href='https://www.your-website.com' style='color:#111; text-decoration:none;'>www.your-website.com</a>
-            </div>
-        
-          </div>
-            </div>
-        ";
-        $mpdf->WriteHTML($html);
 
         return response($mpdf->Output('inspection_report.pdf', 'I'))
             ->header('Content-Type', 'application/pdf');
