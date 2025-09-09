@@ -493,43 +493,106 @@ class InspectionsController extends Controller
 
 
             if($svgImage!=''){
-                $img = new Imagick();
-                $img->readImageBlob($svgImage);
-                $img->setImageFormat("png24");
-                file_put_contents("images/test.png", $img->getImageBlob());
-                $bodyImage = public_path('images/test.png');
+                // $img = new Imagick();
+                // $img->readImageBlob($svgImage);
+                // $img->setImageFormat("png24");
+                // file_put_contents("images/test.png", $img->getImageBlob());
+                // $bodyImage = public_path('images/test.png');
+                $bodyImage = public_path('');
                 $mpdf->WriteHTML('<div style="text-align:center; margin-top:20px;"><img src="'.$bodyImage.'" style="width:80%; height:auto;"/></div>
-                
-                <div class="flex flex-wrap gap-4 mt-[20px] border-t-[1px] border-t-[#f0f0f0] pt-[30px]">
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-white border border-gray-400"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Original Paint</span>
-                    </div>
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-yellow-400"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Portion Repaint</span>
-                    </div>
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-green-500"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Multi Scratches</span>
-                    </div>
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-blue-600"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Panel Replaced</span>
-                    </div>
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-cyan-400"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Faded</span>
-                    </div>
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-sky-200"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Not Available</span>
-                    </div>
-                    <div class="flex items-center space-x-2 min-w-[150px]">
-                        <span class="inline-block w-4 h-4 rounded-full bg-black"></span>
-                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Foiled</span>
-                    </div>
-                </div>');
+               
+                <div style="margin-top:20px;">
+                <table width="100%" cellpadding="6" cellspacing="0" border="0" style="font-size:11pt; color:#192735; margin:auto;">
+                  <tr>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="15" height="15">
+                          <img src="images/original.png" width="15" style="border:none" />
+                          
+                          </td>
+                          <td style="padding:0 0 0 5px; color:#192735ba;">Original Paint</td>
+                        </tr>
+                      </table>
+                      
+                    </td>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="15" height="15">
+                          <img src="images/portion.png" width="15" style="border:none" />
+                          
+                          </td>
+                          <td  style="padding:0 0 0 5px; color:#192735ba;">Portion Repaint</td>
+                        </tr>
+                      </table>
+                      
+                    </td>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="15" height="15">
+                            <img src="images/multi.png" width="15" style="border:none" />
+                          </td>
+                          <td style="padding:0 0 0 5px; color:#192735ba;"> Multi Scratches</td>
+                        </tr>
+                      </table>
+                     
+                    </td>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td  width="15" height="15">
+                          <img src="images/panel.png" width="15" style="border:none" />
+                          </td>
+                          <td style="padding:0 0 0 5px; color:#192735ba;">Panel Replaced</td>
+                        </tr>
+                      </table>
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="15" height="15">
+                          <img src="images/faded.png" width="15" style="border:none" />
+                          </td>
+                          <td style="padding:0 0 0 5px; color:#192735ba;">Faded</td>
+                        </tr>
+                      </table>
+                      
+                    </td>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="15" height="15">
+                          <img src="images/notavai.png" width="15" style="border:none" />
+                          </td>
+                          <td style="padding:0 0 0 5px; color:#192735ba;">Not Available</td>
+                        </tr>
+                      </table>
+                      
+                    </td>
+                    <td>
+                      <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="15" height="15">
+                          <img src="images/foiled.png" width="15" style="border:none" />
+                          </td>
+                          <td style="padding:0 0 0 5px; color:#192735ba;">Foiled</td>
+                        </tr>
+                      </table>
+                      
+                    </td>
+                    <td></td>
+                  </tr>
+                </table>
+              </div>
+
+
+
+                ');
                 $mpdf->AddPage();
                 $svgImage = '';
             } 
