@@ -927,7 +927,7 @@ const InspectionDetails = () => {
                     return (
                       <SwiperSlide key={index}>
                         <img
-                          src={insepectimg1}
+                          src={file}
                           alt={`Car ${index + 1}`}
                           className="w-full h-[250px] max-h-[250px] md:h-[400px] md:max-h-[400px]  object-cover"
                         />

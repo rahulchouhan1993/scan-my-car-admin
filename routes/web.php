@@ -25,7 +25,7 @@ Route::post('/request-inspection', [InspectionsController::class, 'requestInspec
 Route::get('/inspection-details/{id}', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
 Route::get('/thank-you', [InspectionsController::class, 'thankYou'])->name('thank-you');
 Route::get('/mark-as-completed', [InspectionsController::class, 'markComplete'])->name('markComplete');
-Route::get('/preview-report', [InspectionsController::class, 'previewPdf'])->name('preview-report');
+Route::get('/preview-report/{id}', [InspectionsController::class, 'previewPdf'])->name('preview-report');
 Route::get('/downlaod-attachments/{id}', [InspectionsController::class, 'downloadAttachments'])->name('download-attachments');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {

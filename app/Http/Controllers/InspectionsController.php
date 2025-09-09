@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\InspectionRequestSubmitted;
 use App\Mail\InspectionRequestConfirmation;
 use Mpdf\Mpdf;
-
+use Imagick;
 class InspectionsController extends Controller
 {
 
@@ -133,7 +133,7 @@ class InspectionsController extends Controller
         die;
     }
 
-    public function previewPdf()
+    public function previewPdf($id)
     {
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -156,8 +156,8 @@ class InspectionsController extends Controller
                 ],
             ],
             'default_font' => 'rightgroteskwidemedium',
-            'margin_top'    => 30,  // thoda zyada header space
-            'margin_bottom' => 30,  // footer ke liye space
+            'margin_top'    => 25,  // thoda zyada header space
+            'margin_bottom' => 25,  // footer ke liye space
             'margin_left'   => 5,
             'margin_right'  => 5,
         ]);
@@ -168,7 +168,6 @@ class InspectionsController extends Controller
         // ✅ Footer ke liye auto page break enable karo
         $mpdf->SetAutoPageBreak(true, 30);
 
-        $id = 2;
         $inspectionsDetail = InspectionRequest::with([
             'bodyDetail',
             'vehicleDetail',
@@ -200,11 +199,11 @@ class InspectionsController extends Controller
 
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
             <tr>
-                <td style="width:25%; padding:10px 10px 10px 10px;"><img src="' . public_path('images/logo-white.png') . '" width="150" /></td>
+                <td style="width:25%; padding:10px 10px 10px 10px;"><img src="images/logo-white.png" width="150" /></td>
                 <td style="width:50%; padding:10px 10px 10px 10px;font-size:14pt; font-weight:bold; color:#ffffff; text-align:center">Vehicle Inspection Report</td>
                 <td style="width:25%; padding:10px 10px 10px 10px;text-align:right; font-size:10pt; line-height:14pt; color:#ffffff;">
-                    CertifyCars LLC<br>
-                    +971 50 123 4567<br>
+                    CertifyCars<br>
+                    +971 58 558 1172<br>
                     Dubai, UAE
                 </td>
             </tr>
@@ -232,24 +231,37 @@ class InspectionsController extends Controller
                 </tr>
         </table></div>';
         $mpdf->SetHTMLFooter($footer);
-
+        
         // --- COVER PAGE ---
-        $vehicle = $inspectionsDetail->vehicleDetail;
         $cover = '
             <div style="text-align:center; padding-top:20px;">
-                <h1 style="font-size:24pt; color:#0D1B2A; margin-bottom:10px;">Vehicle Inspection Report</h1>
-                <p style="font-size:12pt; color:#555;">Prepared by CertifyCars LLC</p>
+                <h1 style="font-size:14pt; color:#0D1B2A; margin-bottom:10px;">Vehicle Details</h1>
+                
             </div>
 
             <table width="100%" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">
                 <tbody>
-                    <tr style="background:#f9fafb;"><td style="padding:12px; font-weight:bold;">Vehicle Make</td><td style="padding:12px;">' . ($vehicle->make ?? '-') . '</td></tr>
-                    <tr><td style="padding:12px; font-weight:bold;">Model</td><td style="padding:12px;">' . ($vehicle->model ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:12px; font-weight:bold;">Year</td><td style="padding:12px;">' . ($vehicle->year ?? '-') . '</td></tr>
-                    <tr><td style="padding:12px; font-weight:bold;">VIN</td><td style="padding:12px;">' . ($vehicle->vin ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:12px; font-weight:bold;">Registration No.</td><td style="padding:12px;">' . ($vehicle->registration_no ?? '-') . '</td></tr>
-                    <tr><td style="padding:12px; font-weight:bold;">Inspection Date</td><td style="padding:12px;">' . Carbon::parse($inspectionsDetail->created_at)->format('d-m-Y') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:12px; font-weight:bold;">Inspector</td><td style="padding:12px;">' . ($inspectionsDetail->inspector_name ?? 'N/A') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Vehicle Pictures</td><td style="padding:10px;"><a target="_blank" href="'.env('APP_URL').'/inspection-details/'.$inspectionsDetail->id.''.'">Click here to see vehicle pictures</a></td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Vehicle Make</td><td style="padding:10px;">' . ($inspectionsDetail->vehicle_make ?? '-') . '</td></tr>
+                    <tr><td style="padding:10px; font-weight:bold;">Vehicle Model</td><td style="padding:10px;">' . ($inspectionsDetail->vehicle_model ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Year</td><td style="padding:10px;">' . ($inspectionsDetail->vehicle_year ?? '-') . '</td></tr>
+                    <tr><td style="padding:10px; font-weight:bold;">Fuel Type</td><td style="padding:10px;">' . ($inspectionsDetail->fuel_type ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Transmission</td><td style="padding:10px;">' . ($inspectionsDetail->transmission ?? '-') . '</td></tr>
+                    <tr><td style="padding:10px; font-weight:bold;">Mileage</td><td style="padding:10px;">' . ($inspectionsDetail->mileage ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Engine Capacity(L)</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->engine_capacity ?? '-') . '</td></tr>
+                    <tr ><td style="padding:10px; font-weight:bold;">Engine Cylinders</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->engine_cylinders ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Drive Type</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->drive_type ?? '-') . '</td></tr>
+                    <tr ><td style="padding:10px; font-weight:bold;">Body Type</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->body_type ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Exterior Color</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->exterior_color ?? '-') . '</td></tr>
+                    <tr ><td style="padding:10px; font-weight:bold;">Interior Colour/Trim</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->interior_color ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Number of Keys</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->number_keys ?? '-') . '</td></tr>
+                    <tr ><td style="padding:10px; font-weight:bold;">Last Service Date</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->last_service_date ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Registration Emirate</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->registration_emirate ?? '-') . '</td></tr>
+                    <tr ><td style="padding:10px; font-weight:bold;">Warranty Status</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->warranty_status ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Plate Type</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->plate_type ?? '-') . '</td></tr>
+                    <tr ><td style="padding:10px; font-weight:bold;">Registration Number</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->registration_number ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:10px; font-weight:bold;">Chasis Number</td><td style="padding:10px;">' . ($inspectionsDetail->vehicleDetail->chasis_no ?? '-') . '</td></tr>
+                    
                 </tbody>
             </table>
 
@@ -272,7 +284,36 @@ class InspectionsController extends Controller
                 "title" => "Body Details",
                 "items" => $inspectionsDetail->bodyDetail
                     ? collect($inspectionsDetail->bodyDetail->toArray())->map(function ($item, $key) {
-                        return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => ($item) ? 'Need Repair': 'Okay' , "color" => ($item) ? 'red': 'green'];
+                            }
+                        }
+                        
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Engine Bay",
+                "items" => $inspectionsDetail->engineDetails
+                    ? collect($inspectionsDetail->engineDetails->toArray())->map(function ($item, $key) {
+                         if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Transmission & Drivetrain",
+                "items" => $inspectionsDetail->transmissionDetails
+                    ? collect($inspectionsDetail->transmissionDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
                     })->toArray()
                     : [],
             ],
@@ -280,74 +321,247 @@ class InspectionsController extends Controller
                 "title" => "Glass & Mirrors",
                 "items" => $inspectionsDetail->glassDetails
                     ? collect($inspectionsDetail->glassDetails->toArray())->map(function ($item, $key) {
-                        return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
                     })->toArray()
                     : [],
             ],
-            // ... other sections ...
+            [
+                "title" => "Cluster & Lamps",
+                "items" => $inspectionsDetail->clusterDetails
+                    ? collect($inspectionsDetail->clusterDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Suspension & Steering",
+                "items" => $inspectionsDetail->suspensionDetails
+                    ? collect($inspectionsDetail->suspensionDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Brakes",
+                "items" => $inspectionsDetail->brakesDetails                    
+                    ? collect($inspectionsDetail->brakesDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key   !='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Interior General",
+                "items" => $inspectionsDetail->interiorDetails
+                    ? collect($inspectionsDetail->interiorDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key   !='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Seats & Restraints",
+                "items" => $inspectionsDetail->seatDetails
+                    ? collect($inspectionsDetail->seatDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "HVAC & Infotainment",
+                "items" => $inspectionsDetail->hvacDetails
+                    ? collect($inspectionsDetail->hvacDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Cooling & Fuel System",
+                "items" => $inspectionsDetail->coolingFuelDetails
+                    ? collect($inspectionsDetail->coolingFuelDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Electrical Systems & Lighting",
+                "items" => $inspectionsDetail->coolingFuelDetails
+                    ? collect($inspectionsDetail->coolingFuelDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Tyres & Wheels",
+                "items" => $inspectionsDetail->tyresDetails
+                    ? collect($inspectionsDetail->tyresDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            [
+                "title" => "Performance & Road Test",
+                "items" => $inspectionsDetail->performanceRoadTestDetails
+                    ? collect($inspectionsDetail->performanceRoadTestDetails->toArray())->map(function ($item, $key) {
+                        if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            if($item){
+                                return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => $item];
+                            }
+                        }
+                    })->toArray()
+                    : [],
+            ],
+            
         ];
 
         $html = '';
+        $svgImage = $inspectionsDetail->vehicleDetail->svg_image;
         foreach ($accordionData as $section) {
             if (empty($section['items'])) continue;
 
-            $html .= '
+            $html = '
             <h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">' . $section['title'] . '</h3>
             <table width="100%" style="border-collapse:collapse; font-size:10pt; margin-bottom:20px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
-                <thead>
-                    <tr style="background:#0D1B2A; color:white;">
-                        <th width="70%" align="left" style="padding:10px; color:#fffff;">Inspection Point</th>
-                        <th width="30%" align="right" style="padding:10px; color:#fffff;">Result</th>
-                    </tr>
-                </thead>
+                
                 <tbody>';
 
             $rowIndex = 0;
             foreach ($section['items'] as $item) {
-                $color = '#000';
-                if (stripos($item['value'], 'OK') !== false) $color = 'green';
-                if (stripos($item['value'], 'Repair') !== false) $color = 'red';
-                if (stripos($item['value'], 'Not Working') !== false) $color = 'orange';
-
+                
+                if(empty($item)) continue;
+                $colorName = '#000';
+                if(isset($item['color']) && $item['color']=='red'){
+                    $colorName = 'red';
+                } 
+                 // Skip empty values in 'Body Details' section
+                if($section['title']=='Body Details'){
+                    if(!empty($item) && !$item['value']){
+                        continue;
+                    }
+                    
+                }
                 $bg = $rowIndex % 2 === 0 ? '#ffffff' : '#f9fafb';
                 $html .= '
                     <tr style="background:' . $bg . ';">
-                        <td style="padding:10px; border-bottom:1px solid #eee;">' . $item['label'] . '</td>
-                        <td  align="right" style="padding:10px; border-bottom:1px solid #eee; color:' . $color . ';">' . $item['value'] . '</td>
+                        <td style="padding:10px; font-weight:bold;">' . $item['label'] . '</td>
+                        <td style="padding:10px; color:' . $colorName . ';">' . $item['value'] . '</td>
                     </tr>';
                 $rowIndex++;
             }
 
             $html .= '</tbody></table>';
+            $mpdf->WriteHTML($html);
+            $mpdf->AddPage();  
+
+
+            if($svgImage!=''){
+                $img = new Imagick();
+                $img->readImageBlob($svgImage);
+                $img->setImageFormat("png24");
+                file_put_contents("images/test.png", $img->getImageBlob());
+                $bodyImage = public_path('images/test.png');
+                $mpdf->WriteHTML('<div style="text-align:center; margin-top:20px;"><img src="'.$bodyImage.'" style="width:80%; height:auto;"/></div>
+                
+                <div class="flex flex-wrap gap-4 mt-[20px] border-t-[1px] border-t-[#f0f0f0] pt-[30px]">
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-white border border-gray-400"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Original Paint</span>
+                    </div>
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-yellow-400"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Portion Repaint</span>
+                    </div>
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-green-500"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Multi Scratches</span>
+                    </div>
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-blue-600"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Panel Replaced</span>
+                    </div>
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-cyan-400"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Faded</span>
+                    </div>
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-sky-200"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Not Available</span>
+                    </div>
+                    <div class="flex items-center space-x-2 min-w-[150px]">
+                        <span class="inline-block w-4 h-4 rounded-full bg-black"></span>
+                        <span class="creatodisplayM text-[#192735ba] text-[18px]">Foiled</span>
+                    </div>
+                </div>');
+                $mpdf->AddPage();
+                $svgImage = '';
+            } 
         }
        
-        $html.="
-        <div style='position:relative; overflow:hidden;'>
-            <div style='text-align:center; padding-bottom:20px'>
-                <img src='$logoPath' alt='logo' style='position:absolute; max-width:20mm; height:auto; z-index:2; display:block;' />
-            </div>
-            <div style='display:block; text-align:center; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:450px'>
-                <img src='file://$coverPath' alt='cover' style='width:100%; height:450px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
-            </div>
+        // $html ="
+        // <div style='position:relative; overflow:hidden;'>
+        //     <div style='text-align:center; padding-bottom:20px'>
+        //         <img src='$logoPath' alt='logo' style='position:absolute; max-width:20mm; height:auto; z-index:2; display:block;' />
+        //     </div>
+        //     <div style='display:block; text-align:center; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:450px'>
+        //         <img src='file://$coverPath' alt='cover' style='width:100%; height:450px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
+        //     </div>
 
-            <div style='text-align:center; z-index:2; padding-top:30px '>
-              <div style='font-size:30pt; font-weight:700; line-height:0.95; color:#D72638;'>Vehicle Inspection Report</div>
-              <div style='margin-top:3mm; font-size:11pt; color:#444;'>https://certifycars.ae/</div>
-            </div>
-         </div>
+        //     <div style='text-align:center; z-index:2; padding-top:30px '>
+        //       <div style='font-size:30pt; font-weight:700; line-height:0.95; color:#D72638;'>Vehicle Inspection Report</div>
+        //       <div style='margin-top:3mm; font-size:11pt; color:#444;'>https://certifycars.ae/</div>
+        //     </div>
+        //  </div>
 
-         <div style='margin-top:50px'>
-         <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
-             <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
-             </div>
+        //  <div style='margin-top:50px'>
+        //  <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
+        //      <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
+        //      </div>
 
 
-             <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
-             <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px;display:block;' />
-             </div>
-         </div>
-        ";
-        $mpdf->WriteHTML($html);
+        //      <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
+        //      <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px;display:block;' />
+        //      </div>
+        //  </div>
+        // ";
+        // $mpdf->WriteHTML($html);
 
         return response($mpdf->Output('inspection_report.pdf', 'I'))
             ->header('Content-Type', 'application/pdf');
