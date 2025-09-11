@@ -192,6 +192,7 @@ const EditRequest = () => {
 
               <CCol md={4}>
                 <CFormSelect
+                required
                   name="vehicle_make"
                   label="Vehicle Make"
                   value={data.vehicle_make}
@@ -201,16 +202,19 @@ const EditRequest = () => {
                 >
                   <option value="">-- Select Vehicle Make --</option>
                   {[
-                    'Acura', 'Alfa Romeo', 'Aston Martin', 'Audi', 'Bentley', 'BMW', 'Bugatti', 'Buick',
-                    'Cadillac', 'Chevrolet', 'Chrysler', 'Citroën', 'Dacia', 'Daewoo', 'Daihatsu', 'Dodge',
-                    'Ferrari', 'Fiat', 'Ford', 'Geely', 'Genesis', 'GMC', 'Honda', 'Hummer', 'Hyundai',
-                    'Infiniti', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Koenigsegg', 'Lamborghini', 'Lancia',
-                    'Land Rover', 'Lexus', 'Lincoln', 'Lotus', 'Mahindra', 'Maruti Suzuki', 'Maserati',
-                    'Maybach', 'Mazda', 'McLaren', 'Mercedes-Benz', 'MG', 'Mini', 'Mitsubishi', 'Nissan',
-                    'Opel', 'Pagani', 'Peugeot', 'Plymouth', 'Pontiac', 'Porsche', 'Proton', 'Ram', 'Renault',
-                    'Rolls-Royce', 'Rover', 'Saab', 'Saturn', 'Scion', 'SEAT', 'Škoda', 'Smart', 'SsangYong',
-                    'Subaru', 'Suzuki', 'Tata', 'Tesla', 'Toyota', 'Vauxhall', 'Volkswagen', 'Volvo','Other'
-                  ].map((make) => (
+                  'Toyota', 'Honda', 'Nissan', 'Mazda', 'Subaru', 'Mitsubishi', 'Lexus', 'Infiniti', 'Suzuki', 'Daihatsu', 'Acura', 'Mitsuoka',
+                  'Ford', 'Chevrolet', 'Dodge', 'GMC', 'Cadillac', 'Tesla', 'Jeep', 'Chrysler', 'Buick', 'Lincoln', 'Ram', 'Fisker', 'Lucid Motors', 'Rivian',
+                  'BMW', 'Mercedes-Benz', 'Audi', 'Volkswagen (VW)', 'Porsche', 'Opel', 'Mini', 'Smart', 'Maybach', 'Alpina', 'Borgward', 'Wiesmann',
+                  'Ferrari', 'Lamborghini', 'Maserati', 'Alfa Romeo', 'Fiat', 'Lancia', 'Pagani', 'De Tomaso', 'Abarth', 'Italdesign',
+                  'Renault', 'Peugeot', 'Citroën', 'Bugatti', 'Alpine', 'Venturi',
+                  'Rolls-Royce', 'Bentley', 'Aston Martin', 'Jaguar', 'Land Rover', 'Mini', 'McLaren', 'Caterham', 'TVR', 'Morgan', 'Lotus',
+                  'Hyundai', 'Kia', 'Genesis',
+                  'Volvo', 'Saab',
+                  'Tata', 'Mahindra',
+                  'Koenigsegg', 'Rimac',
+                  'BYD', 'Geely', 'Chery', 'Great Wall Motors (GWM)', 'Haval', 'MG', 'Dongfeng', 'FAW', 'BAIC', 'JAC Motors', 'NIO', 'XPeng', 'Li Auto', 'Weltmeister (WM Motor)', 'Seres', 'Aiways', 'Ora', 'Leapmotor', 'Human Horizons (HiPhi)', 'Bordrin', 'Hongqi', 'Denza', 'Voyah', 'Jetour',
+                  'Other'
+                ].map((make) => (
                     <option key={make} value={make}>
                       {make!='Other' ? make : 'Other Make'}
                     </option>
@@ -248,15 +252,21 @@ const EditRequest = () => {
               </CCol>
 
               <CCol md={4}>
-                <CFormInput
-                  type="text"
-                  label="Vehicle Year"
+                <CFormSelect
+                required
                   name="vehicle_year"
+                  label="Vehicle Year"
                   value={data.vehicle_year}
                   onChange={(e) => setData('vehicle_year', e.target.value)}
                   invalid={!!errors.vehicle_year}
                   feedbackInvalid={errors.vehicle_year}
-                />
+                >
+                 <option value="" disabled hidden>-- Select Vehicle Year --</option>
+                    {Array.from({ length: 41 }, (_, i) => {
+                      const year = new Date().getFullYear() - i;
+                      return <option key={year} value={year}>{year}</option>;
+                    })}
+                </CFormSelect>
               </CCol>
 
               <CCol md={4}>
@@ -303,15 +313,32 @@ const EditRequest = () => {
               </CCol>
 
               <CCol md={4}>
-                <CFormInput
-                  type="text"
+                <CFormSelect
+                required
                   name="mileage"
                   label="Mileage"
                   value={data.mileage}
                   onChange={(e) => setData('mileage', e.target.value)}
                   invalid={!!errors.mileage}
                   feedbackInvalid={errors.mileage}
-                />
+                >
+                 <option value="" disabled hidden>-- Select Mileage --</option>
+                    <option value="New – 10,000 kms">New – 10,000 kms</option>
+                    <option value="10,000 – 20,000 kms">10,000 – 20,000 kms</option>
+                    <option value="20,000 – 30,000 kms">20,000 – 30,000 kms</option>
+                    <option value="30,000 – 40,000 kms">30,000 – 40,000 kms</option>
+                    <option value="40,000 – 60,000 kms">40,000 – 60,000 kms</option>
+                    <option value="60,000 – 80,000 kms">60,000 – 80,000 kms</option>
+                    <option value="80,000 – 100,000 kms">80,000 – 100,000 kms</option>
+                    <option value="100,000 – 120,000 kms">100,000 – 120,000 kms</option>
+                    <option value="120,000 – 140,000 kms">120,000 – 140,000 kms</option>
+                    <option value="140,000 – 160,000 kms">140,000 – 160,000 kms</option>
+                    <option value="160,000 – 180,000 kms">160,000 – 180,000 kms</option>
+                    <option value="180,000 – 200,000 kms">180,000 – 200,000 kms</option>
+                    <option value="200,000 – 250,000 kms">200,000 – 250,000 kms</option>
+                    <option value="250,000 – 300,000 kms">250,000 – 300,000 kms</option>
+                    <option value="300,000 - Above kms">300,000 - Above kms</option>
+                </CFormSelect>
               </CCol>
 
               <CCol md={4}>

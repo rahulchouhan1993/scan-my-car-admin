@@ -75,7 +75,7 @@ const BookInspection = () => {
 
   const [activeStep, setActiveStep] = useState(1);
   const [packageId, setpackage] = useState(0);
-  const steps = ["Choose Package", "Enter Details"];
+  const steps = ["Choose Package", "Personal Information", "Vehicle Details", "Schedule"];
   const detailsRef = useRef(null);
   const { props } = usePage();
 
@@ -100,6 +100,24 @@ const BookInspection = () => {
     city: props?.city || '',
     package_name: packageId,
   });
+
+  const isFormValid1 =
+  data.full_name &&
+  data.email &&
+  data.contact_no &&
+  data.address_line_1 &&
+  data.address_line_2 &&
+  data.city;
+
+  const isFormValid2 =
+  data.vehicle_make &&
+  data.vehicle_model &&
+  data.vehicle_year &&
+  data.fuel_type &&
+  data.transmission &&
+  data.mileage;
+
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -244,7 +262,7 @@ const BookInspection = () => {
                 return (
                   <div
                     key={index}
-                    onClick={() => setActiveStepFun(index + 1)}
+                    //onClick={() => setActiveStepFun(index + 1)}
                     className={`w-[48%]  sm:w-[50%] ppfont flex z-[1] items-center justify-center gap-[3px] sm:gap-[4px] md:gap-2 px-[2px] py-[10px] md:px-[15px] md:py-[15px] rounded-full border-[2px]  cursor-pointer transition-all text-[12px] sm:text-[14px] md:text-[20px] text-[#192735] ${isActive
                       ? "bg-[#192735] text-white border-black"
                       : "bg-[#EDEEEF] text-black border-[#192735]"
@@ -356,19 +374,20 @@ const BookInspection = () => {
           )}
 
           {/* Tab 2 & 3: Contact Form */}
-          {((activeStep === 2 || activeStep === 3) && packageId>0) && (
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] inspectionForm" onSubmit={handleSubmit}>
+          {(activeStep === 2 && packageId>0) && (
             <div
               className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]"
               ref={detailsRef}
               id="enter-details-booking"
             >
-              <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Enter your details</h2>
+              <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Complete Your Personal Profile to Continue</h2>
 
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] inspectionForm" onSubmit={handleSubmit}>
+              
                 <input type="hidden" id="packageId" name="package_name" value={data.package_name} />
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label> */}
                   <input
                     required
                     type="text"
@@ -382,7 +401,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label> */}
                   <input
                     required
                     type="email"
@@ -396,7 +415,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone (With Country Code)</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone (With Country Code)</label> */}
                   <input
                     required
                     type="tel"
@@ -410,7 +429,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 1</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 1</label> */}
                   <input
                     required
                     type="text"
@@ -424,7 +443,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 2</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Address Line 2</label> */}
                   <input
                     required
                     type="text"
@@ -451,7 +470,7 @@ const BookInspection = () => {
                 </div> */}
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>City</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>City</label> */}
                   <select
                     required
                     value={data.city}
@@ -470,9 +489,36 @@ const BookInspection = () => {
                   </select>
                   {errors.city && <div className="text-red-500 text-[12px]">{errors.city}</div>}
                 </div>
+                <div className="col-span-1 md:col-span-2 flex">
+                 <button
+                  onClick={() => setActiveStep(1)}
+                  type="button"
+                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setActiveStep(3)}
+                  type="button"
+                  disabled={!isFormValid1} 
+                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                >
+                  Next
+                </button>
+                </div>
+            </div>
+          )}
+
+          {(activeStep === 3 && packageId>0) && (
+            <div
+              className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]"
+              ref={detailsRef}
+              id="enter-details-booking"
+            >
+              <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Tell Us About Your Vehicle to Get Started</h2>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Make</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Make</label> */}
                   <select
                     required
                     value={data.vehicle_make}
@@ -481,80 +527,105 @@ const BookInspection = () => {
                     className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Vehicle Make --</option>
-                    <option value="Acura">Acura</option>
-                    <option value="Alfa Romeo">Alfa Romeo</option>
-                    <option value="Aston Martin">Aston Martin</option>
-                    <option value="Audi">Audi</option>
-                    <option value="Bentley">Bentley</option>
-                    <option value="BMW">BMW</option>
-                    <option value="Bugatti">Bugatti</option>
-                    <option value="Buick">Buick</option>
-                    <option value="Cadillac">Cadillac</option>
-                    <option value="Chevrolet">Chevrolet</option>
-                    <option value="Chrysler">Chrysler</option>
-                    <option value="Citroën">Citroën</option>
-                    <option value="Dacia">Dacia</option>
-                    <option value="Daewoo">Daewoo</option>
-                    <option value="Daihatsu">Daihatsu</option>
-                    <option value="Dodge">Dodge</option>
-                    <option value="Ferrari">Ferrari</option>
-                    <option value="Fiat">Fiat</option>
-                    <option value="Ford">Ford</option>
-                    <option value="Geely">Geely</option>
-                    <option value="Genesis">Genesis</option>
-                    <option value="GMC">GMC</option>
-                    <option value="Honda">Honda</option>
-                    <option value="Hummer">Hummer</option>
-                    <option value="Hyundai">Hyundai</option>
-                    <option value="Infiniti">Infiniti</option>
-                    <option value="Isuzu">Isuzu</option>
-                    <option value="Jaguar">Jaguar</option>
-                    <option value="Jeep">Jeep</option>
-                    <option value="Kia">Kia</option>
-                    <option value="Koenigsegg">Koenigsegg</option>
-                    <option value="Lamborghini">Lamborghini</option>
-                    <option value="Lancia">Lancia</option>
-                    <option value="Land Rover">Land Rover</option>
-                    <option value="Lexus">Lexus</option>
-                    <option value="Lincoln">Lincoln</option>
-                    <option value="Lotus">Lotus</option>
-                    <option value="Mahindra">Mahindra</option>
-                    <option value="Maruti Suzuki">Maruti Suzuki</option>
-                    <option value="Maserati">Maserati</option>
-                    <option value="Maybach">Maybach</option>
-                    <option value="Mazda">Mazda</option>
-                    <option value="McLaren">McLaren</option>
-                    <option value="Mercedes-Benz">Mercedes-Benz</option>
-                    <option value="MG">MG</option>
-                    <option value="Mini">Mini</option>
-                    <option value="Mitsubishi">Mitsubishi</option>
-                    <option value="Nissan">Nissan</option>
-                    <option value="Opel">Opel</option>
-                    <option value="Pagani">Pagani</option>
-                    <option value="Peugeot">Peugeot</option>
-                    <option value="Plymouth">Plymouth</option>
-                    <option value="Pontiac">Pontiac</option>
-                    <option value="Porsche">Porsche</option>
-                    <option value="Proton">Proton</option>
-                    <option value="Ram">Ram</option>
-                    <option value="Renault">Renault</option>
-                    <option value="Rolls-Royce">Rolls-Royce</option>
-                    <option value="Rover">Rover</option>
-                    <option value="Saab">Saab</option>
-                    <option value="Saturn">Saturn</option>
-                    <option value="Scion">Scion</option>
-                    <option value="SEAT">SEAT</option>
-                    <option value="Škoda">Škoda</option>
-                    <option value="Smart">Smart</option>
-                    <option value="SsangYong">SsangYong</option>
-                    <option value="Subaru">Subaru</option>
-                    <option value="Suzuki">Suzuki</option>
-                    <option value="Tata">Tata</option>
-                    <option value="Tesla">Tesla</option>
                     <option value="Toyota">Toyota</option>
-                    <option value="Vauxhall">Vauxhall</option>
-                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Subaru">Subaru</option>
+                    <option value="Mitsubishi">Mitsubishi</option>
+                    <option value="Lexus">Lexus</option>
+                    <option value="Infiniti">Infiniti</option>
+                    <option value="Suzuki">Suzuki</option>
+                    <option value="Daihatsu">Daihatsu</option>
+                    <option value="Acura">Acura</option>
+                    <option value="Mitsuoka">Mitsuoka</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Dodge">Dodge</option>
+                    <option value="GMC">GMC</option>
+                    <option value="Cadillac">Cadillac</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Jeep">Jeep</option>
+                    <option value="Chrysler">Chrysler</option>
+                    <option value="Buick">Buick</option>
+                    <option value="Lincoln">Lincoln</option>
+                    <option value="Ram">Ram</option>
+                    <option value="Fisker">Fisker</option>
+                    <option value="Lucid Motors">Lucid Motors</option>
+                    <option value="Rivian">Rivian</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Volkswagen (VW)">Volkswagen (VW)</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Opel">Opel</option>
+                    <option value="Mini">Mini</option>
+                    <option value="Smart">Smart</option>
+                    <option value="Maybach">Maybach</option>
+                    <option value="Alpina">Alpina</option>
+                    <option value="Borgward">Borgward</option>
+                    <option value="Wiesmann">Wiesmann</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Lamborghini">Lamborghini</option>
+                    <option value="Maserati">Maserati</option>
+                    <option value="Alfa Romeo">Alfa Romeo</option>
+                    <option value="Fiat">Fiat</option>
+                    <option value="Lancia">Lancia</option>
+                    <option value="Pagani">Pagani</option>
+                    <option value="De Tomaso">De Tomaso</option>
+                    <option value="Abarth">Abarth</option>
+                    <option value="Italdesign">Italdesign</option>
+                    <option value="Renault">Renault</option>
+                    <option value="Peugeot">Peugeot</option>
+                    <option value="Citroën">Citroën</option>
+                    <option value="Bugatti">Bugatti</option>
+                    <option value="Alpine">Alpine</option>
+                    <option value="Venturi">Venturi</option>
+                    <option value="Rolls-Royce">Rolls-Royce</option>
+                    <option value="Bentley">Bentley</option>
+                    <option value="Aston Martin">Aston Martin</option>
+                    <option value="Jaguar">Jaguar</option>
+                    <option value="Land Rover">Land Rover</option>
+                    <option value="Mini">Mini</option>
+                    <option value="McLaren">McLaren</option>
+                    <option value="Caterham">Caterham</option>
+                    <option value="TVR">TVR</option>
+                    <option value="Morgan">Morgan</option>
+                    <option value="Lotus">Lotus</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Genesis">Genesis</option>
                     <option value="Volvo">Volvo</option>
+                    <option value="Saab">Saab</option>
+                    <option value="Tata">Tata</option>
+                    <option value="Mahindra">Mahindra</option>
+                    <option value="Koenigsegg">Koenigsegg</option>
+                    <option value="Rimac">Rimac</option>
+                    <option value="BYD">BYD</option>
+                    <option value="Geely">Geely</option>
+                    <option value="Chery">Chery</option>
+                    <option value="Great Wall Motors (GWM)">Great Wall Motors (GWM)</option>
+                    <option value="Haval">Haval</option>
+                    <option value="MG">MG</option>
+                    <option value="Dongfeng">Dongfeng</option>
+                    <option value="FAW">FAW</option>
+                    <option value="BAIC">BAIC</option>
+                    <option value="JAC Motors">JAC Motors</option>
+                    <option value="NIO">NIO</option>
+                    <option value="XPeng">XPeng</option>
+                    <option value="Li Auto">Li Auto</option>
+                    <option value="Weltmeister (WM Motor)">Weltmeister (WM Motor)</option>
+                    <option value="Seres">Seres</option>
+                    <option value="Aiways">Aiways</option>
+                    <option value="Ora">Ora</option>
+                    <option value="Leapmotor">Leapmotor</option>
+                    <option value="Human Horizons (HiPhi)">Human Horizons (HiPhi)</option>
+                    <option value="Bordrin">Bordrin</option>
+                    <option value="Hongqi">Hongqi</option>
+                    <option value="Denza">Denza</option>
+                    <option value="Voyah">Voyah</option>
+                    <option value="Jetour">Jetour</option>
+
                     <option value="Other">Other Make</option>
                   </select>
                   {errors.vehicle_make && <div className="text-red-500 text-[12px]">{errors.vehicle_make}</div>}
@@ -562,9 +633,9 @@ const BookInspection = () => {
 
                 {isOther && (
                     <div>
-                      <label className="flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]">
+                      {/* <label className="flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]">
                         Please specify
-                      </label>
+                      </label> */}
                       <input
                         type="text"
                         name="other_vehicle_make"
@@ -583,7 +654,7 @@ const BookInspection = () => {
                   )}
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Model</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Model</label> */}
                   <input
                     required
                     type="text"
@@ -597,21 +668,26 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Year</label>
-                  <input
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Year</label> */}
+        
+                  <select
                     required
-                    type="text"
-                    placeholder="Vehicle Year"
+                    value={data.vehicle_year}
+                    onChange={(e) => setData("vehicle_year", e.target.value)}
                     name="vehicle_year"
                     className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
-                    value={data.vehicle_year}
-                    onChange={(e) => setData('vehicle_year', e.target.value)}
-                  />
+                  >
+                    <option value="" disabled hidden>-- Select Vehicle Year --</option>
+                    {Array.from({ length: 41 }, (_, i) => {
+                      const year = new Date().getFullYear() - i;
+                      return <option key={year} value={year}>{year}</option>;
+                    })}
+                  </select>
                   {errors.vehicle_year && <div className="text-red-500 text-[12px]">{errors.vehicle_year}</div>}
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Fuel Type</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Fuel Type</label> */}
                   <select
                     required
                     value={data.fuel_type}
@@ -629,7 +705,7 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Transmission</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Transmission</label> */}
                   <select
                     required
                     value={data.transmission}
@@ -644,8 +720,67 @@ const BookInspection = () => {
                   {errors.transmission && <div className="text-red-500 text-[12px]">{errors.transmission}</div>}
                 </div>
 
+                 <div>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Mileage</label> */}
+                  <select
+                    required
+                    value={data.mileage}
+                    onChange={(e) => setData("mileage", e.target.value)}
+                    name="mileage"
+                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                  >
+                    <option value="" disabled hidden>-- Select Mileage --</option>
+                    <option value="New – 10,000 kms">New – 10,000 kms</option>
+                    <option value="10,000 – 20,000 kms">10,000 – 20,000 kms</option>
+                    <option value="20,000 – 30,000 kms">20,000 – 30,000 kms</option>
+                    <option value="30,000 – 40,000 kms">30,000 – 40,000 kms</option>
+                    <option value="40,000 – 60,000 kms">40,000 – 60,000 kms</option>
+                    <option value="60,000 – 80,000 kms">60,000 – 80,000 kms</option>
+                    <option value="80,000 – 100,000 kms">80,000 – 100,000 kms</option>
+                    <option value="100,000 – 120,000 kms">100,000 – 120,000 kms</option>
+                    <option value="120,000 – 140,000 kms">120,000 – 140,000 kms</option>
+                    <option value="140,000 – 160,000 kms">140,000 – 160,000 kms</option>
+                    <option value="160,000 – 180,000 kms">160,000 – 180,000 kms</option>
+                    <option value="180,000 – 200,000 kms">180,000 – 200,000 kms</option>
+                    <option value="200,000 – 250,000 kms">200,000 – 250,000 kms</option>
+                    <option value="250,000 – 300,000 kms">250,000 – 300,000 kms</option>
+                    <option value="300,000 - Above kms">300,000 - Above kms</option>
+                  </select>
+                  {errors.mileage && <div className="text-red-500 text-[12px]">{errors.mileage}</div>}
+                </div>
+
+                <div className="col-span-1 md:col-span-2 flex">
+                 <button
+                  onClick={() => setActiveStep(2)}
+                  type="button"
+                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setActiveStep(4)}
+                  type="button"
+                  disabled={!isFormValid2} 
+                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                >
+                  Next
+                </button>
+                </div>
+
+                
+            </div>
+          )}
+
+          {(activeStep === 4 && packageId>0) && (
+            <div
+              className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]"
+              ref={detailsRef}
+              id="enter-details-booking"
+            >
+              <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">When Would You Like Us to Inspect Your Vehicle?</h2>
+
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Car Parked</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Car Parked</label> */}
                   <select
                     required
                     value={data.car_parked}
@@ -663,36 +798,25 @@ const BookInspection = () => {
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Mileage</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Date</label> */}
                   <input
-                    required
-                    type="text"
-                    name="mileage"
-                    placeholder="Mileage"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
-                    value={data.mileage}
-                    onChange={(e) => setData('mileage', e.target.value)}
-                  />
-                  {errors.mileage && <div className="text-red-500 text-[12px]">{errors.mileage}</div>}
-                </div>
+                  required
+                  type="text"
+                  name="preferred_date"
+                  onFocus={(e) => (e.target.type = "date")}
+                  onBlur={(e) => !e.target.value && (e.target.type = "text")}
+                  placeholder="Preferred Date"
+                  className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                  value={data.preferred_date}
+                  min={new Date().toISOString().split("T")[0]}
+                  onChange={(e) => setData("preferred_date", e.target.value)}
+                />
 
-                <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Date</label>
-                  <input
-                    required
-                    type="date"
-                    name="preferred_date"
-                    placeholder="Preferred Date"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
-                    value={data.preferred_date}
-                    min={new Date().toISOString().split("T")[0]}
-                    onChange={(e) => setData('preferred_date', e.target.value)}
-                  />
                   {errors.preferred_date && <div className="text-red-500 text-[12px]">{errors.preferred_date}</div>}
                 </div>
 
                 <div>
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Time Slot</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Time Slot</label> */}
 
                   <select
                     required
@@ -701,7 +825,7 @@ const BookInspection = () => {
                     name="preferred_time_slot"
                     className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
-                    <option value="" hidden>-- Select --</option>
+                    <option value="" hidden>-- Select Time Slot --</option>
                     <option value="9:00 AM – 12:00 PM">9:00 AM – 12:00 PM</option>
                     <option value="10:00 AM – 1:00 PM">10:00 AM – 1:00 PM</option>
                     <option value="11:00 AM – 2:00 PM">11:00 AM – 2:00 PM</option>
@@ -716,7 +840,7 @@ const BookInspection = () => {
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Additional Notes</label>
+                  {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Additional Notes</label> */}
                   <textarea
                     
                     onChange={(e) => setData('additional_notes', e.target.value)}
@@ -730,6 +854,13 @@ const BookInspection = () => {
 
                 <div className="col-span-1 md:col-span-2 flex">
                   <button
+                    onClick={() => setActiveStep(3)}
+                    type="button"
+                    className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  >
+                    Previous
+                  </button>
+                  <button
                     type="submit"
                     disabled={processing}
                     className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
@@ -737,9 +868,10 @@ const BookInspection = () => {
                     {processing ? "Submitting..." : "Submit"}
                   </button>
                 </div>
-              </form>
+
             </div>
           )}
+          </form>
         </div>
       </div>
     </>

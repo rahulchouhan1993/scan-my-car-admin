@@ -49,7 +49,7 @@ const Footer = () => {
                   </a>
                 </div>
                 <div>
-                  <a  target="_blank" href="/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
+                  <a  target="_blank" href="https://www.linkedin.com/company/certifycars/" className="flex items-center justify-center bg-[#E5E1DA] hover:bg-[#fff] w-[44px] h-[44px] text-black rounded-[60px]">
                     <svg  width="21" height="21"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1"  viewBox="0 0 93.06 93.06" xml:space="preserve">
                       <g>
                         <g>
