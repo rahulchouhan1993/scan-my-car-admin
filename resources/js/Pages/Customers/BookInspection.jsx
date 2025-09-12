@@ -255,7 +255,7 @@ const BookInspection = () => {
         <div className=" container  ">
           {/* Steps Navigation */}
           <div className="w-full md:max-w-[960px] m-auto flex justify-center mb-8">
-            <div className="w-full relative flex justify-center flex-wrap sm:flex-nowrap bg-[#EDEEEF] p-[8px] md:p-[10px] rounded-[80px] gap-[5px] md:gap-4">
+            <div className="w-full relative flex justify-center flex-wrap sm:flex-nowrap bg-[#EDEEEF] p-[4px] md:p-[10px] rounded-[10px] sm:rounded-[80px] gap-[5px] md:gap-4">
               <div className="absolute w-[90%] h-[2px] top-[26px] md:top-[41px] border-b-[2px] border-b-[#000]"></div>
               {steps.map((step, index) => {
                 const isActive = activeStep === index + 1;
@@ -263,13 +263,13 @@ const BookInspection = () => {
                   <div
                     key={index}
                     //onClick={() => setActiveStepFun(index + 1)}
-                    className={`w-[48%]  sm:w-[50%] ppfont flex z-[1] items-center justify-center gap-[3px] sm:gap-[4px] md:gap-2 px-[2px] py-[10px] md:px-[15px] md:py-[15px] rounded-full border-[2px]  cursor-pointer transition-all text-[12px] sm:text-[14px] md:text-[20px] text-[#192735] ${isActive
+                    className={`w-[48%]  sm:w-[50%] ppfont flex z-[1] items-center justify-center gap-[3px] sm:gap-[4px] md:gap-2 px-[2px] py-[10px] md:px-[5px] md:py-[15px] rounded-full border-[1px] md:border-[1px]  cursor-pointer transition-all text-[10px] sm:text-[12px] md:text-[12px] lg:text-[13px] xl:text-[14px] text-[#192735] ${isActive
                       ? "bg-[#192735] text-white border-black"
                       : "bg-[#EDEEEF] text-black border-[#192735]"
                       }`}
                   >
-                    <span className={`relative w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] lg:w-[28px] lg:h-[28px] rounded-full border ${isActive ? " border-white" : " border-black"}`}>
-                      <span className={`absolute top-[3px] left-[3px] sm:top-[3px] sm:left-[3px] w-[6px] h-[6px] sm:w-[10px] sm:h-[10px] md:w-[10px] md:h-[10px] lg:w-[20px] lg:h-[20px] rounded-full ${isActive ? "bg-[#fff]" : ""}`}/>
+                    <span className={`relative w-[14px] h-[14px] rounded-full border ${isActive ? " border-white" : " border-black"}`}>
+                      <span className={`absolute top-[3px] left-[3px] w-[6px] h-[6px] rounded-full ${isActive ? "bg-[#fff]" : ""}`}/>
                     </span>
                     {step}
                   </div>
@@ -374,16 +374,18 @@ const BookInspection = () => {
           )}
 
           {/* Tab 2 & 3: Contact Form */}
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] inspectionForm" onSubmit={handleSubmit}>
+          <form className=" inspectionForm" onSubmit={handleSubmit}>
           {(activeStep === 2 && packageId>0) && (
-            <div
-              className=" mx-auto w-[96%] bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]"
+           
+              <div className="bg-white border-[1px] border-[#19273533] rounded-[10px] md:rounded-[15px] lg:rounded-[25px] p-[15px] md:p-[30px] lg:p-[50px]">
+              <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Complete Your Personal Profile to Continue</h2>
+              <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] mx-auto w-full "
               ref={detailsRef}
               id="enter-details-booking"
             >
-              <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Complete Your Personal Profile to Continue</h2>
-
               
+            
                 <input type="hidden" id="packageId" name="package_name" value={data.package_name} />
 
                 <div>
@@ -489,7 +491,7 @@ const BookInspection = () => {
                   </select>
                   {errors.city && <div className="text-red-500 text-[12px]">{errors.city}</div>}
                 </div>
-                <div className="col-span-1 md:col-span-2 flex">
+                <div className="col-span-1 md:col-span-2 flex gap-[15px]">
                  <button
                   onClick={() => setActiveStep(1)}
                   type="button"
@@ -506,7 +508,7 @@ const BookInspection = () => {
                   Next
                 </button>
                 </div>
-            </div>
+            </div></div>
           )}
 
           {(activeStep === 3 && packageId>0) && (
@@ -516,7 +518,7 @@ const BookInspection = () => {
               id="enter-details-booking"
             >
               <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">Tell Us About Your Vehicle to Get Started</h2>
-
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] mx-auto w-full" >
                 <div>
                   {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Vehicle Make</label> */}
                   <select
@@ -749,7 +751,7 @@ const BookInspection = () => {
                   {errors.mileage && <div className="text-red-500 text-[12px]">{errors.mileage}</div>}
                 </div>
 
-                <div className="col-span-1 md:col-span-2 flex">
+                <div className="col-span-1 md:col-span-2 flex gap-[15px]">
                  <button
                   onClick={() => setActiveStep(2)}
                   type="button"
@@ -765,7 +767,7 @@ const BookInspection = () => {
                 >
                   Next
                 </button>
-                </div>
+                </div></div>
 
                 
             </div>
@@ -779,6 +781,7 @@ const BookInspection = () => {
             >
               <h2 className="ppfont text-[#192735] text-[18px] md:text-[22px] lg:text-[24px] xl:text-[28px] pb-[15px] border-b-[1px] border-b-[#0000001a] mb-[20px] md:mb-[30px] lg:mb-[30px]">When Would You Like Us to Inspect Your Vehicle?</h2>
 
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-[10px] md:gap-[20px] mx-auto w-full">
                 <div>
                   {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Car Parked</label> */}
                   <select
@@ -852,7 +855,7 @@ const BookInspection = () => {
                   {errors.additional_notes && <div className="text-red-500 text-[12px]">{errors.additional_notes}</div>}
                 </div>
 
-                <div className="col-span-1 md:col-span-2 flex">
+                <div className="col-span-1 md:col-span-2 flex gap-[15px]">
                   <button
                     onClick={() => setActiveStep(3)}
                     type="button"
@@ -867,6 +870,7 @@ const BookInspection = () => {
                   >
                     {processing ? "Submitting..." : "Submit"}
                   </button>
+                </div>
                 </div>
 
             </div>

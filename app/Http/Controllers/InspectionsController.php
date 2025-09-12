@@ -240,28 +240,28 @@ class InspectionsController extends Controller
                 
             </div>
 
-            <table width="100%" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">
+            <table width="100%" border="1" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">
                 <tbody>
                     
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Vehicle Make</td><td style="padding:11px;">' . ($inspectionsDetail->vehicle_make ?? '-') . '</td></tr>
-                    <tr><td style="padding:11px; font-weight:bold;">Vehicle Model</td><td style="padding:11px;">' . ($inspectionsDetail->vehicle_model ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Year</td><td style="padding:11px;">' . ($inspectionsDetail->vehicle_year ?? '-') . '</td></tr>
-                    <tr><td style="padding:11px; font-weight:bold;">Fuel Type</td><td style="padding:11px;">' . ($inspectionsDetail->fuel_type ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Transmission</td><td style="padding:11px;">' . ($inspectionsDetail->transmission ?? '-') . '</td></tr>
-                    <tr><td style="padding:11px; font-weight:bold;">Mileage</td><td style="padding:11px;">' . ($inspectionsDetail->mileage ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Engine Capacity(L)</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->engine_capacity ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px; font-weight:bold;">Engine Cylinders</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->engine_cylinders ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Drive Type</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->drive_type ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px; font-weight:bold;">Body Type</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->body_type ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Exterior Color</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->exterior_color ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px; font-weight:bold;">Interior Colour/Trim</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->interior_color ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Number of Keys</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->number_keys ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px; font-weight:bold;">Last Service Date</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->last_service_date ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Registration Emirate</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->registration_emirate ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px; font-weight:bold;">Warranty Status</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->warranty_status ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Plate Type</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->plate_type ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px; font-weight:bold;">Registration Number</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->registration_number ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px; font-weight:bold;">Chasis Number</td><td style="padding:11px;">' . ($inspectionsDetail->vehicleDetail->chasis_no ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;"><b>Vehicle Make</b></td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2 ">' . ($inspectionsDetail->vehicle_make ?? '-') . '</td></tr>
+                    <tr><td style="padding:11px;"><b>Vehicle Model</b></td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicle_model ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Year</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicle_year ?? '-') . '</td></tr>
+                    <tr><td style="padding:11px;">Fuel Type</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->fuel_type ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Transmission</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->transmission ?? '-') . '</td></tr>
+                    <tr><td style="padding:11px;">Mileage</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->mileage ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Engine Capacity(L)</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->engine_capacity ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Engine Cylinders</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->engine_cylinders ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Drive Type</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->drive_type ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Body Type</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->body_type ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Exterior Color</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->exterior_color ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Interior Colour/Trim</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->interior_color ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Number of Keys</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->number_keys ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Last Service Date</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->last_service_date ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Registration Emirate</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->registration_emirate ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Warranty Status</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->warranty_status ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Plate Type</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->plate_type ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Registration Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->registration_number ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Chasis Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->chasis_no ?? '-') . '</td></tr>
                     
                 </tbody>
             </table>
@@ -276,9 +276,9 @@ class InspectionsController extends Controller
         // ✅ Next pages without header gap
         $mpdf->AddPage('', '', '', '', '', 5, 5, 4, 30, 10, 10);
 
-        $termsContent = '<div style="margin:10px 0; font-family:Arial, sans-serif; font-size:11pt; color:#192735; line-height:1.6;">
+        $termsContent = '<div style="margin:10px 0; font-size:11pt; color:#192735; line-height:1.6;">
 
-            <h3 style="font-size:14pt; color:#0D1B2A; margin-bottom:10px; text-align:center;">
+            <h3 style="font-size:14pt; color:#0D1B2A; margin-bottom:5px; text-align:center;">
                 Terms & Conditions
             </h3>
 
@@ -286,27 +286,27 @@ class InspectionsController extends Controller
                 By booking or confirming a vehicle inspection (“Service”) with <b>Certify Cars – UAE</b> online, you agree to the following Terms & Conditions:
             </p>
 
-            <h4 style="margin-top:10px; font-size:12pt; color:#0D1B2A;">1. Authorisation</h4>
-            <p>
+            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">1. Authorisation</h4>
+            <p style="0 0 10px 0; color:#5d5d5dc2; font-size:11pt; font-weight:normal">
                 You authorise <b>Certify Cars – UAE</b> to inspect and, if safe, test drive the vehicle (“Vehicle”) for the purpose of delivering the Service. If the Vehicle belongs to a third party, you confirm that you have their permission for this inspection.
             </p>
 
-            <h4 style="margin-top:10px; font-size:12pt; color:#0D1B2A;">2. Scope of Inspection</h4>
-            <ul style="margin:5px 0 10px 25px; padding:0;">
+            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">2. Scope of Inspection</h4>
+            <ul style="margin:0 0 10px 25px; padding:0; color:#5d5d5dc2; font-size:11pt; font-weight:normal">
                 <li>The Service involves a full check-up of the Vehicle, including major visible components, basic mechanical functions, and a limited test drive.</li>
                 <li>Certain inspections may require RTA clearances or approvals.</li>
                 <li>While we perform a thorough inspection, some issues may still be missed or intentionally hidden by the owner.</li>
                 <li>Certify Cars – UAE does not accept responsibility for any issues not detected during the inspection.</li>
             </ul>
 
-            <h4 style="margin-top:10px; font-size:12pt; color:#0D1B2A;">3. Inspection Report</h4>
-            <ul style="margin:5px 0 10px 25px; padding:0;">
+            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">3. Inspection Report</h4>
+            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
                 <li>The inspection report (“Report”) reflects the inspector’s opinion at the time of inspection.</li>
                 <li>The Report is informational only and does not constitute advice to buy, sell, or maintain the Vehicle.</li>
             </ul>
 
-            <h4 style="margin-top:10px; font-size:12pt; color:#0D1B2A;">4. Risk & Liability</h4>
-            <ul style="margin:5px 0 10px 25px; padding:0;">
+            <h4 style="margin: 0 0 5px 0; font-size:13pt; color:#0D1B2A;">4. Risk & Liability</h4>
+            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
                 <li>The Service is entirely at your own risk.</li>
                 <li><b>Certify Cars – UAE</b>, its staff, or representatives accept no liability for:</li>
                 <ul style="margin:5px 0 10px 25px; padding:0;">
@@ -316,18 +316,18 @@ class InspectionsController extends Controller
                 </ul>
             </ul>
 
-            <h4 style="margin-top:10px; font-size:12pt; color:#0D1B2A;">5. Fine</h4>
-            <ul style="margin:5px 0 10px 25px; padding:0;">
+            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">5. Fine</h4>
+            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
                 <li>If the customer fails to comply with these Terms & Conditions, including providing false information about the Vehicle, the customer agrees to pay a fine of AED 1,500.</li>
                 <li>This fine represents the maximum payable amount under such circumstances.</li>
             </ul>
 
-            <h4 style="margin-top:10px; font-size:12pt; color:#0D1B2A;">6. Governing Law</h4>
-            <p>
+            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">6. Governing Law</h4>
+            <p style="margin:0 0 10px 0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
                 These Terms are governed by the laws of the United Arab Emirates. Any disputes will be resolved under UAE jurisdiction.
             </p>
 
-           <p style="margin-top:10px; font-size:10pt; color:#555;">
+           <p style="margin: 0 0 10px 0; font-size:10pt; color:#555;">
                 <b>Disclaimer:</b> This inspection report reflects the condition of the vehicle at the time of inspection. It does not guarantee future performance. CertifyCars LLC is not liable for any hidden defects not visible during inspection.
             </p>
 
@@ -517,7 +517,7 @@ class InspectionsController extends Controller
 
             $html = '
             <h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">'.$counter.'. ' . $section['title'] . '</h3>
-            <table width="100%" style="border-collapse:collapse; font-size:10pt; margin-bottom:20px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+            <table border="1" width="100%" style="border-collapse:collapse; font-size:10pt; margin-bottom:20px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
                 
                 <tbody>';
 
@@ -557,16 +557,16 @@ class InspectionsController extends Controller
             $counter++;
 
             if($svgImage!=''){
-                $img = new Imagick();
-                $img->readImageBlob($svgImage);
-                $img->setImageFormat("png24");
-                file_put_contents("images/test.png", $img->getImageBlob());
-                $bodyImage = public_path('images/test.png');
-                //$bodyImage = public_path('');
+                // $img = new Imagick();
+                // $img->readImageBlob($svgImage);
+                // $img->setImageFormat("png24");
+                // file_put_contents("images/test.png", $img->getImageBlob());
+                // $bodyImage = public_path('images/test.png');
+                $bodyImage = public_path('');
                 $mpdf->WriteHTML('<h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">Draft Paint</h3><div style="text-align:center; margin-top:20px;"><img src="'.$bodyImage.'" style="width:40%; height:auto;"/></div>
                
                 <div style="margin-top:20px;">
-                <table width="100%" cellpadding="6" cellspacing="0" border="0" style="font-size:11pt; color:#192735; margin:auto;">
+                <table width="100%" cellpadding="6" cellspacing="0" style="font-size:11pt; color:#192735; margin:auto;">
                   <tr>
                     <td>
                       <table cellpadding="2" cellspacing="0" border="0" style="border-collapse:collapse;">
