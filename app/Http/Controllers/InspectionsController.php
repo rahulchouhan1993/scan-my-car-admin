@@ -557,12 +557,12 @@ class InspectionsController extends Controller
             $counter++;
 
             if($svgImage!=''){
-                // $img = new Imagick();
-                // $img->readImageBlob($svgImage);
-                // $img->setImageFormat("png24");
-                // file_put_contents("images/test.png", $img->getImageBlob());
-                // $bodyImage = public_path('images/test.png');
-                $bodyImage = public_path('');
+                $img = new Imagick();
+                $img->readImageBlob($svgImage);
+                $img->setImageFormat("png24");
+                file_put_contents("images/test.png", $img->getImageBlob());
+                $bodyImage = public_path('images/test.png');
+                //$bodyImage = public_path('');
                 $mpdf->WriteHTML('<h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">Draft Paint</h3><div style="text-align:center; margin-top:20px;"><img src="'.$bodyImage.'" style="width:40%; height:auto;"/></div>
                
                 <div style="margin-top:20px;">
