@@ -888,6 +888,62 @@ const AddInspection = () => {
         </CCard>
 
          <CarInspectionImage inspectionId={props.inspectionsDetail.id} initialMapping={savedMappingFromServer} onSvgChange={handleSvgChange} svgImage={data.vehicle_detail.svg_image} />
+        
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Paint Comments</strong>
+          </CCardHeader>
+          <CCardBody>
+            <CRow className='g-3'>
+
+              <CCol md={12}>
+                <CFormInput
+              
+                
+                type="text"
+                name="vehicle_detail[chasis_condition]"
+                label="Chassis condition"
+                value={data.vehicle_detail.chasis_condition}
+                onChange={(e) => setData('vehicle_detail[chasis_condition]', e.target.value)}
+                invalid={!!errors.chasis_condition}
+                feedbackInvalid={errors.chasis_condition}
+              />
+              </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+              
+                
+                type="text"
+                name="vehicle_detail[exterior_comments]"
+                label="Exterior comment"
+                value={data.vehicle_detail.exterior_comments}
+                onChange={(e) => setData('vehicle_detail[exterior_comments]', e.target.value)}
+                invalid={!!errors.exterior_comments}
+                feedbackInvalid={errors.exterior_comments}
+              />
+              </CCol>
+
+              <CCol md={12}>
+                <CFormInput
+              
+                
+                type="text"
+                name="vehicle_detail[normal_comments]"
+                label="Normal comment"
+                value={data.vehicle_detail.normal_comments}
+                onChange={(e) => setData('vehicle_detail[normal_comments]', e.target.value)}
+                invalid={!!errors.normal_comments}
+                feedbackInvalid={errors.normal_comments}
+              />
+              </CCol>
+
+              
+            </CRow>
+            
+          </CCardBody>
+        </CCard>
+
 
         <CCard className="mb-4">
           <CCardHeader>

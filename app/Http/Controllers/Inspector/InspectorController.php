@@ -278,6 +278,9 @@ class InspectorController extends Controller
                     'plate_type' => $request->input('vehicle_detail.plate_type'),
                     'registration_number' => $request->input('vehicle_detail.registration_number'),
                     'chasis_no' => $request->input('vehicle_detail.chasis_no'),
+                    'chasis_condition' => $request->input('vehicle_detail.chasis_condition'),
+                    'exterior_comments' => $request->input('vehicle_detail.exterior_comments'),
+                    'normal_comments' => $request->input('vehicle_detail.normal_comments'),
                     'svg_image' => $request->input('svg_code'),
                     'images' =>json_encode($imagePaths)
                 ]);
@@ -297,6 +300,9 @@ class InspectorController extends Controller
                     'plate_type' => $request->input('vehicle_detail.plate_type'),
                     'registration_number' => $request->input('vehicle_detail.registration_number'),
                     'chasis_no' => $request->input('vehicle_detail.chasis_no'),
+                    'chasis_condition' => $request->input('vehicle_detail.chasis_condition'),
+                    'exterior_comments' => $request->input('vehicle_detail.exterior_comments'),
+                    'normal_comments' => $request->input('vehicle_detail.normal_comments'),
                     'svg_image' => $request->input('svg_code'),
                     'images' => json_encode($imagePaths)
                 ]);

@@ -93,7 +93,7 @@ export default function Packages() {
       <PackageCard
         title="Regular Inspection"
         desc="Ideal for basic condition checks before a quick purchase"
-        price="AED 389"
+        price="AED 349"
         color="bg-[#EDEEEF]"
         textColor="text-[#192735]"
         items={regular}
@@ -102,7 +102,7 @@ export default function Packages() {
       <PackageCard
         title="Comprehensive Inspection"
         desc="Balanced package for confident purchases of higher-value used cars"
-        price="AED 489"
+        price="AED 389"
         color="bg-[#192735]"
         textColor="text-[#fff]"
         items={comprehensive}
@@ -111,7 +111,7 @@ export default function Packages() {
       <PackageCard
         title="Ultra Inspection"
         desc="Premium, luxury cars, high-risk imports, or official resale"
-        price="AED 599"
+        price="AED 499"
         color="bg-[#EDEEEF]"
         textColor="text-[#192735]"
         items={ultra}

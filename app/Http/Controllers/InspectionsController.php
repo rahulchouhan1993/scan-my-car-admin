@@ -205,7 +205,7 @@ class InspectionsController extends Controller
                 <td style="width:25%; padding:10px 10px 10px 10px;text-align:right; font-size:10pt; line-height:14pt; color:#ffffff;">
                     CertifyCars<br>
                     +971 58 558 1172<br>
-                    Dubai, UAE
+                    
                 </td>
             </tr>
         </table>
@@ -226,7 +226,7 @@ class InspectionsController extends Controller
         color:white; padding:10px 10px; display:flex; align-items:center; justify-content:space-between; border-radius:10px 10px 10px 10px;">
             <table width="100%" style="font-size:9pt; color:#ffffff;">
                 <tr>
-                    <td width="33%" valign="middle" align="left">support@certifycars.ae <br> +971 50 123 4567</td>
+                    <td width="33%" valign="middle" align="left">info@certifycars.ae <br> +971 58 558 1172</td>
                     <td width="33%" valign="middle" align="center">Page {PAGENO} of {nbpg}</td>
                     <td width="33%" valign="middle" align="right">Generated on: ' . Carbon::now()->format('d-m-Y H:i') . '</td>
                 </tr>
@@ -516,7 +516,7 @@ class InspectionsController extends Controller
             if (empty($section['items'])) continue;
 
             $html = '
-            <h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">'.$counter.'. ' . $section['title'] . '</h3>
+            <h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">' . $section['title'] . '</h3>
             <table border="1" width="100%" style="border-collapse:collapse; font-size:10pt; margin-bottom:20px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
                 
                 <tbody>';
@@ -543,8 +543,7 @@ class InspectionsController extends Controller
                 $bg = $rowIndex % 2 === 0 ? '#ffffff' : '#f9fafb';
                 $html .= '
                     <tr style="background:' . $bg . ';">
-                        <td style="padding:10px; font-weight:bold;">
-                        '.$counter.'.'.$innerCoutner.' &rarr; '.$item['label'] . '</td>
+                        <td style="padding:10px; font-weight:bold;">'.$item['label'] . '</td>
                         <td style="padding:10px; color:' . $colorName . ';">' . $item['value'] . '</td>
                     </tr>';
                 $rowIndex++; $innerCoutner++;
@@ -659,16 +658,16 @@ class InspectionsController extends Controller
                 <tbody>
                
                 <tr style="background:#f9fafb;">
-                    <td style="padding:10px; font-weight:bold;">Engine Comment</td>
-                    <td style="padding:10px; color:#000;">'.$inspectionsDetail->engineDetails->comments_engine.'</td>
+                    <td style="padding:10px; font-weight:bold;">Chassis Condition</td>
+                    <td style="padding:10px; color:#000;">'.$inspectionsDetail->vehicleDetail->chasis_condition.'</td>
                 </tr>
                 <tr style="background:#ffffff;">
-                    <td style="padding:10px; font-weight:bold;">Suspension & Steering Comment</td>
-                    <td style="padding:10px; color:#000;">'.$inspectionsDetail->suspensionDetails->comments_suspension.'</td>
+                    <td style="padding:10px; font-weight:bold;">Exterior Comment</td>
+                    <td style="padding:10px; color:#000;">'.$inspectionsDetail->vehicleDetail->exterior_comments.'</td>
                 </tr>
-                <tr style="background:#ffffff;">
-                    <td style="padding:10px; font-weight:bold;">Normal Condition</td>
-                    <td style="padding:10px; color:#000;">'.$inspectionsDetail->over_comments.'</td>
+                <tr style="background:#f9fafb;">
+                    <td style="padding:10px; font-weight:bold;">Normal Comment</td>
+                    <td style="padding:10px; color:#000;">'.$inspectionsDetail->vehicleDetail->normal_comments.'</td>
                 </tr>
                 </tbody>
                 </table>
@@ -683,14 +682,32 @@ class InspectionsController extends Controller
          if(count($vehicleImages)>0){
             $htmlImages ="
             <h3 style='margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;'>Vehicle Images</h3>";
-            foreach($vehicleImages as $k =>$v){
-                $imgPath = public_path($v);
-                $htmlImages .="<div style='margin-top:25px'>
-                <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
-                    <img src='{$imgPath}' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
-                </div>
-                </div>";
+            $htmlImages = "<table style='width:100%; border-collapse:collapse;'>";
+
+            // Split images into rows of 2
+            $rows = array_chunk($vehicleImages, 2);
+
+            foreach ($rows as $row) {
+                $htmlImages .= "<tr>";
+
+                foreach ($row as $img) {
+                    $imgPath = public_path($img); // or URL if needed
+                    $htmlImages .= "
+                        <td style='width:50%; padding:10px; text-align:center; vertical-align:top;'>
+                            <img src='{$imgPath}' alt='cover' style='width:50%; height:300px; object-fit:cover; border-radius:8px;' />
+                        </td>";
+                }
+
+                // If only 1 image in this row, add empty cell
+                if (count($row) === 1) {
+                    $htmlImages .= "<td style='width:50%; padding:10px;'></td>";
+                }
+
+                $htmlImages .= "</tr>";
             }
+
+            $htmlImages .= "</table>";
+
             $mpdf->WriteHTML($htmlImages);
          }
         

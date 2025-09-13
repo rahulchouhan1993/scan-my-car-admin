@@ -75,7 +75,7 @@ const BookInspection = () => {
 
   const [activeStep, setActiveStep] = useState(1);
   const [packageId, setpackage] = useState(0);
-  const steps = ["Choose Package", "Personal Information", "Vehicle Details", "Schedule"];
+  const steps = ["Choose Package", "Contact Information", "Vehicle Details", "Schedule"];
   const detailsRef = useRef(null);
   const { props } = usePage();
 
@@ -292,14 +292,14 @@ const BookInspection = () => {
                   </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[19px] md:text-[20px] lg:text-[25px] xl:text-[25px] lg:leading-[30px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
-                  AED 389 <span className="text-[14px] md:text-[16px]">(exc. VAT)</span>
+                  AED 349 <span className="text-[14px] md:text-[16px]">(exc. VAT)</span>
                 </p>
                 <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
                 <div className="flex flex-col gap-[10px] creatodisplayM text-[16px] lg:text-[18px] leading-[22px]">
                   <CollapsibleList
                     items={regularItems}
                     maxVisible={6}
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
                     toggleClassName="mt-3 text-[14px] underline text-[#192735]"
                   />
                   </div>
@@ -322,14 +322,14 @@ const BookInspection = () => {
                   </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[19px] md:text-[20px] lg:text-[25px] xl:text-[25px] lg:leading-[30px] text-[#fff] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
-                  AED 489 <span className="text-[14px] md:text-[16px]">(exc. VAT)</span>
+                  AED 389 <span className="text-[14px] md:text-[16px]">(exc. VAT)</span>
                 </p>
                 <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
                 <div className="flex flex-col gap-[10px] creatodisplayM text-[16px] lg:text-[18px] leading-[22px]">
                   <CollapsibleList
                     items={comprehensiveItems}
                     maxVisible={6}
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#fff] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#fff] list-disc pl-[20px] lg:pl-[25px]"
                     toggleClassName="mt-3 text-[14px]  text-white border-[#fff]"
                   />
                   </div>
@@ -352,14 +352,14 @@ const BookInspection = () => {
                   </p>
                 </div>
                 <p className="ppfont border-b-[1px] border-b-[#ccc] text-[19px] md:text-[20px] lg:text-[25px] xl:text-[25px] lg:leading-[30px] text-[#192735] px-[15px] md:px-[15px] lg:px-[35px] pb-[15px] ">
-                  AED 599 <span className="text-[14px] md:text-[16px]">(exc. VAT)</span>
+                  AED 499 <span className="text-[14px] md:text-[16px]">(exc. VAT)</span>
                 </p>
                 <div className="p-[15px]  lg:p-[20px] xl:p-[30px]">
                 <div className="flex flex-col gap-[10px] creatodisplayM text-[16px] lg:text-[18px] leading-[22px]">
                   <CollapsibleList
                     items={ultraItems}
                     maxVisible={6}
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[18px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
                     toggleClassName="mt-3 text-[14px] underline text-[#192735]"
                   />
                   </div>
@@ -495,7 +495,7 @@ const BookInspection = () => {
                  <button
                   onClick={() => setActiveStep(1)}
                   type="button"
-                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  className="prevousbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                 >
                   Previous
                 </button>
@@ -754,7 +754,7 @@ const BookInspection = () => {
                  <button
                   onClick={() => setActiveStep(2)}
                   type="button"
-                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  className="prevousbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                 >
                   Previous
                 </button>
@@ -858,7 +858,7 @@ const BookInspection = () => {
                   <button
                     onClick={() => setActiveStep(3)}
                     type="button"
-                    className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                    className="prevousbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                   >
                     Previous
                   </button>

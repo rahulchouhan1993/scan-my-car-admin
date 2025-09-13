@@ -35,6 +35,9 @@ return new class extends Migration
             $table->string('plate_type')->nullable();
             $table->string('registration_number')->nullable();
             $table->string('chasis_no')->nullable();
+            $table->mediumText('chasis_condition')->nullable();
+            $table->mediumText('exterior_comments')->nullable();
+            $table->mediumText('normal_comments')->nullable();
             $table->timestamps();
         });
     }

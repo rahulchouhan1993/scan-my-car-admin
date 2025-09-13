@@ -130,7 +130,7 @@ const ContactUs = () => {
              
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Full Name</label> */}
               <input
                 type="text"
                 placeholder="Full Name"
@@ -142,7 +142,7 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Email</label> */}
               <input
                 type="email"
                 placeholder="Email"
@@ -154,7 +154,7 @@ const ContactUs = () => {
               </div>
 
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Phone</label> */}
               <input
                 type="tel"
                 placeholder="Phone"
@@ -165,7 +165,7 @@ const ContactUs = () => {
               {errors.phone_no && <div className="text-red-500 text-sm">{errors.phone_no}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Service Type</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Service Type</label> */}
               <input
                 type="text"
                 placeholder="Service Type"
@@ -176,7 +176,7 @@ const ContactUs = () => {
               {errors.service_type && <div className="text-red-500 text-sm">{errors.service_type}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Message</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Message</label> */}
               <textarea
                 placeholder="Message"
                 rows="4"

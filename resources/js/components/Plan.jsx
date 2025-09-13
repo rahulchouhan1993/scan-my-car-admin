@@ -70,7 +70,7 @@ const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClas
 const plans = [
   {
     name: "Regular Inspection",
-    price: "AED 389",
+    price: "AED 349",
     description: "Provides clarity and confidence for buyers before a purchase",
     features: [
       "General Mechanical & Electrical Inspection",
@@ -88,7 +88,7 @@ const plans = [
   },
   {
     name: "Comprehensive Inspection",
-    price: "AED 489",
+    price: "AED 389",
     description: "In-depth review for safer and solid used car purchases",
     features: [
       "Full Computer Diagnostic Scan (OBD & sensors)",
@@ -107,7 +107,7 @@ const plans = [
   },
   {
     name: "Ultra Inspection",
-    price: "AED 599",
+    price: "AED 499",
     description: "Premium inspection for luxury or resale-ready vehicles",
     features: [
       "Extended Road Test Drive (highway + city)",
@@ -171,13 +171,13 @@ const PricingSection = () => {
                     items={plan.features}
                     maxVisible={6}
                     isPrimary={plan.isPrimary}   // ✅ important
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[16px]  lg:text-[18px] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px]  lg:text-[17px] list-disc pl-[20px] lg:pl-[25px]"
                   />
                 </div>
 
                 <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full">
                   <Link href={`/book-inspection?type=${index+1}`}
-                    className={`creatodisplayM text-[20px] inline-flex items-center justify-center w-full px-[10px] py-[10px] md:px-[15px] md:py-[10px] xl:py-[14px] text-[15px] md:text-[15px] xl:text-[20px] rounded-full transition-all ${plan.isPrimary
+                    className={`creatodisplayM text-[16px] inline-flex items-center justify-center w-full px-[10px] py-[10px] md:px-[15px] md:py-[10px] xl:py-[14px] text-[15px] md:text-[15px] xl:text-[20px] rounded-full transition-all ${plan.isPrimary
                         ? "bg-[#D72638] text-white hover:bg-red-700"
                         : "border border-white hover:bg-white hover:text-[#0b1a2a]"
                       }`}

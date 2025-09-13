@@ -24,6 +24,9 @@ class InspectionVehicleDetail extends Model
         'plate_type',
         'registration_number',
         'chasis_no',
+        'chasis_condition',
+        'exterior_comments',
+        'normal_comments'
     ];
 
     /**

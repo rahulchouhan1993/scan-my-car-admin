@@ -57,6 +57,7 @@ to{transform:rotate(360deg);}
 .bookbtn{background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#F61221 24.58%);color:#fff;text-align:center;padding:15px 20px;border-radius:60px;font-family:'CreatoDisplayBold';font-size:20px;display:inline-block;}
 .carSlider .swiper-button-prev,.carSlider .swiper-button-next{display:none!important;}
 .redbtn{background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#F61221 24.58%); transition: all ease .3s;}
+.prevousbtn{background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#3d3c3d 24.58%); transition: all ease .3s;}
 .btn:hover{background:#F61221;background:radial-gradient(188.18% 135.42% at 50% -12.5%,#FFFFFF 0%,#F61221 24.58%);color:#fff; transition: all ease .3s;}
 .workbreak{word-break:break-word;}
 .inspectionSlider .swiper-button-prev{width:64px;height:64px;background:#D72638;display:flex;align-items:center;justify-content:center;border-radius:60px;right:inherit;left:6px;}

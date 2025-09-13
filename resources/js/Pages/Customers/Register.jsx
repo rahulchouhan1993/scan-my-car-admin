@@ -67,7 +67,7 @@ const Register = () => {
 
             <form className="space-y-3 md:space-y-5 registerForm" onSubmit={handleSubmit}>
             <div className='relative'> 
-              <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Full Name</label>
+              {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Full Name</label> */}
               <input
                 type="text"
                 placeholder="Full Name"
@@ -78,7 +78,7 @@ const Register = () => {
                {errors.name && <div className="text-red-500 text-sm">{errors.name}</div>}
                </div>
                <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Company Name</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Company Name</label> */}
               <input
                 type="text"
                 placeholder="Company Name"
@@ -90,7 +90,7 @@ const Register = () => {
                </div>
 
                <div className='relative'> 
-                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Email</label>
+                 {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Email</label> */}
               <input
                 type="email"
                 placeholder="Email"
@@ -101,7 +101,7 @@ const Register = () => {
               {errors.email && <div className="text-red-500 text-sm">{errors.email}</div>}
               </div>
               <div className='relative'> 
-                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Phone Number</label>
+                 {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Phone Number</label> */}
               <input
                 type="tel"
                 placeholder="Phone Number"
@@ -169,7 +169,7 @@ const Register = () => {
               {errors.account_manager && <div className="text-red-500 text-sm">{errors.account_manager}</div>}
               </div> */}
               <div className='relative'> 
-                 <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Password</label>
+                 {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Password</label> */}
               <input
                 type="password"
                 placeholder="Password"
@@ -180,7 +180,7 @@ const Register = () => {
               {errors.password && <div className="text-red-500 text-sm">{errors.password}</div>}
               </div>
               <div className='relative'> 
-                <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Confirm Password</label>
+                {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#fff] ps-[25px] pb-[5px]'>Confirm Password</label> */}
               <input
                 type="password"
                 placeholder="Confirm Password"
