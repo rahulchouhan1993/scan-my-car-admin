@@ -152,7 +152,7 @@ const PricingSection = () => {
               key={index}
               className={`relative rounded-[10px] pb-[90px] md:rounded-[15px] lg:rounded-[20px] xl:rounded-[30px] flex flex-col justify-start shadow-md ${plan.isPrimary
                   ? "bg-white text-[#192735] border-b-[1px] border-b-[#ccc]"
-                  : "bg-[#192735] text-white"
+                  : "bg-[#192735] text-white "
                 }`}
             >
               <div className="pt-[10px] md:pt-[15px] xl:pt-[35px] px-[15px]  md:px-[10px] lg:px-[20px] xl:px-[35px] min-h-auto ">
@@ -167,12 +167,13 @@ const PricingSection = () => {
 
               <div className={`px-[15px] md:px-[15px] lg:px-[20px] xl:px-[30px] pt-[35px] pb-[35px] mt-[25px] border-t ${plan.isPrimary ? "border-t-[#ccc] text-[#192735]" : "border-t-[#ffffff42] text-[#fff]"}`} >
                 <div className="flex flex-col gap-[10px] creatodisplayM text-[16px] lg:text-[18px] leading-[22px]">
-                  <CollapsibleList
-                    items={plan.features}
-                    maxVisible={6}
-                    isPrimary={plan.isPrimary}   // ✅ important
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px]  lg:text-[17px] list-disc pl-[20px] lg:pl-[25px]"
-                  />
+                <CollapsibleList
+                  items={plan.features}
+                  maxVisible={6}
+                  isPrimary={plan.isPrimary}   // ✅ important
+                  listClassName={`check-list ${plan.isPrimary ? "" : "check-list-wh"} creatodisplayM flex flex-col gap-[10px] text-[14px] lg:text-[17px] list-disc pl-[20px] lg:pl-[25px]`}
+                />
+
                 </div>
 
                 <div className="mt-8 absolute left-[0] right-[0] px-[25px] bottom-[35px] w-full">

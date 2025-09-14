@@ -118,15 +118,18 @@ input[type=number]{-moz-appearance:textfield;}
 
 
 .check-list li::before {
-  content: "\f00c";  /* Font Awesome check icon */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  color: green;
+  content: "";
+  background: url("../js/assets/images/check-line.svg") no-repeat center center;
+  background-size: 16px 16px;
+  width: 16px;
+  height: 16px;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 3px;
 }
+.check-list-wh li::before {background: url("../js/assets/images/check-line-wh.svg") no-repeat center center;}
 
+.redshadow{ box-shadow: 0 0 10px 1px rgb(246 18 33);}
 
 .contactForm input, .contactForm textarea {font-family:'CreatoDisplayMedium';color: #000;}
 .contactForm input::placeholder{color:#9f9f9f;opacity:1;}
