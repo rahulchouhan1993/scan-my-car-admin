@@ -4,6 +4,7 @@ import hoverImg1 from "../../assets/images/carsliderimg01.jpg";
 import hoverImg2 from "../../assets/images/carsliderimg02.jpg";
 import hoverImg3 from "../../assets/images/carsliderimg03.jpg";
 import hoverImg4 from "../../assets/images/carsliderimg04.jpg";
+import redangleright from "../../assets/images/redangleright.png";
 import { Link } from "@inertiajs/react";
 
 const services = [
@@ -43,7 +44,7 @@ const VehicleChecks = () => {
   };
 
   return (
-    <section className="bg-[#0D1B2A] text-white py-[40px] md:py-[80px] lg:py-[100px] ">
+    <section className="bg-[#0D1B2A] text-white py-[40px] md:py-[80px] lg:py-[50px] ">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
           <h2 className="ppfont md:w-[50%]  text-[25px] md:text-[28px] lg:md:text-[36px] leading-[26px] md:leading-[38px] text-white">
@@ -55,14 +56,17 @@ const VehicleChecks = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
               onClick={() => handleTouch(index)}
               className="relative group bg-[#192735] rounded-[10px] p-3 md:p-6 flex flex-col justify-between 
-                min-h-auto md:min-h-[200px] lg:min-h-[210px] hover:shadow-lg transition duration-300 overflow-hidden cursor-pointer border-[#F61221] border-[1px] redshadow1"
+                min-h-auto md:min-h-[220px] lg:min-h-[280px] hover:shadow-lg transition duration-300 overflow-hidden cursor-pointer border-[#F61221] border-[1px] redshadow"
             >
+               <div className='absolute left-[-40px] top-[-20px] z-1 opacity-[0.3]'>
+                  <img src={redangleright} alt="" className="max-w-[200px]" />
+                </div>
               {/* Hover / Touch Image */}
               <img
                 src={service.img}
@@ -77,7 +81,7 @@ const VehicleChecks = () => {
 
               {/* Overlay */}
               <div
-                className={`absolute inset-0 transition duration-300 z-0 rounded-[10px] 
+                className={`absolute inset-0 transition duration-300 z-0 rounded-[10px]  
                   ${
                     activeIndex === index
                       ? "bg-[#192735]/80"
@@ -97,7 +101,7 @@ const VehicleChecks = () => {
                     </span>
                   </Link>
                 </div>
-                <p className="creatodisplayM text-[18px] text-[#ffffff91] leading-[20px]">
+                <p className="creatodisplayM text-[18px] text-[#ffffff91] group-hover:text-[#fff] leading-[20px]">
                   {service.description}
                 </p>
               </div>
