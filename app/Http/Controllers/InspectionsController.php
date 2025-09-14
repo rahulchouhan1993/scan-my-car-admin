@@ -240,7 +240,7 @@ class InspectionsController extends Controller
                 
             </div>
 
-            <table width="100%" border="1" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">
+            <table width="100%" border="0" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">
                 <tbody>
                     
                     <tr style="background:#f9fafb;"><td style="padding:11px;"><b>Vehicle Make</b></td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2 ">' . ($inspectionsDetail->vehicle_make ?? '-') . '</td></tr>

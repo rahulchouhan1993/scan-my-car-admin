@@ -4,6 +4,7 @@ import redarrowRg from "../../assets/images/redarrowRg.png";
 import bookinspectionbg from "../../assets/images/bookinspectionbg.jpg";
 import { route } from 'ziggy-js'
 import { useForm, usePage } from '@inertiajs/react'
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 /** Collapsible “Show more” list with smooth height animation (no dependencies) */
 const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClassName = "" }) => {
@@ -299,7 +300,7 @@ const BookInspection = () => {
                   <CollapsibleList
                     items={regularItems}
                     maxVisible={6}
-                    listClassName="creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="check-list creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#192735] list-disc pl-[20px] lg:pl-[25px]"
                     toggleClassName="mt-3 text-[14px] underline text-[#192735]"
                   />
                   </div>
@@ -395,7 +396,7 @@ const BookInspection = () => {
                     type="text"
                     name="full_name"
                     placeholder="Full Name"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] min-h-[35px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.full_name}
                     onChange={(e) => setData('full_name', e.target.value)}
                   />
@@ -409,7 +410,7 @@ const BookInspection = () => {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.email}
                     onChange={(e) => setData('email', e.target.value)}
                   />
@@ -423,7 +424,7 @@ const BookInspection = () => {
                     type="tel"
                     placeholder="+971 501231234"
                     name="contact_no"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.contact_no}
                     onChange={(e) => setData('contact_no', e.target.value)}
                   />
@@ -437,7 +438,7 @@ const BookInspection = () => {
                     type="text"
                     placeholder="Address Line 1"
                     name="address_line_1"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.address_line_1}
                     onChange={(e) => setData('address_line_1', e.target.value)}
                   />
@@ -451,7 +452,7 @@ const BookInspection = () => {
                     type="text"
                     placeholder="Address Line 2"
                     name="address_line_2"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.address_line_2}
                     onChange={(e) => setData('address_line_2', e.target.value)}
                   />
@@ -478,7 +479,7 @@ const BookInspection = () => {
                     value={data.city}
                     onChange={(e) => setData("city", e.target.value)}
                     name="city"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select City --</option>
                     <option value="Abudhabi" disabled>Abudhabi (Not Servicable)</option>
@@ -491,11 +492,11 @@ const BookInspection = () => {
                   </select>
                   {errors.city && <div className="text-red-500 text-[12px]">{errors.city}</div>}
                 </div>
-                <div className="col-span-1 md:col-span-2 flex gap-[15px]">
+                <div className="col-span-1 md:col-span-2 flex justify-center gap-[15px]">
                  <button
                   onClick={() => setActiveStep(1)}
                   type="button"
-                  className="prevousbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  className="prevousbtn cursor-pointer w-[170px] px-[10px] py-[10px] rounded-full text-white creatodisplayM text-[15px] md:text-[18px] transition disabled:opacity-60"
                 >
                   Previous
                 </button>
@@ -503,7 +504,7 @@ const BookInspection = () => {
                   onClick={() => setActiveStep(3)}
                   type="button"
                   disabled={!isFormValid1} 
-                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  className="redbtn cursor-pointer w-[170px] px-[10px] py-[10px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                 >
                   Next
                 </button>
@@ -526,7 +527,7 @@ const BookInspection = () => {
                     value={data.vehicle_make}
                     onChange={handleChange}
                     name="vehicle_make"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Vehicle Make --</option>
                     <option value="Abarth">Abarth</option>
@@ -644,7 +645,7 @@ const BookInspection = () => {
                         onChange={(e) => setData("other_vehicle_make", e.target.value)}
                         required={isOther}
                         placeholder="Enter vehicle make"
-                        className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                        className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                       />
                       {errors.other_vehicle_make && (
                         <div className="text-red-500 text-[12px]">
@@ -661,7 +662,7 @@ const BookInspection = () => {
                     type="text"
                     placeholder="Vehicle Model"
                     name="vehicle_model"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                     value={data.vehicle_model}
                     onChange={(e) => setData('vehicle_model', e.target.value)}
                   />
@@ -676,7 +677,7 @@ const BookInspection = () => {
                     value={data.vehicle_year}
                     onChange={(e) => setData("vehicle_year", e.target.value)}
                     name="vehicle_year"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Vehicle Year --</option>
                     {Array.from({ length: 41 }, (_, i) => {
@@ -694,7 +695,7 @@ const BookInspection = () => {
                     value={data.fuel_type}
                     onChange={(e) => setData("fuel_type", e.target.value)}
                     name="fuel_type"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Fuel Type --</option>
                     <option value="Petrol">Petrol</option>
@@ -712,7 +713,7 @@ const BookInspection = () => {
                     value={data.transmission}
                     onChange={(e) => setData("transmission", e.target.value)}
                     name="transmission"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Transmission --</option>
                     <option value="Manual">Manual</option>
@@ -728,7 +729,7 @@ const BookInspection = () => {
                     value={data.mileage}
                     onChange={(e) => setData("mileage", e.target.value)}
                     name="mileage"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Mileage --</option>
                     <option value="New – 10,000 kms">New – 10,000 kms</option>
@@ -750,11 +751,11 @@ const BookInspection = () => {
                   {errors.mileage && <div className="text-red-500 text-[12px]">{errors.mileage}</div>}
                 </div>
 
-                <div className="col-span-1 md:col-span-2 flex gap-[15px]">
+                <div className="col-span-1 md:col-span-2 flex justify-center gap-[15px]">
                  <button
                   onClick={() => setActiveStep(2)}
                   type="button"
-                  className="prevousbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  className="prevousbtn cursor-pointer w-[170px] px-[10px] py-[10px]  rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                 >
                   Previous
                 </button>
@@ -762,7 +763,7 @@ const BookInspection = () => {
                   onClick={() => setActiveStep(4)}
                   type="button"
                   disabled={!isFormValid2} 
-                  className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                  className="redbtn cursor-pointer w-[170px] px-[10px] py-[10px]  rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                 >
                   Next
                 </button>
@@ -788,7 +789,7 @@ const BookInspection = () => {
                     value={data.car_parked}
                     onChange={(e) => setData("car_parked", e.target.value)}
                     name="car_parked"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Where is the car parked? --</option>
                     <option value="Outdoor">Outdoor</option>
@@ -808,7 +809,7 @@ const BookInspection = () => {
                   onFocus={(e) => (e.target.type = "date")}
                   onBlur={(e) => !e.target.value && (e.target.type = "text")}
                   placeholder="Preferred Date"
-                  className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                  className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   value={data.preferred_date}
                   min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setData("preferred_date", e.target.value)}
@@ -825,7 +826,7 @@ const BookInspection = () => {
                     value={data.preferred_time_slot}
                     onChange={(e) => setData("preferred_time_slot", e.target.value)}
                     name="preferred_time_slot"
-                    className="border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
+                    className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" hidden>-- Select Time Slot --</option>
                     <option value="9:00 AM – 12:00 PM">9:00 AM – 12:00 PM</option>
@@ -854,18 +855,18 @@ const BookInspection = () => {
                   {errors.additional_notes && <div className="text-red-500 text-[12px]">{errors.additional_notes}</div>}
                 </div>
 
-                <div className="col-span-1 md:col-span-2 flex gap-[15px]">
+                <div className="col-span-1 md:col-span-2 justify-center flex gap-[15px]">
                   <button
                     onClick={() => setActiveStep(3)}
                     type="button"
-                    className="prevousbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                    className="prevousbtn cursor-pointer w-[170px] px-[10px] py-[10px]  rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                   >
                     Previous
                   </button>
                   <button
                     type="submit"
                     disabled={processing}
-                    className="redbtn cursor-pointer w-[200px] md:w-[247px] px-[10px] py-[13px] md:py-[17px] rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
+                    className="redbtn cursor-pointer w-[170px] px-[10px] py-[10px]  rounded-full text-white creatodisplayM text-[15px] md:text-[20px] transition disabled:opacity-60"
                   >
                     {processing ? "Submitting..." : "Submit"}
                   </button>

@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/react';
 import CustomerLayout from '../../layout/CustomerLayout'
 import reactimg from '../../assets/images/react.jpg'
 import heroImage from "../../assets/images/homebanner.jpg";
+import redarrowRg from "../../assets/images/redarrowRg.png";
 import redangleright from "../../assets/images/redangleright.png";
 import redangleleft from "../../assets/images/redangleleft.png";
 import homeoverlaybg from "../../assets/images/homeoverlaybg.png";
@@ -25,9 +26,15 @@ const Home = () => {
         <div className="absolute inset-0 top-[0] bottom-[0] h-full">
           <img src={heroImage} alt="Vehicle Inspection" className="w-full h-full object-cover" />
         </div>
-        <div className='flex items-center absolute right-[0] top-[0] bottom-[0] m-auto z-[1]'>
+        {/* <div className='flex items-center absolute right-[0] top-[0] bottom-[0] m-auto z-[1]'>
           <img src={redangleleft} alt="img" className='max-w-full w-full' />
+        </div> */}
+
+        <div className='flex items-center absolute right-[0] top-[20px] md:top-[90px] bottom-[inherit] md:bottom-[0] m-auto z-[1]'>
+          <img src={redarrowRg} alt="img" className='block lg:hidden max-w-full max-h-[400px]' />
+          <img src={redarrowRg} alt="img" className='hidden lg:block max-w-full' />
         </div>
+
 
         {/* Overlay */}
         <div className="absolute inset-0 top-[0] bottom-[0] h-full">
