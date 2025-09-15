@@ -23,9 +23,9 @@ Route::match(['post','get'],'/register-dealer', [CustomersController::class, 'cr
 Route::match(['post','get'],'/book-inspection', [InspectionsController::class, 'requestInspection'])->name('book-inspection');
 Route::post('/request-inspection', [InspectionsController::class, 'requestInspection'])->name('request-inspection');
 Route::get('/inspection-details/{id}', [InspectionsController::class, 'inspectionDetails'])->name('inspectionDetails');
-Route::get('/thank-you', [InspectionsController::class, 'thankYou'])->name('thank-you');
+Route::get('/thank-you/{type}', [InspectionsController::class, 'thankYou'])->name('thank-you');
 Route::get('/mark-as-completed', [InspectionsController::class, 'markComplete'])->name('markComplete');
-Route::get('/preview-report/{id}', [InspectionsController::class, 'previewPdf'])->name('preview-report');
+Route::get('/preview-report/{id}/{type?}', [InspectionsController::class, 'previewPdf'])->name('preview-report');
 Route::get('/downlaod-attachments/{id}', [InspectionsController::class, 'downloadAttachments'])->name('download-attachments');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
@@ -90,6 +90,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::match(['post','get'],'/edit-request/{id}', [UsersController::class, 'editRequest'])->name('inspections.add');
         Route::get('/report/{id}', [UsersController::class, 'report'])->name('inspections.report');
         Route::get('/logs/{id}', [UsersController::class, 'logs'])->name('inspections.logs');
+        Route::get('/start-inspection/{id}', [UsersController::class, 'startInspection'])->name('start-inspection');
+        Route::post('/submit-test/{id}/{savetype}', [UsersController::class, 'submitTest'])->name('submit-test');
+        Route::delete('/delete-file/{id}/{typefile},{index}', [UsersController::class, 'deleteFile'])->name('delete-file');
+        Route::get('/send-report/{id}/{type?}', [InspectionsController::class, 'previewPdf'])->name('send-report');
         Route::get('/sold-status/{id}', [UsersController::class, 'markSold'])->name('inspections.marksold');
     });
 });
@@ -120,6 +124,7 @@ Route::prefix('inspector')->name('inspector.')->group(function () {
         Route::get('/start-inspection/{id}', [InspectorController::class, 'startInspection'])->name('start-inspection');
         Route::post('/submit-test/{id}/{savetype}', [InspectorController::class, 'submitTest'])->name('submit-test');
         Route::delete('/delete-file/{id}/{typefile},{index}', [InspectorController::class, 'deleteFile'])->name('delete-file');
+        Route::get('/send-report/{id}/{type?}', [InspectionsController::class, 'previewPdf'])->name('send-report');
 
         // Inquiries
         Route::get('/inquiries', [InspectorController::class, 'inquiries'])->name('inquiries');

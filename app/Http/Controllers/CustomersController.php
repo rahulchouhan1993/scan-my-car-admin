@@ -86,7 +86,7 @@ class CustomersController extends Controller
                 'password'          => Hash::make($randomPass),
             ]);
             Mail::to($user->email)->send(new UserLoginDetailsMail($user, $randomPass));
-            return redirect()->back()->with('success','Please verify your email to activate your account');
+            return redirect()->route('thank-you',['type' => 'registration'])->with('success','Please verify your email to activate your account');
             
         }
         $pageTitle = 'Registration | CertifyCars';

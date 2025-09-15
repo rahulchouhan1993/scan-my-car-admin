@@ -843,27 +843,6 @@ class InspectorController extends Controller
 
     }
 
-    public function inquiries(){
-        $allInquiries = ContactUs::where('assign',auth()->user()->id)->orderBy('id','DESC')->paginate(10);
-        $pageTitle = 'Inspector | Inquiries';
-        return inertia('Inspector/Users/Inquiries',compact('allInquiries', 'pageTitle'));
-    }
-
-    public function updateContact($id, Request $request){
-        $pageTitle = 'Inspector | Contact Update';
-        $contactDetails = ContactUs::find($id);
-
-        if($request->isMethod('post')){
-            $contactDetails->service_type = $request->service_type;
-            $contactDetails->seen_status = $request->seen_status ?? 1;
-            $contactDetails->notes = $request->notes;
-            $contactDetails->save();
-            return redirect()->back()->with('success', 'Information Updated Successfully.');
-        }
-        $userOption = User::where('role','inspector')->get();
-        return inertia('Inspector/Users/ContactUpdate',compact('pageTitle','contactDetails','userOption','id'));
-    }
-
     public function deleteFile($id,$typefile,$index){
         $typefile = $typefile;
         $index = (int) $index;
@@ -900,4 +879,27 @@ class InspectorController extends Controller
 
         return back()->with('success', 'File deleted');
     }
+
+    public function inquiries(){
+        $allInquiries = ContactUs::where('assign',auth()->user()->id)->orderBy('id','DESC')->paginate(10);
+        $pageTitle = 'Inspector | Inquiries';
+        return inertia('Inspector/Users/Inquiries',compact('allInquiries', 'pageTitle'));
+    }
+
+    public function updateContact($id, Request $request){
+        $pageTitle = 'Inspector | Contact Update';
+        $contactDetails = ContactUs::find($id);
+
+        if($request->isMethod('post')){
+            $contactDetails->service_type = $request->service_type;
+            $contactDetails->seen_status = $request->seen_status ?? 1;
+            $contactDetails->notes = $request->notes;
+            $contactDetails->save();
+            return redirect()->back()->with('success', 'Information Updated Successfully.');
+        }
+        $userOption = User::where('role','inspector')->get();
+        return inertia('Inspector/Users/ContactUpdate',compact('pageTitle','contactDetails','userOption','id'));
+    }
+
+    
 }

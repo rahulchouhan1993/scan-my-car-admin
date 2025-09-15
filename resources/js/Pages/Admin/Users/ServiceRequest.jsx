@@ -27,7 +27,6 @@ import DefaultLayout from '../../../layout/DefaultLayout'
 
 const ServiceRequest = (props) => {
   const { allInspections } = usePage().props;
-  console.log(allInspections)
   return (
     <CRow>
       <CCol xs={12}>
@@ -36,7 +35,7 @@ const ServiceRequest = (props) => {
             <strong>Service Request</strong>
           </CCardHeader>
           <CCardBody>
-              <CTable responsive >
+              <CTable responsive>
                 <CTableHead>
                   <CTableRow>
                     <CTableHeaderCell scope="col">#</CTableHeaderCell>
@@ -45,10 +44,7 @@ const ServiceRequest = (props) => {
                     <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Contact No.</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Date & Time</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Inspector</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Dealer</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Status</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Created</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Action</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -57,6 +53,7 @@ const ServiceRequest = (props) => {
                   <CTableRow key={inspection.id || index}>
                     <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
                     <CTableDataCell>
+                      
                       {inspection.package_id === 1 ? (
                         "Regular"
                       ) : inspection.package_id === 2 ? (
@@ -70,10 +67,8 @@ const ServiceRequest = (props) => {
                     <CTableDataCell>{inspection.full_name}</CTableDataCell>
                     <CTableDataCell>{inspection.email}</CTableDataCell>
                     <CTableDataCell>{inspection.contact_no}</CTableDataCell>
-                   
+                    {/* <CTableDataCell>{inspection.vehicle_make} | {inspection.vehicle_model} | {inspection.vehicle_year}</CTableDataCell> */}
                     <CTableDataCell>{inspection.preferred_date} {inspection.preferred_time_slot}</CTableDataCell>
-                    <CTableDataCell>{inspection?.inspector?.name ?? 'N/A'} </CTableDataCell>
-                    <CTableDataCell>{inspection?.dealer?.name ?? 'N/A'} </CTableDataCell>
                     <CTableDataCell>
                       {inspection.status === 0 && (
                         <CButton color="warning" size="sm">
@@ -110,53 +105,36 @@ const ServiceRequest = (props) => {
                           Sold
                         </CButton>
                       )}
+                       {inspection.status === 7 && (
+                        <CButton color="success" size="sm">
+                          Report Sent
+                        </CButton>
+                      )}
                     </CTableDataCell>
-                    <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell>
+                    {/* <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell> */}
                     <CTableDataCell>
                       <CDropdown variant="btn-group">
                         <CDropdownToggle color="secondary" size="sm">
                           Actions
                         </CDropdownToggle>
-                        <CDropdownMenu>
-                           <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>Edit</CDropdownItem>
-                           {(inspection.status === 4 || inspection.status === 5) && (
-                            <>
-                            
-                            <CDropdownItem target="_blank'" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
+                        {inspection.status != 6 && (
+                          <CDropdownMenu>
+                            <CDropdownItem href={route('admin.inspections.add',{id:inspection.id})}>View Details</CDropdownItem>
+                              {(inspection.status === 1 || inspection.status === 2 || inspection.status === 4) && (
+                                <CDropdownItem href={route('admin.start-inspection', { id: inspection.id })}>
+                                  {inspection.status === 4 ? "Edit Inspection" : "Start Inspection"}
+                                </CDropdownItem>
+                              )}
+                            {(inspection.status === 4 || inspection.status === 5 || inspection.status === 7) && (
+                              <>
+                            <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
                             <CDropdownItem target="_blank'" href={route('preview-report',{id:inspection.id})}>View Pdf</CDropdownItem>
+                            <CDropdownItem href={route('admin.send-report',{id:inspection.id,type:'send'})}>Send Report</CDropdownItem>
                             </>
-                           )}
-
-                           {inspection.status === 5 && (
-
-                              <CDropdownItem
-                                  as="button"
-                                  onClick={(e) => {
-                                    e.preventDefault()
-                                    if (confirm('Are you sure you want mark this as sold?')) {
-                                      window.location.href = '/admin/sold-status/'+inspection.id
-                                    }
-                                  }}
-                                >
-                                  Mark As Sold
-                              </CDropdownItem>
                             )}
-
-                            {inspection.status === 6 && (
-                              <CDropdownItem
-                                  as="button"
-                                  onClick={(e) => {
-                                    e.preventDefault()
-                                    if (confirm('Are you sure you want mark this as unsold?')) {
-                                      window.location.href = '/admin/sold-status/'+inspection.id
-                                    }
-                                  }}
-                                >
-                                  Mark Unsold
-                              </CDropdownItem>
-                            )}
-                           {/* <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
-                        </CDropdownMenu>
+                            {/* <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
+                          </CDropdownMenu>
+                        )}
                       </CDropdown>
                     </CTableDataCell>
                   </CTableRow>

@@ -329,7 +329,7 @@ const BookInspection = () => {
                   <CollapsibleList
                     items={comprehensiveItems}
                     maxVisible={6}
-                    listClassName="check-list check-list-wh creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#fff] list-disc pl-[20px] lg:pl-[25px]"
+                    listClassName="check-list creatodisplayM flex flex-col gap-[10px] text-[14px] md:text-[16px] lg:text-[17px] text-[#fff] list-disc pl-[20px] lg:pl-[25px]"
                     toggleClassName="mt-3 text-[14px]  text-white border-[#fff]"
                   />
                   </div>

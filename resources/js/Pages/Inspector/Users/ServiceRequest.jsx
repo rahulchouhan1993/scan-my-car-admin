@@ -105,6 +105,11 @@ const ServiceRequest = (props) => {
                           Sold
                         </CButton>
                       )}
+                       {inspection.status === 7 && (
+                        <CButton color="success" size="sm">
+                          Report Sent
+                        </CButton>
+                      )}
                     </CTableDataCell>
                     {/* <CTableDataCell>{formatDate(inspection.created_at)} </CTableDataCell> */}
                     <CTableDataCell>
@@ -120,10 +125,11 @@ const ServiceRequest = (props) => {
                                   {inspection.status === 4 ? "Edit Inspection" : "Start Inspection"}
                                 </CDropdownItem>
                               )}
-                            {(inspection.status === 4 || inspection.status === 5) && (
+                            {(inspection.status === 4 || inspection.status === 5 || inspection.status === 7) && (
                               <>
                             <CDropdownItem target="_blank" href={route('inspectionDetails',{id:inspection.id})}>View Report</CDropdownItem>
                             <CDropdownItem target="_blank'" href={route('preview-report',{id:inspection.id})}>View Pdf</CDropdownItem>
+                            <CDropdownItem href={route('inspector.send-report',{id:inspection.id,type:'send'})}>Send Report</CDropdownItem>
                             </>
                             )}
                             {/* <CDropdownItem href={route('inspector.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}

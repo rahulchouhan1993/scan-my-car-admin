@@ -347,7 +347,7 @@ const EditRequest = () => {
                   name="preferred_date"
                   label="Preferred Date"
                   value={data.preferred_date}
-                  min={new Date().toISOString().split("T")[0]}
+                  
                   onChange={(e) => setData('preferred_date', e.target.value)}
                   invalid={!!errors.preferred_date}
                   feedbackInvalid={errors.preferred_date}

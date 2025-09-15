@@ -132,7 +132,7 @@ const AddInspection = () => {
     if (!confirmed) {
       return; // stop if user cancels
     }
-    post(route(`inspector.submit-test`, { id: props.inspectionsDetail.id, savetype: 'normal'}))
+    post(route(`admin.submit-test`, { id: props.inspectionsDetail.id, savetype: 'normal'}))
   }
 
   const handleSvgChange = ({ svg, mapping }) => {
@@ -158,7 +158,7 @@ const AddInspection = () => {
 
   saveTimeout.current = setTimeout(() => {
     post(
-      route("inspector.submit-test", { id: props.inspectionsDetail.id, savetype: 'autosave' }),
+      route("admin.submit-test", { id: props.inspectionsDetail.id, savetype: 'autosave' }),
       {
         preserveScroll: true,  // ✅ this works now
         preserveState: true,
@@ -200,7 +200,7 @@ const AddInspection = () => {
     }
 
     router.delete(
-      route('inspector.delete-file', {
+      route('admin.delete-file', {
         id: props.inspectionsDetail.id,
         typefile,
         index,

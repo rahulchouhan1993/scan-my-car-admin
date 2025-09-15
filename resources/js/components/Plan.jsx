@@ -171,7 +171,7 @@ const PricingSection = () => {
                   items={plan.features}
                   maxVisible={6}
                   isPrimary={plan.isPrimary}   // ✅ important
-                  listClassName={`check-list ${plan.isPrimary ? "" : "check-list-wh"} creatodisplayM flex flex-col gap-[10px] text-[14px] lg:text-[17px] list-disc pl-[20px] lg:pl-[25px]`}
+                  listClassName={`check-list ${plan.isPrimary ? "" : "check-list"} creatodisplayM flex flex-col gap-[10px] text-[14px] lg:text-[17px] list-disc pl-[20px] lg:pl-[25px]`}
                 />
 
                 </div>

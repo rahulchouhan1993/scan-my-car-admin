@@ -10,11 +10,6 @@ export default function TestimonialSlider() {
   const testimonials = [
     {
       quote:
-        "I almost bought a used SUV that looked spotless — until Vehicheck’s report flagged frame damage and a leaking gearbox. That AED 999 inspection saved me from a AED 60,000 mistake.",
-      name: "— Ethan Carter, Dubai",
-    },
-    {
-      quote:
         "The inspection revealed a worn-out clutch that the seller conveniently forgot to mention. I used the report to negotiate AED 15k off. Absolutely worth it.",
       name: "— Zain Al-Mansoori, Sharjah",
     },

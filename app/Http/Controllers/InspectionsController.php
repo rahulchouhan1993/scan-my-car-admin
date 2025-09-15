@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\InspectionRequestSubmitted;
 use App\Mail\InspectionRequestConfirmation;
+use App\Mail\SendInspectionReport;
 use Mpdf\Mpdf;
 use Imagick;
 class InspectionsController extends Controller
@@ -121,9 +122,9 @@ class InspectionsController extends Controller
 
     }
 
-    public function thankYou(){
+    public function thankYou($type=''){
         $pageTitle = 'Thank you!';
-        return inertia('Customers/ThankYou', compact('pageTitle'));
+        return inertia('Customers/ThankYou', compact('pageTitle','type'));
     }
 
     public function markComplete(){
@@ -133,7 +134,7 @@ class InspectionsController extends Controller
         die;
     }
 
-    public function previewPdf($id)
+    public function previewPdf($id,$type='')
     {
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -258,10 +259,10 @@ class InspectionsController extends Controller
                     <tr style="background:#f9fafb;"><td style="padding:11px;">Number of Keys</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->number_keys ?? '-') . '</td></tr>
                     <tr ><td style="padding:11px;">Last Service Date</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->last_service_date ?? '-') . '</td></tr>
                     <tr style="background:#f9fafb;"><td style="padding:11px;">Registration Emirate</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->registration_emirate ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px;">Warranty Status</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->warranty_status ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px;">Plate Type</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->plate_type ?? '-') . '</td></tr>
-                    <tr ><td style="padding:11px;">Registration Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->registration_number ?? '-') . '</td></tr>
-                    <tr style="background:#f9fafb;"><td style="padding:11px;">Chasis Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->chasis_no ?? '-') . '</td></tr>
+                
+                    <tr ><td style="padding:11px;">Specification</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->plate_type ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Registration Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->registration_number ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Chasis Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->chasis_no ?? '-') . '</td></tr>
                     
                 </tbody>
             </table>
@@ -678,7 +679,7 @@ class InspectionsController extends Controller
                 $svgImage = '';
             } 
         }
-         $vehicleImages = json_decode($inspectionsDetail->vehicleDetail->images);
+         $vehicleImages = json_decode($inspectionsDetail->vehicleDetail->images) ?? [];
          if(count($vehicleImages)>0){
             $htmlImages ="
             <h3 style='margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;'>Vehicle Images</h3>";
@@ -709,39 +710,42 @@ class InspectionsController extends Controller
             $htmlImages .= "</table>";
 
             $mpdf->WriteHTML($htmlImages);
-         }
-        
-       
-        // $html ="
-        // <div style='position:relative; overflow:hidden;'>
-        //     <div style='text-align:center; padding-bottom:20px'>
-        //         <img src='$logoPath' alt='logo' style='position:absolute; max-width:20mm; height:auto; z-index:2; display:block;' />
-        //     </div>
-        //     <div style='display:block; text-align:center; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:450px'>
-        //         <img src='file://$coverPath' alt='cover' style='width:100%; height:450px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
-        //     </div>
+        }
 
-        //     <div style='text-align:center; z-index:2; padding-top:30px '>
-        //       <div style='font-size:30pt; font-weight:700; line-height:0.95; color:#D72638;'>Vehicle Inspection Report</div>
-        //       <div style='margin-top:3mm; font-size:11pt; color:#444;'>https://certifycars.ae/</div>
-        //     </div>
-        //  </div>
+        if($type=='send'){
+            $directory = storage_path('app/reports');
 
-        //  <div style='margin-top:50px'>
-        //  <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
-        //      <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px; display:block;' />
-        //      </div>
+            if (!is_dir($directory)) {
+                mkdir($directory, 0755, true);
+            }
 
+            $path = $directory . '/inspection_report_' . $id . '.pdf';
 
-        //      <div style='display:block; text-align:center; margin-bottom:20px; padding:10px 10px 10px 10px; border-radius:10px 10px 10px 10px; box-shadow:0 0 15px 5px rgba(0,0,0,0.2); height:300px'>
-        //      <img src='file://$sliderPath' alt='cover' style='width:100%; height:300px; object-fit:cover; border-radius:8px 8px 8px 8px;display:block;' />
-        //      </div>
-        //  </div>
-        // ";
-        // $mpdf->WriteHTML($html);
-
-        return response($mpdf->Output('inspection_report.pdf', 'I'))
+            $mpdf->Output($path, 'F');  // Save the PDF here
+             Mail::to($inspectionsDetail->email)->send(new SendInspectionReport($inspectionsDetail));
+            InspectionRequest::where('id', $id)->update(['status' => 7]);
+            return redirect()->route('inspector.service-request')->with('success', 'Inspection report sent to customer email successfully.');
+        }else{
+              return response($mpdf->Output('inspection_report.pdf', 'I'))
             ->header('Content-Type', 'application/pdf');
+        }
     }
+
+    public function downloadAttachments($id)
+    {
+        // Fetch inspection details
+        $inspection = InspectionRequest::findOrFail($id);
+
+        $documents = json_decode($inspection->documents, true) ?? [];
+
+        $files = collect($documents)->map(function ($filePath) {
+            return asset($filePath);
+        });
+
+        return response()->json($files);
+
+        return response()->json($files);
+    }
+
 }
 

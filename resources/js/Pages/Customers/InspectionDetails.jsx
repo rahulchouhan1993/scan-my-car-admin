@@ -736,8 +736,8 @@ const InspectionDetails = () => {
     { label: "Service History", value: props.inspectionsDetail.vehicle_detail.service_history },
     { label: "Last Service", value: props.inspectionsDetail.vehicle_detail.last_service_date },
     { label: "Registration", value: props.inspectionsDetail.vehicle_detail.registration_emirate },
-    { label: "Warrenty Status", value: props.inspectionsDetail.vehicle_detail.warranty_status },
-    { label: "Plate Type", value: props.inspectionsDetail.vehicle_detail.plate_type },
+    // { label: "Warrenty Status", value: props.inspectionsDetail.vehicle_detail.warranty_status },
+    // { label: "Plate Type", value: props.inspectionsDetail.vehicle_detail.plate_type },
     { label: "Registration Number", value: props.inspectionsDetail.vehicle_detail.registration_number },
   ];
   
@@ -908,7 +908,7 @@ const InspectionDetails = () => {
 
 
             <p className="creatodisplayM text-[#192735c9] text-[16px] ">
-              {props.inspectionsDetail.over_comments}
+              {props.inspectionsDetail.vehicle_year} | {props.inspectionsDetail.vehicle_detail.plate_type}
             </p>
           </div>
               <div className="w-full">
