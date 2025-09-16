@@ -75,6 +75,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/update-user/{id}', [UsersController::class, 'updateStatus'])->name('users.status');
         Route::get('/delete-user/{id}', [UsersController::class, 'deleteUser'])->name('users.delete');
+        Route::get('/delete-service-request/{id}', [UsersController::class, 'deleteRequest'])->name('delete-service-request');
         Route::get('/users/{roleType}', [UsersController::class, 'index'])->name('users');
         Route::match(['post','get'],'/add-dealer/{id}', [UsersController::class, 'add'])->name('users.add');
         Route::match(['post','get'],'/add-inspector/{id}', [UsersController::class, 'addInspector'])->name('inspector.add');

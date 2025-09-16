@@ -468,6 +468,7 @@ const AddInspection = () => {
                   feedbackInvalid={errors.vehicle_year}
                 >
                  <option value="" disabled hidden>-- Select Vehicle Year --</option>
+                 <option key="2026" value="2026">2026</option>
                     {Array.from({ length: 41 }, (_, i) => {
                       const year = new Date().getFullYear() - i;
                       return <option key={year} value={year}>{year}</option>;

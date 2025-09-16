@@ -4,7 +4,8 @@ import redarrowRg from "../../assets/images/redarrowRg.png";
 import bookinspectionbg from "../../assets/images/bookinspectionbg.jpg";
 import { route } from 'ziggy-js'
 import { useForm, usePage } from '@inertiajs/react'
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 /** Collapsible “Show more” list with smooth height animation (no dependencies) */
 const CollapsibleList = ({ items, maxVisible = 6, listClassName = "", toggleClassName = "" }) => {
   const [expanded, setExpanded] = useState(false); 
@@ -679,10 +680,12 @@ const BookInspection = () => {
                     className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
                   >
                     <option value="" disabled hidden>-- Select Vehicle Year --</option>
+                    <option key="2026" value="2026">2026</option>
                     {Array.from({ length: 41 }, (_, i) => {
                       const year = new Date().getFullYear() - i;
                       return <option key={year} value={year}>{year}</option>;
                     })}
+                    
                   </select>
                   {errors.vehicle_year && <div className="text-red-500 text-[12px]">{errors.vehicle_year}</div>}
                 </div>
@@ -801,18 +804,26 @@ const BookInspection = () => {
 
                 <div>
                   {/* <label className='flex creatodisplayM text-[14px] md:text-[18px] text-[#192735bd] ps-[20px] md:ps-[25px] pb-[5px]'>Inspection Date</label> */}
-                  <input
-                  required
-                  type="text"
-                  name="preferred_date"
-                  onFocus={(e) => (e.target.type = "date")}
-                  onBlur={(e) => !e.target.value && (e.target.type = "text")}
-                  placeholder="Preferred Date"
-                  className="min-h-[35px] border border-[#192735] rounded-full text-[14px] md:text-[16px] lg:text-[18px] px-[18px] py-[10px] md:px-[22px] md:py-[13px] creatodisplayM text-[#192735] text-[15px] md:text-[20px] w-full focus:outline-none"
-                  value={data.preferred_date}
-                  min={new Date().toISOString().split("T")[0]}
-                  onChange={(e) => setData("preferred_date", e.target.value)}
-                />
+                  
+              <DatePicker
+                required
+                name="preferred_date"
+                selected={data.preferred_date ? new Date(data.preferred_date) : null}
+                onChange={(date) =>
+                  setData("preferred_date", date ? date.toISOString().split("T")[0] : "")
+                }
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Preferred Date"
+                minDate={new Date()}   // ✅ disables all past dates
+                className="min-h-[35px] border border-[#192735] rounded-full 
+                  text-[14px] md:text-[16px] lg:text-[18px] 
+                  px-[18px] py-[10px] md:px-[22px] md:py-[13px] 
+                  creatodisplayM text-[#192735] text-[15px] md:text-[20px] 
+                  focus:outline-none 
+                  w-full md:w-[400px] lg:w-[550px]"
+              />
+
+
 
                   {errors.preferred_date && <div className="text-red-500 text-[12px]">{errors.preferred_date}</div>}
                 </div>

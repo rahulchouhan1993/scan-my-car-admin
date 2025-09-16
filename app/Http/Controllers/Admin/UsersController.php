@@ -1081,4 +1081,30 @@ class UsersController extends Controller
 
         return back()->with('success', 'File deleted');
     }
+
+    public function deleteRequest($id)
+    {
+        $inspectionData = InspectionRequest::findOrFail($id);
+        // Delete related records (assuming each detail table has inspection_request_id column)
+        InspectionVehicleDetail::where('request_id', $id)->delete();
+        InspectionBodyDetail::where('request_id', $id)->delete();
+        InspectionBreaksDetail::where('request_id', $id)->delete();
+        InspectionClusterDetail::where('request_id', $id)->delete();
+        InspectionCoolingDetail::where('request_id', $id)->delete();
+        InspectionElectricalDetail::where('request_id', $id)->delete();
+        InspectionEngineDetail::where('request_id', $id)->delete();
+        InspectionGlassDetail::where('request_id', $id)->delete();
+        InspectionHvacDetail::where('request_id', $id)->delete();
+        InspectionInteriorDetail::where('request_id', $id)->delete();
+        InspectionRoadTestDetail::where('request_id', $id)->delete();
+        InspectionSeatDetail::where('request_id', $id)->delete();
+        InspectionSuspensionDetail::where('request_id', $id)->delete();
+        InspectionTransmissionDetail::where('request_id', $id)->delete();
+        InspectionTyreDetail::where('request_id', $id)->delete();
+
+        // Finally delete the inspection request itself
+        $inspectionData->delete();
+
+        return Redirect::back()->with('success', 'Inspection request and related details deleted successfully.');
+    }
 }

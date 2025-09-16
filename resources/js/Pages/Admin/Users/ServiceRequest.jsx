@@ -132,6 +132,17 @@ const ServiceRequest = (props) => {
                             <CDropdownItem href={route('admin.send-report',{id:inspection.id,type:'send'})}>Send Report</CDropdownItem>
                             </>
                             )}
+                            <CDropdownItem
+                              as="button"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                if (confirm('Are you sure you want to delete this record?')) {
+                                  window.location.href = '/admin/delete-service-request/'+inspection.id
+                                }
+                              }}
+                            >
+                              Delete
+                            </CDropdownItem>
                             {/* <CDropdownItem href={route('admin.inspections.logs',{id:inspection.id})}>View Logs</CDropdownItem> */}
                           </CDropdownMenu>
                         )}

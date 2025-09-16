@@ -89,7 +89,7 @@ class InspectionsController extends Controller
             if ($adminDetails) {
                 Mail::to($adminDetails->email)->send(new InspectionRequestSubmitted($inspectionRequest));
             }
-            return redirect()->route('thank-you')->with('success', 'Inspection request created successfully.');
+            return redirect()->route('thank-you',['type'=>'booking'])->with('success', 'Inspection request created successfully.');
             //return redirect()->back()->with('success', 'Inspection request created successfully.');
         }
 
