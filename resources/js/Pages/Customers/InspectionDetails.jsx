@@ -224,6 +224,10 @@ const InspectionDetails = () => {
           label: "Fuse box access", 
           value: props?.inspectionsDetail?.engine_details?.fuse_box_access
         },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.engine_details?.comments_engine
+        },
       ],
     },
     {
@@ -268,7 +272,11 @@ const InspectionDetails = () => {
         {  
           label: "Tyre Pressure Monitoring System (TPMS)", 
           value: props?.inspectionsDetail?.cluster_details?.tpms
-        }
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.cluster_details?.comments
+        },
       ],
     },
     {
@@ -321,7 +329,11 @@ const InspectionDetails = () => {
         {  
           label: "Gearbox unusual noise under load", 
           value: props?.inspectionsDetail?.transmission_details?.gearbox_unusual_noise
-        }
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.transmission_details?.comments_transmission
+        },
       ],
     },
     {
@@ -406,7 +418,11 @@ const InspectionDetails = () => {
         {  
           label: "Steering wheel free play", 
           value: props?.inspectionsDetail?.suspension_details?.steering_wheel_free_play
-        }
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.suspension_details?.comments_suspension
+        },
       ],
     },
     {
@@ -451,6 +467,10 @@ const InspectionDetails = () => {
         {  
           label: "Brake fluid contamination test note", 
           value: props?.inspectionsDetail?.brakes_details?.brake_fluid_contamination_test_note
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.brakes_details?.comments_brakes
         },
       ],
     },
@@ -513,6 +533,10 @@ const InspectionDetails = () => {
           label: "Spare wheel presence & condition", 
           value: props?.inspectionsDetail?.tyres_details?.spare_wheel_condition
         },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.tyres_details?.tyre_comment
+        },
       ],
     },
     {
@@ -549,7 +573,11 @@ const InspectionDetails = () => {
         {  
           label: "Trunk/boot interior condition", 
           value: props?.inspectionsDetail?.interior_details?.trunk_boot_interior_condition
-        }
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.interior_details?.comment
+        },
       ],
     },
     {
@@ -578,7 +606,11 @@ const InspectionDetails = () => {
         {  
           label: "Seat upholstery integrity (front/rear)", 
           value: props?.inspectionsDetail?.seat_details?.seat_upholstery_integrity
-        }
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.seat_details?.comment
+        },
       ],
     },
     {
@@ -595,6 +627,10 @@ const InspectionDetails = () => {
         {  
           label: "Radio Condition", 
           value: props?.inspectionsDetail?.hvac_details?.radio_condition
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.hvac_details?.comment
         },
       ],
     },
@@ -624,6 +660,10 @@ const InspectionDetails = () => {
         {  
           label: "Fuel tank inspection (visual)", 
           value: props?.inspectionsDetail?.cooling_fuel_details?.fuel_tank_inspection
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.cooling_fuel_details?.comment
         },
       ],
     },
@@ -657,6 +697,10 @@ const InspectionDetails = () => {
         {  
           label: "Parking sensor functionality", 
           value: props?.inspectionsDetail?.electrical_lighting_details?.parking_sensor_functionality
+        },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.electrical_lighting_details?.comment
         },
       ],
     },
@@ -715,6 +759,10 @@ const InspectionDetails = () => {
           label: "Noise levels at various speeds", 
           value: props?.inspectionsDetail?.performance_road_test_details?.noise_levels
         },
+        {  
+          label: "Comments", 
+          value: props?.inspectionsDetail?.performance_road_test_details?.comment
+        },
       ],
     },
   ];
@@ -739,6 +787,8 @@ const InspectionDetails = () => {
     // { label: "Warrenty Status", value: props.inspectionsDetail.vehicle_detail.warranty_status },
     // { label: "Plate Type", value: props.inspectionsDetail.vehicle_detail.plate_type },
     { label: "Registration Number", value: props.inspectionsDetail.vehicle_detail.registration_number },
+    { label: "Comments", value: props.inspectionsDetail.over_comments },
+    { label: "Accident, Flood, Etc", value: props.inspectionsDetail.accident },
   ];
   
 
@@ -768,18 +818,21 @@ const InspectionDetails = () => {
         return;
       }
 
-      files.forEach((fileUrl, i) => {
-        const link = document.createElement("a");
-        link.href = fileUrl;
-        link.setAttribute("download", fileUrl.split("/").pop()); // force download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
+      for (let i = 0; i < files.length; i++) {
+        setTimeout(() => {
+          const link = document.createElement("a");
+          link.href = files[i];
+          link.setAttribute("download", files[i].split("/").pop());
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }, i * 1000); // wait 1 second between downloads
+      }
     } catch (error) {
       console.error("Error downloading files:", error);
     }
   };
+
 
   return (
     <>
@@ -952,7 +1005,7 @@ const InspectionDetails = () => {
               </div>
               
               <div className=" mt-[25px] md:mt-[50px]">
-                <h2 className="creatodisplayM text-[16px] text-[#192735b0] uppercase ">Body inspection</h2>
+                <h2 className="creatodisplayM text-[16px] text-[#192735b0] uppercase ">Paints</h2>
                 <div className="carbx flex flex-col items-center justify-center px-[15px] py-[15px] md:px-[30px] md:py-[30px] border-[1px] border-[#e5e5e5] mt-[10px] md:mt-[20px]  rounded-[15px]">
                   <div className="flex items-center justify-center"
                     dangerouslySetInnerHTML={{
@@ -969,7 +1022,23 @@ const InspectionDetails = () => {
                     </div>
                   ))}
                 </div>
+                  
                  </div>
+
+                  <div class="flex flex-wrap gap-[10px] md:gap-2 mt-6">
+                    <div class="flex flex-col gap-[2px] bg-white border border-[#19273521] rounded-[5px] md:rounded-[15px] px-[5px] py-[5px] md:px-[15px] md:py-[15px]">
+                      <span class="creatodisplayM md:text-[13px] lg:text-[15px] text-[16px] text-[#192735b5]">Chasis condition:</span> 
+                      <span class="ppfont text-[13px] md:text-[18px]  text-[#192735]">{props.inspectionsDetail.vehicle_detail.chasis_condition}</span>
+                    </div>
+                    <div class="flex flex-col gap-[2px] bg-white border border-[#19273521] rounded-[5px] md:rounded-[15px] px-[5px] py-[5px] md:px-[15px] md:py-[15px]">
+                      <span class="creatodisplayM md:text-[13px] lg:text-[15px] text-[16px] text-[#192735b5]">Exterior comment:</span> 
+                      <span class="ppfont text-[13px] md:text-[18px]  text-[#192735]">{props.inspectionsDetail.vehicle_detail.chasis_condition}</span>
+                    </div>
+                    <div class="flex flex-col gap-[2px] bg-white border border-[#19273521] rounded-[5px] md:rounded-[15px] px-[5px] py-[5px] md:px-[15px] md:py-[15px]">
+                      <span class="creatodisplayM md:text-[13px] lg:text-[15px] text-[16px] text-[#192735b5]">Normal comment:</span> 
+                      <span class="ppfont text-[13px] md:text-[18px]  text-[#192735]">{props.inspectionsDetail.vehicle_detail.chasis_condition}</span>
+                    </div>
+                  </div>
               </div>
             </div>
 

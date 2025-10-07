@@ -32,6 +32,9 @@ const AppHeader = () => {
   const { auth } = usePage().props;
   const headerRef = useRef()
   const { colorMode, setColorMode } = useColorModes('coreui-free-react-admin-template-theme')
+  useEffect(() => {
+    setColorMode('light');
+  }, [colorMode, setColorMode]);
 
   useEffect(() => {
     const handleScroll = () => {

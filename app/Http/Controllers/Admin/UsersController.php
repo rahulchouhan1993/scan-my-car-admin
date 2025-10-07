@@ -428,11 +428,17 @@ class UsersController extends Controller
             }
             
             $documentPaths = json_decode($inspectionsDetail->documents ?? '[]', true);
-            if($savetype=='normal'){
+            if ($savetype == 'normal') {
                 if ($request->hasFile('documents')) {
                     foreach ($request->file('documents') as $file) {
-                        $path = $file->store('vehicle_documents', 'public'); 
-                        $documentPaths[] = '/storage/' . $path; 
+                        // Create unique file name
+                        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+                        // Move to public/vehicle_documents
+                        $file->move(public_path('vehicle_documents'), $filename);
+
+                        // Store relative path
+                        $documentPaths[] = '/vehicle_documents/' . $filename;
                     }
                 }
             }
@@ -453,11 +459,17 @@ class UsersController extends Controller
 
             $imagePaths = json_decode($vehicleDetail->images ?? '[]', true);
 
-            if($savetype=='normal'){
+            if ($savetype == 'normal') {
                 if ($request->hasFile('vehicle_detail.images')) {
                     foreach ($request->file('vehicle_detail.images') as $file) {
-                        $path = $file->store('vehicle_images', 'public'); 
-                        $imagePaths[] = '/storage/' . $path; 
+                        // Create unique file name
+                        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+                        // Move to public/vehicle_documents
+                        $file->move(public_path('vehicle_images'), $filename);
+
+                        // Store relative path
+                        $imagePaths[] = '/vehicle_images/' . $filename;
                     }
                 }
             }

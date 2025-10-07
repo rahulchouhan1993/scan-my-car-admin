@@ -214,6 +214,7 @@ class InspectorController extends Controller
         $roadTestDetail = InspectionRoadTestDetail::where('request_id', $id)->first();
 
         if($request->isMethod('post')){
+            
             if ($inspectionsDetail && $inspectionsDetail->completed_date && $inspectionsDetail->status==5 ) {
                 $completedAt = Carbon::parse($inspectionsDetail->completed_date);
                 $now = Carbon::now();
@@ -226,15 +227,22 @@ class InspectorController extends Controller
             }
             
             $documentPaths = json_decode($inspectionsDetail->documents ?? '[]', true);
-            if($savetype=='normal'){
+
+            if ($savetype == 'normal') {
                 if ($request->hasFile('documents')) {
                     foreach ($request->file('documents') as $file) {
-                        $path = $file->store('vehicle_documents', 'public'); 
-                        $documentPaths[] = '/storage/' . $path; 
+                        // Create unique file name
+                        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+                        // Move to public/vehicle_documents
+                        $file->move(public_path('vehicle_documents'), $filename);
+
+                        // Store relative path
+                        $documentPaths[] = '/vehicle_documents/' . $filename;
                     }
                 }
             }
-
+            
             $inspectionsDetail->update([
                 'other_vehicle_make' => $request->input('other_vehicle_make'),
                 'vehicle_make' => $request->input('vehicle_make'),
@@ -251,11 +259,17 @@ class InspectorController extends Controller
 
             $imagePaths = json_decode($vehicleDetail->images ?? '[]', true);
 
-            if($savetype=='normal'){
+            if ($savetype == 'normal') {
                 if ($request->hasFile('vehicle_detail.images')) {
                     foreach ($request->file('vehicle_detail.images') as $file) {
-                        $path = $file->store('vehicle_images', 'public'); 
-                        $imagePaths[] = '/storage/' . $path; 
+                        // Create unique file name
+                        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+                        // Move to public/vehicle_documents
+                        $file->move(public_path('vehicle_images'), $filename);
+
+                        // Store relative path
+                        $imagePaths[] = '/vehicle_images/' . $filename;
                     }
                 }
             }

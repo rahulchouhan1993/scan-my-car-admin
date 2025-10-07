@@ -27,6 +27,7 @@ Route::get('/thank-you/{type}', [InspectionsController::class, 'thankYou'])->nam
 Route::get('/mark-as-completed', [InspectionsController::class, 'markComplete'])->name('markComplete');
 Route::get('/preview-report/{id}/{type?}', [InspectionsController::class, 'previewPdf'])->name('preview-report');
 Route::get('/downlaod-attachments/{id}', [InspectionsController::class, 'downloadAttachments'])->name('download-attachments');
+Route::get('/downloadFile/{fileName}', [InspectionsController::class, 'downloadFile'])->name('downloadFile');
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/dashboard', [CustomersController::class, 'dashboard'])->name('customer.dashboard');

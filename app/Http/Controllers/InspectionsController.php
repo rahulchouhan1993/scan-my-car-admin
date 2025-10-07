@@ -235,6 +235,19 @@ class InspectionsController extends Controller
         $mpdf->SetHTMLFooter($footer);
         
         // --- COVER PAGE ---
+        $downloadDocuments = '';
+        $availabledocuments = json_decode($inspectionsDetail->documents, true) ?? [];
+
+        // Don't wrap with asset(), just keep file path/filename
+        $files = collect($availabledocuments);
+
+        if ($files->isNotEmpty()) {
+            foreach ($files as $fName) {
+                $downloadDocuments .= '<a href="' . route('downloadFile', ['fileName' => basename($fName)]) . '">Download</a> | ';
+            }
+        }
+       
+        //downloadFile
         $cover = '
             <div style="text-align:center; padding-top:20px;">
                 <h1 style="font-size:14pt; color:#0D1B2A; margin-bottom:10px;">Vehicle Details</h1>
@@ -263,6 +276,9 @@ class InspectionsController extends Controller
                     <tr ><td style="padding:11px;">Specification</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->plate_type ?? '-') . '</td></tr>
                     <tr style="background:#f9fafb;"><td style="padding:11px;">Registration Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->registration_number ?? '-') . '</td></tr>
                     <tr ><td style="padding:11px;">Chasis Number</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->vehicleDetail->chasis_no ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Comments</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->over_comments ?? '-') . '</td></tr>
+                    <tr ><td style="padding:11px;">Accident, Flood, Etc</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">' . ($inspectionsDetail->accident ?? '-') . '</td></tr>
+                    <tr style="background:#f9fafb;"><td style="padding:11px;">Documents</td><td style="padding:11px; font-weight:normal; color:#5d5d5dc2">'.$downloadDocuments.'</td></tr>
                     
                 </tbody>
             </table>
@@ -279,7 +295,7 @@ class InspectionsController extends Controller
 
         $termsContent = '<div style="margin:10px 0; font-size:11pt; color:#192735; line-height:1.6;">
 
-            <h3 style="font-size:14pt; color:#0D1B2A; margin-bottom:5px; text-align:center;">
+            <h3 style="font-size:12pt; color:#0D1B2A; margin-bottom:5px; text-align:center;">
                 Terms & Conditions
             </h3>
 
@@ -287,27 +303,27 @@ class InspectionsController extends Controller
                 By booking or confirming a vehicle inspection (“Service”) with <b>Certify Cars – UAE</b> online, you agree to the following Terms & Conditions:
             </p>
 
-            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">1. Authorisation</h4>
-            <p style="0 0 10px 0; color:#5d5d5dc2; font-size:11pt; font-weight:normal">
+            <h4 style="margin:0 0 5px 0; font-size:12pt; color:#0D1B2A;">1. Authorisation</h4>
+            <p style="0 0 10px 0; color:#5d5d5dc2; font-size:10pt; font-weight:normal">
                 You authorise <b>Certify Cars – UAE</b> to inspect and, if safe, test drive the vehicle (“Vehicle”) for the purpose of delivering the Service. If the Vehicle belongs to a third party, you confirm that you have their permission for this inspection.
             </p>
 
-            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">2. Scope of Inspection</h4>
-            <ul style="margin:0 0 10px 25px; padding:0; color:#5d5d5dc2; font-size:11pt; font-weight:normal">
+            <h4 style="margin:0 0 5px 0; font-size:12pt; color:#0D1B2A;">2. Scope of Inspection</h4>
+            <ul style="margin:0 0 10px 25px; padding:0; color:#5d5d5dc2; font-size:10pt; font-weight:normal">
                 <li>The Service involves a full check-up of the Vehicle, including major visible components, basic mechanical functions, and a limited test drive.</li>
                 <li>Certain inspections may require RTA clearances or approvals.</li>
                 <li>While we perform a thorough inspection, some issues may still be missed or intentionally hidden by the owner.</li>
                 <li>Certify Cars – UAE does not accept responsibility for any issues not detected during the inspection.</li>
             </ul>
 
-            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">3. Inspection Report</h4>
-            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
+            <h4 style="margin:0 0 5px 0; font-size:12pt; color:#0D1B2A;">3. Inspection Report</h4>
+            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:10pt; font-weight:normal">
                 <li>The inspection report (“Report”) reflects the inspector’s opinion at the time of inspection.</li>
                 <li>The Report is informational only and does not constitute advice to buy, sell, or maintain the Vehicle.</li>
             </ul>
 
-            <h4 style="margin: 0 0 5px 0; font-size:13pt; color:#0D1B2A;">4. Risk & Liability</h4>
-            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
+            <h4 style="margin: 0 0 5px 0; font-size:12pt; color:#0D1B2A;">4. Risk & Liability</h4>
+            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:10pt; font-weight:normal">
                 <li>The Service is entirely at your own risk.</li>
                 <li><b>Certify Cars – UAE</b>, its staff, or representatives accept no liability for:</li>
                 <ul style="margin:5px 0 10px 25px; padding:0;">
@@ -317,14 +333,14 @@ class InspectionsController extends Controller
                 </ul>
             </ul>
 
-            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">5. Fine</h4>
-            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
+            <h4 style="margin:0 0 5px 0; font-size:12pt; color:#0D1B2A;">5. Fine</h4>
+            <ul style="margin:0 0 10px 25px; padding:0;color:#5d5d5dc2; font-size:10pt; font-weight:normal">
                 <li>If the customer fails to comply with these Terms & Conditions, including providing false information about the Vehicle, the customer agrees to pay a fine of AED 1,500.</li>
                 <li>This fine represents the maximum payable amount under such circumstances.</li>
             </ul>
 
-            <h4 style="margin:0 0 5px 0; font-size:13pt; color:#0D1B2A;">6. Governing Law</h4>
-            <p style="margin:0 0 10px 0;color:#5d5d5dc2; font-size:11pt; font-weight:normal">
+            <h4 style="margin:0 0 5px 0; font-size:12pt; color:#0D1B2A;">6. Governing Law</h4>
+            <p style="margin:0 0 10px 0;color:#5d5d5dc2; font-size:10pt; font-weight:normal">
                 These Terms are governed by the laws of the United Arab Emirates. Any disputes will be resolved under UAE jurisdiction.
             </p>
 
@@ -337,12 +353,14 @@ class InspectionsController extends Controller
         $mpdf->AddPage();
 
         // --- BODY CONTENT ---
+        
         $accordionData = [
             [
                 "title" => "Body Details",
                 "items" => $inspectionsDetail->bodyDetail
                     ? collect($inspectionsDetail->bodyDetail->toArray())->map(function ($item, $key) {
                         if($key!='id' && $key!='inspection_request_id' && $key!='created_at' && $key!='updated_at' && $key!='request_id'){
+                            
                             if($item){
                                 return ["label" => ucfirst(str_replace('_', ' ', $key)), "value" => ($item) ? 'Need Repair': 'Okay' , "color" => ($item) ? 'red': 'green'];
                             }
@@ -514,13 +532,11 @@ class InspectionsController extends Controller
         $svgImage = $inspectionsDetail->vehicleDetail->svg_image;
         $counter = 1;
         foreach ($accordionData as $section) {
-            if (empty($section['items'])) continue;
+            if (empty($section['items']) && count($section['items'])<0) continue;
 
             $html = '
             <h3 style="margin:40px 0 15px; font-size:14pt; color:#0D1B2A; background:#E9ECEF; padding:10px; border-radius:8px; text-align:center;">' . $section['title'] . '</h3>
-            <table border="1" width="100%" style="border-collapse:collapse; font-size:10pt; margin-bottom:20px; border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.1);">
-                
-                <tbody>';
+            <table width="100%" border="0" style="border-collapse:collapse; margin-top:10px; font-size:11pt; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1); page-break-inside:auto;">';
 
             $rowIndex = 0;
             $innerCoutner = 1;
@@ -542,10 +558,13 @@ class InspectionsController extends Controller
                     $colorName = 'red';
                 }
                 $bg = $rowIndex % 2 === 0 ? '#ffffff' : '#f9fafb';
+                if($item['label']=='Comments transmission' || $item['label']=='Comments engine' || $item['label']== 'Comments suspension' || $item['label']== 'Comments brakes' || $item['label']== 'Tyre comment'){
+                    $item['label'] = 'Comment';
+                }
                 $html .= '
                     <tr style="background:' . $bg . ';">
                         <td style="padding:10px; font-weight:bold;">'.$item['label'] . '</td>
-                        <td style="padding:10px; color:' . $colorName . ';">' . $item['value'] . '</td>
+                        <td style="padding:10px; font-weight:normal; color:' . $colorName . ';">' . $item['value'] . '</td>
                     </tr>';
                 $rowIndex++; $innerCoutner++;
                 
@@ -745,6 +764,17 @@ class InspectionsController extends Controller
         return response()->json($files);
 
         return response()->json($files);
+    }
+
+    public function downloadFile($fileName)
+    {
+        $path = public_path("vehicle_documents/$fileName");
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        return response()->download($path);
     }
 
 }
